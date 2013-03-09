@@ -3,10 +3,35 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x",
+    "jake": "latest",
+    "forever": "latest"
   },
   "dependencies": {
-    "express": "3.0.3",
-    "ejs": "*"
+    "express": "3.x",
+    "ejs": "0.8.x",
+    "mongoose": "3.x",
+    "mongoose-timestamp": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
+    "passport-facebook": "latest",
+    "passport-twitter": "latest",
+    "bcrypt": "latest",
+    "socket.io": "0.9.x",
+    "express-partials": "latest",
+    "underscore": "1.4.x",
+    "async": "0.2.x",
+    "request": "2.x",
+    "debug": "0.7.x",
+    "node-uuid": "1.x",
+    "redis": "0.8.x",
+    "connect-redis": "1.4.x",
+    "connect-flash": "0.1.x",
+    "node-inspector": "0.1.x",
+    "q": "0.9.x"
   }
 }
