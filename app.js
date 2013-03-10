@@ -8,12 +8,15 @@ var express = require('express'),
   mongoose = require('mongoose'),
   redis = require('redis'),
   RedisStore = require('connect-redis')(express),
-  page = require('./routes/page'),
-  path = require('path');
+  path = require('path'),
+  PowerShroom = require('./lib/power_shroom'),
+  WarpShroom = require('./lib/warp_shroom');
 
 var app = express();
 var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/powerup';
 mongoose.connect(dbUri);
+
+PowerShroom.setupPassport();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -55,7 +58,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', page.home);
+WarpShroom.setupRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
