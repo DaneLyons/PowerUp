@@ -10,11 +10,15 @@ var express = require('express'),
   RedisStore = require('connect-redis')(express),
   page = require('./routes/page'),
   WarpShroom = require('./lib/warp_shroom'),  // Routes
-  path = require('path');
+  path = require('path'),
+  PowerShroom = require('./lib/power_shroom'),
+  WarpShroom = require('./lib/warp_shroom');
 
 var app = express();
 var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/powerup';
 mongoose.connect(dbUri);
+
+PowerShroom.setupPassport();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
