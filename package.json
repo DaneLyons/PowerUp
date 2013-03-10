@@ -24,6 +24,7 @@
     "socket.io": "0.9.x",
     "express-partials": "latest",
     "underscore": "1.4.x",
+    "winston": "latest",
     "async": "0.2.x",
     "request": "2.x",
     "debug": "0.7.x",

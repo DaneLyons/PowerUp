@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamps'),
+  timestamps = require('mongoose-timestamp'),
   Schema = mongoose.Schema;
   
 var gridSchema = new Schema({
