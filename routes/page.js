@@ -1,6 +1,7 @@
 exports.home = function (req, res) {
   res.render("page/home.ejs", {
-    "stylesheets":["home"]
+    "stylesheets":["home"],
+    "javascripts":["home"]
   });
 }
 
