@@ -50,6 +50,17 @@ table {
 body {
   background:url('/images/bg_1.jpg') no-repeat;
   background-size: 100% auto;
+  font-family:"Helvetica Neue",arial;
+  font-weight:200;
+  color:#fff;
+}
+
+.center {
+  text-align:center;
+}
+
+.clear {
+  clear:both;
 }
 
 #header {
@@ -75,12 +86,35 @@ body {
   position:relative;
 }
 
-#sidebar {
-  left:40%;
-  top:150px;
-  position:absolute;
-  background:rgba(0,0,0,.5);
-  margin-left:-400px;
-  width:400px;
-  height:400px;
+h1,h2,h3 {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size:35px;
+}
+
+input.text {
+  padding:10px;
+  font-size:15px;
+  border:none;
+  background:rgba(255,255,255,.20);
+  color:#fff;
+}
+
+button {
+  padding:15px;
+  text-align:center;
+  border:none;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size:24px;
+  color:#fff;
+  line-height:1;
+}
+
+form label {
+  width:75px;
+  padding-right:10px;
+  text-align:right;
+  display:block;
+  float:left;
 }

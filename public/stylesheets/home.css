@@ -1,0 +1,51 @@
+#sidebar {
+  left:70px;
+  top:100px;
+  top:50%;
+  margin-top:-175px;
+  position:absolute;
+  background:rgba(0,0,0,.5);
+  width:400px;
+  height:310px;
+  padding:40px;
+}
+
+#sidebar h1 {
+  padding-bottom:10px;
+}
+
+#sidebar p {
+  font-size:22px;
+  font-weight:100;
+  line-height:1.2;
+  letter-spacing:1px;
+}
+
+#sidebar form {
+  padding-top:20px;
+}
+
+#sidebar form label {
+  padding-top:12px;
+}
+
+#sidebar form div {
+  clear:left;
+  padding-top:7px;
+}
+
+#sidebar form input.text {
+  width:209px;
+}
+
+#sidebar form button {
+  background:rgba(208,96,13,.7);
+  margin:0 auto;
+  width:228px;
+}
+
+#sidebar form button img {
+  position:relative;
+  top:2px;
+  left:-2px;
+}

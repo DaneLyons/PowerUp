@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<% title = 'Achieve your goals with PowerUp' %>
+	
+	<% if(typeof(title) === 'undefined'){ %>
+		<% title = 'Achieve your goals with PowerUp' %>
+	<% } %>
   <title><%= title %></title>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+	<% if(typeof(stylesheets) !== 'undefined'){ %>
+		<% for(stylesheet in stylesheets){ %>
+			<link rel="stylesheet" type="text/css" href="/stylesheets/<%= stylesheets[stylesheet] %>.css" />
+		<% } %>
+	<% } %>
 	
 	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 	<script type="text/javascript" src="/javascripts/actions.js"></script>
