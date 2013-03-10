@@ -9,6 +9,7 @@ var express = require('express'),
   redis = require('redis'),
   RedisStore = require('connect-redis')(express),
   page = require('./routes/page'),
+  WarpShroom = require('./lib/warp_shroom'),  // Routes
   path = require('path');
 
 var app = express();
@@ -55,7 +56,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', page.home);
+WarpShroom.setupRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

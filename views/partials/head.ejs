@@ -19,6 +19,12 @@
 	<script type="text/javascript" src="/javascripts/actions.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	
+	<% if(typeof(javascripts) !== 'undefined'){ %>
+		<% for(javascript in javascripts){ %>
+			<script type="text/javascript" src="/javascripts/<%= javascripts[javascript] %>.js"></script>
+		<% } %>
+	<% } %>
+	
 	<!-- Google Analytics -->
 	<script type="text/javascript">
     var _gaq = _gaq || [];
@@ -41,4 +47,4 @@
 			<a href="/login" class="button"><span class="icon"></span>LOGIN</a>
 		</div>
 	</div>
-	<div id="page"></div>
+	<div id="page">
