@@ -4,11 +4,16 @@
  */
 
 var express = require('express'),
-  page = require('./routes/page'),
   http = require('http'),
+  mongoose = require('mongoose'),
+  redis = require('redis'),
+  RedisStore = require('connect-redis')(express),
+  page = require('./routes/page'),
   path = require('path');
 
 var app = express();
+var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/powerup';
+mongoose.connect(dbUri);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -19,7 +24,29 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  
+  if (process.env.NODE_ENV === 'production') {
+    var redisUrl = url.parse(process.env.REDISTOGO_URL),
+      redisAuth = redisUrl.auth.split(':'),
+      redisHost = redisUrl.hostname,
+      redisPort = redisUrl.port,
+      redisDb = redisAuth[0],
+      redisPass = redisAuth[1];
+    
+    app.use(express.session({
+      secret: process.env.CLIENT_SECRET || "it's a secret to everybody...",
+      cookie: { maxAge: 999999999, httpOnly: false },
+      store: new RedisStore({
+        host: redisHost,
+        port: redisPort,
+        db: redisDb,
+        pass: redisPass
+      })
+    }));
+  } else {
+    app.use(express.session());
+  }
+  
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
