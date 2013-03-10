@@ -118,3 +118,36 @@ form label {
   display:block;
   float:left;
 }
+
+#header .account {
+  position:absolute;
+  top:17px;
+  right:17px;
+}
+
+#header .account a.button {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size:18px;
+  color:#fff;
+  background:rgba(0,0,0,.5);
+  display:block;
+  width:100px;
+  padding:10px 0;
+  text-align:center;
+  text-decoration:none;
+}
+
+#header .account a.button:hover {
+  background:rgba(0,0,0,1);
+}
+
+#header .account a.button .icon {
+  display:inline-block;
+  width:16px;
+  height:16px;
+  background:url('/images/sprites.png') -24px 0;
+  margin-right:5px;
+  position:relative;
+  top:2px;
+}
