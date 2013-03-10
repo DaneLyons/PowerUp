@@ -2,3 +2,26 @@ body {
   background:url('/images/bg_2.jpg') no-repeat center bottom;
   background-size: 100% auto;
 }
+
+#grid {
+  position:absolute;
+  left:20px;
+  top:95px;
+}
+
+#grid.small li {
+  width:20%;
+  height:20%;
+  float:left;
+}
+
+#grid li div {
+  width:90%;
+  height:90%;
+  margin:5%;
+  background:rgba(0,0,0,.2);
+}
+
+#grid li.active div {
+  background:rgba(0,0,0,.85);
+}
