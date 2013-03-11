@@ -1,0 +1,19 @@
+<% include ../partials/head.ejs %>
+
+<div class="new-grid">
+  <form action="/grids" method="post" class="grid">
+    <div class="field">
+      <input type="text" class="name" name="grid[name]"
+        placeholder="Grid name" />
+    </div>
+    
+    <div class="field">
+      <input type="text" class="work-unit" name="grid[workUnit]"
+        placeholder="Unit of work? (i.e. 10 pushups)" />
+    </div>
+    
+    <input type="submit" value="Start grid" />
+  </form>
+</div>
+
+<% include ../partials/footer.ejs %>

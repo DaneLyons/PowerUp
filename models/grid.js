@@ -16,5 +16,23 @@ var gridSchema = new Schema({
 
 gridSchema.plugin(timestamps);
 
+gridSchema.pre('save', function (next) {  
+  if (!this.slug) {
+    var slug = encodeURIComponent(this.name).replace(/%20/g, "-");
+    console.log(slug);
+    var grid = this;
+    Grid.count({ slug: slug }, function (err, count) {
+      if (count == 0) {
+        grid.slug = slug;
+      } else {
+        grid.slug = slug + "-" + count;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
 var Grid = mongoose.model('Grid', gridSchema);
 module.exports = Grid;

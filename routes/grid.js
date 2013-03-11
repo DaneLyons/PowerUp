@@ -1,4 +1,6 @@
-exports.index = function (req, res) {
+var Grid = require('../models/grid');
+
+exports.gridIndex = function (req, res) {
   Grid.find({ public: true })
     .populate('user')
     .populate('powerUps')
@@ -8,29 +10,37 @@ exports.index = function (req, res) {
   );
 };
 
-exports.new = function (req, res) {
+exports.gridNew = function (req, res) {
   res.render('grid/new');
 };
 
-exports.show = function (req, res) {
+exports.gridShow = function (req, res) {
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
     res.render('grid/show', { grid: grid });
   });
 };
 
-exports.edit = function (req, res) {
+exports.gridEdit = function (req, res) {
   
 };
 
-exports.create = function (req, res) {
+exports.gridCreate = function (req, res) {
+  var grid = new Grid(req.body.grid);
+  grid.save(function (err, grid) {
+    if (err) {
+      req.flash(err);
+      res.redirect('back');
+    } else {
+      res.redirect('/grids/' + grid.slug);
+    }
+  })
+};
+
+exports.gridUpdate = function (req, res) {
   
 };
 
-exports.update = function (req, res) {
-  
-};
-
-exports.destroy = function (req, res) {
+exports.gridDestroy = function (req, res) {
   
 };
 

@@ -1,0 +1,13 @@
+<div class="grids">
+  <h1>Grids</h1>
+  <div class="new-grid"><a href="/grids/new">New grid</a></div>
+  
+  <% for (var i = 0; i < grids.length; i++) { %>
+    <% var grid = grids[i]; %>
+    <div class="grid">
+      <div class="name">
+        <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
+      </div>
+    </div>
+  <% } %>
+</div>
