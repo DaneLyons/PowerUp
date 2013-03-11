@@ -34,7 +34,7 @@ $(function () {
       var powerUpCount = grid.powerUps.length;
       var gridSize = grid.size;
       var gridElem = $("#grid");
-      var grid_progress = $('#content .progress span');
+      var grid_progress = $('#content .progress');
       
       function setPowerUp(i) {
         setTimeout(function(){

@@ -10,7 +10,7 @@ body {
   right:20px;
   width:500px;
   height:500px;
-  background:rgba(0,0,0,.15);
+  background:rgba(0,0,0,.25);
   overflow:hidden;
 }
 
@@ -18,9 +18,21 @@ body {
   padding:20px;
   background:rgba(0,0,0,.25);
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
-  text-align:center;
   color:#fff;
   text-shadow:-1px -1px 0 rgba(0,0,0,.7);
+}
+
+#content .progress {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-align:center;
+  font-size:200px;
+  color:#fff;
+  text-shadow:-1px -1px 0 rgba(0,0,0,.7);
+  width:100%;
+  position:absolute;
+  left:0;
+  top:50%;
+  margin-top:-50px;
 }
 
 #content .heading h1 {
@@ -28,11 +40,22 @@ body {
   padding-bottom:5px;
 }
 
-#content .heading .progress {
+#content .heading .author {
   font-size:25px;
+  float:right;
 }
 
 #content .legend {
+}
+
+#content .share {
+  position:absolute;
+  right:20px;
+  bottom:20px;
+}
+
+#content .share img {
+  margin-left:10px;
 }
 
 #content .legend button {
