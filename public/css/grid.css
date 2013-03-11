@@ -32,6 +32,32 @@ body {
   font-size:25px;
 }
 
+#content .legend {
+  padding:10px;
+}
+
+#content .legend li {
+  float:left;
+  margin-right:20px;
+  width:150px;
+}
+
+#content .legend .square {
+  width:20px;
+  height:20px;
+  float:left;
+  margin-right:5px;
+}
+
+#content .legend .black {
+  background:rgba(0,0,0,.75);
+}
+
+#content .legend .label {
+  font-size:13px;
+  font-weight:bold;
+  padding-top:3px;
+}
 
 
 #grid {
