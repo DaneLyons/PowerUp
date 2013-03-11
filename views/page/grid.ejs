@@ -10,3 +10,14 @@
 	</div>
 	
 <% include ../partials/footer.ejs %>
+
+<script type="text/javascript">
+  $(function () {
+    var grid = {
+      size: 400,
+      powerUps: [1, 4, 20, 40, 50, 123, 235, 321, 213, 313]
+    };
+    PowerUp.GridMaster.initializeGrid();
+    PowerUp.GridMaster.populateGrid(grid);
+  });
+</script>
