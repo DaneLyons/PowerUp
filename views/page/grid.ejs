@@ -20,8 +20,12 @@
   $(function () {
     var grid = {
       size: 400,
-      powerUps: [1, 4, 20, 40, 50, 123, 235, 321, 213, 313]
+      powerUps: []
     };
+    
+    for (var i = 0; i < 100; i++) {
+      grid.powerUps.push(Math.floor(Math.random() * grid.size));
+    }
     PowerUp.GridMaster.initializeGrid();
     PowerUp.GridMaster.populateGrid(grid);
   });
