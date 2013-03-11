@@ -1,6 +1,16 @@
 body {
   background:url('/img/bg_2.jpg') no-repeat center top;
   background-size: 100% auto;
+  background-size: cover;
+}
+
+#content {
+  position:absolute;
+  top:95px;
+  right:20px;
+  width:500px;
+  height:500px;
+  background:rgba(0,0,0,.15);
 }
 
 #grid {
