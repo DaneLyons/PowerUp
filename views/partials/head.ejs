@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
-	<% if(typeof(title) === 'undefined'){ %>
-		<% title = 'Achieve your goals with PowerUp' %>
-	<% } %>
+	<% title = 'Achieve your goals with PowerUp' %>
   <title><%= title %></title>
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-	<% if(typeof(stylesheets) !== 'undefined'){ %>
-		<% for(stylesheet in stylesheets){ %>
-			<link rel="stylesheet" type="text/css" href="/stylesheets/<%= stylesheets[stylesheet] %>.css" />
-		<% } %>
-	<% } %>
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 	
-	<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-	<script type="text/javascript" src="/javascripts/actions.js"></script>
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/actions.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	
-	<% if(typeof(javascripts) !== 'undefined'){ %>
-		<% for(javascript in javascripts){ %>
-			<script type="text/javascript" src="/javascripts/<%= javascripts[javascript] %>.js"></script>
-		<% } %>
-	<% } %>
 	
 	<!-- Google Analytics -->
 	<script type="text/javascript">
@@ -40,11 +26,5 @@
   </script>
 </head>
 <body>
-	<div id="header" class="hide">
-		<a href="/" id="logo"></a>
-		
-		<div class="account">
-			<a href="/login" class="button"><span class="icon"></span>LOGIN</a>
-		</div>
-	</div>
-	<div id="page">
+	<div id="header"></div>
+	<div id="page"></div>

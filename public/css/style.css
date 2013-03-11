@@ -48,7 +48,7 @@ table {
 }
 
 body {
-  background:url('/images/bg_1.jpg') no-repeat;
+  background:url('/img/bg_1.jpg') no-repeat;
   background-size: 100% auto;
   font-family:"Helvetica Neue",arial;
   font-weight:200;
@@ -75,7 +75,7 @@ body {
   display:block;
   height:60px;
   width:230px;
-  background:url('/images/logo_white.png') no-repeat;
+  background:url('/img/logo_white.png') no-repeat;
   position:absolute;
   top:5px;
   left:10px;
@@ -146,7 +146,7 @@ form label {
   display:inline-block;
   width:16px;
   height:16px;
-  background:url('/images/sprites.png') -24px 0;
+  background:url('/img/sprites.png') -24px 0;
   margin-right:5px;
   position:relative;
   top:2px;

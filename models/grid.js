@@ -9,7 +9,9 @@ var gridSchema = new Schema({
     powerUps: Number
   },
   powerUps: [ { type: Schema.ObjectId, ref: 'PowerUp' } ],
-  user: { type: Schema.ObjectId, ref: 'User' }
+  user: { type: Schema.ObjectId, ref: 'User' },
+  public: { type: Boolean, default: false },
+  slug: String
 });
 
 gridSchema.plugin(timestamps);
