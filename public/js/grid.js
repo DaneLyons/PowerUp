@@ -14,16 +14,16 @@ $(function(){
   content.css({width:content_width,height:content_height});
   
   var grid = $('#grid');
-  var grid_percent = $('#grid .percent');
+  var grid_progress = $('#content .progress span');
   grid.css({width:grid_size,height:grid_size}); 
   for(var i=0;i<400;i++){
     grid.append($('<li><div></div></li>'));
   }
-  for(var i=0;i<100;i++){
+  for(var i=0;i<300;i++){
     (function(i){
     setTimeout(function(){
       var percent = Math.floor((i/400)*100);
-      grid_percent.text(percent+'%');
+      grid_progress.text(percent+'%');
       var rand_square = Math.floor(Math.random() * 400);
       grid.find('li:eq('+rand_square+')').addClass('active');
     },(i+1)*25)

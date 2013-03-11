@@ -11,7 +11,28 @@ body {
   width:500px;
   height:500px;
   background:rgba(0,0,0,.15);
+  overflow:hidden;
 }
+
+#content .heading {
+  padding:10px;
+  background:rgba(0,0,0,.25);
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-align:center;
+  color:#fff;
+  text-shadow:-1px -1px 0 rgba(0,0,0,.7);
+}
+
+#content .heading h1 {
+  font-size:50px;
+  padding-bottom:5px;
+}
+
+#content .heading .progress {
+  font-size:25px;
+}
+
+
 
 #grid {
   position:absolute;
