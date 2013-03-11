@@ -15,7 +15,7 @@ body {
 }
 
 #content .heading {
-  padding:10px;
+  padding:20px;
   background:rgba(0,0,0,.25);
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   text-align:center;
@@ -33,24 +33,33 @@ body {
 }
 
 #content .legend {
-  padding:10px;
 }
 
-#content .legend li {
+#content .legend button {
   float:left;
-  margin-right:20px;
-  width:150px;
-}
-
-#content .legend .square {
-  width:20px;
-  height:20px;
-  float:left;
-  margin-right:5px;
+  padding:10px 0;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform:uppercase;
+  font-size:15px;
+  letter-spacing:1px;
+  line-height:1;
+  margin:0;
 }
 
 #content .legend .black {
   background:rgba(0,0,0,.75);
+}
+
+#content .legend .red {
+  background:rgba(111,11,11,.75);
+}
+
+#content .legend .blue {
+  background:rgba(22,76,124,.75);
+}
+
+#content .legend .green {
+  background:rgba(0,45,0,.75);
 }
 
 #content .legend .label {

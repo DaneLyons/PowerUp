@@ -23,6 +23,12 @@ $(function () {
       for(var i=0;i<400;i++){
         grid.append($('<li><div></div></li>'));
       }
+      
+      var legend_buttons = $('#content .legend button');
+      var legend_width = content_width/legend_buttons.length;
+      for(var i=0;i<legend_buttons.length;i++){
+        $('#content .legend button:eq('+i+')').css({width:legend_width});
+      }
     },
     populateGrid: function (grid) {
       var powerUpCount = grid.powerUps.length;
