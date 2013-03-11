@@ -37,13 +37,30 @@ body {
 
 #content .legend button {
   float:left;
-  padding:10px 0;
+  padding:16px 0 20px 0;
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   text-transform:uppercase;
   font-size:15px;
   letter-spacing:1px;
   line-height:1;
   margin:0;
+}
+
+#content .legend button span {
+  display:inline-block;
+}
+
+#content .legend button .plus {
+  width:18px;
+  height:18px;
+  margin-right:5px;
+  background:url('/img/sprites.png') -24px -24px;
+  position:relative;
+  bottom:-4px;
+}
+
+#content .legend .none {
+  background:rgba(0,0,0,.15);
 }
 
 #content .legend .black {
