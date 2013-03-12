@@ -15,9 +15,21 @@ exports.gridNew = function (req, res) {
 };
 
 exports.gridShow = function (req, res) {
-  Grid.findOne({ slug: req.params.slug }, function (err, grid) {
-    res.render('grid/show', { grid: grid });
-  });
+  Grid.findOne({ slug: req.params.slug })
+    .populate('user')
+    .populate('powerUps')
+  .exec(
+    function (err, grid) {
+      var workUnitNum = parseInt(10, grid.workUnit),
+        workUnitName = grid.workUnit.split(' ')[-1],
+        powerUps = [];
+      
+      for (var i = 1; i <= 3; i++) {
+        powerUps.push(workUnitNum * i);
+      }
+      res.render('grid/show', { grid: grid, powerUps: powerUps });
+    }
+  );
 };
 
 exports.gridEdit = function (req, res) {
@@ -25,6 +37,11 @@ exports.gridEdit = function (req, res) {
 };
 
 exports.gridCreate = function (req, res) {
+  if (!req.user) {
+    res.redirect('/login');
+    return;
+  }
+  
   var grid = new Grid(req.body.grid);
   grid.save(function (err, grid) {
     if (err) {
