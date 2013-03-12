@@ -110,6 +110,10 @@ button {
   line-height:1;
 }
 
+button:hover {
+  cursor:pointer;
+}
+
 form label {
   width:75px;
   padding-right:10px;

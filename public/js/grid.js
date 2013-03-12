@@ -29,6 +29,10 @@ $(function () {
       for(var i=0;i<legend_buttons.length;i++){
         $('#content .legend button:eq('+i+')').css({width:legend_width});
       }
+      
+      legend_buttons.click(function(){
+        
+      });
     },
     populateGrid: function (grid) {
       var powerUpCount = grid.powerUps.length;

@@ -91,17 +91,29 @@ body {
 #content .legend .black {
   background:rgba(0,0,0,.75);
 }
+#content .legend .black:hover {
+  background:rgba(0,0,0,1);
+}
 
 #content .legend .red {
   background:rgba(111,11,11,.75);
+}
+#content .legend .red:hover {
+  background:rgba(111,11,11,1);
 }
 
 #content .legend .blue {
   background:rgba(22,76,124,.75);
 }
+#content .legend .blue:hover {
+  background:rgba(22,76,124,1);
+}
 
 #content .legend .green {
   background:rgba(0,45,0,.75);
+}
+#content .legend .green:hover {
+  background:rgba(0,45,0,1);
 }
 
 #content .legend .label {
