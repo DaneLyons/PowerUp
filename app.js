@@ -6,6 +6,8 @@
 var express = require('express'),
   http = require('http'),
   mongoose = require('mongoose'),
+  passport = require('passport'),
+  flash = require('connect-flash'),
   redis = require('redis'),
   RedisStore = require('connect-redis')(express),
   page = require('./routes/page'),
@@ -51,6 +53,15 @@ app.configure(function(){
   } else {
     app.use(express.session());
   }
+  
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
+  
+  app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+  });
   
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));

@@ -37,12 +37,14 @@ exports.gridEdit = function (req, res) {
 };
 
 exports.gridCreate = function (req, res) {
+  console.log(req.user);
   if (!req.user) {
-    res.redirect('/login');
+    res.redirect('/sign_in');
     return;
   }
   
   var grid = new Grid(req.body.grid);
+  grid.user = req.user._id;
   grid.save(function (err, grid) {
     if (err) {
       req.flash(err);

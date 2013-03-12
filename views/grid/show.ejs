@@ -14,7 +14,7 @@
 		  <% for (var i = 0; i < powerUps.length; i++) { %>
   			<button class="<%= colors[i] %>">
   				<span class="plus"></span>
-  				<span><%= powerUps %> <%= grid.workUnit.split(' ')[-1] %></span>
+  				<span><%= powerUps[i] %> <%= grid.workUnit.split(' ')[1] %></span>
   			</button>
   		<% } %>
 		</div>
