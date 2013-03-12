@@ -30,6 +30,8 @@
 			<a href="/"><img src="/img/facebook.png" /></a>
 			<a href="/"><img src="/img/google+.png" /></a>
 		</div>
+		<div class="clear"></div>
+		<button class="grid group">Group</button>
 	</div>
 	
 <% include ../partials/footer.ejs %>
@@ -45,5 +47,90 @@
     }
     PowerUp.GridMaster.initializeGrid();
     PowerUp.GridMaster.populateGrid(grid);
+    
+    $(".grid.group").click(function (ev) {
+      ev.preventDefault();
+      
+      function pointToXY(idx) {
+        idx = parseInt(10, idx);
+        var size = 400,
+          sizeFac = Math.sqrt(size);
+          
+        var xy = {
+          x: idx % sizeFac,
+          y: idx / sizeFac
+        };
+        return xy;
+      }
+      
+      function xyToPoint(pt) {
+        var size = 400,
+          sizeFac = Math.sqrt(size);
+        console.log(sizeFac);
+        var idx = pt.y * size + pt.x;
+        return idx;
+      }
+      
+      var doneGrouping = false;
+      var dotsDone = 0;
+      
+      var groupInterval = setInterval(function () {
+        var dots = $("#grid li.active"),
+          dotCount = dots.length,
+          rawFactor = Math.sqrt(dotCount),
+          xBound = Math.ceil(rawFactor),
+          yBound = Math.ceil(rawFactor);
+        
+        console.log("RAW ROOT: " + rawFactor);
+        console.log("X BOUND: " + xBound);
+        console.log("Y BOUND: " + yBound);
+        
+        for (var i = 0; i < dots.length; i++) {
+          console.log("i: " + i);
+          
+          var dot = $(dots[i]);
+          var xy = pointToXY(parseInt(10, dot.index()));
+          
+          console.log("XY " + i + " : " + xy);
+          
+          var xDiff = xBound - xy.x;
+          var yDiff = yBound - xy.y;
+          
+          console.log("X DIFF: " + xDiff);
+          console.log("Y Diff: " + yDiff);
+          
+          if (xy.x < xBound && xy.y < yBound) {
+            if (dotsDone === dots.length) {
+              doneGrouping = true;
+            }
+            
+            dotsDone += 1;
+            continue;
+          } else if (xDiff >= yDiff) {
+            var newPoint = xyToPoint({
+              x: (xy.x - 1),
+              y: xy.y
+            });
+            console.log("NEW: " + newPoint);
+            dot.removeClass("active");
+            $("#grid li:eq(" + newPoint + ")").addClass('active');
+          } else {
+            var newPoint = xyToPoint({
+              x: xy.x,
+              y: (xy.y - 1)
+            });
+            console.log("NEW: " + newPoint);
+            
+            dot.removeClass("active");
+            $("#grid li:eq(" + newPoint + ")").addClass('active');
+          }
+        }
+        
+        console.log("done: " + doneGrouping);
+        if (doneGrouping) {
+          clearInterval(groupInterval);
+        }
+      }, 1000);
+    });
   });
 </script>
