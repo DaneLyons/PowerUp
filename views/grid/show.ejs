@@ -1,43 +1,40 @@
 <% include ../partials/head.ejs %>
+<link href="/css/grid.css" rel="stylesheet" type="text/css" />
 
-	<ul id="grid" class="large"></ul>
-	
-	<div id="content">
-		<div class="heading">
-			<div class="author">
-				<%= grid.user.name %>
-			</div>
-			<h1><%= grid.name %></h1>
+<ul id="grid" class="large"></ul>
+
+<div id="content">
+	<div class="heading">
+		<div class="author">
+			<%= grid.user.name %>
 		</div>
-		<div class="legend">
-		  <% var colors = ['black', 'blue', 'red']; %>
-		  <% for (var i = 0; i < powerUps.length; i++) { %>
-  			<button class="<%= colors[i] %>">
-  				<span class="plus"></span>
-  				<span><%= powerUps[i] %> <%= grid.workUnit.split(' ')[1] %></span>
-  			</button>
-  		<% } %>
-		</div>
-		<div class="progress"></div>
-		
-		<div class="share">
-			<a href="/"><img src="/img/twitter.png" /></a>
-			<a href="/"><img src="/img/facebook.png" /></a>
-			<a href="/"><img src="/img/google+.png" /></a>
-		</div>
+		<h1><%= grid.name %></h1>
 	</div>
+	<div class="legend">
+	  <% var colors = ['black', 'blue', 'red']; %>
+	  <% for (var i = 0; i < powerUps.length; i++) { %>
+			<button class="powerup <%= colors[i] %>" data-powerup-num="<%= i + 1 %>">
+				<span class="plus"></span>
+				<span><%= powerUps[i] %> <%= grid.workUnit.split(' ')[1] %></span>
+			</button>
+		<% } %>
+	</div>
+	<div class="progress"></div>
+	
+	<div class="share">
+		<a href="/"><img src="/img/twitter.png" /></a>
+		<a href="/"><img src="/img/facebook.png" /></a>
+		<a href="/"><img src="/img/google+.png" /></a>
+	</div>
+</div>
 	
 <% include ../partials/footer.ejs %>
+
+<script type="text/javascript" src="/js/grid.js"></script>
 <script type="text/javascript">
   $(function () {
-    var grid = {
-      size: 400,
-      powerUps: []
-    };
+    grid = JSON.parse('<%- JSON.stringify(grid) %>');
     
-    for (var i = 0; i < 100; i++) {
-      grid.powerUps.push(Math.floor(Math.random() * grid.size));
-    }
     PowerUp.GridMaster.initializeGrid();
     PowerUp.GridMaster.populateGrid(grid);
   });

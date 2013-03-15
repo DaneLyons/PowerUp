@@ -3,10 +3,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
   
 var powerUpSchema = new Schema({
-  position: {
-    x: Number,
-    y: Number
-  },
+  position: Number,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' }
 });
 

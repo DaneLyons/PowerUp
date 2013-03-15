@@ -71,6 +71,10 @@ body {
   margin:0;
 }
 
+#content .legend button.powerup {
+  cursor: pointer;
+}
+
 #content .legend button span {
   display:inline-block;
 }
