@@ -14,7 +14,8 @@ var express = require('express'),
   WarpShroom = require('./lib/warp_shroom'),  // Routes
   path = require('path'),
   PowerShroom = require('./lib/power_shroom'),
-  WarpShroom = require('./lib/warp_shroom');
+  WarpShroom = require('./lib/warp_shroom'),
+  TimeShroom = require('./lib/time_shroom');
 
 var app = express();
 var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/powerup';
@@ -73,6 +74,10 @@ app.configure('development', function(){
 
 WarpShroom.setupRoutes(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app)
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+var io = require('socket.io').listen(server);
+TimeShroom.setupEvents(io);
