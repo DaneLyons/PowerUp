@@ -11,7 +11,7 @@
 		<h1><%= grid.name %></h1>
 	</div>
 	
-	<% if (currentUser && (currentUser._id === grid.user._id)) { %>
+	<% //if (currentUser && (currentUser._id === grid.user._id)) { %>
   	<div class="legend">
   	  <% var colors = ['black', 'blue', 'red']; %>
   	  <% for (var i = 0; i < powerUps.length; i++) { %>
@@ -21,7 +21,7 @@
   			</button>
   		<% } %>
   	</div>
-	<% } %>
+	<% //} %>
 	
 	<div class="progress"></div>
 	

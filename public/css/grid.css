@@ -175,8 +175,17 @@ body {
   height:90%;
   margin:5%;
   background:rgba(0,0,0,.15);
+  -webkit-transition:all linear 400ms;
+  -webkit-transform: rotateY(360deg);
+  -moz-transition:all linear 400ms;
+  -moz-transform: rotateY(360deg);
+  transition:all linear 400ms;
+  transform: rotateY(360deg);
 }
 
 #grid li.active div {
   background:rgba(0,0,0,.75);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
