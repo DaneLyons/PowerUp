@@ -7,13 +7,13 @@ $(function () {
       var window_width = $(window).width();
       $('#page').css({height:window_height});
 
-      var grid_size = window_height-115;
+      var grid_size = window_height-155;
       if((grid_size+40)>(window_width/2)){
         grid_size = (window_width/2)-40;
       }
 
       var content_width = window_width-grid_size-60;
-      var content_height = window_height-115;
+      var content_height = window_height-155;
       var content = $('#content');
       content.css({width:content_width,height:content_height});
 
