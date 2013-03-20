@@ -55,7 +55,6 @@ $(function () {
       for(var i = 0; i < grid.powerUps.length; i++) {
         setPowerUp(i);
       }
-<<<<<<< HEAD
       
       $("#content .legend button.powerup").click(function (ev) {
         ev.preventDefault();
@@ -79,12 +78,11 @@ $(function () {
         if (percent === 0) { percent = 1; }
         console.log(percent);
         grid_progress.text(percent + '%');
-=======
+      });
     },
     gridKeeper: function() {
       $('.legend button').click(function(){
         console.log('GRID KEEPER');
->>>>>>> grid updates
       });
     }
   }
