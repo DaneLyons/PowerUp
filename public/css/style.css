@@ -53,6 +53,7 @@ body {
   font-family:"Helvetica Neue",arial;
   font-weight:200;
   color:#fff;
+  overflow:hidden;
 }
 
 .center {
@@ -165,13 +166,15 @@ form label {
 }
 
 #nav a {
-  color:rgba(255,255,255,.5);
+  color:rgba(255,255,255,.6);
   display:block;
   width:20%;
   height:40px;
   line-height:40px;
+  font-size:14px;
   text-align:center;
   text-decoration:none;
+  letter-spacing:1px;
   float:left;
 }
 

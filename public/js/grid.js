@@ -31,7 +31,6 @@ $(function () {
       }
       
       legend_buttons.click(function(){
-        
       });
     },
     populateGrid: function (grid) {
@@ -63,7 +62,9 @@ $(function () {
         var num = btn.data('powerup-num');
         var emptySquares = $("ul#grid li.inactive");
         var emptyLen = emptySquares.length;
-        console.log(num);
+        if(emptyLen != 400 && emptyLen % 5 == 0){
+          PowerUp.GridMaster.gridMilestone();
+        }
         for (var i = 0; i < num; i++) {
           var idx = Math.floor(Math.random() * emptySquares.length);
           console.log(idx);
@@ -74,7 +75,7 @@ $(function () {
         
         var gridSize = $("#grid li").length;
         var filledLen = gridSize - emptyLen;
-        var percent = Math.ceil((filledLen / gridSize) * 100);
+        var percent = Math.floor((filledLen / gridSize) * 100);
         if (percent === 0) { percent = 1; }
         console.log(percent);
         grid_progress.text(percent + '%');
@@ -83,6 +84,25 @@ $(function () {
     gridKeeper: function() {
       $('.legend button').click(function(){
         console.log('GRID KEEPER');
+      });
+    },
+    gridMilestone: function(){
+      var grid = $('#grid');
+      var grid_pos = grid.offset();
+      var grid_width = grid.width();
+      var grid_height = grid.height();
+      var milestone = $('<div id="milestone">\
+        <h1>Feel the progress!</h1>\
+        <h2><img src="/img/icon_white.png" /></h2>\
+      </div>');
+      $('body').append(milestone);
+      milestone.css({left:grid_pos.left,width:grid_width,height:(grid_height/4)});
+      milestone.animate({top:(grid_pos.top+(grid_height/3))},1000,"easeOutBounce",function(){
+        setTimeout(function(){
+          milestone.animate({opacity:0},1000,function(){
+            milestone.remove();
+          });
+        },5000)
       });
     }
   }

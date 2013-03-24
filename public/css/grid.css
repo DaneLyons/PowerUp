@@ -46,6 +46,8 @@ body {
 }
 
 #content .legend {
+  position:relative;
+  z-index:100;
 }
 
 #content .share {
@@ -188,4 +190,32 @@ body {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
+}
+
+#milestone {
+  width:400px;
+  height:200px;
+  position:absolute;
+  background:rgba(0,0,0,.5);
+  top:100%;
+  z-index:9000;
+}
+
+#milestone h1 {
+  text-align:center;
+  width:100%;
+  position:absolute;
+  top:50%;
+  left:0;
+  line-height:0;
+  font-size:50px;
+}
+
+#milestone h2 {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform:uppercase;
+  font-size:20px;
+  position:absolute;
+  right:10px;
+  bottom:10px;
 }
