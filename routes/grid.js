@@ -11,7 +11,9 @@ exports.gridIndex = function (req, res) {
 };
 
 exports.gridNew = function (req, res) {
-  res.render('grid/new');
+  res.render('grid/new',{
+    "stylesheets":["page"]
+  });
 };
 
 exports.gridShow = function (req, res) {

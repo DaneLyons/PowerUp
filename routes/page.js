@@ -11,3 +11,10 @@ exports.grid = function (req, res) {
     "javascripts":["grid"]
   });
 }
+
+exports.gettingStarted = function (req, res) {
+  res.render("page/getting-started.ejs", {
+    "title":"Getting Started with PowerUp",
+    "stylesheets":["page"]
+  });
+}

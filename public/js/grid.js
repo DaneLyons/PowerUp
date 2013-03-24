@@ -62,7 +62,7 @@ $(function () {
         var num = btn.data('powerup-num');
         var emptySquares = $("ul#grid li.inactive");
         var emptyLen = emptySquares.length;
-        if(emptyLen != 400 && emptyLen % 5 == 0){
+        if(emptyLen != 400 && emptyLen % 40 == 0){
           PowerUp.GridMaster.gridMilestone();
         }
         for (var i = 0; i < num; i++) {
