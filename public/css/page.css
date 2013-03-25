@@ -24,6 +24,7 @@ h2 {
 
 .toc {
   width:200px;
+  padding-left:50px;
   float:left;
 }
 
@@ -34,7 +35,7 @@ h2 {
 .toc button {
   font-weight:bold;
   background:transparent;
-  font-size:20px;
+  font-size:30px;
   text-align:left;
   padding:0;
   color:#888;
@@ -46,25 +47,34 @@ h2 {
   color:#333;
 }
 
-.toc button:hover .icon,
-.toc button.active .icon {
-  width:22px;
-  height:22px;
+.toc button .icon {
+  width:40px;
+  height:40px;
+  line-height:40px;
   position:absolute;
-  top:-2px;
-  left:-30px;
-  background:url('/img/icon_black.png') no-repeat;
+  top:-6px;
+  left:-50px;
+  background:#888;
+  color:#fff;
   background-size: 100% auto;
+  text-align:center;
+  -webkit-border-radius:30px;
+  -moz-border-radius:30px;
+  border-radius:30px;
 }
 
 .toc button:hover .icon {
-  opacity:.5;
+  background:#666;
+}
+
+.toc button.active .icon {
+  background:#333;
 }
 
 .content {
   float:left;
-  width:780px;
-  margin-left:40px;
+  width:750px;
+  margin-left:20px;
   font-size:24px;
   line-height:1.4;
   letter-spacing:1px;
@@ -99,9 +109,13 @@ a.skip span {
 }
 
 .content .slides .slide {
+  width:100%;
   position:absolute;
   top:0;
   left:100%;
+  -webkit-transition:left 200ms linear;
+  -moz-transition:left 200ms linear;
+  transition:left 200ms linear;
 }
 
 .content .slides .active {
