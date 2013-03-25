@@ -45,7 +45,7 @@ $(function () {
           var percent = Math.floor((i / grid.size) * 100);
           console.log(percent);
           grid_progress.text(percent + '%');
-          var rand_square = Math.floor(Math.random() * gridSize);
+          var rand_square = grid.powerUps[i].position;
           var sq = gridElem.find('li:eq('+rand_square+')');
           sq.removeClass('inactive');
           sq.addClass('active');
