@@ -41,6 +41,7 @@ $(function () {
       
       function setPowerUp(i) {
         setTimeout(function(){
+          console.log("Size: " + grid.size)
           var percent = Math.floor((i / grid.size) * 100);
           console.log(percent);
           grid_progress.text(percent + '%');
@@ -65,9 +66,19 @@ $(function () {
         if(emptyLen != 400 && emptyLen % 40 == 0){
           PowerUp.GridMaster.gridMilestone();
         }
+        
+        var sockHost = "http://" + window.location.host;
+        var socket = io.connect(sockHost);
+        var gridId = $("#grid").data("grid-id");
         for (var i = 0; i < num; i++) {
           var idx = Math.floor(Math.random() * emptySquares.length);
-          console.log(idx);
+          socket.emit('Grid.PowerUp', {
+            PowerUp: {
+              grid: gridId,
+              position: idx
+            }
+          });
+          
           var newSquare = $(emptySquares[idx]);
           newSquare.removeClass('inactive');
           newSquare.addClass('active');        
@@ -82,7 +93,7 @@ $(function () {
       });
     },
     gridKeeper: function() {
-      $('.legend button').click(function(){
+      $('.legend button').on('click', function(ev) {
         console.log('GRID KEEPER');
       });
     },

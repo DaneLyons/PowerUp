@@ -7,7 +7,7 @@ var powerUpSchema = new Schema({
   grid: { type: Schema.ObjectId, ref: 'PowerUp' }
 });
 
-userSchema.plugin(timestamps);
+powerUpSchema.plugin(timestamps);
 
 var PowerUp = mongoose.model('PowerUp', powerUpSchema);
 module.exports = PowerUp;
