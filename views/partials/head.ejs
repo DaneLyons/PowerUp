@@ -14,10 +14,10 @@
 		<% } %>
 	<% } %>
 	
-	
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/jquery.easing.js"></script>
 	<script type="text/javascript" src="/js/actions.js"></script>
+	<script type="text/javascript" src="/js/header.js"></script>
 	<% if(typeof(javascripts) !== 'undefined'){ %>
 		<% for(javascript in javascripts){ %>
 			<script type="text/javascript" src="/js/<%= javascripts[javascript] %>.js"></script>
@@ -43,7 +43,9 @@
 		<a href="/" id="logo"></a>
 
 		<div class="account">
-			<a href="/login" class="button"><span class="icon"></span>LOGIN</a>
+			<a href="/login" class="login button">
+			  <span class="icon"></span>LOGIN
+			</a>
 		</div>
 	</div>
 	<div id="page">

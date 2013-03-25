@@ -79,6 +79,7 @@ a:hover {
   background:rgba(0,0,0,.5);
   position:absolute;
   top:0;
+  z-index: 10;
 }
 
 #logo {
@@ -163,6 +164,10 @@ form label {
   margin-right:5px;
   position:relative;
   top:2px;
+}
+
+#header .account .login.button:hover {
+  cursor: pointer;
 }
 
 #nav {
