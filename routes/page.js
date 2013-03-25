@@ -19,3 +19,10 @@ exports.gettingStarted = function (req, res) {
     "javascripts":["slides"]
   });
 }
+
+exports.contact = function (req, res) {
+  res.render("page/contact.ejs", {
+    "title":"PowerUp Contact Page",
+    "stylesheets":["page"]
+  });
+}

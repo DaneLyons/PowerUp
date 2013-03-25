@@ -76,7 +76,7 @@ h2 {
   width:750px;
   margin-left:20px;
   font-size:24px;
-  line-height:1.4;
+  line-height:1.2;
   letter-spacing:1px;
 }
 
@@ -105,7 +105,7 @@ a.skip span {
   position:relative;
   overflow:hidden;
   width:100%;
-  height:500px;
+  height:800px;
 }
 
 .content .slides .slide {
