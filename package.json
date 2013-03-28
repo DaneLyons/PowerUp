@@ -32,6 +32,7 @@
     "connect-redis": "1.4.x",
     "connect-flash": "0.1.x",
     "node-inspector": "0.1.x",
-    "q": "0.9.x"
+    "q": "0.9.x",
+    "i": "latest"
   }
 }

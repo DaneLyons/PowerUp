@@ -1,0 +1,25 @@
+<form action="/start" method="post">
+  <div class="field">
+    <input type="text" name="grid[name]" placeholder="What's your goal?"
+      size="80" />
+  </div>
+  
+  <div class="field">
+    <input type="text" name="workUnit" size="80"
+      placeholder="What will bring you 1 step closer?" />
+  </div>
+  
+  <% if (typeof currentUser === 'undefined') { %>
+    <div class="field">
+      <input type="text" name="user[email]" placeholder="Email"
+        size="80" />
+    </div>
+
+    <div class="field">
+      <input type="password" name="user[password]" size="80"
+        placeholder="Password" />
+    </div>
+  <% } %>
+  
+  <input type="submit" value="Get Started" />
+</form>
