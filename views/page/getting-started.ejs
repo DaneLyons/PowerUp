@@ -5,19 +5,19 @@
 
 <ul class="toc">
 	<li>
-		<button class="active the_grid" data-slide="the_grid">
+		<button class="active the_basics" data-slide="the_basics">
 			<div class="icon">1</div>
-			The Grid
+			The Basics
 		</button>
 	</li>
 	<li>
-		<button class="ideas" data-slide="ideas">
+		<button class="friends" data-slide="friends">
 			<div class="icon">2</div>
-			Grid Ideas
+			Friends
 		</button>
 	</li>
 	<li>
-		<button class="support" data-slide="setup">
+		<button class="setup" data-slide="setup">
 			<div class="icon">3</div>
 			Build a Grid
 		</button>
@@ -26,20 +26,38 @@
 
 <div class="content">
 	<div class="slides">
-		<div class="slide the_grid active">
-			<img src="/img/demo_screen.jpg" style="float:left;" />
-			<img src="/img/shadow.png" />
-			<p class="clear">PowerUp Grids help you track progress. Start by picking a goal and splitting it into manageable tasks. For example, I created a grid to help me complete 4,000 push-ups. Every time I do 10 push-ups I earn a square.</p>
-			<a class="next" href="#" data-slide="ideas">Next: Grid Ideas &rarr;</a>
-		</div>
-		<div class="slide ideas">
-			<p>[grid ideas]</p>
-			<a class="next" href="#" data-slide="setup">Next: Friends &rarr;</a>
-		</div>
-		<div class="slide setup">
-			<p>Grid setup form</p>
-			<a class="next" href="#" data-slide="setup">Next: Getting Help &rarr;</a>
-		</div>
+		<ul class="slide the_basics active">
+			<li>
+				<img src="/img/trophy.png" class="left" />
+				It all starts with a <strong>simple goal</strong>. Maybe you want to learn a new language, lose 50lbs, finish a project, eat healthier or any other worth while ambition.
+			</li>
+			<li>
+				<img src="/img/icon_grid.png" class="left" />
+				We help you break down your goals into manageable tasks. Every time you complete a task you get rewarded with a square in your personal PowerUp Grid.
+			</li>
+			<li>
+				<img src="/img/icon_powerup.png" class="left" />
+				Complete an entire grid and earn a PowerUp Badge. Your badge timeline is a great way to keep track of all your accomplishments.
+			</li>
+			<li>
+				<a class="next" href="#" data-slide="friends">Next: Friends &rarr;</a>
+			</li>
+		</ul>
+		<ul class="slide friends">
+			<li>
+				<img src="/img/icon_friends.png" class="left" />
+				Sometimes you need a little extra push to keep on track. We've made it so you can collaborate on grids with your friends either cooperatively or competitively!
+			</li>
+			<li>
+				Or share your grid on social media so your friends can cheer you on from the sidelines.
+			</li>
+			<li style="padding-top:10px">
+				<a class="next" href="#" data-slide="setup">Next: Build a Grid &rarr;</a>
+			</li>
+		</ul>
+		<ul class="slide setup">
+			<li>GRID SETUP FORM</li>
+		</ul>
 </div>
 
 <% include ../partials/footer.ejs %>

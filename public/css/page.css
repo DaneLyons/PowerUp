@@ -121,3 +121,7 @@ a.skip span {
 .content .slides .active {
   left:0;
 }
+
+.content .slides .slide li {
+  clear:left;
+}

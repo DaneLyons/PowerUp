@@ -77,6 +77,10 @@ img.left {
   margin-bottom:15px;
 }
 
+strong {
+  font-weight:500;
+}
+
 .center {
   text-align:center;
 }
