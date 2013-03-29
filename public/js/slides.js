@@ -8,10 +8,27 @@ $(function(){
     elem.addClass('active');
     
     //show slide
+    var currentSlide = $('.slides .active');
+    var newSlide = $('.slides .'+slide);
+    
+    if(newSlide.hasClass('seen')){
+      currentSlide.removeClass('active seen');
+    }else{
+      currentSlide.removeClass('active');
+      currentSlide.addClass('seen');
+    }
+    newSlide.addClass('active');
+    
+    /*
     var active = $('.slides .active');
     active.removeClass('active');
-    active.addClass('seen');
+    if(active.hasClass('seen')){
+      active.removeClass('seen');
+    }else{
+      active.addClass('seen');
+    }
     $('.slides .'+slide).addClass('active');
+    */
   });
   
   $('.content .next').click(function(ev){
