@@ -41,9 +41,11 @@ gridSchema.pre('save', function (next) {
 gridSchema.post('save', function (grid) {
   if (grid.gridButtons.length === 0) {
     Grid.findById(grid._id, function (err, grid) {
+      var workUnit = inflect.singularize(grid.workUnit.replace(/\d/g, ''))
+        .trim();
       var firstBtn = new GridButton({
         grid: grid._id,
-        workUnit: inflect.singularize(grid.workUnit.replace(/\d/g, '').trim(),
+        workUnit: workUnit,
         increment: 1
       });
       
