@@ -8,6 +8,8 @@
   width:400px;
   height:310px;
   padding:40px;
+  left:50%;
+  margin-left:-240px;
 }
 
 #sidebar h1 {
