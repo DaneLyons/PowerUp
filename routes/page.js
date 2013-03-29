@@ -1,6 +1,6 @@
 var Grid = require('../models/grid'),
   User = require('../models/user'),
-  inflect = require('i');
+  inflect = require('i')();
 
 exports.home = function (req, res) {
   res.render("page/home.ejs", {
