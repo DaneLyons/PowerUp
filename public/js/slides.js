@@ -18,17 +18,6 @@ $(function(){
       currentSlide.addClass('seen');
     }
     newSlide.addClass('active');
-    
-    /*
-    var active = $('.slides .active');
-    active.removeClass('active');
-    if(active.hasClass('seen')){
-      active.removeClass('seen');
-    }else{
-      active.addClass('seen');
-    }
-    $('.slides .'+slide).addClass('active');
-    */
   });
   
   $('.content .next').click(function(ev){

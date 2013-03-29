@@ -1,25 +1,27 @@
-<form action="/start" method="post">
+<form action="/start" method="post" id="new_grid">
   <div class="field">
-    <input type="text" name="grid[name]" placeholder="What's your goal?"
-      size="80" />
+		<label>GOAL</label>
+    <input type="text" name="grid[name]" value="Lose 50 lbs" />
   </div>
   
   <div class="field">
-    <input type="text" name="workUnit" size="80"
-      placeholder="What will bring you 1 step closer?" />
+		<label>WORK UNITS</label>
+    <input type="text" name="workUnit" value="10 Push-Ups" class="small" />
+		<input type="text" class="small" value="20 Sit-Ups" />
+		<input type="text" class="small last" value="Run 10 Minutes" />
   </div>
   
   <% if (typeof currentUser === 'undefined') { %>
     <div class="field">
-      <input type="text" name="user[email]" placeholder="Email"
-        size="80" />
+			<label>EMAIL</label>
+      <input type="text" name="user[email]" />
     </div>
 
     <div class="field">
-      <input type="password" name="user[password]" size="80"
-        placeholder="Password" />
+			<label>PASSWORD</label>
+      <input type="password" name="user[password]" />
     </div>
   <% } %>
   
-  <input type="submit" value="Get Started" />
+	<button type="submit" class="submit">Get Started</button>
 </form>

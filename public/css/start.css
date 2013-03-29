@@ -13,6 +13,16 @@
   padding:10px 40px;
 }
 
+button.submit {
+  background:#cb0000;
+  padding:15px 50px;
+}
+
+button.random {
+  float:right;
+  background:rgba(0,0,0,.3);
+}
+
 .next_btn {
   text-align:left;
   padding-top:20px;
@@ -45,4 +55,42 @@
 
 .content .slides .slide li {
   clear:left;
+}
+
+#new_grid .field {
+  margin-bottom:10px;
+  width:748px;
+  height:40px;
+}
+
+#new_grid .field label {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  float:left;
+  padding-right:10px;
+  width:130px;
+  height:40px;
+  background:rgba(0,0,0,.05);
+  font-size:20px;
+  line-height:40px;
+}
+
+#new_grid .field input {
+  float:left;
+  border:none;
+  background:#fff;
+  width:588px;
+  height:40px;
+  margin:0;
+  padding:0 10px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:20px;
+}
+
+#new_grid .field input.small {
+  width:176px;
+  margin-right:10px;
+}
+
+#new_grid .field input.last {
+  margin-right:0;
 }
