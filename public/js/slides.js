@@ -8,7 +8,9 @@ $(function(){
     elem.addClass('active');
     
     //show slide
-    $('.slides .active').removeClass('active');
+    var active = $('.slides .active');
+    active.removeClass('active');
+    active.addClass('seen');
     $('.slides .'+slide).addClass('active');
   });
   

@@ -1,0 +1,19 @@
+.share {
+  float:right;
+}
+
+.share img {
+  width:40px;
+  margin-left:5px;
+}
+
+.next {
+  background:#cb0000;
+  color:#fff;
+  padding:10px 40px;
+}
+
+.next_btn {
+  text-align:left;
+  padding-top:20px;
+}

@@ -118,6 +118,10 @@ a.skip span {
   transition:left 200ms linear;
 }
 
+.content .slides .seen {
+  left:-100%;
+}
+
 .content .slides .active {
   left:0;
 }
