@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
+  inflect = require('i')(),
   Schema = mongoose.Schema,
   GridButton = require('./grid_button');
   
