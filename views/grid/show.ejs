@@ -13,10 +13,10 @@
 	
 	<div class="legend">
 	  <% var colors = ['black', 'blue', 'red']; %>
-	  <% for (var i = 0; i < powerUps.length; i++) { %>
+	  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
 			<button class="powerup <%= colors[i] %>" data-powerup-num="<%= i + 1 %>">
 				<span class="plus"></span>
-				<span><%= powerUps[i] %> <%= grid.workUnit.split(' ')[1] %></span>
+				<span><%= grid.gridButtons[i].increment %> <%= grid.gridButtons[i].workUnit %></span>
 			</button>
 		<% } %>
 	</div>

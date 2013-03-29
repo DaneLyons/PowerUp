@@ -20,16 +20,10 @@ exports.gridShow = function (req, res) {
   Grid.findOne({ slug: req.params.slug })
     .populate('user')
     .populate('powerUps')
+    .populate('gridButtons')
   .exec(
     function (err, grid) {
-      var workUnitNum = parseInt(10, grid.workUnit),
-        workUnitName = grid.workUnit.split(' ')[-1],
-        powerUps = [];
-      
-      for (var i = 1; i <= 3; i++) {
-        powerUps.push(workUnitNum * i);
-      }
-      res.render('grid/show', { grid: grid, powerUps: powerUps });
+      res.render('grid/show', { grid: grid });
     }
   );
 };

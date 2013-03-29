@@ -65,13 +65,15 @@ exports.start = function (req, res) {
 
   if (userParams) {
     User.findOrCreate(userParams, function (err, user) {
-      grid.user = user._id;
-      grid.save(function (err, grid) {
-        user.grids.push(grid._id);
-        user.save(function (err) {
-          if (err) { console.log("ERR: " + err); }
-          res.redirect("/grids/" + grid.slug);
-          return;
+      User.findById(user._id, function (err, user) {
+        grid.user = user._id;
+        grid.save(function (err, grid) {
+          user.grids.push(grid._id);
+          user.save(function (err) {
+            if (err) { console.log("ERR: " + err); }
+            res.redirect("/grids/" + grid.slug);
+            return;
+          });
         });
       });
     });

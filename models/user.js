@@ -103,6 +103,16 @@ userSchema.statics.findOrCreate = function(userParams, done) {
   });
 };
 
+userSchema.methods.validPassword = function (password, done) {
+  bcrypt.compare(password, this.passwordHash, function (err, res) {
+    if (err) {
+      console.error("ERR " + err);
+      return done(err);
+    }
+    
+    return done(null, res);
+  });
+};
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;
