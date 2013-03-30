@@ -61,6 +61,7 @@ button.random {
   margin-bottom:10px;
   width:748px;
   height:40px;
+  position:relative;
 }
 
 #new_grid .field label {
@@ -93,4 +94,20 @@ button.random {
 
 #new_grid .field input.last {
   margin-right:0;
+}
+
+#new_grid h2 {
+  padding-bottom:5px;
+}
+
+#new_grid .actions {
+  position:absolute;
+  top:7px;
+  right:10px;
+  z-index:10;
+}
+
+#new_grid button.clear {
+  background:rgba(0,0,0,.15);
+  color:#777;
 }

@@ -1,5 +1,11 @@
 <form action="/start" method="post" id="new_grid">
+
+	<h2>What do you want to accomplish?</h2>
   <div class="field">
+		<div class="actions">
+			<img src="/img/icons/random.png" />
+		</div>
+		
 		<label>GOAL</label>
     <input type="text" name="grid[name]" value="Lose 50 lbs" />
   </div>
@@ -23,5 +29,6 @@
     </div>
   <% } %>
   
-	<button type="submit" class="submit">Get Started</button>
+	<button type="submit" class="submit">Start</button>
+	<button class="clear">Clear</button>
 </form>
