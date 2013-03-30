@@ -111,3 +111,16 @@ button.random {
   background:rgba(0,0,0,.15);
   color:#777;
 }
+
+#new_grid button.random {
+  background:transparent;
+  opacity:.25;
+  padding:0;
+  -webkit-transition:opacity linear 300ms;
+  -moz-transition:opacity linear 300ms;
+  transition:opacity linear 300ms;
+}
+
+#new_grid button.random:hover {
+  opacity:1;
+}

@@ -3,18 +3,18 @@
 	<h2>What do you want to accomplish?</h2>
   <div class="field">
 		<div class="actions">
-			<img src="/img/icons/random.png" />
+			<button class="random"><img src="/img/icons/random.png" /></button>
 		</div>
 		
 		<label>GOAL</label>
-    <input type="text" name="grid[name]" value="Lose 50 lbs" />
+    <input type="text" name="grid[name]" class="goal" value="Lose Weight" />
   </div>
   
   <div class="field">
 		<label>WORK UNITS</label>
-    <input type="text" name="workUnit" value="10 Push-Ups" class="small" />
-		<input type="text" class="small" value="20 Sit-Ups" />
-		<input type="text" class="small last" value="Run 10 Minutes" />
+    <input type="text" name="workUnit" value="10 Push-Ups" class="small work_unit" />
+		<input type="text" class="small work_unit" value="20 Sit-Ups" />
+		<input type="text" class="small last work_unit" value="Run 10 Minutes" />
   </div>
   
   <% if (typeof currentUser === 'undefined') { %>
