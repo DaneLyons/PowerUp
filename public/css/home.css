@@ -5,11 +5,11 @@
   margin-top:-175px;
   position:absolute;
   background:rgba(0,0,0,.5);
-  width:400px;
+  width:500px;
   height:300px;
   padding:40px;
   left:50%;
-  margin-left:-240px;
+  margin-left:-290px;
 }
 
 #sidebar h1 {
@@ -22,6 +22,7 @@
   line-height:1.2;
   letter-spacing:1px;
   padding-bottom:15px;
+  text-shadow:1px 1px 0 rgba(0,0,0,.7);
 }
 
 #sidebar a.button {
@@ -56,4 +57,17 @@
   position:relative;
   top:2px;
   left:-2px;
+}
+
+#sidebar p strong {
+  padding:3px 10px;
+  margin-right:2px;
+  background:rgba(255,255,255,.15);
+  text-align:center;
+  border:none;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  color:#fff;
+  line-height:1;
+  display:inline-block;
 }

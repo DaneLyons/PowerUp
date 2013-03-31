@@ -4,7 +4,11 @@
 	<h1>FEEL THE PROGRESS</h1>
 	<p>PowerUp helps you achieve your goals by giving you simple, visual tools to track each step along the way.</p>
 	
-	<p>The next <strong><%= freebies %> signups</strong> get free premium accounts for life!</p>
+	<p>The next
+	<% for(var i=0;i<freebies.length;i++){ %>
+		<strong><%= freebies[i] %></strong>
+	<% } %>
+	 lucky users get free premium accounts for life!</p>
 	
 	<a href="/getting-started" class="button">
 		<img src="/img/icon_white.png" width="30" height="26" />
