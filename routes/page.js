@@ -7,6 +7,11 @@ exports.home = function (req, res) {
     var freebies = 500-count;
     if(freebies<0){ freebies=0 }
     freebies += ""; //makes freebies a string
+    if(freebies.length<2){
+      freebies = "00"+freebies;
+    }else if(freebies.length<3){
+      freebies = "0"+freebies;
+    }
     res.render("page/home.ejs", {
       "freebies":freebies,
       "stylesheets":["home"],

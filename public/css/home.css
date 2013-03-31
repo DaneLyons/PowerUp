@@ -70,4 +70,16 @@
   color:#fff;
   line-height:1;
   display:inline-block;
+  -webkit-transition:all linear 400ms;
+  -webkit-transform: rotateY(360deg);
+  -moz-transition:all linear 400ms;
+  -moz-transform: rotateY(360deg);
+  transition:all linear 400ms;
+  transform: rotateY(360deg);
+}
+
+#sidebar p strong.flip {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
