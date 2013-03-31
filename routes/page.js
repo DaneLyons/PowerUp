@@ -3,9 +3,15 @@ var Grid = require('../models/grid'),
   inflect = require('i')();
 
 exports.home = function (req, res) {
-  res.render("page/home.ejs", {
-    "stylesheets":["home"],
-    "javascripts":["home"]
+  User.count({},function(err,count){
+    var freebies = 500-count;
+    if(freebies<0){ freebies=0 }
+    
+    res.render("page/home.ejs", {
+      "freebies":freebies,
+      "stylesheets":["home"],
+      "javascripts":["home"]
+    });
   });
 }
 

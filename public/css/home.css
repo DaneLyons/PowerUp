@@ -6,7 +6,7 @@
   position:absolute;
   background:rgba(0,0,0,.5);
   width:400px;
-  height:310px;
+  height:300px;
   padding:40px;
   left:50%;
   margin-left:-240px;
@@ -17,10 +17,16 @@
 }
 
 #sidebar p {
-  font-size:22px;
+  font-size:23px;
   font-weight:100;
   line-height:1.2;
   letter-spacing:1px;
+  padding-bottom:15px;
+}
+
+#sidebar a.button {
+  margin:20px auto 0 auto;
+  width:228px;
 }
 
 #sidebar form {

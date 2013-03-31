@@ -65,6 +65,24 @@ a:hover {
   text-decoration:underline;
 }
 
+a.button {
+  display:block;
+  background:rgba(208,96,13,.7);
+  padding:15px;
+  text-align:center;
+  border:none;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size:24px;
+  color:#fff;
+  line-height:1;
+}
+
+a.button:hover {
+  background:rgba(208,96,13,.85);
+  text-decoration:none;
+}
+
 img.right {
   float:right;
   margin-left:15px;
