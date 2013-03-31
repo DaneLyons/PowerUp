@@ -20,32 +20,32 @@
 
 <script>
 	var freebies = "<%= freebies %>";
+	function freebieCounter(){
+		freebies -= 1;
+		freebies += ""; //makes freebies a string
+    if(freebies.length<2){
+      freebies = "00"+freebies;
+    }else if(freebies.length<3){
+      freebies = "0"+freebies;
+    }
+		for(var i=0;i<freebies.length;i++){
+			var elem = $('.freebies strong:eq('+i+')');
+			var currentNum = elem.text();
+			var newNum = freebies[i];
+			if(currentNum != newNum){
+				elem.toggleClass('flip');
+				(function(elem,i){
+					setTimeout(function(){
+						elem.text(freebies[i]);
+					},200);
+				})(elem,i);
+			}
+		}
+	}
+	
 	$(function(){
 		setInterval(function(){
 			freebieCounter();
 		},5000);
-		
-		function freebieCounter(){
-			freebies -= 1;
-			freebies += ""; //makes freebies a string
-	    if(freebies.length<2){
-	      freebies = "00"+freebies;
-	    }else if(freebies.length<3){
-	      freebies = "0"+freebies;
-	    }
-			for(var i=0;i<freebies.length;i++){
-				var elem = $('.freebies strong:eq('+i+')');
-				var currentNum = elem.text();
-				var newNum = freebies[i];
-				if(currentNum != newNum){
-					elem.toggleClass('flip');
-					(function(elem,i){
-						setTimeout(function(){
-							elem.text(freebies[i]);
-						},200);
-					})(elem,i);
-				}
-			}
-		}
 	});
 </script>
