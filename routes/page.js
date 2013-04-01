@@ -42,6 +42,20 @@ exports.contact = function (req, res) {
   });
 }
 
+exports.faq = function (req, res) {
+  res.render("page/faq.ejs", {
+    "title":"PowerUp Frequently Asked Questions",
+    "stylesheets":["page"]
+  });
+}
+
+exports.press = function (req, res) {
+  res.render("page/press.ejs", {
+    "title":"PowerUp Press Inquiries",
+    "stylesheets":["page"]
+  });
+}
+
 exports.start = function (req, res) {
   var userParams = req.body.user,
     gridParams = req.body.grid,
