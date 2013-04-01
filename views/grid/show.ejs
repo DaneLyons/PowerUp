@@ -5,9 +5,11 @@
 
 <div id="content">
 	<div class="heading">
+		<% if(grid.user.name){ %>
 		<div class="author">
 			<%= grid.user.name %>
 		</div>
+		<% } %>
 		<h1><%= grid.name %></h1>
 	</div>
 	
