@@ -1,0 +1,68 @@
+h1 {
+
+}
+
+.section {
+  width:500px;
+  float:left;
+  margin-right:10px;
+}
+
+.content {
+  text-align:center;
+  width:1020px;
+}
+
+.timeline {
+  margin-left:100px;
+  width:20px;
+}
+
+.timeline li {
+  width:20px;
+  height:15px;
+  background:url('/img/icons/badge_bg.png');
+  position:relative;
+}
+
+.timeline li.last {
+  height:10px;
+  background:url('/img/icons/badge_bg2.png');
+}
+
+.timeline li.badge {
+  height:33px;
+  background:url('/img/icons/badge.png');
+}
+
+.timeline li.now {
+  height:23px;
+  background:url('/img/icons/badge_now.png');
+}
+
+.timeline .time {
+  position:absolute;
+  left:-100px;
+  top:0;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:15px;
+  width:90px;
+  text-align:right;
+}
+
+.timeline .name {
+  position:absolute;
+  left:30px;
+  top:0;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:15px;
+  width:200px;
+}
+
+.stats li {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:17px;
+  width:200px;
+  float:left;
+  padding-bottom:5px;
+}

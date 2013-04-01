@@ -1,6 +1,7 @@
 body {
   background:url('/img/bg_2.png');
   text-align:center;
+  overflow:visible;
 }
 
 #page {

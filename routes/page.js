@@ -38,21 +38,28 @@ exports.gettingStarted = function (req, res) {
 exports.contact = function (req, res) {
   res.render("page/contact.ejs", {
     "title":"PowerUp Contact Page",
-    "stylesheets":["page"]
+    "stylesheets":["page","content"]
   });
 }
 
 exports.faq = function (req, res) {
   res.render("page/faq.ejs", {
     "title":"PowerUp Frequently Asked Questions",
-    "stylesheets":["page"]
+    "stylesheets":["page","content"]
   });
 }
 
 exports.press = function (req, res) {
   res.render("page/press.ejs", {
     "title":"PowerUp Press Inquiries",
-    "stylesheets":["page"]
+    "stylesheets":["page","content"]
+  });
+}
+
+exports.badgeTimeline = function (req, res) {
+  res.render("page/badge-timeline.ejs", {
+    "title":"PowerUp Badge Timeline",
+    "stylesheets":["page","content","timeline"]
   });
 }
 
