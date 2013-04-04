@@ -61,6 +61,7 @@ $(function () {
         
         var btn = $(this);
         var num = btn.data('powerup-num');
+        var color = btn.data('color');
         var emptySquares = $("ul#grid li.inactive");
         var emptyLen = emptySquares.length;
         if(emptyLen != 400 && emptyLen % 40 == 0){
@@ -81,7 +82,8 @@ $(function () {
           
           var newSquare = $(emptySquares[idx]);
           newSquare.removeClass('inactive');
-          newSquare.addClass('active');        
+          newSquare.addClass('active');
+          newSquare.addClass(color);      
         }
         
         var gridSize = $("#grid li").length;

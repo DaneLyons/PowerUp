@@ -193,6 +193,18 @@ body {
   transform: rotateY(180deg);
 }
 
+#grid li.red div {
+  background:rgba(111,11,11,.75);
+}
+
+#grid li.blue div {
+  background:rgba(22,76,124,.75);
+}
+
+#grid li.green div {
+  background:rgba(0,45,0,.75);
+}
+
 #milestone {
   width:400px;
   height:200px;
