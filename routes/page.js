@@ -1,4 +1,5 @@
 var Grid = require('../models/grid'),
+  GridButton = require('../models/grid_button'),
   User = require('../models/user'),
   inflect = require('i')();
 
@@ -86,14 +87,33 @@ exports.start = function (req, res) {
     return;
   }
   
+  console.log("BUTTONS: "+workUnit.length);
+  /*
   var workUnitNum = parseInt(workUnit, 10);
   workUnit = workUnit.trim();
   if (workUnitNum === NaN) {
     workUnit = "1 " + inflect.singularize(workUnit);
   }
+  */
   gridParams.workUnit = workUnit;
   
+  
   var grid = new Grid(gridParams);
+  console.log("GRID ID: "+grid._id);
+  for(var i=0;i<workUnit.length;i++){
+    var btn = new GridButton({
+      grid: grid._id,
+      workUnit: workUnit[i],
+      increment: 1
+    });
+  
+    btn.save(function (err, button) {
+      grid.gridButtons.push(button._id);
+      grid.save(function (err) {
+        if (err) { console.log("ERR: " + err);}
+      });
+    });
+  }
 
   if (userParams) {
     User.findOrCreate(userParams, function (err, user) {
