@@ -1,7 +1,9 @@
 body {
-  background:url('/img/bg_3.jpg') no-repeat center top;
   background:url('/img/maui.jpg') no-repeat center top;
+  background:url('/img/bg_4.png');
+  background:url('/img/bg_3.jpg') no-repeat center top;
   background-size: 100% auto;
+  background-size:auto;
   background-size: cover;
 }
 

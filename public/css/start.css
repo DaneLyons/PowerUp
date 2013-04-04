@@ -87,6 +87,11 @@ button.random {
   font-size:20px;
 }
 
+#new_grid .field input.prompt {
+  border-right:10px solid #cb0000;
+  padding-right:0;
+}
+
 #new_grid .field input.small {
   width:176px;
   margin-right:10px;

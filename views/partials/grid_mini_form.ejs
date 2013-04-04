@@ -3,16 +3,16 @@
 	<h2>What do you want to accomplish?</h2>
   <div class="field">
 		<div class="actions">
-			<button class="random"><img src="/img/icons/random.png" /></button>
+			<button class="random" type="button"><img src="/img/icons/random.png" /></button>
 		</div>
 		
 		<label>GOAL</label>
-    <input type="text" name="grid[name]" class="goal" value="Lose Weight" />
+    <input type="text" name="grid[name]" class="goal required" value="Lose Weight" />
   </div>
   
   <div class="field">
 		<label>WORK UNITS</label>
-    <input type="text" name="workUnit[]" value="10 Push-Ups" class="small work_unit" />
+    <input type="text" name="workUnit[]" value="10 Push-Ups" class="small work_unit required" />
 		<input type="text" name="workUnit[]" class="small work_unit" value="20 Sit-Ups" />
 		<input type="text" name="workUnit[]" class="small last work_unit" value="Run 10 Minutes" />
   </div>
@@ -20,12 +20,12 @@
   <% if (typeof currentUser === 'undefined') { %>
     <div class="field">
 			<label>EMAIL</label>
-      <input type="text" name="user[email]" />
+      <input type="text" name="user[email]" class="required" />
     </div>
 
     <div class="field">
 			<label>PASSWORD</label>
-      <input type="password" name="user[password]" />
+      <input type="password" name="user[password]" class="required" />
     </div>
   <% } %>
   

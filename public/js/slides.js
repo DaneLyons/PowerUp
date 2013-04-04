@@ -54,4 +54,27 @@ $(function(){
     $('input.work_unit:eq(1)').val(useCase.units[1]);
     $('input.work_unit:eq(2)').val(useCase.units[2]);
   });
+  
+  $('button.submit').click(function(ev){
+    return requiredCheck();
+  });
+  
+  $('input').bind('keypress', function(e) {
+  	if(e.keyCode==13){
+  		$('button.submit').trigger('click');
+  	}
+  });
+  
+  function requiredCheck(){
+    var submit = true;
+    $('input.required').each(function(){
+      if($(this).val() == ''){
+        $(this).addClass('prompt');
+        submit = false;
+      }else{
+        $(this).removeClass('prompt');
+      }
+    });
+    return submit;
+  }
 });
