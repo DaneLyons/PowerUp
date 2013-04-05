@@ -1,0 +1,47 @@
+.field {
+  margin-bottom:10px;
+  width:748px;
+  height:40px;
+  position:relative;
+}
+
+.field label {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  float:left;
+  padding-right:10px;
+  width:130px;
+  height:40px;
+  background:rgba(0,0,0,.05);
+  font-size:20px;
+  line-height:40px;
+}
+
+.field input {
+  float:left;
+  border:none;
+  background:#fff;
+  width:588px;
+  height:40px;
+  margin:0;
+  padding:0 10px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:20px;
+}
+
+.field input.prompt {
+  border-right:10px solid #cb0000;
+  padding-right:0;
+}
+
+.field input.small {
+  width:176px;
+  margin-right:10px;
+}
+
+.field input.last {
+  margin-right:0;
+}
+
+h2 {
+  padding-bottom:5px;
+}
