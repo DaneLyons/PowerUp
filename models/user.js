@@ -2,14 +2,18 @@ var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
-  bcrypt = require('bcrypt');
+  bcrypt = require('bcrypt'),
+  TimeShroom = require('../lib/time_shroom');
   
 var userSchema = new Schema({
   name: String,
   email: String,
   passwordHash: String,
   passwordSalt: String,
-  grids: [ { type: Schema.ObjectId, ref: 'User' } ]
+  grids: [ { type: Schema.ObjectId, ref: 'User' } ],
+  flags: {
+    isNew: Boolean
+  }
 });
 
 userSchema.plugin(timestamps);
@@ -113,6 +117,32 @@ userSchema.methods.validPassword = function (password, done) {
     return done(null, res);
   });
 };
+
+userSchema.pre('save', function (next) {
+  var that = this;
+  User.findById(this._id, function (err, user) {
+    if (!user) {
+      that.flags.isNew = true;
+    }
+    next();
+  });
+});
+
+userSchema.post('save', function (user) {
+  console.log("IS NEW: " + user.flags.isNew);
+  if (user.flags.isNew) {
+    user.flags.isNew = false;
+    var io = TimeShroom.io;
+    console.log(io);
+    
+    io.sockets.emit('promo.freebie', function () {
+      console.log("EMISSIONS");
+      user.save(function (err, user) {
+        if (err) { console.log("ERR: " + err) }
+      });
+    });
+  }
+});
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;

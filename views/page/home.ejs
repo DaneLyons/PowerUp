@@ -21,6 +21,7 @@
 <script>
 	var freebies = "<%= freebies %>";
 	function freebieCounter(){
+	  console.log("FREEBIE!");
 		freebies -= 1;
 		freebies += ""; //makes freebies a string
     if(freebies.length<2){
@@ -44,8 +45,9 @@
 	}
 	
 	$(function(){
-		setInterval(function(){
-			freebieCounter();
-		},5000);
+		var socket = io.connect('http://localhost');
+    socket.on('promo.freebie', function (data) {
+		  freebieCounter();
+	  });
 	});
 </script>
