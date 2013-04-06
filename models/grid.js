@@ -17,6 +17,8 @@ var gridSchema = new Schema({
   active: { type: Boolean, default: true },
   slug: String,
   size: { type: Number, default: 400 }
+}, {
+  safe: true
 });
 
 gridSchema.plugin(timestamps);

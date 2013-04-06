@@ -5,6 +5,8 @@ var mongoose = require('mongoose'),
 var powerUpSchema = new Schema({
   position: Number,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' }
+}, {
+  safe: true
 });
 
 powerUpSchema.plugin(timestamps);

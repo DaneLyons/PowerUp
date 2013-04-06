@@ -2,6 +2,7 @@ var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
+  Action = require('./action'),
   bcrypt = require('bcrypt'),
   TimeShroom = require('../lib/time_shroom');
   
@@ -10,10 +11,9 @@ var userSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
-  grids: [ { type: Schema.ObjectId, ref: 'User' } ],
-  flags: {
-    isNew: Boolean
-  }
+  grids: [ { type: Schema.ObjectId, ref: 'User' } ]
+}, {
+  safe: true
 });
 
 userSchema.plugin(timestamps);
@@ -118,30 +118,29 @@ userSchema.methods.validPassword = function (password, done) {
   });
 };
 
-userSchema.pre('save', function (next) {
-  var that = this;
-  User.findById(this._id, function (err, user) {
-    if (!user) {
-      that.flags.isNew = true;
-    }
-    next();
-  });
-});
-
 userSchema.post('save', function (user) {
-  console.log("IS NEW: " + user.flags.isNew);
-  if (user.flags.isNew) {
-    user.flags.isNew = false;
-    var io = TimeShroom.io;
-    console.log(io);
-    
-    io.sockets.emit('promo.freebie', function () {
-      console.log("EMISSIONS");
-      user.save(function (err, user) {
-        if (err) { console.log("ERR: " + err) }
+  var actionParams = {
+    user: user._id,
+    actionType: 'Models.User.Create',
+    actionObjectId: user._id
+  };
+  
+  Action.findOne(actionParams, function (err, action) {
+    if (!action) {
+      action = new Action(actionParams);
+      action.save(function (err) {
+        var io = TimeShroom.io;
+        console.log(io);
+
+        io.sockets.emit('promo.freebie', function () {
+          console.log("EMISSIONS");
+          user.save(function (err, user) {
+            if (err) { console.log("ERR: " + err) }
+          });
+        });
       });
-    });
-  }
+    }
+  });
 });
 
 var User = mongoose.model('User', userSchema);
