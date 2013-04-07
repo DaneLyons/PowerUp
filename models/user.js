@@ -11,7 +11,10 @@ var userSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
-  grids: [ { type: Schema.ObjectId, ref: 'User' } ]
+  grids: [ { type: Schema.ObjectId, ref: 'User' } ],
+  promo: {
+    zed: Boolean
+  }
 }, {
   safe: true
 });
@@ -118,6 +121,16 @@ userSchema.methods.validPassword = function (password, done) {
   });
 };
 
+userSchema.pre('save', function (next) {
+  var user = this;
+  User.count(function (err, count) {
+    if (count < 500) {
+      user.promo.zed = true;
+    }
+    next();
+  });
+});
+
 userSchema.post('save', function (user) {
   var actionParams = {
     user: user._id,
@@ -132,7 +145,7 @@ userSchema.post('save', function (user) {
         var io = TimeShroom.io;
         console.log(io);
 
-        io.sockets.emit('promo.freebie', function () {
+        io.sockets.emit('promo.zed', function () {
           console.log("EMISSIONS");
           user.save(function (err, user) {
             if (err) { console.log("ERR: " + err) }
