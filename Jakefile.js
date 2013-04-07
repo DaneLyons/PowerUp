@@ -1,6 +1,5 @@
 desc('Install required npm modules');
 task('install-npm-depends', [], function () {
-	
 	console.log("\n\n > Attempting to install dependencies via npm\n".blue);
 
 	// Get the fs module
