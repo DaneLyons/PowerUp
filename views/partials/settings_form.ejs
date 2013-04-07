@@ -1,0 +1,25 @@
+<form action="/settings" method="post" id="settings_form">
+
+	<h2>ACCOUNT SETTINGS</h2>
+  <div class="field">
+		<label>Name</label>
+    <input type="text" name="name" value="" />
+  </div>
+
+	<div class="field">
+		<label>Twitter</label>
+    <input type="text" name="name" value="" />
+  </div>
+
+	<div class="field">
+		<label>EMAIL</label>
+    <input type="text" name="user[email]" class="required" value="<%= user.email || '' %>" />
+  </div>
+
+  <div class="field">
+		<label>PASSWORD</label>
+    <input type="password" name="user[password]" class="required" value="<%= user.password || '' %>" />
+  </div>
+  
+	<button type="submit" class="submit">Submit</button>
+</form>

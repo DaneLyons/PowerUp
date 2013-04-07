@@ -45,3 +45,9 @@
 h2 {
   padding-bottom:5px;
 }
+
+button.submit {
+  background: #cb0000;
+  color: #fff;
+  padding: 15px 50px;
+}
