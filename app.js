@@ -61,7 +61,7 @@ app.configure(function(){
   app.use(flash());
   
   app.use(function (req, res, next) {
-    res.locals.currentUser = req.user;
+    res.locals.currentUser = req.user || req.session.passport.user;
     next();
   });
   
