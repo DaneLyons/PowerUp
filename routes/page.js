@@ -123,8 +123,13 @@ exports.start = function (req, res) {
           user.grids.push(grid._id);
           user.save(function (err) {
             if (err) { console.log("ERR: " + err); }
-            res.redirect("/grids/" + grid.slug);
-            return;
+            req.login(user, function (err) {
+              if (err) {
+                console.error("ERR " + err);
+              }
+              res.redirect("/grids/" + grid.slug);
+              return;
+            });
           });
         });
       });
