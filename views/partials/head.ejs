@@ -44,9 +44,15 @@
 		<a href="/" id="logo"></a>
 
 		<div class="account">
-			<a href="/sign_in" class="login button">
-			  <span class="icon"></span>LOGIN
-			</a>
+			<% if (typeof currentUser === 'undefined') { %>
+				<a href="/sign_in" class="login button">
+				  <span class="icon"></span>LOGIN
+				</a>
+			<% }else{ %>
+				<a href="/sign_in" class="login button">
+				  <span class="icon"></span>ACCOUNT
+				</a>
+			<% } %>
 		</div>
 	</div>
 	<div id="page">
