@@ -1,15 +1,24 @@
+<% include ../partials/head.ejs %>
+
+<h1>SIGN IN</h1>
 <div class="sign-in">
   <form action="/sign_in" method="post">
     <div class="field">
-      <input type="email" class="email" name="user[email]" placeholder="Email" 
-        />
+			<label>EMAIL</label>
+      <input type="email" class="email" name="username" />
     </div>
     
     <div class="field">
-      <input type="password" class="password" name="user[password]"
-        placeholder="password" />
+			<label>PASSWORD</label>
+      <input type="password" class="password" name="password" />
     </div>
     
-    <input type="submit" value="Sign up" />
+		<ul class="right links">
+			<li><a href="/forgot">Forgot password?</a></li>
+			<li><a href="/sign_up">Create account</a></li>
+		</ul>
+    <button type="submit" class="submit">Submit</button>
   </form>
 </div>
+
+<% include ../partials/footer.ejs %>

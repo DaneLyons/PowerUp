@@ -107,6 +107,14 @@ strong {
   clear:both;
 }
 
+.right {
+  float:right;
+}
+
+.left {
+  float:left;
+}
+
 #header {
   width:100%;
   height:75px;

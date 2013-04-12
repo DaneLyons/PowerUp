@@ -5,7 +5,10 @@ exports.signIn = function (req, res) {
   if (req.user) {
     res.redirect('/new');
   } else{
-    res.render('auth/sign_in');
+    res.render('auth/sign_in', {
+      "title":"PowerUp Sign In",
+      "stylesheets":["page","settings","auth"]
+    });
   }
 };
 
@@ -13,7 +16,10 @@ exports.signUp = function (req, res) {
   if (req.user) {
     res.redirect('back');
   } else{
-    res.render('auth/sign_up');
+    res.render('auth/sign_up', {
+      "title":"PowerUp Sign Up",
+      "stylesheets":["page","settings","auth"]
+    });
   }
 };
 
