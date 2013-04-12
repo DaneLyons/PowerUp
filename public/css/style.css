@@ -188,10 +188,11 @@ form label {
   color:#fff;
   background:rgba(0,0,0,.5);
   display:block;
-  width:100px;
-  padding:10px 0;
+  padding:10px 15px;
   text-align:center;
   text-decoration:none;
+  float:right;
+  margin-left:15px;
 }
 
 #header .account a.button:hover {

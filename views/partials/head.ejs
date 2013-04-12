@@ -43,11 +43,14 @@
 		<div class="account">
 			<% if (typeof currentUser === 'undefined') { %>
 				<a href="/sign_in" class="login button">
-				  <span class="icon"></span>LOGIN
+				  <span class="icon"></span>SIGN IN
 				</a>
 			<% }else{ %>
-				<a href="/sign_in" class="login button">
-				  <span class="icon"></span>ACCOUNT
+				<a href="/settings" class="settings button">
+				  <span class="icon"></span>SETTINGS
+				</a>
+				<a href="/grids" class="grids button">
+				  <span class="icon"></span>GRIDS
 				</a>
 			<% } %>
 		</div>

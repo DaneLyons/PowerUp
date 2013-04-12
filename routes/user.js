@@ -11,7 +11,7 @@ exports.settings = function (req, res) {
   User.findById(req.user._id, function (err, user) {
     res.render("user/settings.ejs", {
       "title":"PowerUp Settings",
-      "stylesheets":["page","settings"],
+      "stylesheets":["page","settings","auth"],
       "user":user
     });
   });
