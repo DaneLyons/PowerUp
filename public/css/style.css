@@ -203,10 +203,18 @@ form label {
   display:inline-block;
   width:16px;
   height:16px;
-  background:url('/img/sprites.png') -24px 0;
+  background:url('/img/sprites.png') -30px 0;
   margin-right:5px;
   position:relative;
   top:2px;
+}
+
+#header .account a.grids .icon {
+  background-position:-50px -30px;
+}
+
+#header .account a.settings .icon {
+  background-position:-70px -30px;
 }
 
 #header .account .login.button:hover {

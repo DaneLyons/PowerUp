@@ -89,7 +89,7 @@ body {
   width:18px;
   height:18px;
   margin-right:5px;
-  background:url('/img/sprites.png') -24px -24px;
+  background:url('/img/sprites.png') -30px -20px;
   position:relative;
   bottom:-4px;
 }
