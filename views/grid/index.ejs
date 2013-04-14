@@ -1,16 +1,20 @@
 <% include ../partials/head.ejs %>
 
 <div class="grids">
+
+	<a href="/grids/new" class="new_grid">New Grid</a>
   <h1>Grids</h1>
-  <div class="new-grid"><a href="/grids/new">New grid</a></div>
   
-  <% for (var i = 0; i < grids.length; i++) { %>
+  <% for (var i = grids.length-1; i > -1; i--) { %>
     <% var grid = grids[i]; %>
-    <div class="grid">
-      <div class="name">
+		<% var percent = (grid.powerUps.length/grid.size)*100; %>
+
+    <ul class="grid_list">
+      <li>
+				<div class="fill" style="width:<%= percent %>%;"></div>
         <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
-      </div>
-    </div>
+      </li>
+    </ul>
   <% } %>
 </div>
 

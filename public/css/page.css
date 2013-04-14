@@ -4,6 +4,10 @@ body {
   overflow:visible;
 }
 
+#logo {
+  opacity:1;
+}
+
 #page {
   width:1020px;
   margin:100px auto 0 auto;

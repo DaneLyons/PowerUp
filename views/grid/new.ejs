@@ -1,19 +1,37 @@
 <% include ../partials/head.ejs %>
 
-<div class="new-grid">
-  <form action="/grids" method="post" class="grid">
+<h1>NEW GRID</h1>
+<form action="/start" method="post" id="new_grid">
+  <div class="field">
+		<div class="actions">
+			<button class="random" type="button"><img src="/img/icons/random.png" /></button>
+		</div>
+		
+		<label>GOAL</label>
+    <input type="text" name="grid[name]" class="goal required" value="Lose Weight" />
+  </div>
+  
+  <div class="field">
+		<label>WORK UNITS</label>
+    <input type="text" name="workUnit[]" value="10 Push-Ups" class="small work_unit required" />
+		<input type="text" name="workUnit[]" class="small work_unit" value="20 Sit-Ups" />
+		<input type="text" name="workUnit[]" class="small last work_unit" value="Run 10 Minutes" />
+  </div>
+  
+  <% if (typeof currentUser === 'undefined') { %>
     <div class="field">
-      <input type="text" class="name" name="grid[name]"
-        placeholder="Grid name" />
+			<label>EMAIL</label>
+      <input type="text" name="user[email]" class="required" />
     </div>
-    
+
     <div class="field">
-      <input type="text" class="work-unit" name="grid[workUnit]"
-        placeholder="Unit of work? (i.e. 10 pushups)" />
+			<label>PASSWORD</label>
+      <input type="password" name="user[password]" class="required" />
     </div>
-    
-    <input type="submit" value="Start grid" />
-  </form>
-</div>
+  <% } %>
+  
+	<button type="submit" class="submit">Start</button>
+	<button class="clear">Clear</button>
+</form>
 
 <% include ../partials/footer.ejs %>

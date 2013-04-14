@@ -8,7 +8,7 @@ exports.gridIndex = function (req, res) {
       .exec(function (err, grids) {
         res.render('grid/index', {
           grids: grids,
-          "stylesheets":["page","settings","auth"]
+          "stylesheets":["page","settings","auth","list"]
         });
       }
     );
@@ -19,7 +19,8 @@ exports.gridIndex = function (req, res) {
 
 exports.gridNew = function (req, res) {
   res.render('grid/new',{
-    "stylesheets":["page"]
+    "stylesheets":["page","settings","auth","start"],
+    "javascripts":["slides"]
   });
 };
 

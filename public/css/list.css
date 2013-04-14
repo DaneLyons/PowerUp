@@ -1,0 +1,41 @@
+.grid_list li {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  height:40px;
+  background:rgba(0,0,0,.05);
+  font-size:20px;
+  line-height:40px;
+  margin-bottom:5px;
+  position:relative;
+}
+
+.grid_list li a {
+  display:block;
+  height:100%;
+  width:100%;
+  text-indent:10px;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:100;
+}
+
+.grid_list li .fill {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:99;
+  height:100%;
+  width:45%;
+  background:rgba(0,0,0,.10);
+}
+
+a.new_grid {
+  float:right;
+  background: #cb0000;
+  color: #fff;
+  padding: 10px 30px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size: 20px;
+  text-transform: uppercase;
+}
