@@ -1,13 +1,20 @@
 var Grid = require('../models/grid');
 
 exports.gridIndex = function (req, res) {
-  Grid.find({ public: true })
-    .populate('user')
-    .populate('powerUps')
-    .exec(function (err, grids) {
-      res.render('grid/index', { grids: grids })
-    }
-  );
+  if(res.locals.currentUser){
+    Grid.find({ user: res.locals.currentUser._id })
+      .populate('user')
+      .populate('powerUps')
+      .exec(function (err, grids) {
+        res.render('grid/index', {
+          grids: grids,
+          "stylesheets":["page","settings","auth"]
+        });
+      }
+    );
+  }else{
+    res.redirect('/');
+  }
 };
 
 exports.gridNew = function (req, res) {
@@ -23,7 +30,10 @@ exports.gridShow = function (req, res) {
     .populate('gridButtons')
   .exec(
     function (err, grid) {
-      res.render('grid/show', { grid: grid });
+      res.render('grid/show', {
+        grid: grid,
+        "stylesheets":["grid"]
+      });
     }
   );
 };
