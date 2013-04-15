@@ -21,7 +21,7 @@ $(function () {
       var grid_progress = $('#content .progress span');
       grid.css({ width: grid_size, height: grid_size}); 
       for(var i=0;i<400;i++){
-        grid.append($('<li class="inactive"><div></div></li>'));
+        grid.append($('<li class="inactive" data-idx="'+i+'"><div></div></li>'));
       }
       
       var legend_buttons = $('#content .legend button');
@@ -40,10 +40,9 @@ $(function () {
       var grid_progress = $('#content .progress');
       
       function setPowerUp(i) {
+        pos_arr.push(grid.powerUps[i].position);
         setTimeout(function(){
-          console.log("Size: " + grid.size)
           var percent = Math.floor((i / grid.size) * 100);
-          console.log(percent);
           grid_progress.text(percent + '%');
           var rand_square = grid.powerUps[i].position;
           var sq = gridElem.find('li:eq('+rand_square+')');
@@ -52,6 +51,7 @@ $(function () {
         }, (i + 1) * 25)
       }
       
+      var pos_arr = [];
       for(var i = 0; i < grid.powerUps.length; i++) {
         setPowerUp(i);
       }
@@ -72,7 +72,8 @@ $(function () {
         var socket = io.connect(sockHost);
         var gridId = $("#grid").data("grid-id");
         for (var i = 0; i < num; i++) {
-          var idx = Math.floor(Math.random() * emptySquares.length);
+          var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
+          console.log('idx: '+idx);
           socket.emit('Grid.PowerUp', {
             PowerUp: {
               grid: gridId,
@@ -80,7 +81,7 @@ $(function () {
             }
           });
           
-          var newSquare = $(emptySquares[idx]);
+          var newSquare = $("ul#grid li:eq("+idx+")");
           newSquare.removeClass('inactive');
           newSquare.addClass('active');
           newSquare.addClass(color);      
@@ -90,7 +91,6 @@ $(function () {
         var filledLen = gridSize - emptyLen;
         var percent = Math.floor((filledLen / gridSize) * 100);
         if (percent === 0) { percent = 1; }
-        console.log(percent);
         grid_progress.text(percent + '%');
       });
     },
