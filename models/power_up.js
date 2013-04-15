@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
   
 var powerUpSchema = new Schema({
   position: Number,
+  color: String,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' }
 }, {
   safe: true

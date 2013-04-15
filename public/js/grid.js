@@ -48,6 +48,9 @@ $(function () {
           var sq = gridElem.find('li:eq('+rand_square+')');
           sq.removeClass('inactive');
           sq.addClass('active');
+          if(grid.powerUps[i].color){
+            sq.addClass(grid.powerUps[i].color);
+          }
         }, (i + 1) * 25)
       }
       
@@ -77,7 +80,8 @@ $(function () {
           socket.emit('Grid.PowerUp', {
             PowerUp: {
               grid: gridId,
-              position: idx
+              position: idx,
+              color:color
             }
           });
           
