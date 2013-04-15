@@ -1,7 +1,8 @@
 var Grid = require('../models/grid'),
   GridButton = require('../models/grid_button'),
   User = require('../models/user'),
-  inflect = require('i')();
+  inflect = require('i')(),
+  util = require('util');
 
 exports.home = function (req, res) {
   User.count({},function(err,count){
@@ -29,10 +30,13 @@ exports.grid = function (req, res) {
 }
 
 exports.gettingStarted = function (req, res) {
+  var flash = req.flash();
+  console.log("FLASH: " + util.inspect(flash, false, null));
   res.render("page/getting-started.ejs", {
-    "title":"Getting Started with PowerUp",
-    "stylesheets":["page","start"],
-    "javascripts":["slides"]
+    "title": "Getting Started with PowerUp",
+    "stylesheets": ["page","start"],
+    "javascripts": ["slides"],
+    "flash": flash
   });
 }
 
@@ -86,15 +90,6 @@ exports.start = function (req, res) {
     res.redirect('back');
     return;
   }
-  
-  console.log("BUTTONS: "+workUnit.length);
-  /*
-  var workUnitNum = parseInt(workUnit, 10);
-  workUnit = workUnit.trim();
-  if (workUnitNum === NaN) {
-    workUnit = "1 " + inflect.singularize(workUnit);
-  }
-  */
   gridParams.workUnit = workUnit;
   
   
@@ -118,7 +113,7 @@ exports.start = function (req, res) {
   if (userParams) {
     User.findOrCreate(userParams, function (err, user) {
       if (err) {
-        req.flash(err);
+        req.flash("error", "Sorry, but we're not taking any more signups right now. We'll email you when we're ready!");
         res.redirect('back');
         return;
       }
