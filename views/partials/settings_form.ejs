@@ -3,25 +3,21 @@
 	<h1>ACCOUNT SETTINGS</h1>
   <div class="field">
 		<label>Name</label>
-    <input type="text" name="name" value="" />
+    <input type="text" name="user[name]" value="<%= user.name || '' %>" />
   </div>
 
 	<div class="field">
 		<label>Twitter</label>
-    <input type="text" name="name" value="" />
+    <input type="text" name="pref[twitter]" value="<%= pref.twitter || '' %>" />
   </div>
 
 	<div class="field">
 		<label>EMAIL</label>
     <input type="text" name="user[email]" class="required" value="<%= user.email || '' %>" />
   </div>
-
-  <div class="field">
-		<label>PASSWORD</label>
-    <input type="password" name="user[password]" class="required" value="<%= user.password || '' %>" />
-  </div>
   
 	<ul class="right links">
+		<li><a href="/change_password">Change password</a></li>
 		<li><a href="/sign_out">Sign out</a></li>
 	</ul>
 	<button type="submit" class="submit">Submit</button>
