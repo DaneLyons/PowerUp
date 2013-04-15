@@ -117,6 +117,11 @@ exports.start = function (req, res) {
 
   if (userParams) {
     User.findOrCreate(userParams, function (err, user) {
+      if (err) {
+        req.flash(err);
+        res.redirect('back');
+        return;
+      }
       User.findById(user._id, function (err, user) {
         grid.user = user._id;
         grid.save(function (err, grid) {

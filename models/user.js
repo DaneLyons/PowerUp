@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
   Action = require('./action'),
+  SignUp = require('./sign_up'),
   bcrypt = require('bcrypt'),
   TimeShroom = require('../lib/time_shroom');
   
@@ -126,35 +127,49 @@ userSchema.pre('save', function (next) {
   User.count(function (err, count) {
     if (count < 500) {
       user.promo.zed = true;
-    }
-    next();
-  });
-});
-
-userSchema.post('save', function (user) {
-  var actionParams = {
-    user: user._id,
-    actionType: 'Models.User.Create',
-    actionObjectId: user._id
-  };
-  
-  Action.findOne(actionParams, function (err, action) {
-    if (!action) {
-      action = new Action(actionParams);
-      action.save(function (err) {
-        var io = TimeShroom.io;
-        console.log(io);
-
-        io.sockets.emit('promo.zed', function () {
-          console.log("EMISSIONS");
-          user.save(function (err, user) {
-            if (err) { console.log("ERR: " + err) }
-          });
-        });
+      next();
+    } else {
+      User.findById(user._id, function (err, existingUser) {
+        console.log("EXISTING: " + existingUser);
+        if (!existingUser) {
+          var msg = "Sorry, but we're not taking any more signups right now. We'll email you when we're ready!";
+          user.invalidate('_id', msg);
+          var signUp = new SignUp({ userData: user });
+          signUp.save(function (err, signUp) {
+            next(new Error(msg));
+          })
+        } else {
+          next();
+        }
       });
     }
   });
 });
+
+// userSchema.post('save', function (user) {
+//   var actionParams = {
+//     user: user._id,
+//     actionType: 'Models.User.Create',
+//     actionObjectId: user._id
+//   };
+//   
+//   Action.findOne(actionParams, function (err, action) {
+//     if (!action) {
+//       action = new Action(actionParams);
+//       action.save(function (err) {
+//         var io = TimeShroom.io;
+//         console.log(io);
+// 
+//         io.sockets.emit('promo.zed', function () {
+//           console.log("EMISSIONS");
+//           user.save(function (err, user) {
+//             if (err) { console.log("ERR: " + err) }
+//           });
+//         });
+//       });
+//     }
+//   });
+// });
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;
