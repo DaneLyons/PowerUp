@@ -11,15 +11,18 @@
 		<% } %>
 		<h1><%= grid.name %></h1>
 	</div>
-	<div class="legend">
-	  <% var colors = ['black', 'blue', 'red']; %>
-	  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-			<button class="powerup <%= colors[i] %>" data-powerup-num="<%= grid.gridButtons[i].increment %>" data-color="<%= colors[i] %>">
-				<span class="plus"></span>
-				<span><%= grid.gridButtons[i].workUnit %></span>
-			</button>
-		<% } %>
-	</div>
+	
+	<% if(currentUser && String(grid.user._id) == String(currentUser._id)){ %>
+		<div class="legend">
+		  <% var colors = ['black', 'blue', 'red']; %>
+		  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
+				<button class="powerup <%= colors[i] %>" data-powerup-num="<%= grid.gridButtons[i].increment %>" data-color="<%= colors[i] %>">
+					<span class="plus"></span>
+					<span><%= grid.gridButtons[i].workUnit %></span>
+				</button>
+			<% } %>
+		</div>
+	<% } %>
 
 	<div class="progress"></div>
 	
