@@ -22,6 +22,13 @@ exports.home = function (req, res) {
   });
 }
 
+exports.tos = function (req, res) {
+  res.render("page/tos.ejs", {
+    "title": "PowerUp Terms of Service",
+    "stylesheets":["page","content"]
+  });
+}
+
 exports.grid = function (req, res) {
   res.render("page/grid.ejs", {
     "stylesheets":["grid"],
