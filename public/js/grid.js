@@ -63,39 +63,41 @@ $(function () {
         ev.preventDefault();
         
         var btn = $(this);
-        var num = btn.data('powerup-num');
-        var color = btn.data('color');
-        var emptySquares = $("ul#grid li.inactive");
-        var emptyLen = emptySquares.length;
-        if(emptyLen != 400 && emptyLen % 40 == 0){
-          PowerUp.GridMaster.gridMilestone();
-        }
         
-        var sockHost = "http://" + window.location.host;
-        var socket = io.connect(sockHost);
-        var gridId = $("#grid").data("grid-id");
-        for (var i = 0; i < num; i++) {
-          var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
-          console.log('idx: '+idx);
-          socket.emit('Grid.PowerUp', {
-            PowerUp: {
-              grid: gridId,
-              position: idx,
-              color:color
-            }
-          });
+        if(!btn.hasClass('disabled')){
+          var num = btn.data('powerup-num');
+          var color = btn.data('color');
+          var emptySquares = $("ul#grid li.inactive");
+          var emptyLen = emptySquares.length;
+          if(emptyLen != 400 && emptyLen % 40 == 0){
+            PowerUp.GridMaster.gridMilestone();
+          }
+        
+          var sockHost = "http://" + window.location.host;
+          var socket = io.connect(sockHost);
+          var gridId = $("#grid").data("grid-id");
+          for (var i = 0; i < num; i++) {
+            var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
+            socket.emit('Grid.PowerUp', {
+              PowerUp: {
+                grid: gridId,
+                position: idx,
+                color:color
+              }
+            });
           
-          var newSquare = $("ul#grid li:eq("+idx+")");
-          newSquare.removeClass('inactive');
-          newSquare.addClass('active');
-          newSquare.addClass(color);      
-        }
+            var newSquare = $("ul#grid li:eq("+idx+")");
+            newSquare.removeClass('inactive');
+            newSquare.addClass('active');
+            newSquare.addClass(color);      
+          }
         
-        var gridSize = $("#grid li").length;
-        var filledLen = gridSize - emptyLen;
-        var percent = Math.floor((filledLen / gridSize) * 100);
-        if (percent === 0) { percent = 1; }
-        grid_progress.text(percent + '%');
+          var gridSize = $("#grid li").length;
+          var filledLen = gridSize - emptyLen;
+          var percent = Math.floor((filledLen / gridSize) * 100);
+          if (percent === 0) { percent = 1; }
+          grid_progress.text(percent + '%');
+        } //disabled check
       });
     },
     gridKeeper: function() {
