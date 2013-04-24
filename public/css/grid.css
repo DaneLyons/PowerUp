@@ -235,3 +235,25 @@ body {
   right:10px;
   bottom:10px;
 }
+
+#content .collaborate {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+#content .collaborate .expand.button {
+  background-color: #e20000;
+  padding: 10px 24px;
+  font-weight: bold;
+}
+
+#content .collaborate .expand.button:hover {
+  cursor: pointer;
+}
+
+#content .collaborate .new_collaborator {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+}
