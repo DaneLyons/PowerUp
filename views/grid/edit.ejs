@@ -1,0 +1,41 @@
+<% include ../partials/head.ejs %>
+
+<h1>EDIT GRID</h1>
+<form action="/grids/<%= grid.slug %>" method="post" id="new_grid">
+  <div class="field">
+		<label>GOAL</label>
+    <input type="text" name="grid[name]" class="goal required" value="<%= grid.name %>" />
+  </div>
+  
+  <div class="field">
+		<label>WORK UNITS</label>
+		
+		<% if(grid.workUnit){ %>
+			<% var workUnits = grid.workUnit.split(',') %>
+		<% }else{ %>
+			<% var workUnits = [] %>
+		<% } %>
+		
+		<% if(workUnits.length > 0){ %>
+    	<input type="text" name="workUnit[]" value="<%= workUnits[0] %>" class="small work_unit required" />
+		<% }else{ %>
+			<input type="text" name="workUnit[]" value="" class="small work_unit required" />
+		<% } %>
+		
+		<% if(workUnits.length > 1){ %>
+			<input type="text" name="workUnit[]" class="small work_unit" value="<%= grid.workUnit.split(',')[1] %>" />
+		<% }else{ %>
+			<input type="text" name="workUnit[]" class="small work_unit" value="" />
+		<% } %>
+		
+		<% if(workUnits.length > 2){ %>
+ 			<input type="text" name="workUnit[]" class="small last work_unit" value="<%= grid.workUnit.split(',')[2] %>" />
+		<% }else{ %>
+			<input type="text" name="workUnit[]" class="small last work_unit" value="" />
+		<% } %>
+  </div>
+  
+	<button type="submit" class="submit">Save</button>
+</form>
+
+<% include ../partials/footer.ejs %>

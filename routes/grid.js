@@ -40,7 +40,18 @@ exports.gridShow = function (req, res) {
 };
 
 exports.gridEdit = function (req, res) {
-  
+  Grid.findOne({ slug: req.params.slug })
+    .populate('user')
+    .populate('powerUps')
+    .populate('gridButtons')
+  .exec(
+    function (err, grid) {
+      res.render('grid/edit', {
+        grid: grid,
+        "stylesheets":["page","settings","auth","start"]
+      });
+    }
+  );
 };
 
 exports.gridCreate = function (req, res) {
@@ -59,11 +70,22 @@ exports.gridCreate = function (req, res) {
     } else {
       res.redirect('/grids/' + grid.slug);
     }
-  })
+  });
 };
 
 exports.gridUpdate = function (req, res) {
-  
+  Grid.findOne({ slug: req.params.slug })
+  .populate('gridButtons')
+  .exec(
+    function (err, grid) {
+      grid.name = req.body.grid.name;
+      grid.workUnit = req.body.workUnit;
+      
+      grid.save(function (err, grid) {
+        res.redirect('/grids/' + grid.slug);
+      });
+    }
+  );
 };
 
 exports.gridDestroy = function (req, res) {
