@@ -238,13 +238,14 @@ body {
 
 #content .collaborate {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 20px;
 }
 
 #content .collaborate .expand.button {
-  background-color: #e20000;
+  background: #3B5998;
   padding: 10px 24px;
+  text-align: center;
   font-weight: bold;
 }
 
@@ -254,6 +255,31 @@ body {
 
 #content .collaborate .new_collaborator {
   position: absolute;
-  bottom: 0px;
-  left: 20px;
+  bottom: 54px;
+  left: 0px;
+  width: 600px;
+  opacity: 0;
+}
+
+#content .collaborate .new_collaborator .field {
+  float: left;
+}
+#content .collaborate .new_collaborator input.text[name='collaborators'] {
+  width: 356px;
+  background: rgba(0,0,0,0.5);
+}
+
+#content .collaborate .new_collaborator .submit {
+  float: left;
+  margin-left: 6px;
+  margin-bottom: 4px;
+  height: 40px;
+  padding: 8px;
+  position: absolute;
+  top: 0;
+  right: 76px;
+}
+
+#content .collaborate .new_collaborator button.submit {
+  background: #3B5998;
 }

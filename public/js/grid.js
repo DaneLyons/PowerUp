@@ -1,20 +1,6 @@
 if (!PowerUp) { var PowerUp = {}; }
 
 $(function () {
-  var isExpanded = false;
-  $("#content .collaborate .expand.button").click(function (ev) {
-    var collab = $("#content .collaborate .list");
-    if (isExpanded) {
-      $("#content").css("overflow", "hidden");
-      $("#content").animate("height", "560px");
-      isExpanded = false;
-    } else {
-      $("#content").css("overflow", "visible");
-      $("#content").animate("height", "100%");
-      isExpanded = true;
-    }
-  })
-  
   PowerUp.GridMaster = {
     initializeGrid: function () {
       var window_height = $(window).height();
@@ -139,4 +125,21 @@ $(function () {
       });
     }
   }
+  
+  var isExpanded = false;
+  $("#content .collaborate .expand.button").click(function (ev) {
+    ev.preventDefault();
+    if (isExpanded) {
+      $("#content .collaborate form.new_collaborator").animate({
+        opacity: 0
+      }, 200);
+      isExpanded = false;
+    } else {
+      $("#content .collaborate form.new_collaborator").animate({
+        opacity: 1
+      }, 200);
+      
+      isExpanded = true;
+    }
+  });
 });

@@ -5,9 +5,9 @@
 <div id="content">
 	<div class="heading">
 		<% if(grid.user.name){ %>
-		<div class="author">
-			<%= grid.user.name %>
-		</div>
+  		<div class="author">
+  			<%= grid.user.name %>
+  		</div>
 		<% } %>
 		<h1><%= grid.name %></h1>
 	</div>
@@ -44,6 +44,16 @@
 	</div>
 	
 	<div class="collaborate">
+    <form action="/grids/<%= grid.slug %>/collaborators" method="post"
+      class="new_collaborator">
+      <div class="field">
+        <input type="text" class="text" name="collaborators" size="40"
+          placeholder="Email collaborators (comma-separated)" />
+      </div>
+      <div class="submit">
+        <button type="submit" class="submit">Add</button>
+      </div>
+    </form>
     <div class="expand button">COLLABORATE</div>
   </div>
 </div>
