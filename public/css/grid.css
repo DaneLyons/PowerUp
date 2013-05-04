@@ -270,14 +270,12 @@ body {
 }
 
 #content .collaborate .new_collaborator .submit {
-  float: left;
-  margin-left: 6px;
-  margin-bottom: 4px;
-  height: 40px;
+  height: 39px;
   padding: 8px;
   position: absolute;
-  top: 0;
-  right: 76px;
+  top: 1px;
+  right: 80px;
+  font-size: 20px;
 }
 
 #content .collaborate .new_collaborator button.submit {
