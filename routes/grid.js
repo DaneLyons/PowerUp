@@ -1,4 +1,7 @@
-var Grid = require('../models/grid');
+var Grid = require('../models/grid'),
+  Mailer = require('../lib/mailer'),
+  async = require('async'),
+  _ = require('underscore');
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -86,6 +89,24 @@ exports.gridUpdate = function (req, res) {
       });
     }
   );
+};
+
+exports.gridCreateCollaborators = function (req, res) {
+  var collaborators = req.body.collaborators.split(',');
+  async.map(collaborators, function (s) { s.trim(); }, function (emails) {
+    async.each(emails, function (email) {
+      var user = new User({
+        email: email,
+        isConfirmed: false
+      });
+      
+      user.save(function (err) {
+        if (err) { console.log("ERR: " + err); }
+      });
+    }, function (err) {
+      
+    })
+  });
 };
 
 exports.gridDestroy = function (req, res) {

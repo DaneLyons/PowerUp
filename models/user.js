@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
+  uuid = require('node-uuid'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
   Action = require('./action'),
@@ -12,6 +13,8 @@ var userSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
+  isConfirmed: { type: Boolean, default: true },
+  confirmationToken: String,
   grids: [ { type: Schema.ObjectId, ref: 'User' } ],
   promo: {
     zed: Boolean
@@ -146,30 +149,39 @@ userSchema.pre('save', function (next) {
   });
 });
 
-// userSchema.post('save', function (user) {
-//   var actionParams = {
-//     user: user._id,
-//     actionType: 'Models.User.Create',
-//     actionObjectId: user._id
-//   };
-//   
-//   Action.findOne(actionParams, function (err, action) {
-//     if (!action) {
-//       action = new Action(actionParams);
-//       action.save(function (err) {
-//         var io = TimeShroom.io;
-//         console.log(io);
-// 
-//         io.sockets.emit('promo.zed', function () {
-//           console.log("EMISSIONS");
-//           user.save(function (err, user) {
-//             if (err) { console.log("ERR: " + err) }
-//           });
-//         });
-//       });
-//     }
-//   });
-// });
+userSchema.pre('save', function (next) {
+  var user = this;
+  if (!user.isConfirmed && !user.confirmationToken) {
+    user.confirmationToken = uuid.v4();
+  } 
+
+  next();
+});
+
+userSchema.post('save', function (user) {
+  var actionParams = {
+    user: user._id,
+    actionType: 'Models.User.Create',
+    actionObjectId: user._id
+  };
+  
+  Action.findOne(actionParams, function (err, action) {
+    if (!action) {
+      action = new Action(actionParams);
+      action.save(function (err) {
+        var io = TimeShroom.io;
+        console.log(io);
+
+        io.sockets.emit('promo.zed', function () {
+          console.log("EMISSIONS");
+          user.save(function (err, user) {
+            if (err) { console.log("ERR: " + err) }
+          });
+        });
+      });
+    }
+  });
+});
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;
