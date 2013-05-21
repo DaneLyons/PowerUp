@@ -9,5 +9,22 @@ var gridButtonSchema = new Schema({
   safe: true
 });
 
+gridButtonSchema.statics.findOrCreate = function (opts, done) {
+  GridButton.findOne(opts, function (err, btn) {
+    if (!btn) {
+      btn = new GridButton(opts);
+      btn.save(function (err) {
+        if (err) {
+          return done(err);
+        }
+        
+        return done(null, btn);
+      });
+    } else {
+      return done(null, btn);
+    }
+  });
+};
+
 var GridButton = mongoose.model('GridButton', gridButtonSchema);
 module.exports = GridButton;

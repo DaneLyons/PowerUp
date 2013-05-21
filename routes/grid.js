@@ -1,4 +1,5 @@
-var Grid = require('../models/grid');
+var Grid = require('../models/grid'),
+    GridButton = require('../models/grid_button');
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -74,13 +75,39 @@ exports.gridCreate = function (req, res) {
 };
 
 exports.gridUpdate = function (req, res) {
-  Grid.findOne({ slug: req.params.slug })
+  var workUnit = req.body.workUnit;
+  
+  Grid.findOne({ slug: req.params.slug,user: res.locals.currentUser._id })
+  .populate('user')
   .populate('gridButtons')
   .exec(
     function (err, grid) {
       grid.name = req.body.grid.name;
-      grid.workUnit = req.body.workUnit;
-      
+      grid.workUnit = workUnit;
+    
+      var btn = GridButton.find({grid: grid._id});
+      btn.exec(function(err,button){
+        for(var i=0;i<workUnit.length;i++){
+          if(button[i]){
+            button[i].workUnit = workUnit[i];
+            button[i].save();
+          }else{
+            var newBtn = new GridButton({
+              grid: grid._id,
+              workUnit: workUnit[i],
+              increment: 1
+            });
+          
+            newBtn.save(function (err, newButton) {
+              grid.gridButtons.push(newButton._id);
+              grid.save(function (err) {
+                if (err) { console.log("ERR: " + err);}
+              });
+            });
+          }
+        }
+      });
+    
       grid.save(function (err, grid) {
         res.redirect('/grids/' + grid.slug);
       });
