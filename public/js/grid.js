@@ -69,33 +69,39 @@ $(function () {
           var color = btn.data('color');
           var emptySquares = $("ul#grid li.inactive");
           var emptyLen = emptySquares.length;
-        
-          var sockHost = "http://" + window.location.host;
-          var socket = io.connect(sockHost);
-          var gridId = $("#grid").data("grid-id");
-          for (var i = 0; i < num; i++) {
-            var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
-            socket.emit('Grid.PowerUp', {
-              PowerUp: {
-                grid: gridId,
-                position: idx,
-                color:color
-              }
-            });
           
-            var newSquare = $("ul#grid li:eq("+idx+")");
-            newSquare.removeClass('inactive');
-            newSquare.addClass('active');
-            newSquare.addClass(color);      
-          }
-        
-          var gridSize = $("#grid li").length;
-          var filledLen = gridSize - emptyLen;
-          var percent = Math.floor((filledLen / gridSize) * 100);
-          if (percent === 0) { percent = 1; }
-          grid_progress.text(percent + '%');
+          if(emptyLen>0){
+            var sockHost = "http://" + window.location.host;
+            var socket = io.connect(sockHost);
+            var gridId = $("#grid").data("grid-id");
+            for (var i = 0; i < num; i++) {
+              //var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
+              var idx = emptySquares.eq(0).data('idx');
+              socket.emit('Grid.PowerUp', {
+                PowerUp: {
+                  grid: gridId,
+                  position: idx,
+                  color:color
+                }
+              });
           
-          if(emptyLen != 400 && emptyLen % 40 == 0){
+              var newSquare = $("ul#grid li:eq("+idx+")");
+              newSquare.removeClass('inactive');
+              newSquare.addClass('active');
+              newSquare.addClass(color);      
+            }
+        
+            var gridSize = $("#grid li").length;
+            var filledLen = gridSize - emptyLen;
+            var percent = Math.floor((filledLen / gridSize) * 100);
+            if (percent === 0) { percent = 1; }
+            if (emptyLen == 0){ percent = 100; }
+            grid_progress.text(percent + '%');
+          
+            if(emptyLen != 400 && emptyLen % 40 == 0){
+              PowerUp.GridMaster.gridMilestone();
+            }
+          }else{
             PowerUp.GridMaster.gridMilestone();
           }
         } //disabled check
