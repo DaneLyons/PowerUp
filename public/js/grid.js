@@ -69,9 +69,6 @@ $(function () {
           var color = btn.data('color');
           var emptySquares = $("ul#grid li.inactive");
           var emptyLen = emptySquares.length;
-          if(emptyLen != 400 && emptyLen % 40 == 0){
-            PowerUp.GridMaster.gridMilestone();
-          }
         
           var sockHost = "http://" + window.location.host;
           var socket = io.connect(sockHost);
@@ -97,6 +94,10 @@ $(function () {
           var percent = Math.floor((filledLen / gridSize) * 100);
           if (percent === 0) { percent = 1; }
           grid_progress.text(percent + '%');
+          
+          if(emptyLen != 400 && emptyLen % 40 == 0){
+            PowerUp.GridMaster.gridMilestone();
+          }
         } //disabled check
       });
     },
@@ -110,8 +111,9 @@ $(function () {
       var grid_pos = grid.offset();
       var grid_width = grid.width();
       var grid_height = grid.height();
+      var percent_complete = $('.progress').text();
       var milestone = $('<div id="milestone">\
-        <h1>Feel the progress!</h1>\
+        <h1>'+percent_complete+' complete!</h1>\
         <h2><img src="/img/icon_white.png" /></h2>\
       </div>');
       $('body').append(milestone);
