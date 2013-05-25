@@ -38,8 +38,15 @@ exports.grid = function (req, res) {
 
 exports.gettingStarted = function (req, res) {
   var flash = req.flash();
+  
+  var type = false;
+  if(req.params.type){
+    type = req.params.type;
+  }
+  
   console.log("FLASH: " + util.inspect(flash, false, null));
   res.render("page/getting-started.ejs", {
+    "type":type,
     "title": "Getting Started with PowerUp",
     "stylesheets": ["page","start"],
     "javascripts": ["slides"],

@@ -1,5 +1,6 @@
 var useCases = [
   { goal:"Lose Weight", units:["10 Push-Ups","20 Sit-Ups","Run 10 Minutes"] },
+  { goal:"Write a Book", units:["1 Page","1 Page Revision","Brainstorm 15 Minutes"] },
   { goal:"Become a Better Writer", units:["Write 15 Minutes","Read 15 Minutes","Study 15 Minutes"] },
   { goal:"Eat Healthier", units:["Cook a Meal","Drink Glass of Water","Refuse Dessert"] },
   { goal:"Get Stronger", units:["Weights: 10 Reps","Cardio: 5 Minutes","Sports: 30 Minutes"] },

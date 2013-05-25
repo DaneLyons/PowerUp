@@ -70,3 +70,11 @@
 </div>
 
 <% include ../partials/footer.ejs %>
+
+<script>
+	var useCase = useCases[<%= type %>];
+  $('input.goal').val(useCase.goal);
+  $('input.work_unit:eq(0)').val(useCase.units[0]);
+  $('input.work_unit:eq(1)').val(useCase.units[1]);
+  $('input.work_unit:eq(2)').val(useCase.units[2]);
+</script>
