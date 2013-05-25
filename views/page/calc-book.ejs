@@ -1,37 +1,139 @@
 <style>
+	h1.heading {
+		padding-bottom:35px;
+	}
+
+	div.gap {
+		height:20px;
+	}
+	
+	p.note {
+		padding-bottom:5px;
+	}
+	
+	p.note span {
+		font-weight:bold;
+	}
+
 	button.active {
 		background:#cb0000;
 		color:#fff;
+	}
+	
+	input[type="range"]{
+	    background:#bbb;
+	    width: 410px;
+	    height: 6px;
+	    -webkit-appearance: none;
+	}
+
+	input[type="range"]::-webkit-slider-thumb{
+	   -webkit-appearance:none !important;  
+	   width:25px;
+	   height:16px;
+	   -webkit-appearance: none;
+	    background: #555;
+	 }
+	
+	input[type="range"]::-webkit-slider-thumb:hover{
+	}
+	
+	input[type="number"]{
+		-webkit-appearance: none;
+		border: none;
+		background: rgba(0,0,0,.07);
+		font-weight: bold;
+		font-size: 18px;
+		padding: 3px;
+	}
+	
+	#day_frame {
+		float:right;
+		padding-top:90px;
+		width:300px;
+		height:276px;
+		text-align:center;
+		background:rgba(0,0,0,.1);
+		position:relative;
+	}
+	
+	#day_frame h1 {
+		font-size:65px;
+	}
+	
+	#day_buttons {
+		padding-top:5px;
+	}
+	
+	.get_started {
+		position:absolute;
+		bottom:0;
+		height:90px;
+		text-align:center;
+		width:100%;
+		padding-top:15px;
+		border-top:1px dashed #888;
+	}
+	
+	.get_started p {
+		padding-bottom:20px;
+	}
+	
+	.get_started a{
+		background: #cb0000;
+		color: #fff;
+		padding: 10px 30px;
+		font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+		font-size: 20px;
+		text-transform: uppercase;
 	}
 </style>
 
 <% include ../partials/head.ejs %>
 
-<h1>How long does it take to write a book?</h1>
+<h1 class="heading">How long does it take to write a book?</h1>
 
+<div id="day_frame">
+	<h2>Total Days:</h2>
+	<h1 id="days"></h1>
+	
+	<div class="get_started">
+		<p>What are you waiting for?</p>
+		<a href="/getting-started">GET STARTED</a>
+	</div>
+</div>
+<h2>BOOK WRITING CALCULATOR</h2>
+<p class="note">How many words do you write per minute? <input id="wordValue" type="number" name="quantity" min="1" max="100" value="50" /></p>
+<input id="wordSlider" type="range" min="1" max="100" value="50" />
 
-<input id="wordSlider" type="range" min="0" max="100" />
-<p class="note">How many words do you write per minute? <span id="wordValue">0</span></p>
+<div class="gap"></div>
 
-<input id="pageSlider" type="range" min="0" max="3000" value="300" />
-<p class="note">How many pages are you planning to write? <span id="pageValue">0</span></p>
+<p class="note">How many pages are you planning to write? <input id="pageValue" type="number" name="quantity" min="1" max="2000" value="300" /></p>
+<input id="pageSlider" type="range" min="1" max="2000" value="300" />
+
+<div class="gap"></div>
+
+<p class="note">How much editing do you plan to do? <input id="editValue" type="number" name="quantity" min="0" max="500" value="50" /><span>%</span></p>
 
 <input id="editSlider" type="range" min="0" max="500" value="50" />
-<p class="note">How much editing do you plan to do? <span id="editValue">0</span>%</p>
 
+<div class="gap"></div>
+
+<p class="note">How many hours do you plan to write per day? <input id="hourValue" type="number" name="quantity" min="0" max="24" step=".1" value="1" /></p>
 <input id="hourSlider" type="range" min="0" max="24" value="1" step=".1" />
-<p class="note">How many hours do you plan to write per day? <span id="hourValue">0</span></p>
+
+<div class="gap"></div>
 
 <p>Which days do you write?</p>
-<button class="day active">S</button>
-<button class="day active">M</button>
-<button class="day active">T</button>
-<button class="day active">W</button>
-<button class="day active">T</button>
-<button class="day active">F</button>
-<button class="day active">S</button>
-
-<h2>Days: <span id="days"><span></h2>
+<div id="day_buttons">
+	<button class="day">S</button>
+	<button class="day active">M</button>
+	<button class="day active">T</button>
+	<button class="day active">W</button>
+	<button class="day active">T</button>
+	<button class="day active">F</button>
+	<button class="day">S</button>
+</div>
 
 <% include ../partials/footer.ejs %>
 
@@ -49,38 +151,66 @@
 			var days = $('#days');
 
 	    $('#wordSlider').change(function(){
-	        wordValue.html(this.value);
+	        wordValue.val(this.value);
 					calc_days();
 	    });
+			wordValue.change(function(){
+				$('#wordSlider').val(this.value);
+				calc_days();
+			});
 	    $('#wordSlider').change();
 	
 			$('#pageSlider').change(function(){
-	        pageValue.html(this.value);
+	        pageValue.val(this.value);
 					calc_days();
 	    });
+			pageValue.change(function(){
+				$('#pageSlider').val(this.value);
+				calc_days();
+			});
 	    $('#pageSlider').change();
 	
 			$('#editSlider').change(function(){
-	        editValue.html(this.value);
+	        editValue.val(this.value);
 					calc_days();
 	    });
+			editValue.change(function(){
+				$('#editSlider').val(this.value);
+				calc_days();
+			});
 	    $('#editSlider').change();
 	
 			$('#hourSlider').change(function(){
-	        hourValue.html(this.value);
+	        hourValue.val(this.value);
 					calc_days();
 	    });
+			hourValue.change(function(){
+				$('#hourSlider').val(this.value);
+				calc_days();
+			});
 	    $('#hourSlider').change();
 	
 			function calc_days(){
-				var totalWords = pageValue.text()*250;
-				var editPercent = (parseInt(editValue.text())+100)/100;
+				var totalWords = pageValue.val()*250;
+				var editPercent = (parseInt(editValue.val())+100)/100;
 				var adjustedWords = totalWords*editPercent;
 				var efficiency = 7/$('button.day.active').length;
-				var totalHours = (adjustedWords / (wordValue.text() * 60))*efficiency;
-				var totalDays = totalHours / hourValue.text();
+				var totalHours = (adjustedWords / (wordValue.val() * 60))*efficiency;
+				var totalDays = totalHours / hourValue.val();
 				var roudedDays = Math.round(totalDays * 10) / 10
-				days.text(roudedDays);
+				days.text(addCommas(roudedDays));
+			}
+			
+			function addCommas(nStr){
+				nStr += '';
+			  x = nStr.split('.');
+			  x1 = x[0];
+			  x2 = x.length > 1 ? '.' + x[1] : '';
+			  var rgx = /(\d+)(\d{3})/;
+			  while (rgx.test(x1)) {
+			  	x1 = x1.replace(rgx, '$1' + ',' + '$2');
+			  }
+			  return x1 + x2;
 			}
 	});
 </script>
