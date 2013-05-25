@@ -1,0 +1,86 @@
+<style>
+	button.active {
+		background:#cb0000;
+		color:#fff;
+	}
+</style>
+
+<% include ../partials/head.ejs %>
+
+<h1>How long does it take to write a book?</h1>
+
+
+<input id="wordSlider" type="range" min="0" max="100" />
+<p class="note">How many words do you write per minute? <span id="wordValue">0</span></p>
+
+<input id="pageSlider" type="range" min="0" max="3000" value="300" />
+<p class="note">How many pages are you planning to write? <span id="pageValue">0</span></p>
+
+<input id="editSlider" type="range" min="0" max="500" value="50" />
+<p class="note">How much editing do you plan to do? <span id="editValue">0</span>%</p>
+
+<input id="hourSlider" type="range" min="0" max="24" value="1" step=".1" />
+<p class="note">How many hours do you plan to write per day? <span id="hourValue">0</span></p>
+
+<p>Which days do you write?</p>
+<button class="day active">S</button>
+<button class="day active">M</button>
+<button class="day active">T</button>
+<button class="day active">W</button>
+<button class="day active">T</button>
+<button class="day active">F</button>
+<button class="day active">S</button>
+
+<h2>Days: <span id="days"><span></h2>
+
+<% include ../partials/footer.ejs %>
+
+<script>
+	$(function(){
+			$('button.day').click(function(){
+				$(this).toggleClass('active');
+				calc_days();
+			});
+	
+	    var wordValue = $('#wordValue');
+			var pageValue = $('#pageValue');
+			var hourValue = $('#hourValue');
+			var editValue = $('#editValue');
+			var days = $('#days');
+
+	    $('#wordSlider').change(function(){
+	        wordValue.html(this.value);
+					calc_days();
+	    });
+	    $('#wordSlider').change();
+	
+			$('#pageSlider').change(function(){
+	        pageValue.html(this.value);
+					calc_days();
+	    });
+	    $('#pageSlider').change();
+	
+			$('#editSlider').change(function(){
+	        editValue.html(this.value);
+					calc_days();
+	    });
+	    $('#editSlider').change();
+	
+			$('#hourSlider').change(function(){
+	        hourValue.html(this.value);
+					calc_days();
+	    });
+	    $('#hourSlider').change();
+	
+			function calc_days(){
+				var totalWords = pageValue.text()*250;
+				var editPercent = (parseInt(editValue.text())+100)/100;
+				var adjustedWords = totalWords*editPercent;
+				var efficiency = 7/$('button.day.active').length;
+				var totalHours = (adjustedWords / (wordValue.text() * 60))*efficiency;
+				var totalDays = totalHours / hourValue.text();
+				var roudedDays = Math.round(totalDays * 10) / 10
+				days.text(roudedDays);
+			}
+	});
+</script>
