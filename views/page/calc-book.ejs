@@ -58,7 +58,7 @@
 	}
 	
 	#day_frame h1 {
-		font-size:65px;
+		font-size:70px;
 	}
 	
 	#day_buttons {
@@ -87,6 +87,13 @@
 		font-size: 20px;
 		text-transform: uppercase;
 	}
+	
+	.content {
+		clear:both;
+		margin-top:50px;
+		padding-top:50px;
+		border-top:1px dashed #888;
+	}
 </style>
 
 <% include ../partials/head.ejs %>
@@ -113,14 +120,13 @@
 
 <div class="gap"></div>
 
-<p class="note">How much editing do you plan to do? <input id="editValue" type="number" name="quantity" min="0" max="500" value="50" /><span>%</span></p>
-
-<input id="editSlider" type="range" min="0" max="500" value="50" />
+<p class="note">How many revisions do you plan to make? <input id="editValue" type="number" name="quantity" min="0" max="10" value="2" /></p>
+<input id="editSlider" type="range" min="0" max="10" value="2" />
 
 <div class="gap"></div>
 
-<p class="note">How many hours do you plan to write per day? <input id="hourValue" type="number" name="quantity" min="0" max="24" step=".1" value="1" /></p>
-<input id="hourSlider" type="range" min="0" max="24" value="1" step=".1" />
+<p class="note">How many hours do you plan to write per day? <input id="hourValue" type="number" name="quantity" min="0" max="24" step=".25" value="1" /></p>
+<input id="hourSlider" type="range" min="0" max="24" value="1" step=".25" />
 
 <div class="gap"></div>
 
@@ -133,6 +139,11 @@
 	<button class="day active">T</button>
 	<button class="day active">F</button>
 	<button class="day">S</button>
+</div>
+
+<div class="content">
+	<h2>fsakjsdfasd fasdklfasd f asd f asd</h2>
+	<p>alksdjfa sdflkasjdflkjasd fklj aslkd flkjas dlkf j</p>
 </div>
 
 <% include ../partials/footer.ejs %>
@@ -192,7 +203,7 @@
 	
 			function calc_days(){
 				var totalWords = pageValue.val()*250;
-				var editPercent = (parseInt(editValue.val())+100)/100;
+				var editPercent = 1+(editValue.val()*.6);
 				var adjustedWords = totalWords*editPercent;
 				var efficiency = 7/$('button.day.active').length;
 				var totalHours = (adjustedWords / (wordValue.val() * 60))*efficiency;
