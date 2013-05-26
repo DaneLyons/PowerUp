@@ -65,6 +65,15 @@ app.configure(function(){
     next();
   });
   
+  app.use(function (req, res, next) {
+    if (req.path.match(/^\/admin\//)) {
+      if (!req.user || !req.user.email.match(/^admin\@powerup\.io$/)) {
+        res.redirect('/');
+      }
+    }
+    next();
+  });
+  
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });

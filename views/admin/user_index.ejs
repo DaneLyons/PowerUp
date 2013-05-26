@@ -1,0 +1,24 @@
+<h1>Users</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Grids</th>
+    <th>Timestamp</th>
+  </tr>
+  
+  <% for (var i = 0; i < users.length; i++) { %>
+    <% var user = users[i]; %>
+    <tr class="user">
+      <td class="email"><%= user.email %></td>
+      <td class="grids"><%= user.grids.length %></td>
+      <td class="timestamp"><%= user.updatedAt || user.createdAt %></td>
+    </tr>
+  <% } %>
+</table>
+
+<style>
+  td {
+    padding-right: 12px;
+  }
+</style>
