@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
   Grid = require('./grid'),
   Action = require('./action'),
   SignUp = require('./sign_up'),
+  Mailer = require('../lib/mailer')
   bcrypt = require('bcrypt'),
   TimeShroom = require('../lib/time_shroom');
   
@@ -162,7 +163,8 @@ userSchema.post('save', function (user) {
   var actionParams = {
     user: user._id,
     actionType: 'Models.User.Create',
-    actionObjectId: user._id
+    actionObjectId: user._id,
+    actionObjectType: 'User'
   };
   
   Action.findOne(actionParams, function (err, action) {
@@ -178,6 +180,25 @@ userSchema.post('save', function (user) {
             if (err) { console.log("ERR: " + err) }
           });
         });
+      });
+    }
+  });
+});
+
+userSchema.post('save', function (user) {
+  var actionParams = {
+    user: user._id,
+    actionType: "Models.User.Confirm",
+    actionObjectId: user._id,
+    actionObjectType: 'User'
+  };
+  
+  Action.findOne(actionParams, function (err, action) {
+    if (!action) {
+      var action = new Action(actionParams);
+      action.save(function (err, action) {
+        if (err) { console.log("ERR: " + err); }
+        
       });
     }
   });

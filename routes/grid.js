@@ -1,7 +1,9 @@
 var Grid = require('../models/grid'),
+  User = require('../models/user'),
   Mailer = require('../lib/mailer'),
   async = require('async'),
-  _ = require('underscore');
+  _ = require('underscore'),
+  inflect = require('i')();
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -58,7 +60,7 @@ exports.gridEdit = function (req, res) {
 };
 
 exports.gridCreate = function (req, res) {
-  console.log(req.user);
+  console.error(req.user);
   if (!req.user) {
     res.redirect('/sign_in');
     return;
@@ -92,20 +94,42 @@ exports.gridUpdate = function (req, res) {
 };
 
 exports.gridCreateCollaborators = function (req, res) {
-  var collaborators = req.body.collaborators.split(',');
-  async.map(collaborators, function (s) { s.trim(); }, function (emails) {
-    async.each(emails, function (email) {
+  Grid.findOne({ slug: req.params.slug }, function (err, grid) {
+    if (err) { console.error("ERR: " + err); }
+    
+    var collab = req.body.collaborators.split(',');
+    for (var i = 0; i < collab.length; i++) {
+      collab[i] = collab[i].trim();
+    }
+
+    async.each(collab, function (email) {
       var user = new User({
         email: email,
         isConfirmed: false
       });
-      
-      user.save(function (err) {
-        if (err) { console.log("ERR: " + err); }
+
+      user.save(function (err, user) {
+        if (err) { console.error("ERR: " + err); }
+        console.error("SAVED");
+        var gridUrl = "http://powerup.io/grids/" + grid.slug;
+        var emailText = "Hi there, \
+\
+You've been invited to the \"" + grid.name + "\" grid on PowerUp.io! Click the following link to get started: " + gridUrl + "\
+\
+- PowerUp Team";
+        Mailer.send({
+          to: user.email,
+          subject: "You're invited to a grid on PowerUp.io.",
+          text: emailText
+        }, function (err) {
+          if (err) { console.error("ERR: " + err); }
+          console.error("SENT");
+        });
       });
     }, function (err) {
-      
-    })
+      if (err) { console.error("ERR: " + err); }
+      res.redirect("back");
+    });
   });
 };
 
