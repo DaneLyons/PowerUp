@@ -146,30 +146,30 @@ userSchema.pre('save', function (next) {
   });
 });
 
-// userSchema.post('save', function (user) {
-//   var actionParams = {
-//     user: user._id,
-//     actionType: 'Models.User.Create',
-//     actionObjectId: user._id
-//   };
-//   
-//   Action.findOne(actionParams, function (err, action) {
-//     if (!action) {
-//       action = new Action(actionParams);
-//       action.save(function (err) {
-//         var io = TimeShroom.io;
-//         console.log(io);
-// 
-//         io.sockets.emit('promo.zed', function () {
-//           console.log("EMISSIONS");
-//           user.save(function (err, user) {
-//             if (err) { console.log("ERR: " + err) }
-//           });
-//         });
-//       });
-//     }
-//   });
-// });
+userSchema.post('save', function (user) {
+  var actionParams = {
+    user: user._id,
+    actionType: 'Models.User.Create',
+    actionObjectId: user._id
+  };
+  
+  Action.findOne(actionParams, function (err, action) {
+    if (!action) {
+      action = new Action(actionParams);
+      action.save(function (err) {
+        var io = TimeShroom.io;
+        console.log(io);
+
+        io.sockets.emit('promo.zed', function () {
+          console.log("EMISSIONS");
+          user.save(function (err, user) {
+            if (err) { console.log("ERR: " + err) }
+          });
+        });
+      });
+    }
+  });
+});
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;
