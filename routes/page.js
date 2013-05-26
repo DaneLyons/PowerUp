@@ -85,7 +85,8 @@ exports.badgeTimeline = function (req, res) {
 exports.calcBook = function (req, res) {
   res.render("page/calc-book.ejs", {
     "title":"How long does it take to write a book?",
-    "stylesheets":["page","content"]
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
   });
 }
 

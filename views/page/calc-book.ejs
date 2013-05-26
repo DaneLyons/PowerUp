@@ -1,3 +1,5 @@
+<% include ../partials/head.ejs %>
+
 <style>
 	h1.heading {
 		padding-bottom:35px;
@@ -13,6 +15,10 @@
 	
 	p.note span {
 		font-weight:bold;
+	}
+	
+	button {
+		background:#888;
 	}
 
 	button.active {
@@ -106,8 +112,6 @@
 	}
 </style>
 
-<% include ../partials/head.ejs %>
-
 <h1 class="heading">How long does it take to write a book?</h1>
 
 <div id="day_frame">
@@ -119,7 +123,7 @@
 		<a href="/getting-started/1">GET STARTED</a>
 	</div>
 </div>
-<h2>BOOK WRITING CALCULATOR</h2>
+<h2>CALCULATOR</h2>
 <p class="note">How many words do you write per minute? <input id="wordValue" type="number" name="quantity" min="1" max="100" value="50" /></p>
 <input id="wordSlider" type="range" min="1" max="100" value="50" />
 
@@ -166,78 +170,83 @@
 
 <script>
 	$(function(){
-			$('button.day').click(function(){
-				$(this).toggleClass('active');
-				calc_days();
-			});
+		if(!Modernizr.inputtypes.range){
+			$('input[type=range]').css({'position':'absolute',top:-500});
+			$('input[type=number]').css({'border':'1px solid #aaa','margin-top':5,'width':300});
+		}
 	
-	    var wordValue = $('#wordValue');
-			var pageValue = $('#pageValue');
-			var hourValue = $('#hourValue');
-			var editValue = $('#editValue');
-			var days = $('#days');
+		$('button.day').click(function(){
+			$(this).toggleClass('active');
+			calc_days();
+		});
 
-	    $('#wordSlider').change(function(){
-	        wordValue.val(this.value);
-					calc_days();
-	    });
-			wordValue.change(function(){
-				$('#wordSlider').val(this.value);
+    var wordValue = $('#wordValue');
+		var pageValue = $('#pageValue');
+		var hourValue = $('#hourValue');
+		var editValue = $('#editValue');
+		var days = $('#days');
+
+    $('#wordSlider').change(function(){
+        wordValue.val(this.value);
 				calc_days();
-			});
-	    $('#wordSlider').change();
-	
-			$('#pageSlider').change(function(){
-	        pageValue.val(this.value);
-					calc_days();
-	    });
-			pageValue.change(function(){
-				$('#pageSlider').val(this.value);
+    });
+		wordValue.change(function(){
+			$('#wordSlider').val(this.value);
+			calc_days();
+		});
+    $('#wordSlider').change();
+
+		$('#pageSlider').change(function(){
+        pageValue.val(this.value);
 				calc_days();
-			});
-	    $('#pageSlider').change();
-	
-			$('#editSlider').change(function(){
-	        editValue.val(this.value);
-					calc_days();
-	    });
-			editValue.change(function(){
-				$('#editSlider').val(this.value);
+    });
+		pageValue.change(function(){
+			$('#pageSlider').val(this.value);
+			calc_days();
+		});
+    $('#pageSlider').change();
+
+		$('#editSlider').change(function(){
+        editValue.val(this.value);
 				calc_days();
-			});
-	    $('#editSlider').change();
-	
-			$('#hourSlider').change(function(){
-	        hourValue.val(this.value);
-					calc_days();
-	    });
-			hourValue.change(function(){
-				$('#hourSlider').val(this.value);
+    });
+		editValue.change(function(){
+			$('#editSlider').val(this.value);
+			calc_days();
+		});
+    $('#editSlider').change();
+
+		$('#hourSlider').change(function(){
+        hourValue.val(this.value);
 				calc_days();
-			});
-	    $('#hourSlider').change();
-	
-			function calc_days(){
-				var totalWords = pageValue.val()*250;
-				var editPercent = 1+(editValue.val()*.6);
-				var adjustedWords = totalWords*editPercent;
-				var efficiency = 7/$('button.day.active').length;
-				var totalHours = (adjustedWords / (wordValue.val() * 60))*efficiency;
-				var totalDays = totalHours / hourValue.val();
-				var roudedDays = Math.round(totalDays * 10) / 10
-				days.text(addCommas(roudedDays));
-			}
-			
-			function addCommas(nStr){
-				nStr += '';
-			  x = nStr.split('.');
-			  x1 = x[0];
-			  x2 = x.length > 1 ? '.' + x[1] : '';
-			  var rgx = /(\d+)(\d{3})/;
-			  while (rgx.test(x1)) {
-			  	x1 = x1.replace(rgx, '$1' + ',' + '$2');
-			  }
-			  return x1 + x2;
-			}
+    });
+		hourValue.change(function(){
+			$('#hourSlider').val(this.value);
+			calc_days();
+		});
+    $('#hourSlider').change();
+
+		function calc_days(){
+			var totalWords = pageValue.val()*250;
+			var editPercent = 1+(editValue.val()*.6);
+			var adjustedWords = totalWords*editPercent;
+			var efficiency = 7/$('button.day.active').length;
+			var totalHours = (adjustedWords / (wordValue.val() * 60))*efficiency;
+			var totalDays = totalHours / hourValue.val();
+			var roudedDays = Math.round(totalDays * 10) / 10
+			days.text(addCommas(roudedDays));
+		}
+		
+		function addCommas(nStr){
+			nStr += '';
+		  x = nStr.split('.');
+		  x1 = x[0];
+		  x2 = x.length > 1 ? '.' + x[1] : '';
+		  var rgx = /(\d+)(\d{3})/;
+		  while (rgx.test(x1)) {
+		  	x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		  }
+		  return x1 + x2;
+		}
 	});
 </script>
