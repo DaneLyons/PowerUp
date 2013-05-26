@@ -20,21 +20,21 @@ exports.home = function (req, res) {
       "javascripts":["home"]
     });
   });
-}
+};
 
 exports.tos = function (req, res) {
   res.render("page/tos.ejs", {
     "title": "PowerUp Terms of Service",
     "stylesheets":["page","content"]
   });
-}
+};
 
 exports.grid = function (req, res) {
   res.render("page/grid.ejs", {
     "stylesheets":["grid"],
     "javascripts":["grid"]
   });
-}
+};
 
 exports.gettingStarted = function (req, res) {
   var flash = req.flash();
@@ -52,35 +52,35 @@ exports.gettingStarted = function (req, res) {
     "javascripts": ["slides"],
     "flash": flash
   });
-}
+};
 
 exports.contact = function (req, res) {
   res.render("page/contact.ejs", {
     "title":"PowerUp Contact Page",
     "stylesheets":["page","content"]
   });
-}
+};
 
 exports.faq = function (req, res) {
   res.render("page/faq.ejs", {
     "title":"PowerUp Frequently Asked Questions",
     "stylesheets":["page","content"]
   });
-}
+};
 
 exports.press = function (req, res) {
   res.render("page/press.ejs", {
     "title":"PowerUp Press Inquiries",
     "stylesheets":["page","content"]
   });
-}
+};
 
 exports.badgeTimeline = function (req, res) {
   res.render("page/badge-timeline.ejs", {
     "title":"PowerUp Badge Timeline",
     "stylesheets":["page","content","timeline"]
   });
-}
+};
 
 exports.calcBook = function (req, res) {
   res.render("page/calc-book.ejs", {
@@ -88,7 +88,15 @@ exports.calcBook = function (req, res) {
     "stylesheets":["page","content"],
     "javascripts":["modernizr"]
   });
-}
+};
+
+exports.blogTips = function (req, res) {
+  res.render("page/blog-tips.ejs", {
+    "title":"PowerUp Blogging Tips",
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
+  });
+};
 
 exports.start = function (req, res) {
   var userParams = req.body.user,
@@ -169,4 +177,4 @@ exports.start = function (req, res) {
       });
     });
   }
-}
+};

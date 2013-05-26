@@ -1,0 +1,134 @@
+<% include ../partials/head.ejs %>
+
+<style>
+	div.gap {
+		height:20px;
+	}
+	
+	button {
+		background:#888;
+	}
+
+	button.active {
+		background:#cb0000;
+		color:#fff;
+	}
+	
+	.get_started {
+		position:absolute;
+		bottom:0;
+		height:90px;
+		text-align:center;
+		width:100%;
+		padding-top:15px;
+		border-top:1px dashed #888;
+	}
+	
+	.get_started p {
+		padding-bottom:20px;
+	}
+	
+	.get_started a{
+		background: #cb0000;
+		color: #fff;
+		padding: 10px 30px;
+		font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+	
+	div.content {
+		clear:both;
+		margin-top:50px;
+		font-size:17px;
+		padding-bottom:50px;
+	}
+	
+	div.content p {
+		padding-bottom:15px;
+	}
+	
+	div.content a.right {
+		margin-left:15px;
+	}
+	
+	.red.button {
+	  padding: 6px 10px;
+	  background: red;
+	  display: inline;
+	  color: #fff;
+	  cursor: pointer;
+	}
+	
+	.new-tip.button {
+	  position: absolute;
+	  top: 98px;
+	  right: -140px;
+	}
+	
+</style>
+
+<h1 class="heading">PowerUp Tips: Blogging</h1>
+
+<div class="tip">
+  <div class="content"></div>
+  <a class="author"></a>
+</div>
+<div class="gap"></div>
+<div class="red button new-tip">NEXT TIP</div>
+
+<script type="text/javascript">
+  Tipster = { };
+  
+  $(function () {
+    Tipster.tips = [
+      {
+        content: "Find a subject you care about and which you in your heart feel others should care about. It is this genuine caring, and not your games with language, which will be the most compelling and seductive element in your style.",
+        author: "Kurt Vonnegut",
+        sourceUrl: "http://www.brainpickings.org/index.php/2013/01/14/how-to-write-with-style-kurt-vonnegut/"
+      },
+      {
+        content: "In writing. Don't use adjectives which merely tell us how you want us to feel about the thing you are describing. I mean, instead of telling us a thing was \"terrible,\" describe it so that we'll be terrified. Don't say it was \"delightful\"; make us say \"delightful\" when we've read the description. You see, all those words (horrifying, wonderful, hideous, exquisite) are only like saying to your readers, \"Please will you do my job for me.\"",
+        author: "C.S. Lewis",
+        sourceUrl: "http://www.lettersofnote.com/2012/04/c-s-lewis-on-writing.html"
+      },
+      {
+        content: "It's exercise. No matter how out of shape you are, if you exercise a few times a week, you're bound to get fitter. Write a small blog entry a few times every week and you're bound to become a better writer. If you're not writing because you're intimidated by writing, well, you're likely to stay that way forever.",
+        author: "Jeff Atwood",
+        sourceUrl: "http://www.codinghorror.com/blog/2011/02/how-to-write-without-writing.html"
+      },
+      {
+        content: "Do not bubble. Do not spin your wheels. Use words I know.",
+        author: "Kurt Vonnegut",
+        sourceUrl: "http://www.slate.com/articles/arts/books/2012/11/kurt_vonnegut_term_paper_assignment_from_the_iowa_writers_workshop.html"
+      }
+    ];
+    
+    Tipster.getTip = function () {
+      if (!Tipster.currentTip) {
+        Tipster.currentTip = Math.floor(Math.random() * Tipster.tips.length);
+      } else {
+        Tipster.currentTip += 1;
+        if (Tipster.currentTip == Tipster.tips.length) {
+          Tipster.currentTip = 0;
+        }
+      }
+      
+      var tip = Tipster.tips[Tipster.currentTip];
+      var $tip = $("#page .tip");
+      $tip.find(".content").html(tip.content);
+      var $author = $tip.find(".author");
+      $author.html("- " + tip.author);
+      $author.attr('href', tip.sourceUrl);
+    };
+    
+    $(".new-tip.button").click(function (ev) {
+      ev.preventDefault();
+      Tipster.getTip();
+    });
+    
+    Tipster.getTip();
+  });
+</script>
+
+<% include ../partials/footer.ejs %>
