@@ -142,4 +142,13 @@ $(function () {
       isExpanded = true;
     }
   });
+  
+  $("#content .controls button").click(function(ev){
+    $("#content .controls button").removeClass('active');
+    $(this).addClass('active');
+    
+    var section = $(this).data('show');
+    $(".sections .section").hide();
+    $(".sections ."+section).show();
+  });
 });
