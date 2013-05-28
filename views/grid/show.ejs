@@ -50,6 +50,8 @@
 					<% } %>
 					<td>0</td>
 				</tr>
+				<% if (currentUser && currentUser._id === grid.user._id) { %>
+				  <% grid.%>
 				<tr>
 					<td>joe@gmail.com</td>
 					<td colspan="<%= grid.gridButtons.length+1 %>">Invite Sent</td>
