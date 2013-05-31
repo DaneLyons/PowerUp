@@ -29,6 +29,13 @@ exports.tos = function (req, res) {
   });
 }
 
+exports.switchboard = function (req, res) {
+  res.render("page/switchboard.ejs", {
+    "title": "PowerUp Switchboard",
+    "stylesheets":["page","content","switchboard"]
+  });
+}
+
 exports.grid = function (req, res) {
   res.render("page/grid.ejs", {
     "stylesheets":["grid"],

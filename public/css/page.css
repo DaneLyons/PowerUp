@@ -16,10 +16,11 @@ body {
   text-shadow:1px 1px 0 rgba(255,255,255,.5);
 }
 
-h1 {
+#content h1 {
   font-size:45px;
   text-transform:uppercase;
-  padding-bottom:30px;
+  padding-bottom:0;
+  margin-bottom:0;
 }
 
 h2 {
@@ -104,4 +105,20 @@ a.skip span {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   font-size:20px;
   text-transform:uppercase;
+}
+
+ul.thirds {
+  padding-top:40px;
+  clear:both;
+}
+
+ul.thirds li {
+  width:30%;
+  padding-right:3%;
+  font-size:16px;
+  line-height:1.2;
+}
+
+ul.thirds li img {
+  width:100%;
 }
