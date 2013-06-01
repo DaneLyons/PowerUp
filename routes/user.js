@@ -89,6 +89,7 @@ exports.join = function (req, res) {
   }
   
   res.render('user/join', {
+    "title":"Do more with PowerUp PRO!",
     "stylesheets":["page","settings","auth", "join"]
   });
 };

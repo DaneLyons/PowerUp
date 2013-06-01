@@ -37,7 +37,12 @@
 
 <form action="" method="post" id="payment-form">
   <span class="payment-errors"></span>
-  <div class="field">
+	<div class="name field">
+    <label>Name on Card</label>
+    <input type="text" class="text" class="card-name" data-stripe="name" />
+  </div>
+
+  <div class="card field">
     <label>Card Number</label>
     <input type="text" class="text" class="card-number" data-stripe="number" />
   </div>
@@ -49,10 +54,10 @@
     <input type="text" class="small text" class="card-exp-year" data-stripe="exp-year" placeholder="YY" />
   </div>
   
-  <div class="field">
+  <div class="cvv field">
     <label>CVV</label>
     <input type="text" class="small text" class="card-cvv" data-stripe="cvc" />
   </div>
   
-  <button type="submit" class="submit button">JOIN</button>
+  <button type="submit" class="submit button">UPGRADE</button>
 </form>
