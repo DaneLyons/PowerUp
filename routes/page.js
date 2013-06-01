@@ -37,21 +37,27 @@ exports.grid = function (req, res) {
 }
 
 exports.gettingStarted = function (req, res) {
-  var flash = req.flash();
-  
-  var type = false;
-  if(req.params.type){
-    type = req.params.type;
-  }
-  
-  console.log("FLASH: " + util.inspect(flash, false, null));
-  res.render("page/getting-started.ejs", {
-    "type":type,
+  var renderParams = {
+    "type": req.params.type || false,
     "title": "Getting Started with PowerUp",
     "stylesheets": ["page","start"],
-    "javascripts": ["slides"],
-    "flash": flash
-  });
+    "javascripts": ["slides"]
+  };
+  
+  if (req.user) {
+    User.findById(req.user._id, function (err, user) {
+      if (user && user.grids.length != 0 && !user.stripeId) {
+        res.redirect('/join');
+        return;
+      } else {      
+        res.render("page/getting-started.ejs", renderParams);
+        return;
+      }
+    });
+  } else {
+    res.render("page/getting-started.ejs", renderParams);
+  }
+  
 }
 
 exports.contact = function (req, res) {

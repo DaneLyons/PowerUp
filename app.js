@@ -70,7 +70,6 @@ app.configure(function(){
   app.use(function (req, res, next) {
     if (req.session.flash) {
       res.locals.flash = req.session.flash;
-      console.log("FLASH: " + util.inspect(res.locals.flash, false, null));
     }
     next();
   });

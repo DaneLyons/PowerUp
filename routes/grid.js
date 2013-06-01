@@ -1,5 +1,6 @@
 var Grid = require('../models/grid'),
-    GridButton = require('../models/grid_button');
+    GridButton = require('../models/grid_button'),
+    User = require('../models/user');
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -19,9 +20,20 @@ exports.gridIndex = function (req, res) {
 };
 
 exports.gridNew = function (req, res) {
-  res.render('grid/new',{
-    "stylesheets":["page","settings","auth","start"],
-    "javascripts":["slides"]
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  User.findById(req.user._id, function (err, user) {
+    if (user.stripeId || user.grids.length === 0) {
+      res.render('grid/new',{
+        "stylesheets":["page","settings","auth","start"],
+        "javascripts":["slides"]
+      });
+    } else {
+      res.redirect('/join');
+    }
   });
 };
 
@@ -58,18 +70,25 @@ exports.gridEdit = function (req, res) {
 exports.gridCreate = function (req, res) {
   console.log(req.user);
   if (!req.user) {
-    res.redirect('/sign_in');
+    res.redirect('/');
     return;
   }
   
-  var grid = new Grid(req.body.grid);
-  grid.user = req.user._id;
-  grid.save(function (err, grid) {
-    if (err) {
-      req.flash("error", err);
-      res.redirect('back');
+  User.findById(req.user._id, function (err, user) {
+    if (user.grids.length != 0 && !user.stripeId) {
+      res.redirect('/join');
+      return;
     } else {
-      res.redirect('/grids/' + grid.slug);
+      var grid = new Grid(req.body.grid);
+      grid.user = req.user._id;
+      grid.save(function (err, grid) {
+        if (err) {
+          req.flash("error", err);
+          res.redirect('back');
+        } else {
+          res.redirect('/grids/' + grid.slug);
+        }
+      });
     }
   });
 };

@@ -100,9 +100,11 @@ exports.postJoin = function (req, res) {
   }
   
   User.findById(req.user._id, function (err, user) {
-    stripe.customers.create(
-       { email: user.email, card: req.body.stripeToken },
-       function(err, customer) {
+    stripe.customers.create({
+      email: user.email,
+      card: req.body.stripeToken,
+      plan: "powerup_premium"
+    }, function(err, customer) {
           if (err) {
              console.log(err.message);
           }
