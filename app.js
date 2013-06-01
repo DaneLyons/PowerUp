@@ -14,6 +14,7 @@ var express = require('express'),
   WarpShroom = require('./lib/warp_shroom'),  // Routes
   path = require('path'),
   url = require('url'),
+  util = require('util'),
   PowerShroom = require('./lib/power_shroom'),
   WarpShroom = require('./lib/warp_shroom'),
   TimeShroom = require('./lib/time_shroom');
@@ -63,6 +64,14 @@ app.configure(function(){
   
   app.use(function (req, res, next) {
     res.locals.currentUser = req.user || req.session.passport.user;
+    next();
+  });
+  
+  app.use(function (req, res, next) {
+    if (req.session.flash) {
+      res.locals.flash = req.session.flash;
+      console.log("FLASH: " + util.inspect(res.locals.flash, false, null));
+    }
     next();
   });
   

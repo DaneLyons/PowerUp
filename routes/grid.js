@@ -66,7 +66,7 @@ exports.gridCreate = function (req, res) {
   grid.user = req.user._id;
   grid.save(function (err, grid) {
     if (err) {
-      req.flash(err);
+      req.flash("error", err);
       res.redirect('back');
     } else {
       res.redirect('/grids/' + grid.slug);

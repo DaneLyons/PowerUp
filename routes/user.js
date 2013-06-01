@@ -111,7 +111,7 @@ exports.postJoin = function (req, res) {
           user.cardLast4 = customer.active_card.last4;
           
           user.save(function (err, user) {
-            req.flash("Thank you! Welcome to PowerUp Premium.");
+            req.flash("success", "Thank you! Welcome to PowerUp Premium.");
             res.redirect('/grids');
           });
        }
@@ -147,7 +147,7 @@ exports.postCard = function (req, res) {
           user.cardLast4 = customer.active_card.last4;
           
           user.save(function (err, user) {
-            req.flash("Thanks! Your card has been updated.");
+            req.flash("success", "Thanks! Your card has been updated.");
             res.redirect('/grids');
           });
        }

@@ -60,8 +60,12 @@
 	</div>
 	<div id="page">
 	  <% if (typeof flash !== 'undefined') { %>
-	    <% for (msg in flash) { %>
-  	    <p class="flash <%- msg %>"><%- flash[msg] %></p>
-  	    <% delete flash[msg]; %>
-  	  <% } %>
+	    <% if (typeof flash !== 'undefined') { %>
+        <div class="flash_list">
+          <% for (msg in flash) { %>
+            <p class="flash <%= msg %>"><%= flash[msg] %></p>
+            <% delete flash[msg] %>
+          <% } %>
+        </div>
+      <% } %>
 	  <% } %>
