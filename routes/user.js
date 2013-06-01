@@ -2,7 +2,8 @@ var Grid = require('../models/grid'),
   GridButton = require('../models/grid_button'),
   User = require('../models/user'),
   Preference = require('../models/preference'),
-  inflect = require('i')();
+  inflect = require('i')(),
+  stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
   
 exports.settings = function (req, res) {
   if (typeof req.user === 'undefined') {
@@ -82,11 +83,38 @@ exports.updatePassword = function (req, res) {
 };
 
 exports.join = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
   res.render('user/join', {
     "stylesheets":["page","settings","auth", "join"]
   });
 };
 
 exports.postJoin = function (req, res) {
-  res.redirect('/');
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  User.findById(req.user._id, function (err, user) {
+    stripe.customers.create(
+       { email: user.email, card: req.body.stripeToken },
+       function(err, customer) {
+          if (err) {
+             console.log(err.message);
+          }
+          user.stripeId = customer.id;
+          user.cardType = customer.active_card.type;
+          user.cardLast4 = customer.active_card.last4;
+          
+          user.save(function (err, user) {
+            req.flash("Thank you! Welcome to PowerUp Premium.");
+            res.redirect('/grids');
+          });
+       }
+     );
+  });
 };

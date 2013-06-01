@@ -16,6 +16,11 @@
     <input type="text" name="user[email]" class="required" value="<%= user.email || '' %>" />
   </div>
   
+  <% if (user.stripeId) { %>
+    <div class="card">
+      <%= user.cardType %> ending in <%= user.cardLast4 %>
+    </div>
+  <% } %>
 	<ul class="right links">
 		<li><a href="/change_password">Change password</a></li>
 		<li><a href="/sign_out">Sign out</a></li>

@@ -15,7 +15,10 @@ var userSchema = new Schema({
   grids: [ { type: Schema.ObjectId, ref: 'User' } ],
   promo: {
     zed: Boolean
-  }
+  },
+  stripeId: String,
+  cardType: String,
+  cardLast4: String
 }, {
   safe: true
 });

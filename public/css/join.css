@@ -1,3 +1,7 @@
+.field input {
+  color: #000;
+}
+
 .field input.small.text {
   width: 40px;
 }
