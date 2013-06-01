@@ -1,0 +1,74 @@
+<% include ../partials/head.ejs %>
+
+<link href="/css/join.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  $(function () {
+    Stripe.setPublishableKey('pk_test_qPCNrIvfWPVOWyJ9zTMxi1dj');
+    
+    $('#payment-form').submit(function(event) {
+      var $form = $(this);
+
+      // Disable the submit button to prevent repeated clicks
+      $form.find('button').prop('disabled', true);
+
+      Stripe.createToken($form, stripeResponseHandler);
+
+      // Prevent the form from submitting with the default action
+      return false;
+    });
+    
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // token contains id, last4, and card type
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // and submit
+        $form.get(0).submit();
+      }
+    };
+  });
+</script>
+
+  <h1>JOIN POWERUP PREMIUM</h1>
+  <h2>Get unlimited grids and early access to premium Gear.</h2>
+  <form action="/join" method="post" id="payment-form">
+    <% if (typeof currentUser === 'undefined') { %>
+      <div class="field">
+        <label for="user[email]">Email</label>
+        <input type="email" class="email" name="user[email]" />
+      </div>
+      <div class="field">
+        <label for="user[password]">Password</label>
+        <input type="password" class="password" name="user[password]" />
+      </div>
+    <% } %>
+    
+    <div class="field">
+      <label>Card Number</label>
+      <input type="text" class="text" class="card-number" stripe-data="number" />
+    </div>
+    
+    <div class="exp field">
+      <label>Exp. Date</label>
+      <input type="text" class="small text" class="card-exp-month" stripe-data="exp-month" placeholder="MM" />
+      <div class="sep">/</div>
+      <input type="text" class="small text" class="card-exp-year" stripe-data="exp-year" placeholder="YY" />
+    </div>
+    
+    <div class="field">
+      <label>CVV</label>
+      <input type="text" class="small text" class="card-cvv" stripe-data="cvv" />
+    </div>
+    
+    <button type="submit" class="submit button">JOIN</button>
+  </form>
+
+<% include ../partials/footer.ejs %>

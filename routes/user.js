@@ -17,9 +17,9 @@ exports.settings = function (req, res) {
         "user":user,
         "pref":pref
       });
-    })
+    });
   });
-}
+};
 
 exports.update = function (req, res) {
   if (typeof req.user === 'undefined') {
@@ -46,7 +46,7 @@ exports.update = function (req, res) {
       res.redirect('/settings');
     });
   });
-}
+};
 
 exports.password = function (req, res) {
   if (typeof req.user === 'undefined') {
@@ -60,7 +60,7 @@ exports.password = function (req, res) {
       "user":user
     });
   });
-}
+};
 
 exports.updatePassword = function (req, res) {
   if (typeof req.user === 'undefined') {
@@ -79,4 +79,14 @@ exports.updatePassword = function (req, res) {
       });
     });
   });
-}
+};
+
+exports.join = function (req, res) {
+  res.render('user/join', {
+    "stylesheets":["page","settings","auth", "join"]
+  });
+};
+
+exports.postJoin = function (req, res) {
+  res.redirect('/');
+};

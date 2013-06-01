@@ -1,0 +1,15 @@
+.field input.small.text {
+  width: 40px;
+}
+
+.exp.field .sep {
+  float: left;
+  font-size: 26px;
+  margin-top: 6px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.exp.field input.small.text {
+  text-align: center;
+}
