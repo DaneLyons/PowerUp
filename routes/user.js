@@ -118,3 +118,39 @@ exports.postJoin = function (req, res) {
      );
   });
 };
+
+exports.card = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  res.render('user/card', {
+    "stylesheets":["page","settings","auth", "join"]
+  });
+};
+
+exports.postCard = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  User.findById(req.user._id, function (err, user) {
+    stripe.customers.update(user.stripeId, { card: req.body.stripeToken },
+       function(err, customer) {
+          if (err) {
+             console.log(err.message);
+          }
+          user.stripeId = customer.id;
+          user.cardType = customer.active_card.type;
+          user.cardLast4 = customer.active_card.last4;
+          
+          user.save(function (err, user) {
+            req.flash("Thanks! Your card has been updated.");
+            res.redirect('/grids');
+          });
+       }
+     );
+  });
+}

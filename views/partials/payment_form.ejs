@@ -1,0 +1,58 @@
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript">
+  $(function () {
+    Stripe.setPublishableKey('pk_test_qPCNrIvfWPVOWyJ9zTMxi1dj');
+    
+    $('#payment-form').submit(function handleSubmit(event) {
+      event.preventDefault();
+      var $form = $(this);
+
+      // Disable the submit button to prevent repeated clicks
+      $form.find('button').prop('disabled', true);
+
+      Stripe.createToken($form, stripeResponseHandler);
+      console.log("SUBMIT");
+      // Prevent the form from submitting with the default action
+    });
+    
+    var stripeResponseHandler = function(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        // Show the errors on the form
+        $form.find('.payment-errors').text(response.error.message);
+        $form.find('button').prop('disabled', false);
+      } else {
+        // token contains id, last4, and card type
+        var token = response.id;
+        // Insert the token into the form so it gets submitted to the server
+        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        // and submit
+        $form.unbind('submit');
+        $form.get(0).submit();
+      }
+    };
+  });
+</script>
+
+<form action="" method="post" id="payment-form">
+  <span class="payment-errors"></span>
+  <div class="field">
+    <label>Card Number</label>
+    <input type="text" class="text" class="card-number" data-stripe="number" />
+  </div>
+  
+  <div class="exp field">
+    <label>Exp. Date</label>
+    <input type="text" class="small text" class="card-exp-month" data-stripe="exp-month" placeholder="MM" />
+    <div class="sep">/</div>
+    <input type="text" class="small text" class="card-exp-year" data-stripe="exp-year" placeholder="YY" />
+  </div>
+  
+  <div class="field">
+    <label>CVV</label>
+    <input type="text" class="small text" class="card-cvv" data-stripe="cvc" />
+  </div>
+  
+  <button type="submit" class="submit button">JOIN</button>
+</form>

@@ -131,20 +131,6 @@ userSchema.pre('save', function (next) {
     if (count < 500) {
       user.promo.zed = true;
       next();
-    } else {
-      User.findById(user._id, function (err, existingUser) {
-        console.log("EXISTING: " + existingUser);
-        if (!existingUser) {
-          var msg = "Sorry, but we're not taking any more signups right now. We'll email you when we're ready!";
-          user.invalidate('_id', msg);
-          var signUp = new SignUp({ userData: user });
-          signUp.save(function (err, signUp) {
-            next(new Error(msg));
-          })
-        } else {
-          next();
-        }
-      });
     }
   });
 });
