@@ -1,5 +1,6 @@
 var Grid = require('../models/grid'),
   User = require('../models/user'),
+  Invite = require('../models/invite'),
   Mailer = require('../lib/mailer'),
   async = require('async'),
   _ = require('underscore'),
@@ -98,39 +99,21 @@ exports.gridCreateCollaborators = function (req, res) {
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
     if (err) { console.error("ERR: " + err); }
     
-    var collab = req.body.collaborators.split(',');
-    for (var i = 0; i < collab.length; i++) {
-      collab[i] = collab[i].trim();
+    var emails = req.body.collaborators.split(',');
+    for (var i = 0; i < emails.length; i++) {
+      var email = emails[i].trim();
+      var invite = new Invite({
+        fromUser: req.user._id,
+        toParams: { email: emails[i].trim() },
+        grid: grid._id
+      });
+      
+      invite.save(function (err) {
+        if (err) { console.log("ERR: " + err); }
+      });
     }
-
-    async.each(collab, function (email) {
-      var user = new User({
-        email: email,
-        isConfirmed: false
-      });
-
-      user.save(function (err, user) {
-        if (err) { console.error("ERR: " + err); }
-        console.error("SAVED");
-        var gridUrl = "http://powerup.io/grids/" + grid.slug;
-        var emailText = "Hi there, \
-\
-You've been invited to the \"" + grid.name + "\" grid on PowerUp.io! Click the following link to get started: " + gridUrl + "\
-\
-- PowerUp Team";
-        Mailer.send({
-          to: user.email,
-          subject: "You're invited to a grid on PowerUp.io.",
-          text: emailText
-        }, function (err) {
-          if (err) { console.error("ERR: " + err); }
-          console.error("SENT");
-        });
-      });
-    }, function (err) {
-      if (err) { console.error("ERR: " + err); }
-      res.redirect("back");
-    });
+    
+    res.redirect("back");
   });
 };
 
