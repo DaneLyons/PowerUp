@@ -40,7 +40,7 @@
 					<td>Total</td>
 				</tr>
 				<tr>
-					<% if(grid.user.name){ %>
+					<% if (grid.user.name) { %>
 			  		<td><%= grid.user.name %></td>
 					<% }else{ %>
 						<td>Grid Master</td>
@@ -50,8 +50,6 @@
 					<% } %>
 					<td>0</td>
 				</tr>
-				<% if (currentUser && currentUser._id === grid.user._id) { %>
-				  <% grid.%>
 				<tr>
 					<td>joe@gmail.com</td>
 					<td colspan="<%= grid.gridButtons.length+1 %>">Invite Sent</td>
