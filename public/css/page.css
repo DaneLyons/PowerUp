@@ -27,6 +27,10 @@ h2 {
   text-transform:uppercase;
 }
 
+.flash {
+  font-size: 18px;
+  padding: 10px 0;
+}
 .toc {
   width:200px;
   padding-left:50px;

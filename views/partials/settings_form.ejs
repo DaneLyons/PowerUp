@@ -22,8 +22,24 @@
         Change card (<%= user.cardType %> ending in <%= user.cardLast4 %>)
       </a></li>
     <% } %>
+    
+    <% if (user.isPremium) { %>
+      <a rel="nofollow" href="/downgrade" class="downgrade">Downgrade your account</a></li>
+    <% } else { %>
+      <li><a rel="nofollow" href="/upgrade" class="upgrade">Upgrade your account</a></li>
+    <% } %>
 		<li><a href="/change_password">Change password</a></li>
 		<li><a href="/sign_out">Sign out</a></li>
 	</ul>
 	<button type="submit" class="submit">Submit</button>
 </form>
+
+<script type="text/javascript">
+  $(function () {
+    $("#settings_form .right.links a.downgrade").click(function (ev) {
+      if (!confirm("Are you sure you want to downgrade?")) {
+        ev.preventDefault();
+      }
+    });
+  });
+</script>

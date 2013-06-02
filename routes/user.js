@@ -158,4 +158,46 @@ exports.postCard = function (req, res) {
        }
      );
   });
-}
+};
+
+exports.downgrade = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  User.findById(req.user._id, function (err, user) {
+    stripe.customers.cancel_subscription(user.stripeId, false, function (err) {
+      user.isPremium = false;
+      user.save(function (err) {
+        req.flash("success", "Your account has been downgraded.");
+        res.redirect('back');
+      });
+    });
+  });
+};
+
+exports.upgrade = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  User.findById(req.user._id, function (err, user) {
+    if (!user.stripeId) {
+      res.redirect('/join');
+      return;
+    }
+    
+    stripe.customers.update_subscription(user.stripeId, {
+        plan: "powerup_premium"
+      }, function (err) {
+        user.isPremium = true;
+        user.save(function (err) {
+          req.flash("success", "Your account has been upgraded!");
+          res.redirect('back');
+        });
+      }
+    );
+  });
+};
