@@ -112,6 +112,7 @@ exports.postJoin = function (req, res) {
           user.stripeId = customer.id;
           user.cardType = customer.active_card.type;
           user.cardLast4 = customer.active_card.last4;
+          user.isPremium = true;
           
           user.save(function (err, user) {
             req.flash("success", "Thank you! Welcome to PowerUp Premium.");
@@ -148,6 +149,7 @@ exports.postCard = function (req, res) {
           user.stripeId = customer.id;
           user.cardType = customer.active_card.type;
           user.cardLast4 = customer.active_card.last4;
+          user.isPremium = true;
           
           user.save(function (err, user) {
             req.flash("success", "Thanks! Your card has been updated.");

@@ -16,6 +16,7 @@ var userSchema = new Schema({
   promo: {
     zed: Boolean
   },
+  isPremium: { type: Boolean, default: false },
   stripeId: String,
   cardType: String,
   cardLast4: String
