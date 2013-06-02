@@ -1,6 +1,7 @@
 var Grid = require('../models/grid'),
     GridButton = require('../models/grid_button'),
-    User = require('../models/user');
+    User = require('../models/user'),
+    HelpShroom = require('../lib/help_shroom');
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -25,15 +26,16 @@ exports.gridNew = function (req, res) {
     return;
   }
   
-  User.findById(req.user._id, function (err, user) {
-    if (user.stripeId || user.grids.length === 0) {
-      res.render('grid/new',{
-        "stylesheets":["page","settings","auth","start"],
-        "javascripts":["slides"]
-      });
-    } else {
+  HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
+    if (!allowed) {
       res.redirect('/join');
+      return;
     }
+    
+    res.render('grid/new',{
+      "stylesheets":["page","settings","auth","start"],
+      "javascripts":["slides"]
+    });
   });
 };
 
@@ -74,22 +76,22 @@ exports.gridCreate = function (req, res) {
     return;
   }
   
-  User.findById(req.user._id, function (err, user) {
-    if (user.grids.length != 0 && !user.stripeId) {
+  HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
+    if (!allowed) {
       res.redirect('/join');
       return;
-    } else {
-      var grid = new Grid(req.body.grid);
-      grid.user = req.user._id;
-      grid.save(function (err, grid) {
-        if (err) {
-          req.flash("error", err);
-          res.redirect('back');
-        } else {
-          res.redirect('/grids/' + grid.slug);
-        }
-      });
     }
+
+    var grid = new Grid(req.body.grid);
+    grid.user = req.user._id;
+    grid.save(function (err, grid) {
+      if (err) {
+        req.flash("error", err);
+        res.redirect('back');
+      } else {
+        res.redirect('/grids/' + grid.slug);
+      }
+    });
   });
 };
 
