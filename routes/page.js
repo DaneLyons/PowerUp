@@ -139,9 +139,7 @@ exports.start = function (req, res) {
   if (userParams) {
     User.findOrCreate(userParams, function (err, user) {
       if (err) {
-        req.flash("error", "Sorry, but we're not taking any more signups right now. We'll email you when we're ready!");
-        res.redirect('back');
-        return;
+        console.error("ERR " + err);
       }
       User.findById(user._id, function (err, user) {
         grid.user = user._id;
