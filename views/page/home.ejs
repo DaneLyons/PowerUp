@@ -45,7 +45,7 @@
 	}
 	
 	$(function(){
-	  var uri = "http://" + window.location.host;
+	  var uri = window.location.protocol + "//" + window.location.host;
 		var socket = io.connect(uri);
     socket.on('promo.zed', function (data) {
 		  freebieCounter();
