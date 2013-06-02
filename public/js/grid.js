@@ -71,7 +71,7 @@ $(function () {
           var emptyLen = emptySquares.length;
           
           if(emptyLen>0){
-            var sockHost = "http://" + window.location.host;
+            var sockHost = window.location.protocol + "//" + window.location.host;
             var socket = io.connect(sockHost);
             var gridId = $("#grid").data("grid-id");
             for (var i = 0; i < num; i++) {
