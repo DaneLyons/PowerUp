@@ -32,6 +32,7 @@ exports.gridNew = function (req, res) {
 exports.gridShow = function (req, res) {
   Grid.findOne({ slug: req.params.slug })
     .populate('user')
+    .populate('collaborators')
     .populate('powerUps')
     .populate('gridButtons')
   .exec(
