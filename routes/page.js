@@ -1,6 +1,7 @@
 var Grid = require('../models/grid'),
   GridButton = require('../models/grid_button'),
   User = require('../models/user'),
+  HelpShroom = require('../lib/help_shroom'),
   inflect = require('i')(),
   util = require('util');
 
