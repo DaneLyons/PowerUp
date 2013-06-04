@@ -1,0 +1,271 @@
+<% include ../partials/head.ejs %>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<style>
+	h1.heading {
+		padding-bottom:5px;
+	}
+
+	div.gap {
+		height:20px;
+	}
+	
+	p.note {
+		padding-bottom:5px;
+	}
+	
+	p.note span {
+		font-weight:bold;
+	}
+	
+	button {
+		background:#888;
+	}
+
+	button.active {
+		background:#cb0000;
+		color:#fff;
+	}
+	
+	button.random {
+		background:transparent;
+		padding:0;
+		position:relative;
+		top:-2px;
+		opacity:.4;
+	}
+	
+	button.random:hover {
+		opacity:1;
+	}
+	
+	input[type="range"]{
+	  background:#bbb;
+	  width: 410px;
+	  height: 6px;
+	  -webkit-appearance: none;
+		float:left;
+		position:relative;
+		top:3px;
+	}
+
+	input[type="range"]::-webkit-slider-thumb{
+	   -webkit-appearance:none !important;  
+	   width:25px;
+	   height:16px;
+	   -webkit-appearance: none;
+	    background: #555;
+	 }
+	
+	input[type="range"]::-webkit-slider-thumb:hover{
+	}
+	
+	input[type="number"]{
+		-webkit-appearance: none;
+		border: none;
+		background: rgba(0,0,0,.07);
+		font-weight: bold;
+		font-size: 18px;
+		padding: 3px;
+	}
+	
+	#band_frame {
+		padding-top:40px;
+		padding-bottom:125px;
+		text-align:center;
+		background:rgba(0,0,0,.1);
+		position:relative;
+	}
+	
+	#band_frame h1 {
+		font-size:50px;
+	}
+	
+	#day_buttons {
+		padding-top:5px;
+	}
+	
+	.get_started {
+		position:absolute;
+		bottom:0;
+		height:90px;
+		text-align:center;
+		width:100%;
+		padding-top:15px;
+		border-top:1px dashed #888;
+	}
+	
+	.get_started p {
+		padding-bottom:20px;
+	}
+	
+	.get_started a{
+		background: #cb0000;
+		color: #fff;
+		padding: 10px 30px;
+		font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+	
+	div.content {
+		clear:both;
+		margin-top:50px;
+		padding-top:50px;
+		border-top:1px dashed #888;
+		font-size:17px;
+		padding-bottom:50px;
+	}
+	
+	div.content p {
+		padding-bottom:15px;
+	}
+	
+	div.content a.right {
+		margin-left:15px;
+	}
+	
+	.sharing {
+		float:right;
+		padding-top:10px;
+	}
+	
+	.twitter-share-button {
+		background:transparent;
+	}
+	
+	#sortable .ui-icon {
+		float:left;
+		position:relative;
+		top:0;
+	}
+	
+	#sortable li {
+		height:30px;
+		margin-bottom:5px;
+		padding-top:14px;
+	}
+	
+	#sortable li label.left {
+		width:100px;
+		text-align:right;
+		margin-right:10px;
+	}
+	
+	#sortable li label.right {
+		margin-left:10px;
+		float:left;
+	}
+</style>
+
+
+<div class="sharing">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="duilen">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+<h1 class="heading">
+	Band Name Generator
+	<button class="random" type="button"><img src="/img/icons/random.png"></button>
+</h1>
+
+
+<ul id="sortable">
+	<li class="ui-state-default">
+		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+		<label class="left">WEAK</label>
+		<input data-slider="0" type="range" min="0" max="100" value="0" />
+		<label class="right">STRONG</label>
+	</li>
+	<li class="ui-state-default">
+		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+		<label class="left">FAST</label>
+		<input data-slider="1" type="range" min="0" max="100" value="0" />
+		<label class="right">SLOW</label>
+	</li>
+	<li class="ui-state-default">
+		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+		<label class="left">FUTURISM</label>
+		<input data-slider="2" type="range" min="0" max="100" value="0" />
+		<label class="right">PRIMAL</label>
+	</li>
+</ul>
+
+<div id="band_frame">
+	<h2>RANDOM BAND NAME:</h2>
+	<h1 id="band_name"></h1>
+	
+	<div class="get_started">
+		<p></p>
+		<a href="/getting-started/1">GET STARTED</a>
+	</div>
+</div>
+
+
+<div class="content">
+
+</div>
+
+<% include ../partials/footer.ejs %>
+
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+	$(function(){
+		$("button.random").click(random_name)
+	
+		$( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+		$( "#sortable" ).on("sortupdate",generate_name);
+		
+		if(!Modernizr.inputtypes.range){
+
+		}
+		
+		if (Modernizr.draganddrop) {
+		  // Browser supports HTML5 DnD.
+		}
+
+    $('#sortable input').change(function(){
+				generate_name();
+    });
+		
+		setup_sliders();
+		random_name();
+	});
+	
+	function generate_name(){
+		var name = "";
+		$('#sortable input').each(function(){
+			var slider = sliders[$(this).data('slider')];
+			var word = slider[$(this).val()];
+			if(name==""){
+				name+=word;
+			}else{
+				name+=" "+word;
+			}
+		});
+		$('#band_name').text(name);
+	}
+	
+	function setup_sliders(){
+		$('#sortable input').each(function(){
+			var slider = sliders[$(this).data('slider')];
+			$(this).attr('max',slider.length-1);
+		});
+	}
+	
+	function random_name(){
+		$('#sortable input').each(function(){
+			var elem = $(this);
+			var slider = sliders[elem.data('slider')];
+			var rand = Math.floor(Math.random() * slider.length);
+			elem.val(rand);
+		});
+		generate_name();
+	}
+	
+	var sliders = [
+		["BABY","SLIME","EGG","BOX","MEAT","SHOE","BLACK","WOOD","STRONG","HAMMER","AXE","WAR","NUKE","STAR"],
+		["RABBIT","RACING","ROCKET","SPINNING","CAR","WIELDING","BOAT","CARGO","SLIDE","WAGON","BUCKET","GRASS","SLUG","WAX"],
+		["ROBOTS","ROVERS","NERDS","FLYERS","RACERS","HEROES","BUTLERS","MONKS","BAKERS","WANNABES","SERVANTS","GOBLINS","STOMPERS","HOOLIGANS","SERPENTS","SLAVES","SAVAGES"]
+	]
+</script>

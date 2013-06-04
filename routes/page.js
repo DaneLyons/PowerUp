@@ -95,6 +95,14 @@ exports.calcBook = function (req, res) {
   });
 };
 
+exports.bandNames = function (req, res) {
+  res.render("page/band-names.ejs", {
+    "title":"Random Band Name Generator",
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
+  });
+}
+
 exports.start = function (req, res) {
   var userParams = req.body.user,
     gridParams = req.body.grid,
