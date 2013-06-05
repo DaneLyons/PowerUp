@@ -49,7 +49,7 @@ exports.gridShow = function (req, res) {
       if (!grid) { res.redirect('/'); return; }
       
       if (grid.isPrivate) {
-        if (!req.user || (grid.user != req.user._id)) {
+        if (!req.user || (grid.user._id != req.user._id)) {
           res.redirect('/');
           return;
         }
