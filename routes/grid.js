@@ -46,6 +46,14 @@ exports.gridShow = function (req, res) {
     .populate('gridButtons')
   .exec(
     function (err, grid) {
+      if (!grid) { res.redirect('/'); return; }
+      
+      if (grid.isPrivate) {
+        if (!req.user || (grid.user != req.user._id)) {
+          res.redirect('/');
+          return;
+        }
+      }
       res.render('grid/show', {
         grid: grid,
         "stylesheets":["grid"]

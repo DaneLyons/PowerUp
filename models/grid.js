@@ -13,7 +13,7 @@ var gridSchema = new Schema({
   powerUps: [ { type: Schema.ObjectId, ref: 'PowerUp' } ],
   gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' }],
   user: { type: Schema.ObjectId, ref: 'User' },
-  public: { type: Boolean, default: false },
+  isPrivate: { type: Boolean, default: false },
   active: { type: Boolean, default: true },
   slug: String,
   size: { type: Number, default: 400 }
