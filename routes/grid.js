@@ -1,7 +1,8 @@
 var Grid = require('../models/grid'),
     GridButton = require('../models/grid_button'),
     User = require('../models/user'),
-    HelpShroom = require('../lib/help_shroom');
+    HelpShroom = require('../lib/help_shroom'),
+    util = require('util');
 
 exports.gridIndex = function (req, res) {
   if(res.locals.currentUser){
@@ -49,7 +50,10 @@ exports.gridShow = function (req, res) {
       if (!grid) { res.redirect('/'); return; }
       
       if (grid.isPrivate) {
-        if (!req.user || (grid.user._id !== req.user._id)) {
+        if (!req.user) {
+          res.redirect('/');
+          return;
+        } else if (grid.user._id.toString() !== req.user._id.toString()) {
           res.redirect('/');
           return;
         }
