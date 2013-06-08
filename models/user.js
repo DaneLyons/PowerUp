@@ -83,7 +83,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
 
     if (!user) {
       if (!userParams.password) {
-        var user = new User(userParams);
+        user = new User(userParams);
         user.save(function (err, user) {
           if (err) {
             return done(err);
@@ -93,7 +93,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
         });
       } else {
         User.bcryptPassword(userParams, function (err, params) {
-          var user = new User(params);
+          user = new User(params);
           user.save(function (err, user) {
             if (err) {
               return done(err);

@@ -97,7 +97,7 @@ exports.gridUpdate = function (req, res) {
 
 exports.gridCreateCollaborators = function (req, res) {
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
-    if (err) { console.error("ERR: " + err); }
+    if (err) { console.log("ERR: " + err); }
     
     var emails = req.body.collaborators.split(',');
     for (var i = 0; i < emails.length; i++) {

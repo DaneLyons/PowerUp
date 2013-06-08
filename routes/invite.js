@@ -42,16 +42,15 @@ exports.acceptInvite = function (req, res) {
           console.log(err);
         }
         
-        Invite.findById(req.params.id)
-          .populate('grid')
-          .exec(function (err, invite) {
+        Invite.findById(req.params.id, function (err, invite) {
+          Grid.findById(invite.grid, function (err, grid) {
             invite.isAccepted = true;
             invite.save(function (err, invite) {
               var gridUrl = "/grids/" + invite.grid.slug;
               res.redirect(gridUrl);
             });
-          }
-        );
+          });
+        });
       });
     });
   });
