@@ -67,10 +67,17 @@
   					<td class="total"><%- powerUps.total || '0' %></td>
   				</tr>
   			<% } %>
-				<tr>
-					<td>john@gmail.com</td>
-					<td colspan="<%= grid.gridButtons.length+1 %>">Invite Rejected</td>
-				</tr>
+  			<% if (gridClass !== 'disabled') { %>
+  			  <% for (var i = 0; i < invites.length; i++) { %>
+  			    <% var invite = invites[i]; %>
+    			  <tr>
+    					<td><%- invite.toParams.email %></td>
+    					<td colspan="<%= grid.gridButtons.length+1 %>">
+    					  Invite <%- invite.isAccepted ? "Accepted" : "Sent" %></td>
+    				</tr>
+    			<% } %>
+  			<% } %>
+				
 			</table>
 			<form action="/grids/<%= grid.slug %>/collaborators" method="post">
 	      <div class="field">

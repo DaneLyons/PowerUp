@@ -42,11 +42,18 @@ exports.gridShow = function (req, res) {
     function (err, grid) {
       grid.getCollaboratorStats(function (err, collaborators) {
         if (err) { console.log(err); }
-        res.render('grid/show', {
-          grid: grid,
-          collaborators: collaborators,
-          "stylesheets":["grid"]
-        });
+        Invite.find({ grid: grid._id })
+          .populate('toUser')
+          .exec(function (err, invites) {
+            if (err) { console.log(err); }
+            res.render('grid/show', {
+              grid: grid,
+              collaborators: collaborators,
+              invites: invites,
+              "stylesheets":["grid"]
+            });
+          }
+        );
       });
     }
   );
