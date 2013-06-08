@@ -15,7 +15,7 @@ var userSchema = new Schema({
   passwordHash: String,
   passwordSalt: String,
   isConfirmed: { type: Boolean, default: true },
-  grids: [ { type: Schema.ObjectId, ref: 'User' } ],
+  grids: [ { type: Schema.ObjectId, ref: 'Grid' } ],
   promo: {
     zed: Boolean
   }
