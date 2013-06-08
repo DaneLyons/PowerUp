@@ -42,16 +42,15 @@ inviteSchema.post('save', function (invite) {
 
         function inviteUser(user) {
           var baseUrl = "http://" + ((process.env.NODE_ENV === 'production') ? 'powerup.io' : 'localhost:3000');
-          var inviteUrl = baseUrl + "/invites/" + invite._id + "/accept";
+          var inviteUrl = baseUrl + "/invites/" + invite._id;
           inviteUrl += "?token=" + invite.token;
 
           var mailerParams = {
-            from: 'welcome@powerup.io',
             to: user.email,
             subject: "You're invited to a grid on PowerUp.io.",
             text: ["Hi there,",
               "",
-              "You've been invited to the " + grid.name + " grid on PowerUp.io. To get started, click the link below:",
+              "You've been invited to the \"" + grid.name + "\" grid on PowerUp.io. To get started, click the link below:",
               "",
               inviteUrl,
               "",
@@ -62,6 +61,7 @@ inviteSchema.post('save', function (invite) {
             if (err) { console.log(err); }
 
             invite.isSent = true;
+            invite.toUser = user._id;
             invite.save(function (err) {
               if (err) { console.log(err); }
             });
