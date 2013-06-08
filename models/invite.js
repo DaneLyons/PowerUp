@@ -34,7 +34,7 @@ inviteSchema.post('save', function (invite) {
         if (user) {
           inviteUser(user);
         } else {
-          User.findOrCreate(toParams, function (err, user) {
+          User.findOrCreate(invite.toParams, function (err, user) {
             if (err) { console.log(err); }
             inviteUser(user);
           });
