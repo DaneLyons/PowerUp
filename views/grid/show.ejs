@@ -50,7 +50,7 @@
 					
 					<% var colors = ['black', 'blue', 'red']; %>
 					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-						<td class="<%- colors[i] %>"><% user[colors[i]] %></td>
+						<td class="<%- colors[i] %>"><%- user[colors[i]] %></td>
 					<% } %>
 					<td class="total"><%- user['total'] %></td>
 				</tr>
