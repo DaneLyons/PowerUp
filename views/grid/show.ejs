@@ -39,19 +39,23 @@
 					<% } %>
 					<th>Total</th>
 				</tr>
+				
+				<% var user = collaborators[grid.user.email]; %>
 				<tr>
-					<% if (grid.user.name) { %>
-			  		<td><%= grid.user.name %></td>
+					<% if (user.name) { %>
+			  		<td><%= user.name %></td>
 					<% }else{ %>
 						<td>Grid Master</td>
 					<% } %>
 					
 					<% var colors = ['black', 'blue', 'red']; %>
 					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-						<td class="<%- colors[i] %>">0</td>
+						<td class="<%- colors[i] %>"><% user[colors[i]] %></td>
 					<% } %>
-					<td class="total">0</td>
+					<td class="total"><%- user['total'] %></td>
 				</tr>
+				<% delete collaborators[grid.user.email]; %>
+				
 				<% for (email in collaborators) { %>
 				  <% powerUps = collaborators[email] %>
 			  	<tr>
@@ -119,7 +123,12 @@
   $(function () {
     grid = JSON.parse('<%- JSON.stringify(grid) %>');
     
-    PowerUp.GridMaster.initializeGrid({ user: "<%- currentUser._id %>" });
+    var params = {};
+    <% if (currentUser) { %>
+      params.user = "<%- currentUser._id %>";
+    <% } %>
+    
+    PowerUp.GridMaster.initializeGrid(params);
     PowerUp.GridMaster.populateGrid(grid);
   });
 </script>
