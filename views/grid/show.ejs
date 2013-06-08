@@ -52,10 +52,16 @@
 					<% } %>
 					<td class="total">0</td>
 				</tr>
-				<tr>
-					<td>joe@gmail.com</td>
-					<td colspan="<%= grid.gridButtons.length+1 %>">Invite Sent</td>
-				</tr>
+				<% for (email in collaborators) { %>
+				  <% powerUps = collaborators[email] %>
+			  	<tr>
+  					<td><%- (gridClass === "disabled") ? "Player " + (i + 2) : email %></td>
+  					<% for (var i = 0; i < colors.length; i++) { %>
+  					  <% var color = colors[i]; %>
+  					  <td class="<%- color %>"><%- powerUps[color] || '0' %></td>
+  					<% } %>
+  				</tr>
+  			<% } %>
 				<tr>
 					<td>john@gmail.com</td>
 					<td colspan="<%= grid.gridButtons.length+1 %>">Invite Rejected</td>
@@ -113,7 +119,7 @@
   $(function () {
     grid = JSON.parse('<%- JSON.stringify(grid) %>');
     
-    PowerUp.GridMaster.initializeGrid();
+    PowerUp.GridMaster.initializeGrid({ user: "<%- currentUser._id %>" });
     PowerUp.GridMaster.populateGrid(grid);
   });
 </script>

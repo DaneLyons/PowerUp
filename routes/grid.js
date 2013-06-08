@@ -40,9 +40,13 @@ exports.gridShow = function (req, res) {
     .populate('gridButtons')
   .exec(
     function (err, grid) {
-      res.render('grid/show', {
-        grid: grid,
-        "stylesheets":["grid"]
+      grid.getCollaboratorStats(function (err, collaborators) {
+        if (err) { console.log(err); }
+        res.render('grid/show', {
+          grid: grid,
+          collaborators: collaborators,
+          "stylesheets":["grid"]
+        });
       });
     }
   );

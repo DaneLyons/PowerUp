@@ -2,7 +2,13 @@ if (!PowerUp) { var PowerUp = {}; }
 
 $(function () {
   PowerUp.GridMaster = {
-    initializeGrid: function () {
+    initializeGrid: function (opts) {
+      if (opts) {
+        for (prop in opts) {
+          PowerUp[prop] = opts[prop];
+        }
+      }
+      
       var window_height = $(window).height();
       var window_width = $(window).width();
       $('#page').css({height:window_height});
@@ -79,10 +85,11 @@ $(function () {
           for (var i = 0; i < num; i++) {
             var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
             socket.emit('Grid.PowerUp', {
-              PowerUp: {
+              "PowerUp": {
                 grid: gridId,
                 position: idx,
-                color:color
+                color: color,
+                user: PowerUp.user
               }
             });
           
