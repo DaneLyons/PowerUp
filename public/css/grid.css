@@ -353,6 +353,32 @@ body {
   padding:5px;
 }
 
+#content .collaborators table th {
+  background:#fff;
+  background:rgba(255,255,255,.3);
+  text-align:left;
+  padding:5px;
+}
+
+#content .collaborators table td.black {
+  border-bottom:3px solid rgba(0,0,0,.75);
+  text-align:center;
+}
+
+#content .collaborators table td.blue {
+  border-bottom:3px solid rgba(22,76,124,.75);
+  text-align:center;
+}
+
+#content .collaborators table td.red {
+  border-bottom:3px solid rgba(111,11,11,.75);
+  text-align:center;
+}
+
+#content .collaborators table td.total {
+  text-align:center;
+}
+
 #content .collaborators .field .text {
   float: left;
   border: none;
