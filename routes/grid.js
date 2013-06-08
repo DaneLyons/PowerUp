@@ -7,18 +7,20 @@ var Grid = require('../models/grid'),
   inflect = require('i')();
 
 exports.gridIndex = function (req, res) {
-  if(res.locals.currentUser){
-    Grid.find({ user: res.locals.currentUser._id })
-      .populate('user')
-      .populate('powerUps')
-      .exec(function (err, grids) {
-        res.render('grid/index', {
-          grids: grids,
-          "stylesheets":["page","settings","auth","list"]
-        });
-      }
-    );
-  }else{
+  if (req.user) {
+    User.findById(req.user._id, function (err, user) {
+      Grid.find({ _id: { $in: user.grids } })
+        .populate('user')
+        .populate('powerUps')
+        .exec(function (err, grids) {
+          res.render('grid/index', {
+            grids: grids,
+            "stylesheets":["page","settings","auth","list"]
+          });
+        }
+      );
+    });
+  } else {
     res.redirect('/');
   }
 };
