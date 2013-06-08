@@ -34,19 +34,19 @@ inviteSchema.post('save', function (invite) {
         if (user) {
           inviteUser(user);
         } else {
-          User.findOrCreate(invite.toParams, function (err, user) {
+          User.findOrCreate(invite.toParams, function (err, newUser) {
             if (err) { console.log(err); }
-            inviteUser(user);
+            inviteUser(newUser);
           });
         }
 
-        function inviteUser(user) {
+        function inviteUser(toUser) {
           var baseUrl = "http://" + ((process.env.NODE_ENV === 'production') ? 'powerup.io' : 'localhost:3000');
           var inviteUrl = baseUrl + "/invites/" + invite._id;
           inviteUrl += "?token=" + invite.token;
 
           var mailerParams = {
-            to: user.email,
+            to: toUser.email,
             subject: "You're invited to a grid on PowerUp.io.",
             text: ["Hi there,",
               "",
@@ -57,11 +57,12 @@ inviteSchema.post('save', function (invite) {
               "Power on!",
               "- Team PowerUp"].join('\n')
           };
+          
           Mailer.send(mailerParams, function (err) {
             if (err) { console.log(err); }
 
             invite.isSent = true;
-            invite.toUser = user._id;
+            invite.toUser = toUser._id;
             invite.save(function (err) {
               if (err) { console.log(err); }
             });

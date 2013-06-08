@@ -82,7 +82,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
     if (err) { return done(err); }
 
     if (!user) {
-      if (userParams.password === undefined) {
+      if (!userParams.password) {
         var user = new User(userParams);
         user.save(function (err, user) {
           if (err) {
