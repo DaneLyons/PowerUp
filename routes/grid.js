@@ -46,6 +46,7 @@ exports.gridShow = function (req, res) {
           .populate('toUser')
           .exec(function (err, invites) {
             if (err) { console.log(err); }
+            
             res.render('grid/show', {
               grid: grid,
               collaborators: collaborators,

@@ -25,7 +25,7 @@ powerUpSchema.pre('save', function (next) {
   } else {
     next();
   }
-})
+});
 
 var PowerUp = mongoose.model('PowerUp', powerUpSchema);
 module.exports = PowerUp;
