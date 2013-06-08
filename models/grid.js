@@ -2,10 +2,7 @@ var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
   inflect = require('i')(),
   util = require('util'),
-  Schema = mongoose.Schema,
-  GridButton = require('./grid_button'),
-  PowerUp = require('./power_up'),
-  User = require('./user');
+  Schema = mongoose.Schema;
   
 var gridSchema = new Schema({
   name: String,
@@ -26,47 +23,6 @@ var gridSchema = new Schema({
 });
 
 gridSchema.plugin(timestamps);
-
-gridSchema.methods.getCollaboratorStats = function (cb) {
-  var grid = this;
-  var collaborators = {};
-  
-  User.findById(grid.user, function (err, user) {
-    if (err) { return cb(err); }
-    User.find({ _id: { $in: grid.collaborators } }, function (err, users) {
-      if (err) { return cb(err); }
-      
-      if (!users) { users = []; }
-      users.push(user);
-      for (var i = 0; i < users.length; i++) {
-        user = users[i];
-        collaborators[user.email] = {};
-      }
-      
-      PowerUp.find({ grid: grid._id })
-        .populate('user')
-        .exec(function (err, powerUps) {
-          for (var i = 0; i < powerUps.length; i++) {
-            var powerUp = powerUps[i];
-            if (!collaborators[powerUp.user.email][powerUp.color]) {
-              collaborators[powerUp.user.email][powerUp.color] = 0;
-            }
-            collaborators[powerUp.user.email][powerUp.color] += 1;
-          }
-
-          for (email in collaborators) {
-            var total = 0;
-            for (color in collaborators[email]) {
-              total += collaborators[email][color];
-            }
-            collaborators[email].total = total;
-          }
-          return cb(null, collaborators);
-        }
-      );
-    });
-  });
-};
 
 gridSchema.pre('save', function (next) {  
   if (!this.slug) {

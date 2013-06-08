@@ -1,5 +1,6 @@
 var Grid = require('../models/grid'),
   User = require('../models/user'),
+  PowerUp = require('../models/power_up'),
   Invite = require('../models/invite'),
   Mailer = require('../lib/mailer'),
   async = require('async'),
@@ -40,22 +41,55 @@ exports.gridShow = function (req, res) {
     .populate('gridButtons')
   .exec(
     function (err, grid) {
-      grid.getCollaboratorStats(function (err, collaborators) {
-        if (err) { console.log(err); }
-        Invite.find({ grid: grid._id })
-          .populate('toUser')
-          .exec(function (err, invites) {
+      if (err) { console.log(err); }
+      Invite.find({ grid: grid._id })
+        .populate('toUser')
+        .exec(function (err, invites) {
+          if (err) { console.log(err); }
+          
+          var collaborators = {};
+
+          User.findById(grid.user, function (err, user) {
             if (err) { console.log(err); }
-            
-            res.render('grid/show', {
-              grid: grid,
-              collaborators: collaborators,
-              invites: invites,
-              "stylesheets":["grid"]
+            User.find({ _id: { $in: grid.collaborators } }, function (err, users) {
+              if (err) { console.log(err); }
+              if (!users) { users = []; }
+              users.push(user);
+              for (var i = 0; i < users.length; i++) {
+                user = users[i];
+                collaborators[user.email] = {};
+              }
+
+              PowerUp.find({ grid: grid._id })
+                .populate('user')
+                .exec(function (err, powerUps) {
+                  for (var i = 0; i < powerUps.length; i++) {
+                    var powerUp = powerUps[i];
+                    if (!collaborators[powerUp.user.email][powerUp.color]) {
+                      collaborators[powerUp.user.email][powerUp.color] = 0;
+                    }
+                    collaborators[powerUp.user.email][powerUp.color] += 1;
+                  }
+
+                  for (email in collaborators) {
+                    var total = 0;
+                    for (color in collaborators[email]) {
+                      total += collaborators[email][color];
+                    }
+                    collaborators[email].total = total;
+                  }
+                  res.render('grid/show', {
+                    grid: grid,
+                    collaborators: collaborators,
+                    invites: invites,
+                    "stylesheets":["grid"]
+                  });
+                }
+              );
             });
-          }
-        );
-      });
+          });
+        }
+      );
     }
   );
 };
