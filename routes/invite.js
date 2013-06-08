@@ -51,8 +51,15 @@ exports.acceptInvite = function (req, res) {
             invite.isAccepted = true;
             invite.save(function (err, invite) {
               if (err) { console.log(err); }
-              var gridUrl = "/grids/" + grid.slug;
-              res.redirect(gridUrl);
+              
+              user.grids.push(grid._id);
+              user.save(function (err, user) {
+                grid.collaborators.push(user._id);
+                grid.save(function (err, grid) {
+                  var gridUrl = "/grids/" + grid.slug;
+                  res.redirect(gridUrl);
+                });
+              });
             });
           });
         });
