@@ -35,12 +35,12 @@
   top:0;
   left:-45px;
   color:#444;
-  display:none;
   font-size:14px;
+  opacity:.3;
 }
 
 .grid_list li:hover .edit {
-  display:block;
+  opacity:1;
 }
 
 a.new_grid {
