@@ -50,6 +50,14 @@ gridSchema.methods.getCollaboratorStats = function (cb) {
             }
             collaborators[powerUp.user.email][powerUp.color] += 1;
           }
+
+          for (email in collaborators) {
+            var total = 0;
+            for (color in collaborators[email]) {
+              total += collaborators[email][color];
+            }
+            collaborators[email].total = total;
+          }
           return cb(null, collaborators);
         }
       );

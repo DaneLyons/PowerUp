@@ -50,9 +50,9 @@
 					
 					<% var colors = ['black', 'blue', 'red']; %>
 					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-						<td class="<%- colors[i] %>"><%- user[colors[i]] %></td>
+						<td class="<%- colors[i] %>"><%- user[colors[i]] || '0' %></td>
 					<% } %>
-					<td class="total"><%- user['total'] %></td>
+					<td class="total"><%- user['total'] || '0' %></td>
 				</tr>
 				<% delete collaborators[grid.user.email]; %>
 				
@@ -64,6 +64,7 @@
   					  <% var color = colors[i]; %>
   					  <td class="<%- color %>"><%- powerUps[color] || '0' %></td>
   					<% } %>
+  					<td class="total"><%- powerUps.total || '0' %></td>
   				</tr>
   			<% } %>
 				<tr>
