@@ -34,7 +34,30 @@
 			<input type="text" name="workUnit[]" class="small last work_unit" value="" />
 		<% } %>
   </div>
-  
+
+	<div class="field">
+		<% var grid_master = "YOU" %>
+		<% if(grid.user.name){ %>
+			<% grid_master = grid.user.name %>
+		<% } %>
+		<label>PLAYER 1</label><input type="text" disabled value="<%= grid_master %>" />
+	</div>
+	
+	<div class="field">
+		<a href="#" class="delete">DELETE</a>
+		<label>PLAYER 2</label><input type="text" disabled value="John" />
+	</div>
+	
+	<div class="field">
+		<a href="#" class="delete">DELETE</a>
+		<label>PLAYER 3</label><input type="text" disabled value="joe@user.com (invited)" />
+	</div>
+	
+	<div class="field">
+		<a href="#" class="delete">DELETE</a>
+		<label>PLAYER 4</label><input type="text" disabled value="sarah@user.com (rejected)" />
+	</div>
+
 	<button type="submit" class="submit">Save</button>
 </form>
 
