@@ -34,6 +34,8 @@ gridSchema.methods.getCollaboratorStats = function (cb) {
     if (err) { return cb(err); }
     User.find({ _id: { $in: grid.collaborators } }, function (err, users) {
       if (err) { return cb(err); }
+      
+      if (!users) { users = []; }
       users.push(user);
       for (var i = 0; i < users.length; i++) {
         user = users[i];
