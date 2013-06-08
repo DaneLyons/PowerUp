@@ -43,10 +43,15 @@ exports.acceptInvite = function (req, res) {
         }
         
         Invite.findById(req.params.id, function (err, invite) {
+          if (err) { console.log(err); }
+          
           Grid.findById(invite.grid, function (err, grid) {
+            if (err) { console.log(err); }
+            
             invite.isAccepted = true;
             invite.save(function (err, invite) {
-              var gridUrl = "/grids/" + invite.grid.slug;
+              if (err) { console.log(err); }
+              var gridUrl = "/grids/" + grid.slug;
               res.redirect(gridUrl);
             });
           });
