@@ -30,6 +30,22 @@
   background:rgba(0,0,0,.10);
 }
 
+.grid_list .edit {
+  position:absolute;
+  top:0;
+  left:-45px;
+  color:#444;
+  font-size:14px;
+  opacity:.3;
+  -webkit-transition:all 400ms;
+  -moz-transition:all 400ms;
+  transition:all 400ms;
+}
+
+.grid_list li:hover .edit {
+  opacity:1;
+}
+
 a.new_grid {
   float:right;
   background: #cb0000;

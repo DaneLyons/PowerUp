@@ -195,3 +195,40 @@ function stylize(str, style) {
   });
 
 });
+
+desc('Runs data migration scripts.');
+task('migrate', [], function () {
+  var fs = require('fs'),
+    exec = require('child_process').exec,
+  	spawn = require('child_process').spawn,
+  	async = require('async');
+  
+  fs.readFile('./scripts.json', "utf-8", function (err, oldScripts) {
+    if (oldScripts) {
+      oldScripts = oldScripts.split("\n");
+    } else {
+      oldScripts = [];
+    }
+    
+    fs.readdir('./scripts', function (err, files) {
+      async.mapSeries(files, function (file, cb) {
+        if (oldScripts.indexOf(file) === -1) {
+          exec("node ./scripts/" + file, function (err, stdout, stderr) {
+            if (err) { return cb(err); }
+            
+            console.log("STDOUT: " + stdout);
+            
+            fs.writeFile("./scripts.json", file + "\n", function (err) {
+              if (err) { return cb(err); }
+              return cb(null);
+            })
+          });
+        } else {
+          return cb(null);
+        }
+      }, function (err) {
+        if (err) { console.log("Error: " + err); }
+      });
+    });
+  });
+});

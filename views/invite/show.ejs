@@ -1,0 +1,15 @@
+<% include ../partials/head.ejs %>
+
+<form action="/invites/<%- invite._id %>/accept" method="post" id="password_form">
+
+	<h1>WELCOME TO POWERUP!</h1>
+	<h2>Set your password and we'll get started.</h2>
+  <div class="field">
+		<label>NEW PASS</label>
+    <input type="password" name="user[password]" id="pass_1" />
+  </div>
+  
+	<button type="submit" class="submit">Submit</button>
+</form>
+
+<% include ../partials/footer.ejs %>

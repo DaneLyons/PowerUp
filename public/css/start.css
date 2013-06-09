@@ -129,3 +129,7 @@ button.random {
 #new_grid button.random:hover {
   opacity:1;
 }
+
+h1{
+  padding-bottom:30px;
+}

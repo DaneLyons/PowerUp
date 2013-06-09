@@ -2,7 +2,13 @@ if (!PowerUp) { var PowerUp = {}; }
 
 $(function () {
   PowerUp.GridMaster = {
-    initializeGrid: function () {
+    initializeGrid: function (opts) {
+      if (opts) {
+        for (prop in opts) {
+          PowerUp[prop] = opts[prop];
+        }
+      }
+      
       var window_height = $(window).height();
       var window_width = $(window).width();
       $('#page').css({height:window_height});
@@ -91,12 +97,27 @@ $(function () {
               newSquare.addClass(color);      
             }
         
+
             var gridSize = $("#grid li").length;
             var filledLen = gridSize - emptyLen;
             var percent = Math.floor((filledLen / gridSize) * 100);
             if (percent === 0) { percent = 1; }
             if (emptyLen == 0){ percent = 100; }
             grid_progress.text(percent + '%');
+
+          var sockHost = "http://" + window.location.host;
+          var socket = io.connect(sockHost);
+          var gridId = $("#grid").data("grid-id");
+          for (var i = 0; i < num; i++) {
+            var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
+            socket.emit('Grid.PowerUp', {
+              "PowerUp": {
+                grid: gridId,
+                position: idx,
+                color: color,
+                user: PowerUp.user
+              }
+            });
           
             if(emptyLen != 400 && emptyLen % 40 == 0){
               PowerUp.GridMaster.gridMilestone();
@@ -133,4 +154,30 @@ $(function () {
       });
     }
   }
+  
+  var isExpanded = false;
+  $("#content .collaborate .expand.button").click(function (ev) {
+    ev.preventDefault();
+    if (isExpanded) {
+      $("#content .collaborate form.new_collaborator").animate({
+        opacity: 0
+      }, 200);
+      isExpanded = false;
+    } else {
+      $("#content .collaborate form.new_collaborator").animate({
+        opacity: 1
+      }, 200);
+      
+      isExpanded = true;
+    }
+  });
+  
+  $("#content .controls button").click(function(ev){
+    $("#content .controls button").removeClass('active');
+    $(this).addClass('active');
+    
+    var section = $(this).data('show');
+    $(".sections .section").hide();
+    $(".sections ."+section).show();
+  });
 });

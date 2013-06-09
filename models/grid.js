@@ -1,8 +1,8 @@
 var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
   inflect = require('i')(),
-  Schema = mongoose.Schema,
-  GridButton = require('./grid_button');
+  util = require('util'),
+  Schema = mongoose.Schema;
   
 var gridSchema = new Schema({
   name: String,
@@ -14,6 +14,8 @@ var gridSchema = new Schema({
   gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' }],
   user: { type: Schema.ObjectId, ref: 'User' },
   isPrivate: { type: Boolean, default: false },
+  collaborators: [ { type: Schema.ObjectId, ref: 'User' } ],
+  public: { type: Boolean, default: false },
   active: { type: Boolean, default: true },
   slug: String,
   size: { type: Number, default: 400 }

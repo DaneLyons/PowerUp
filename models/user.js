@@ -1,9 +1,11 @@
 var mongoose = require('mongoose'),
   timestamps = require('mongoose-timestamp'),
+  uuid = require('node-uuid'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
   Action = require('./action'),
   SignUp = require('./sign_up'),
+  Mailer = require('../lib/mailer')
   bcrypt = require('bcrypt'),
   TimeShroom = require('../lib/time_shroom');
   
@@ -12,7 +14,8 @@ var userSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
-  grids: [ { type: Schema.ObjectId, ref: 'User' } ],
+  isConfirmed: { type: Boolean, default: true },
+  grids: [ { type: Schema.ObjectId, ref: 'Grid' } ],
   promo: {
     zed: Boolean
   },
@@ -32,7 +35,7 @@ userSchema.statics.bcryptPassword = function (userParams, done) {
       return done(err);
     }
     
-    if (userParams.password === undefined) {
+    if (typeof userParams.password === 'undefined') {
       return done(null);
     }
     
@@ -83,8 +86,8 @@ userSchema.statics.findOrCreate = function(userParams, done) {
     if (err) { return done(err); }
 
     if (!user) {
-      if (userParams.password === undefined) {
-        var user = new User(userParams);
+      if (!userParams.password) {
+        user = new User(userParams);
         user.save(function (err, user) {
           if (err) {
             return done(err);
@@ -94,7 +97,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
         });
       } else {
         User.bcryptPassword(userParams, function (err, params) {
-          var user = new User(params);
+          user = new User(params);
           user.save(function (err, user) {
             if (err) {
               return done(err);
@@ -136,11 +139,21 @@ userSchema.pre('save', function (next) {
   });
 });
 
+userSchema.pre('save', function (next) {
+  var user = this;
+  if (!user.isConfirmed && !user.confirmationToken) {
+    user.confirmationToken = uuid.v4();
+  } 
+
+  next();
+});
+
 userSchema.post('save', function (user) {
   var actionParams = {
     user: user._id,
     actionType: 'Models.User.Create',
-    actionObjectId: user._id
+    actionObjectId: user._id,
+    actionObjectType: 'User'
   };
   
   Action.findOne(actionParams, function (err, action) {
@@ -156,6 +169,25 @@ userSchema.post('save', function (user) {
             if (err) { console.log("ERR: " + err) }
           });
         });
+      });
+    }
+  });
+});
+
+userSchema.post('save', function (user) {
+  var actionParams = {
+    user: user._id,
+    actionType: "Models.User.Confirm",
+    actionObjectId: user._id,
+    actionObjectType: 'User'
+  };
+  
+  Action.findOne(actionParams, function (err, action) {
+    if (!action) {
+      var action = new Action(actionParams);
+      action.save(function (err, action) {
+        if (err) { console.log("ERR: " + err); }
+        
       });
     }
   });

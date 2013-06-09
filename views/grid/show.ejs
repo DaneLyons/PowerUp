@@ -5,22 +5,34 @@
 <div id="content">
 	<div class="heading">
 		<% if(grid.user.name){ %>
-		<div class="author">
-			<%= grid.user.name %>
-		</div>
+  		<div class="author">
+  			<%= grid.user.name %>
+  		</div>
 		<% } %>
 		<h1><%= grid.name %></h1>
 	</div>
 	
+	<% var gridOwner = false; %>
+	<% if (currentUser && (String(grid.user._id) === String(currentUser._id))) { %>
+	  <% gridOwner = true; %>
+	<% } %>
+	<% var gridCollaborator = false; %>
+
+	<% if (currentUser && collaborators.hasOwnProperty(currentUser.email)) { %>
+	  <% gridCollaborator = true; %>
+	<% } %>
+		
 	<% var gridClass = "disabled"; %>
-	<% if(currentUser && String(grid.user._id) == String(currentUser._id)){ %>
+	<% if (gridOwner) { %>
 		<% gridClass = ""; %>
+	<% } else if (gridCollaborator) { %>
+	  <% gridClass = ""; %>
 	<% } %>
 	<div class="legend">
 	  <% var colors = ['black', 'blue', 'red']; %>
 	  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
 			<button class="powerup <%= colors[i] %> <%= gridClass %>" data-powerup-num="<%= grid.gridButtons[i].increment %>" data-color="<%= colors[i] %>">
-				<% if(gridClass != "disabled"){ %>
+				<% if (gridOwner || gridCollaborator) { %>
 					<span class="plus"></span>
 				<% } %>
 				<span><%= grid.gridButtons[i].workUnit %></span>
@@ -28,7 +40,68 @@
 		<% } %>
 	</div>
 
-	<div class="progress"></div>
+	<div class="sections">
+		<div class="section progress"></div>
+		<div class="section collaborators" style="display:none;">
+			<table>
+				<tr>
+					<th>User</th>
+					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
+						<th><%= grid.gridButtons[i].workUnit %></th>
+					<% } %>
+					<th>Total</th>
+				</tr>
+				
+				<% var user = collaborators[grid.user.email]; %>
+				<tr>
+					<% if (user.name) { %>
+			  		<td><%= user.name %></td>
+					<% }else{ %>
+						<td>Grid Master</td>
+					<% } %>
+					
+					<% var colors = ['black', 'blue', 'red']; %>
+					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
+						<td class="<%- colors[i] %>"><%- user[colors[i]] || '0' %></td>
+					<% } %>
+					<td class="total"><%- user['total'] || '0' %></td>
+				</tr>
+				<% delete collaborators[grid.user.email]; %>
+				
+				<% for (email in collaborators) { %>
+				  <% powerUps = collaborators[email] %>
+			  	<tr>
+  					<td><%- gridOwner ? "Player " + (i + 2) : email %></td>
+  					<% for (var i = 0; i < colors.length; i++) { %>
+  					  <% var color = colors[i]; %>
+  					  <td class="<%- color %>"><%- powerUps[color] || '0' %></td>
+  					<% } %>
+  					<td class="total"><%- powerUps.total || '0' %></td>
+  				</tr>
+  			<% } %>
+  			<% if (gridOwner) { %>
+  			  <% for (var i = 0; i < invites.length; i++) { %>
+  			    <% var invite = invites[i]; %>
+    			  <tr>
+    					<td><%- invite.toParams.email %></td>
+    					<td colspan="<%= grid.gridButtons.length+1 %>">
+    					  Invite <%- invite.isAccepted ? "Accepted" : "Sent" %></td>
+    				</tr>
+    			<% } %>
+  			<% } %>
+				
+			</table>
+			<form action="/grids/<%= grid.slug %>/collaborators" method="post">
+	      <div class="field">
+	        <input type="text" class="text" name="collaborators" size="40"
+	          placeholder="Email" />
+	      </div>
+	      <div class="submit">
+	        <button type="submit" class="submit">Invite</button>
+	      </div>
+	    </form>
+		</div>
+	</div>
 	
 	<div class="share">
 		<% var share_url = encodeURIComponent("http://powerup.io/grids/"+grid.slug) %>
@@ -42,8 +115,27 @@
 
 		<a target="_blank" href="https://plus.google.com/share?url=<%- share_url %>"><img src="/img/google+.png"></a>
 	</div>
-</div>
 	
+	<div class="collaborate" style="display:none">
+    <form action="/grids/<%= grid.slug %>/collaborators" method="post"
+      class="new_collaborator">
+      <div class="field">
+        <input type="text" class="text" name="collaborators" size="40"
+          placeholder="Email collaborators (comma-separated)" />
+      </div>
+      <div class="submit">
+        <button type="submit" class="submit">Add</button>
+      </div>
+    </form>
+    <div class="expand button">COLLABORATE</div>
+  </div>
+
+	<div class="controls">
+		<button data-show="progress" class="stats active"><span class="icon"></span>Stats</button>
+		<button data-show="collaborators" class="users"><span class="icon"></span>Collaborators</button>
+	</div>
+</div>
+
 <% include ../partials/footer.ejs %>
 
 <script type="text/javascript" src="/js/grid.js"></script>
@@ -51,7 +143,12 @@
   $(function () {
     grid = JSON.parse('<%- JSON.stringify(grid) %>');
     
-    PowerUp.GridMaster.initializeGrid();
+    var params = {};
+    <% if (currentUser) { %>
+      params.user = "<%- currentUser._id %>";
+    <% } %>
+    
+    PowerUp.GridMaster.initializeGrid(params);
     PowerUp.GridMaster.populateGrid(grid);
   });
 </script>

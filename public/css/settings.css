@@ -42,6 +42,23 @@
   margin-right:0;
 }
 
+.field .delete {
+  position:absolute;
+  top:13px;
+  right:10px;
+  z-index:1000;
+  color:#444;
+  opacity:.3;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  -webkit-transition:all 400ms;
+  -moz-transition:all 400ms;
+  transition:all 400ms;
+}
+
+.field:hover .delete {
+  opacity:.7;
+}
+
 h2 {
   padding-bottom:5px;
 }

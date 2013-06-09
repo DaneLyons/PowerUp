@@ -11,6 +11,9 @@
 
     <ul class="grid_list">
       <li>
+        <% if (String(currentUser._id) === String(grid.user._id)) { %>
+				  <a class="edit" href="/grids/<%- grid.slug %>/edit">EDIT</a>
+				<% } %>
 				<div class="fill" style="width:<%= percent %>%;"></div>
         <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
       </li>

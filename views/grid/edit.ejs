@@ -10,32 +10,46 @@
   <div class="field">
 		<label>WORK UNITS</label>
 		
-		<% if(grid.workUnit){ %>
-			<% var workUnits = grid.workUnit.split(',') %>
-		<% }else{ %>
-			<% var workUnits = [] %>
-		<% } %>
-		
-		<% if(workUnits.length > 0){ %>
-    	<input type="text" name="workUnit[]" value="<%= workUnits[0] %>" class="small work_unit required" />
-		<% }else{ %>
-			<input type="text" name="workUnit[]" value="" class="small work_unit required" />
-		<% } %>
-		
-		<% if(workUnits.length > 1){ %>
-			<input type="text" name="workUnit[]" class="small work_unit" value="<%= grid.workUnit.split(',')[1] %>" />
-		<% }else{ %>
-			<input type="text" name="workUnit[]" class="small work_unit" value="" />
-		<% } %>
-		
-		<% if(workUnits.length > 2){ %>
- 			<input type="text" name="workUnit[]" class="small last work_unit" value="<%= grid.workUnit.split(',')[2] %>" />
-		<% }else{ %>
-			<input type="text" name="workUnit[]" class="small last work_unit" value="" />
+		<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
+		  <% var btn = grid.gridButtons[i]; %>
+    	<input type="text" name="gridButtons[<%- btn._id %>]"
+    	  value="<%= btn.workUnit %>" class="small work_unit required<% if (i === 2) { %> last <% } %>" />
+    <% } %>
+    
+    <% for (var i = (3 - grid.gridButtons.length); i > 0; i--) { %>
+      <input type="text" name="workUnits[]" value="" class="small work_unit required <% if (i === 1) { %> last <% } %>" />
 		<% } %>
   </div>
+
+	<div class="field">
+		<% var grid_master = "YOU" %>
+		<% if(grid.user.name){ %>
+			<% grid_master = grid.user.name %>
+		<% } %>
+		<label>PLAYER 1</label><input type="text" disabled value="<%= grid_master %>" />
+	</div>
+	
+	<% for (var i = 0; i < grid.collaborators.length; i++) { %>
+	  <% var user = grid.collaborators[i]; %>
+  	<div class="field">
+  		<a href="#" class="delete user" data-user="<%- user._id %>" data-grid-slug="<%- grid.slug %>">DELETE</a>
+  		<label>PLAYER <%- i + 2 %></label>
+  		<input type="text" disabled value="<%- user.name || user.email %>" />
+  	</div>
+  <% } %>
+  
+  <% for (var i = 0; i < invites.length; i++) { %>
+	  <% var invite = invites[i]; %>
+  	<div class="field">
+  		<a href="#" class="delete invite" data-invite="<%- invite._id %>">
+  		  DELETE</a>
+  		<label>PLAYER <%- i + 2 + grid.collaborators.length %></label>
+  		<input type="text" disabled value="<%- invite.toParams.email %> (invite sent)" />
+  	</div>
+  <% } %>
   
 	<button type="submit" class="submit">Save</button>
 </form>
 
+<script type="text/javascript" src="/js/edit_grid.js"></script>
 <% include ../partials/footer.ejs %>

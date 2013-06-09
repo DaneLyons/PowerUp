@@ -1,0 +1,33 @@
+#page {
+  width:1020px;
+}
+
+h2 {
+  font-size:20px;
+}
+
+ul.thirds {
+  padding-top:20px;
+  clear:both;
+}
+
+#page ul.thirds li {
+  width:300px;
+  padding-right:15px;
+  font-size:16px;
+  line-height:1.2;
+  float:left;
+  height:125px;
+}
+
+#page ul.thirds li div {
+  float:left;
+  width:235px;
+}
+
+#page ul.thirds img {
+  width:50px;
+  float:left;
+  margin-right:15px;
+  opacity:.1;
+}
