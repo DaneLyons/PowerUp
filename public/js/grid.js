@@ -120,10 +120,10 @@ $(function () {
             });
           
             if(emptyLen != 400 && emptyLen % 40 == 0){
-              PowerUp.GridMaster.gridMilestone();
+              gridMilestone();
             }
           }else{
-            PowerUp.GridMaster.gridMilestone();
+            gridMilestone();
           }
         } //disabled check
       });
@@ -133,7 +133,7 @@ $(function () {
         console.log('GRID KEEPER');
       });
     },
-    gridMilestone: function(){
+    gridMilestone: function gridMilestone(){
       var grid = $('#grid');
       var grid_pos = grid.offset();
       var grid_width = grid.width();
