@@ -180,9 +180,24 @@ exports.deleteCollaborator = function (req, res) {
     User.findById(req.body.user, function (err, user) {
       user.grids.remove(grid._id);
       user.save(function (err, user) {
-        grid.collaborators.remove(user._id);
-        grid.save(function (err, grid) {
-          res.redirect("back");
+        PowerUp.find({
+          grid: grid._id,
+          user: user._id
+        }, function (err, powerUps) {
+          var ids = _.map(powerUps, function (p) { return p._id });
+          PowerUp.remove({
+            grid: grid._id,
+            user: user._id
+          }, function (err) {
+            if (err) { console.log(err); }
+            for (var i = 0; i < ids.length; i++) {
+              grid.powerUps.remove(ids[i]);
+            }
+            grid.collaborators.remove(user._id);
+            grid.save(function (err, grid) {
+              res.redirect("back");
+            });
+          });
         });
       });
     });

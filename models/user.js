@@ -31,7 +31,7 @@ userSchema.statics.bcryptPassword = function (userParams, done) {
       return done(err);
     }
     
-    if (userParams.password === undefined) {
+    if (typeof userParams.password === 'undefined') {
       return done(null);
     }
     

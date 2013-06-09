@@ -12,15 +12,29 @@
 		<h1><%= grid.name %></h1>
 	</div>
 	
+	<% var gridOwner = false; %>
+	<% if (currentUser && (String(grid.user._id) === String(currentUser._id))) { %>
+	  <% gridOwner = true; %>
+	<% } %>
+	<% var gridCollaborator = false; %>
+
+	<% if (currentUser && collaborators.hasOwnProperty(currentUser.email)) { %>
+	  <% gridCollaborator = true; %>
+	<% } %>
+	
+	<div class="collaborator"><%- collaborators[currentUser.email] %></div>
+	
 	<% var gridClass = "disabled"; %>
-	<% if(currentUser && String(grid.user._id) == String(currentUser._id)){ %>
+	<% if (gridOwner) { %>
 		<% gridClass = ""; %>
+	<% } else if (gridCollaborator) { %>
+	  <% gridClass = ""; %>
 	<% } %>
 	<div class="legend">
 	  <% var colors = ['black', 'blue', 'red']; %>
 	  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
 			<button class="powerup <%= colors[i] %> <%= gridClass %>" data-powerup-num="<%= grid.gridButtons[i].increment %>" data-color="<%= colors[i] %>">
-				<% if(gridClass != "disabled"){ %>
+				<% if (gridOwner || gridCollaborator) { %>
 					<span class="plus"></span>
 				<% } %>
 				<span><%= grid.gridButtons[i].workUnit %></span>
@@ -59,7 +73,7 @@
 				<% for (email in collaborators) { %>
 				  <% powerUps = collaborators[email] %>
 			  	<tr>
-  					<td><%- (gridClass === "disabled") ? "Player " + (i + 2) : email %></td>
+  					<td><%- gridOwner ? "Player " + (i + 2) : email %></td>
   					<% for (var i = 0; i < colors.length; i++) { %>
   					  <% var color = colors[i]; %>
   					  <td class="<%- color %>"><%- powerUps[color] || '0' %></td>
@@ -67,7 +81,7 @@
   					<td class="total"><%- powerUps.total || '0' %></td>
   				</tr>
   			<% } %>
-  			<% if (gridClass !== 'disabled') { %>
+  			<% if (gridOwner) { %>
   			  <% for (var i = 0; i < invites.length; i++) { %>
   			    <% var invite = invites[i]; %>
     			  <tr>
