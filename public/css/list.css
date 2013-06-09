@@ -37,6 +37,9 @@
   color:#444;
   font-size:14px;
   opacity:.3;
+  -webkit-transition:all 400ms;
+  -moz-transition:all 400ms;
+  transition:all 400ms;
 }
 
 .grid_list li:hover .edit {
