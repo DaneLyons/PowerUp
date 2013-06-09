@@ -32,7 +32,7 @@
 	<% for (var i = 0; i < grid.collaborators.length; i++) { %>
 	  <% var user = grid.collaborators[i]; %>
   	<div class="field">
-  		<a href="#" class="delete">DELETE</a>
+  		<a href="#" class="delete user" data-user="<%- user._id %>" data-grid-slug="<%- grid.slug %>">DELETE</a>
   		<label>PLAYER <%- i + 2 %></label>
   		<input type="text" disabled value="<%- user.name || user.email %>" />
   	</div>
@@ -41,7 +41,8 @@
   <% for (var i = 0; i < invites.length; i++) { %>
 	  <% var invite = invites[i]; %>
   	<div class="field">
-  		<a href="#" class="delete">DELETE</a>
+  		<a href="#" class="delete invite" data-invite="<%- invite._id %>">
+  		  DELETE</a>
   		<label>PLAYER <%- i + 2 + grid.collaborators.length %></label>
   		<input type="text" disabled value="<%- invite.toParams.email %> (invite sent)" />
   	</div>
@@ -50,4 +51,5 @@
 	<button type="submit" class="submit">Save</button>
 </form>
 
+<script type="text/javascript" src="/js/edit_grid.js"></script>
 <% include ../partials/footer.ejs %>

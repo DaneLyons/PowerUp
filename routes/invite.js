@@ -67,3 +67,20 @@ exports.acceptInvite = function (req, res) {
     });
   });
 };
+
+exports.deleteInvite = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
+  Invite.findOne({
+    fromUser: req.user._id,
+    _id: req.params.id 
+  }, function (err, invite) {
+    invite.remove(function (err) {
+      if (err) { console.log(err); }
+      res.redirect('back');
+    });    
+  });
+}

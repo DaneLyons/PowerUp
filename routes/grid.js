@@ -95,8 +95,14 @@ exports.gridShow = function (req, res) {
 };
 
 exports.gridEdit = function (req, res) {
+  if (!req.user) {
+    res.redirect('/');
+    return;
+  }
+  
   Grid.findOne({ slug: req.params.slug })
     .populate('user')
+    .populate('collaborators')
     .populate('powerUps')
     .populate('gridButtons')
   .exec(
@@ -166,6 +172,20 @@ exports.gridCreateCollaborators = function (req, res) {
     }
     
     res.redirect("back");
+  });
+};
+
+exports.deleteCollaborator = function (req, res) {
+  Grid.findOne({ slug: req.params.slug }, function (err, grid) {
+    User.findById(req.body.user, function (err, user) {
+      user.grids.remove(grid._id);
+      user.save(function (err, user) {
+        grid.collaborators.remove(user._id);
+        grid.save(function (err, grid) {
+          res.redirect("back");
+        });
+      });
+    });
   });
 };
 
