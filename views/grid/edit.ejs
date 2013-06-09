@@ -13,11 +13,11 @@
 		<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
 		  <% var btn = grid.gridButtons[i]; %>
     	<input type="text" name="gridButtons[<%- btn._id %>]"
-    	  value="<%= btn.workUnit %>" class="small work_unit required" />
+    	  value="<%= btn.workUnit %>" class="small work_unit required<% if (i === 2) { %> last <% } %>" />
     <% } %>
     
     <% for (var i = (3 - grid.gridButtons.length); i > 0; i--) { %>
-      <input type="text" name="workUnits[]" value="" class="small work_unit required" />
+      <input type="text" name="workUnits[]" value="" class="small work_unit required <% if (i === 1) { %> last <% } %>" />
 		<% } %>
   </div>
 
@@ -38,7 +38,15 @@
   	</div>
   <% } %>
   
-
+  <% for (var i = 0; i < invites.length; i++) { %>
+	  <% var invite = invites[i]; %>
+  	<div class="field">
+  		<a href="#" class="delete">DELETE</a>
+  		<label>PLAYER <%- i + 2 + grid.collaborators.length %></label>
+  		<input type="text" disabled value="<%- invite.toParams.email %> (invite sent)" />
+  	</div>
+  <% } %>
+  
 	<button type="submit" class="submit">Save</button>
 </form>
 
