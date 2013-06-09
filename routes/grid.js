@@ -140,15 +140,66 @@ exports.gridCreate = function (req, res) {
 
 exports.gridUpdate = function (req, res) {
   Grid.findOne({ slug: req.params.slug })
-  .populate('gridButtons')
-  .exec(
-    function (err, grid) {
+    .populate('gridButtons')
+    .exec(function (err, grid) {
       grid.name = req.body.grid.name;
-      grid.workUnit = req.body.workUnit;
-      
-      grid.save(function (err, grid) {
-        res.redirect('/grids/' + grid.slug);
-      });
+      var newButtons = req.body.gridButtons;
+      if (newButtons) {
+        async.map(newButtons, function (button, cb) {
+          GridButton.findById(button, function (err, button) {
+            if (err) { return cb(err); }
+            return cb(button);
+          });
+        }, function (err, buttons) {
+          if (err) { console.log(err); }
+          
+          async.map(buttons, function (button, cb) {
+            button.workUnit = newButtons[button._id];
+            button.save(function (err, button) {
+              if (err) { return cb(err); }
+              return cb(null, button);
+            });
+          }, function (err, buttons) {
+            if (err) { console.log(err); }
+          });
+        });
+      }
+    
+      var workUnits = req.body.workUnits;
+      if (workUnits) {
+        var btns = [];
+        for (var i = 0; i < workUnits.length; i++) {
+          var workUnit = workUnits[i];
+          var btn = new GridButton({
+            grid: grid._id,
+            workUnit: workUnit,
+            increment: 1
+          });
+          btns.push(btn);
+        }
+
+        async.map(btns, function (btn, cb) {
+          btn.save(function (err, btn) {
+            if (err) { return cb(err); }
+            return cb(null, btn);
+          });
+        }, function (err, gridButtons) {
+          if (err) { console.log(err); }
+
+          for (var i = 0; i < gridButtons.length; i++) {
+            grid.gridButtons.push(gridButtons[i]._id);
+          }
+
+          grid.save(function (err, grid) {
+            if (err) { console.log("ERR: " + err); }
+            res.redirect('/grids/' + grid.slug);
+          });
+        });
+      } else {
+        grid.save(function (err, grid) {
+          res.redirect('/grids/' + grid.slug);
+        });
+      }
     }
   );
 };
