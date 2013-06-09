@@ -3,7 +3,7 @@ $(function () {
     ev.preventDefault();
     var link = $(this);
     var name = link.parents(".field").find("input[type='text']").val();
-    if (!confirm("Are you sure you want to remove " + name + "?")) {
+    if (!confirm("Are you sure you want to remove " + name + "? This will delete all of their work!")) {
       return;
     }
         
