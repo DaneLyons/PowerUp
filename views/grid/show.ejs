@@ -21,9 +21,7 @@
 	<% if (currentUser && collaborators.hasOwnProperty(currentUser.email)) { %>
 	  <% gridCollaborator = true; %>
 	<% } %>
-	
-	<div class="collaborator"><%- collaborators[currentUser.email] %></div>
-	
+		
 	<% var gridClass = "disabled"; %>
 	<% if (gridOwner) { %>
 		<% gridClass = ""; %>
