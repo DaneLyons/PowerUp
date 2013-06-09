@@ -101,9 +101,13 @@ exports.gridEdit = function (req, res) {
     .populate('gridButtons')
   .exec(
     function (err, grid) {
-      res.render('grid/edit', {
-        grid: grid,
-        "stylesheets":["page","settings","auth","start"]
+      Invite.find({ grid: grid._id }, function (err, invites) {
+        if (!invites) { invites = []; }
+        res.render('grid/edit', {
+          grid: grid,
+          invites: invites,
+          "stylesheets":["page","settings","auth","start"]
+        });
       });
     }
   );
