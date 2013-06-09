@@ -2,6 +2,10 @@
   width:1020px;
 }
 
+h2 {
+  font-size:20px;
+}
+
 ul.thirds {
   padding-top:20px;
   clear:both;
