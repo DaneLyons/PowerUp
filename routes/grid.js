@@ -42,7 +42,7 @@ exports.gridShow = function (req, res) {
   .exec(
     function (err, grid) {
       if (err) { console.log(err); }
-      Invite.find({ grid: grid._id })
+      Invite.find({ grid: grid._id, isAccepted: false })
         .populate('toUser')
         .exec(function (err, invites) {
           if (err) { console.log(err); }
