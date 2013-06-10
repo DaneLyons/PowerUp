@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   uuid = require('node-uuid'),
+  util = require('util'),
   timestamps = require('mongoose-timestamp'),
   User = require('./user'),
   Grid = require('./grid'),
@@ -57,7 +58,7 @@ inviteSchema.post('save', function (invite) {
 
           Mailer.send(mailerParams, function (err, response) {
             if (err) { console.log(err); }
-            console.log("Mailer response: " + response);
+            console.log("Mailer response: " + util.inspect(response, false, null));
             
             invite.isSent = true;
             invite.toUser = user._id;
