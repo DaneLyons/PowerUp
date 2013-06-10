@@ -116,13 +116,14 @@ userSchema.statics.findOrCreate = function(userParams, done) {
 
           return done(null, user);
         });
+      } else {
+        user.validPassword(userParams.password, function (err, valid) {
+          if (!valid) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+        });
       }
-      user.validPassword(userParams.password, function (err, valid) {
-        if (!valid) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        return done(null, user);
-      });
     }
   });
 };
