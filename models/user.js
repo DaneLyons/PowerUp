@@ -108,6 +108,15 @@ userSchema.statics.findOrCreate = function(userParams, done) {
         });
       } 
     } else {
+      if (typeof userParams.password === 'undefined') {
+        user.save(function (err, user) {
+          if (err) {
+            return done(err);
+          }
+
+          return done(null, user);
+        });
+      }
       user.validPassword(userParams.password, function (err, valid) {
         if (!valid) {
           return done(null, false, { message: 'Incorrect password.' });
