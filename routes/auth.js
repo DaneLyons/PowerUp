@@ -41,7 +41,7 @@ exports.postSignUp = function (req, res) {
   
   User.findOne({ email: userParams.email }, function (err, user) {
     console.log("U: " + user);
-    if (user) {
+    if (user && user.passwordHash) {
       req.flash('info', "That email is already in use. Please sign in.");
       var locals = {};
       if (req.session) {
