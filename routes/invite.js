@@ -22,8 +22,15 @@ exports.showInvite = function (req, res) {
           if (user.passwordHash) {
             invite.isAccepted = true;
             invite.save(function (err, invite) {
-              res.redirect('/grids/' + grid.slug);
-              return;
+              user.grids.push(grid._id);
+              user.save(function (err, user) {
+                grid.collaborators.push(user._id);
+                grid.save(function (err, grid) {
+                  var gridUrl = "/grids/" + grid.slug;
+                  res.redirect(gridUrl);
+                  return;
+                });
+              });
             });
           } else {
             res.render('invite/show.ejs', {
