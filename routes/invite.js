@@ -17,10 +17,21 @@ exports.showInvite = function (req, res) {
     
     User.findById(invite.toUser, function (err, user) {
       req.login(user, function (err) {
-        console.log(err);
-        res.render('invite/show.ejs', {
-          "invite": invite,
-          "stylesheets":["page","settings","auth"]
+        Grid.findById(invite.grid, function (err, grid) {
+          console.log(err);
+          if (user.passwordHash) {
+            invite.isAccepted = true;
+            invite.save(function (err, invite) {
+              res.redirect('/grids/' + grid.slug);
+              return;
+            });
+          } else {
+            res.render('invite/show.ejs', {
+              "invite": invite,
+              "stylesheets":["page","settings","auth"]
+            });
+            return;
+          }
         });
       });
     });
