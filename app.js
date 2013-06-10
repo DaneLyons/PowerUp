@@ -1,3 +1,9 @@
+if (process.env.NODE_ENV === 'production') {
+  require('nodetime').profile({
+    accountKey: '702d10982845b0a8f28426ca17ce63de4587ef31', 
+    appName: 'PowerUp'
+  });
+}
 
 /**
  * Module dependencies.

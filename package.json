@@ -34,6 +34,7 @@
     "node-inspector": "0.1.x",
     "q": "0.9.x",
     "i": "latest",
-    "stripe": "latest"
+    "stripe": "latest",
+    "nodetime": "latest"
   }
 }
