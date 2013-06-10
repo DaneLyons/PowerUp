@@ -107,7 +107,8 @@ $(function () {
                 PowerUp: {
                   grid: gridId,
                   position: idx,
-                  color:color
+                  color:color,
+                  user: PowerUp.user
                 }
               });
           
