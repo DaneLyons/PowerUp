@@ -55,9 +55,10 @@ inviteSchema.post('save', function (invite) {
               "- Team PowerUp"].join('\n')
           };
 
-          Mailer.send(mailerParams, function (err) {
+          Mailer.send(mailerParams, function (err, response) {
             if (err) { console.log(err); }
-
+            console.log("Mailer response: " + response);
+            
             invite.isSent = true;
             invite.toUser = user._id;
             invite.save(function (err) {
