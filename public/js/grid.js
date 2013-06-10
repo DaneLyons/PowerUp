@@ -96,7 +96,7 @@ $(function () {
           var emptySquares = $("ul#grid li.inactive");
           var emptyLen = emptySquares.length;
           
-          if(emptyLen>0){
+          if (emptyLen > 0) {
             var sockHost = window.location.protocol + "//" + window.location.host;
             var socket = io.connect(sockHost);
             var gridId = $("#grid").data("grid-id");
@@ -125,27 +125,26 @@ $(function () {
             if (emptyLen == 0){ percent = 100; }
             grid_progress.text(percent + '%');
 
-          var sockHost = "http://" + window.location.host;
-          var socket = io.connect(sockHost);
-          var gridId = $("#grid").data("grid-id");
-          for (var i = 0; i < num; i++) {
-            var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
-            socket.emit('Grid.PowerUp', {
-              "PowerUp": {
-                grid: gridId,
-                position: idx,
-                color: color,
-                user: PowerUp.user
-              }
-            });
+            var sockHost = "http://" + window.location.host;
+            var socket = io.connect(sockHost);
+            var gridId = $("#grid").data("grid-id");
+            for (var i = 0; i < num; i++) {
+              var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
+              socket.emit('Grid.PowerUp', {
+                "PowerUp": {
+                  grid: gridId,
+                  position: idx,
+                  color: color,
+                  user: PowerUp.user
+                }
+              });
           
-            if(emptyLen != 400 && emptyLen % 40 == 0){
-              gridMilestone();
+              if(emptyLen != 400 && emptyLen % 40 == 0){
+                gridMilestone();
+              }
             }
-          }else{
-            gridMilestone();
           }
-        } //disabled check
+        } 
       });
     },
     gridKeeper: function() {
