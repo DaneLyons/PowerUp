@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
   SignUp = require('./sign_up'),
   Mailer = require('../lib/mailer')
   bcrypt = require('bcrypt'),
-  TimeShroom = require('../lib/time_shroom');
+  EventShroom = require('../lib/event_shroom');
   
 var userSchema = new Schema({
   name: String,
@@ -170,7 +170,7 @@ userSchema.post('save', function (user) {
     if (!action) {
       action = new Action(actionParams);
       action.save(function (err) {
-        var io = TimeShroom.io;
+        var io = EventShroom.io;
         console.log(io);
 
         io.sockets.emit('promo.zed', function () {

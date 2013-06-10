@@ -17,19 +17,19 @@ var express = require('express'),
   redis = require('redis'),
   RedisStore = require('connect-redis')(express),
   page = require('./routes/page'),
-  WarpShroom = require('./lib/warp_shroom'),  // Routes
+  RouteShroom = require('./lib/route_shroom'),  // Routes
   path = require('path'),
   url = require('url'),
   util = require('util'),
-  PowerShroom = require('./lib/power_shroom'),
-  WarpShroom = require('./lib/warp_shroom'),
-  TimeShroom = require('./lib/time_shroom');
+  AuthShroom = require('./lib/auth_shroom'),
+  RouteShroom = require('./lib/route_shroom'),
+  EventShroom = require('./lib/event_shroom');
 
 var app = express();
 var dbUri = process.env.MONGOLAB_URI || 'mongodb://localhost/powerup';
 mongoose.connect(dbUri);
 
-PowerShroom.setupPassport();
+AuthShroom.setupPassport();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -97,7 +97,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-WarpShroom.setupRoutes(app);
+RouteShroom.setupRoutes(app);
 
 var server = http.createServer(app)
 server.listen(app.get('port'), function(){
@@ -105,4 +105,4 @@ server.listen(app.get('port'), function(){
 });
 
 var io = require('socket.io').listen(server);
-TimeShroom.setupEvents(io);
+EventShroom.setupEvents(io);
