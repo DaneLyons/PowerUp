@@ -54,8 +54,8 @@
 				
 				<% var user = collaborators[grid.user.email]; %>
 				<tr>
-					<% if (user.name) { %>
-			  		<td><%= user.name %></td>
+					<% if (grid.user.name) { %>
+			  		<td><%= grid.user.name %></td>
 					<% }else{ %>
 						<td>Grid Master</td>
 					<% } %>
