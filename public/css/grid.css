@@ -332,6 +332,8 @@ body {
 #content .collaborators {
   padding:5px;
   clear:both;
+  position:relative;
+  overflow-y:auto;
 }
 
 #content .collaborators table {
