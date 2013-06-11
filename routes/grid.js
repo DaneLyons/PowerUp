@@ -75,6 +75,7 @@ exports.gridShow = function (req, res) {
           if (err) { console.log(err); }
           
           var collaborators = {};
+          var names = {};
 
           User.findById(grid.user, function (err, user) {
             if (err) { console.log(err); }
@@ -85,6 +86,7 @@ exports.gridShow = function (req, res) {
               for (var i = 0; i < users.length; i++) {
                 user = users[i];
                 collaborators[user.email] = {};
+                names[user.email] = user.name;
               }
 
               PowerUp.find({ grid: grid._id })
@@ -108,6 +110,7 @@ exports.gridShow = function (req, res) {
                   res.render('grid/show', {
                     grid: grid,
                     collaborators: collaborators,
+                    names: names,
                     invites: invites,
                     "stylesheets":["grid"]
                   });

@@ -71,7 +71,13 @@
 				<% for (email in collaborators) { %>
 				  <% powerUps = collaborators[email] %>
 			  	<tr>
-  					<td><%- gridOwner ? email : "Player " + (i + 2) %></td>
+  					<td>
+  					  <% if (names[email]) { %>
+  					    <%- names[email] %>
+  					  <% } else { %>
+  					    <%- gridOwner ? email : "Player " + (i + 2) %>
+  					  <% } %>
+  					</td>
   					<% for (var i = 0; i < colors.length; i++) { %>
   					  <% var color = colors[i]; %>
   					  <td class="<%- color %>"><%- powerUps[color] || '0' %></td>

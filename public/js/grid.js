@@ -90,7 +90,6 @@ $(function () {
       
       $("#content .legend button.powerup").click(function (ev) {
         ev.preventDefault();
-        console.log("#POW EVENT TRIGGER");
         var btn = $(this);
         
         if(!btn.hasClass('disabled')){
