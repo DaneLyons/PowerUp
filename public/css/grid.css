@@ -336,44 +336,45 @@ body {
 
 #content .collaborators table {
   width:100%;
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
-  font-size:20px;
-  color:#444;
-  /*text-shadow: -1px -1px 0 rgba(0,0,0,.7);*/
-  border-spacing:5px 5px;
-  border-collapse: separate;
+  font-size:17px;
+  color:#000;
+}
+
+#content .collaborators table tr {
+  border-bottom:1px solid rgba(255,255,255,.15);
 }
 
 #content .collaborators table td {
-  background:#fff;
-  background:rgba(255,255,255,.15);
-  padding:5px;
+  padding:10px;
 }
 
 #content .collaborators table th {
-  background:#fff;
-  background:rgba(255,255,255,.3);
   text-align:left;
-  padding:5px;
+  padding:10px;
+  font-weight:bold;
 }
 
 #content .collaborators table td.black {
-  border-bottom:5px solid rgba(0,0,0,.75);
+  /* border-bottom:5px solid rgba(0,0,0,.75); */
   text-align:center;
 }
 
 #content .collaborators table td.blue {
-  border-bottom:5px solid rgba(22,76,124,.75);
+  /* border-bottom:5px solid rgba(22,76,124,.75); */
   text-align:center;
 }
 
 #content .collaborators table td.red {
-  border-bottom:5px solid rgba(111,11,11,.75);
+  /* border-bottom:5px solid rgba(111,11,11,.75); */
   text-align:center;
 }
 
 #content .collaborators table td.total {
   text-align:center;
+}
+
+#content .collaborators form {
+  padding-top:10px;
 }
 
 #content .collaborators .field .text {
