@@ -6,6 +6,19 @@
 		<label>GOAL</label>
     <input type="text" name="grid[name]" class="goal required" value="<%= grid.name %>" />
   </div>
+
+	<div class="field">
+		<label>ACCESS</label>
+		<select name="grid[isPrivate]">
+			<% if(!grid.isPrivate){ %>
+				<option value="0" selected>Public</option>
+				<option value="1">Private</option>
+			<% }else{ %>
+				<option value="0">Public</option>
+				<option value="1" selected>Private</option>
+			<% } %>
+		</select>
+  </div>
   
   <div class="field">
 		<label>WORK UNITS</label>

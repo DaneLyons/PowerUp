@@ -111,18 +111,20 @@
 		</div>
 	</div>
 	
-	<div class="share">
-		<% var share_url = encodeURIComponent("http://powerup.io/grids/"+grid.slug) %>
+	<% if(!grid.isPrivate){ %>
+		<div class="share">
+			<% var share_url = encodeURIComponent("http://powerup.io/grids/"+grid.slug) %>
 	
-		<% var tweet = encodeURIComponent("Help me reach my goal: "+grid.name) %>
-		<a target="_blank" href="https://twitter.com/share?url=<%- share_url %>&related=powerupio&text=<%- tweet %>"><img src="/img/twitter.png"></a>
+			<% var tweet = encodeURIComponent("Help me reach my goal: "+grid.name) %>
+			<a target="_blank" href="https://twitter.com/share?url=<%- share_url %>&related=powerupio&text=<%- tweet %>"><img src="/img/twitter.png"></a>
 		
-		<% var fb_title = encodeURIComponent("Help me reach my goal: "+grid.name) %>
-		<% var fb_text = encodeURIComponent("PowerUp helps you achieve your goals by giving you simple, visual tools to track each step along the way.") %>
-		<a target="_blank" href="http://www.facebook.com/sharer.php?p[title]=<%- fb_title %>&p[summary]=<%- fb_text %>&p[url]=<%- share_url %>&p[images][0]=http%3A%2F%2Fpowerup.io%2Fimg%2Ficon_powerup.png"><img src="/img/facebook.png"></a>
+			<% var fb_title = encodeURIComponent("Help me reach my goal: "+grid.name) %>
+			<% var fb_text = encodeURIComponent("PowerUp helps you achieve your goals by giving you simple, visual tools to track each step along the way.") %>
+			<a target="_blank" href="http://www.facebook.com/sharer.php?p[title]=<%- fb_title %>&p[summary]=<%- fb_text %>&p[url]=<%- share_url %>&p[images][0]=http%3A%2F%2Fpowerup.io%2Fimg%2Ficon_powerup.png"><img src="/img/facebook.png"></a>
 
-		<a target="_blank" href="https://plus.google.com/share?url=<%- share_url %>"><img src="/img/google+.png"></a>
-	</div>
+			<a target="_blank" href="https://plus.google.com/share?url=<%- share_url %>"><img src="/img/google+.png"></a>
+		</div>
+	<% } %>
 	
 	<div class="collaborate" style="display:none">
     <form action="/grids/<%= grid.slug %>/collaborators" method="post"

@@ -58,11 +58,15 @@ exports.gridShow = function (req, res) {
     function (err, grid) {
       if (!grid) { res.redirect('/'); return; }
       
+      var collab_ids = {};
+      for(collaborator in grid.collaborators){
+        collab_ids[grid.collaborators[collaborator]._id] = true;
+      }
       if (grid.isPrivate) {
         if (!req.user) {
           res.redirect('/');
           return;
-        } else if (grid.user._id.toString() !== req.user._id.toString()) {
+        } else if (!collab_ids[req.user._id] && grid.user._id.toString() !== req.user._id.toString()) {
           res.redirect('/');
           return;
         }
@@ -178,6 +182,7 @@ exports.gridCreate = function (req, res) {
 exports.gridUpdate = function (req, res) {
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
     grid.name = req.body.grid.name;
+    grid.isPrivate = req.body.grid.isPrivate;
     var newButtons = req.body.gridButtons;
     if (typeof newButtons !== 'undefined') {
       console.log(util.inspect(newButtons, false, null));

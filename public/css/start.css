@@ -75,6 +75,7 @@ button.random {
   line-height:40px;
 }
 
+#new_grid .field select,
 #new_grid .field input {
   float:left;
   border:none;
@@ -85,6 +86,17 @@ button.random {
   padding:0 10px;
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   font-size:20px;
+}
+
+#new_grid .field select {
+  background:#fff url('/img/icons/down.png') 580px 10px no-repeat;
+  width:608px;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+  border-radius:0;
 }
 
 #new_grid .field input.prompt {
