@@ -90,7 +90,7 @@ $(function () {
       
       $("#content .legend button.powerup").click(function (ev) {
         ev.preventDefault();
-        
+        console.log("#POW EVENT TRIGGER");
         var btn = $(this);
         
         if(!btn.hasClass('disabled')){
@@ -104,7 +104,6 @@ $(function () {
             var socket = io.connect(sockHost);
             var gridId = $("#grid").data("grid-id");
             for (var i = 0; i < num; i++) {
-              //var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
               var idx = emptySquares.eq(0).data('idx');
               socket.emit('Grid.PowerUp', {
                 PowerUp: {
@@ -119,30 +118,7 @@ $(function () {
               newSquare.removeClass('inactive');
               newSquare.addClass('active');
               newSquare.addClass(color);      
-            }
-        
 
-            var gridSize = $("#grid li").length;
-            var filledLen = gridSize - emptyLen;
-            var percent = Math.floor((filledLen / gridSize) * 100);
-            if (percent === 0) { percent = 1; }
-            if (emptyLen == 0){ percent = 100; }
-            grid_progress.text(percent + '%');
-
-            var sockHost = "http://" + window.location.host;
-            var socket = io.connect(sockHost);
-            var gridId = $("#grid").data("grid-id");
-            for (var i = 0; i < num; i++) {
-              var idx = emptySquares.eq(Math.floor(Math.random() * emptySquares.length)).data('idx');
-              socket.emit('Grid.PowerUp', {
-                "PowerUp": {
-                  grid: gridId,
-                  position: idx,
-                  color: color,
-                  user: PowerUp.user
-                }
-              });
-          
               if(emptyLen != 400 && emptyLen % 40 == 0){
                 gridMilestone();
               }
