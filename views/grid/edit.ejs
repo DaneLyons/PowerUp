@@ -7,6 +7,12 @@
     <input type="text" name="grid[name]" class="goal required" value="<%= grid.name %>" />
   </div>
 
+	<div class="field textarea">
+		<label>ABOUT</label>
+		<textarea name="grid[about]"><%= grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") || "" %></textarea>
+		<div class="clear"></div>
+	</div>
+
 	<div class="field">
 		<label>ACCESS</label>
 		<select name="grid[isPrivate]">

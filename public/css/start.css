@@ -57,6 +57,10 @@ button.random {
   clear:left;
 }
 
+#new_grid {
+  padding-bottom:75px;
+}
+
 #new_grid .field {
   margin-bottom:10px;
   width:748px;
@@ -75,6 +79,7 @@ button.random {
   line-height:40px;
 }
 
+#new_grid .field textarea,
 #new_grid .field select,
 #new_grid .field input {
   float:left;
@@ -86,6 +91,15 @@ button.random {
   padding:0 10px;
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   font-size:20px;
+}
+
+#new_grid .field.textarea {
+  height:90px;
+}
+
+#new_grid .field textarea {
+  height:83px;
+  padding-top:7px;
 }
 
 #new_grid .field select {

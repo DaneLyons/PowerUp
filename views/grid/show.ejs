@@ -42,6 +42,12 @@
 
 	<div class="sections">
 		<div class="section progress"></div>
+		<% if(grid.about){ %>
+			<div class="section about" style="display:none;">
+				<h3>ABOUT THIS GRID</h3>
+				<%= grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") %>
+			</div>
+		<% } %>
 		<div class="section collaborators" style="display:none;">
 			<table>
 				<tr>
@@ -143,6 +149,9 @@
 	<div class="controls">
 		<button data-show="progress" class="stats active"><span class="icon"></span>Stats</button>
 		<button data-show="collaborators" class="users"><span class="icon"></span>Collaborators</button>
+		<% if(grid.about){ %>
+			<button data-show="about" class="about"><span class="icon"></span>About</button>
+		<% } %>
 	</div>
 </div>
 

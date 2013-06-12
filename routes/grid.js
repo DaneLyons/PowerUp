@@ -183,6 +183,7 @@ exports.gridUpdate = function (req, res) {
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
     grid.name = req.body.grid.name;
     grid.isPrivate = req.body.grid.isPrivate;
+    grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ").replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '').replace(/\"/g, "&#34;").replace(/\'/g, "&#39;");
     var newButtons = req.body.gridButtons;
     if (typeof newButtons !== 'undefined') {
       console.log(util.inspect(newButtons, false, null));

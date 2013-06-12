@@ -329,10 +329,35 @@ body {
   width:25px;
 }
 
+#content .controls button.about .icon {
+  background-position: -50px -30px;
+}
+
+#content .sections .about h3 {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size:24px;
+}
+
+#content .sections .about {
+  margin:20px;
+  padding:20px;
+  color:#000;
+  font-size:20px;
+  clear:both;
+  line-height:1.25;
+  background:#fff;
+  position:relative;
+  top:20px;
+  overflow-y:auto;
+}
+
 #content .collaborators {
-  padding:5px;
+  margin:20px;
+  padding:20px;
   clear:both;
   position:relative;
+  background:#fff;
+  top:20px;
   overflow-y:auto;
 }
 
@@ -343,7 +368,7 @@ body {
 }
 
 #content .collaborators table tr {
-  border-bottom:1px solid rgba(255,255,255,.15);
+  border-bottom:1px solid rgba(0,0,0,.05);
 }
 
 #content .collaborators table td {
@@ -382,7 +407,7 @@ body {
 #content .collaborators .field .text {
   float: left;
   border: none;
-  background: #fff;
+  background: #eee;
   color:#444;
   width: 180px;
   height: 40px;

@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
   
 var gridSchema = new Schema({
   name: String,
+  about: String,
   workUnit: String,
   stats: {
     powerUps: Number

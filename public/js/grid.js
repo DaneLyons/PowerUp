@@ -23,8 +23,11 @@ $(function () {
       var content = $('#content');
       content.css({width:content_width,height:content_height});
       
-      var collab_height = content_height-250;
+      var collab_height = content_height-300;
       $('#content .collaborators').css({height:collab_height});
+      
+      var collab_height = content_height-300;
+      $('#content .sections .about').css({height:collab_height});
 
       var grid = $('#grid');
       var grid_progress = $('#content .progress span');
