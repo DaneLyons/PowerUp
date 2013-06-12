@@ -9,7 +9,11 @@
 
 	<div class="field textarea">
 		<label>ABOUT</label>
-		<textarea name="grid[about]"><%= grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") || "" %></textarea>
+		<% var about_text = "" %>
+		<% if(grid.about){ %>
+			<% about_text = grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") %>
+		<% } %>
+		<textarea name="grid[about]"><%= about_text %></textarea>
 		<div class="clear"></div>
 	</div>
 
