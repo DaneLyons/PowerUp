@@ -11,6 +11,7 @@ var useCases = [
   { goal:"Game Leaderboard", units:["John Wins","Sarah Wins","Tie"] },
   { goal:"Save Money", units:["Cheap Dinner","Purchased Discount Item","Put $15 in Savings"] },
   { goal:"Become More Creative", units:["Documented Idea","Read: 30 Minutes","Art Project: 15 Minutes"] },
+  { goal:"Learn a Language", units:["Study: 10 Mins","Listen: 10 Mins","Speak: 10 Mins"] },
   { goal:"Be More Informed", units:["Read News: 15 Minutes","Study: 15 Minutes","Talk to Representative"] }
 ]
 
