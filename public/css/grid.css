@@ -98,24 +98,24 @@ body {
 }
 
 #content .legend .black {
-  background:rgba(0,0,0,.75);
+  background:rgba(57,57,57,1);
 }
 #content .legend .black:hover {
-  background:rgba(0,0,0,1);
+  background:rgba(50,50,50,1);
 }
 
 #content .legend .red {
-  background:rgba(111,11,11,.75);
+  background:rgba(203,0,0,.85);
 }
 #content .legend .red:hover {
-  background:rgba(111,11,11,1);
+  background:rgba(203,0,0,1);
 }
 
 #content .legend .blue {
-  background:rgba(22,76,124,.75);
+  background:rgba(6,146,192,.85);
 }
 #content .legend .blue:hover {
-  background:rgba(22,76,124,1);
+  background:rgba(6,146,192,1);
 }
 
 #content .legend .green {
@@ -189,18 +189,18 @@ body {
 }
 
 #grid li.active div {
-  background:rgba(0,0,0,.75);
+  background:rgba(57,57,57,1);
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
 #grid li.red div {
-  background:rgba(111,11,11,.75);
+  background:rgba(203,0,0,1);
 }
 
 #grid li.blue div {
-  background:rgba(22,76,124,.75);
+  background:rgba(6,146,192,1);
 }
 
 #grid li.green div {
