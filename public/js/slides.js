@@ -6,7 +6,7 @@ var useCases = [
   { goal:"Get Stronger", units:["Weights: 10 Reps","Cardio: 5 Minutes","Sports: 30 Minutes"] },
   { goal:"Become a Better Programmer", units:["Code: 15 Minutes","Study: 15 Minutes","Write Blog Post"] },
   { goal:"Learn to Play Guitar", units:["Play: 15 Minutes","Study: 15 Minutes","Write Lyrics"] },
-  { goal:"Become a Blogger", units:["Write Blog Post","Write Comment","Read Blog Post"] },
+  { goal:"Blog More", units:["Write a Comment","Write a Post","Guest Blog"] },
   { goal:"Allowance Grid", units:["Clean Room","Do Dishes","Take out Trash"] },
   { goal:"Game Leaderboard", units:["John Wins","Sarah Wins","Tie"] },
   { goal:"Save Money", units:["Cheap Dinner","Purchased Discount Item","Put $15 in Savings"] },
