@@ -154,6 +154,7 @@ body {
 
 #grid li {
   position:relative;
+  overflow: hidden;
   z-index:2;
 }
 
@@ -193,6 +194,27 @@ body {
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  position: relative;
+}
+
+#grid li.active.extra {
+  cursor: pointer;
+}
+
+#grid li.active.extra .highlight {
+  background: #ec2;
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  -webkit-transition:all linear 0ms;
+  -moz-transition:all linear 0ms;
+  transition:all linear 0ms;
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+  z-index: 10;
 }
 
 #grid li.red div {
