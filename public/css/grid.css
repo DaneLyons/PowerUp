@@ -176,10 +176,11 @@ body {
   float:left;
 }
 
-#grid li div {
+#grid li .square {
   width:90%;
   height:90%;
   margin:5%;
+  overflow: hidden;
   background:rgba(0,0,0,.15);
   -webkit-transition:all linear 400ms;
   -webkit-transform: rotateY(360deg);
@@ -189,7 +190,7 @@ body {
   transform: rotateY(360deg);
 }
 
-#grid li.active div {
+#grid li.active .square {
   background:rgba(57,57,57,1);
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
@@ -197,17 +198,18 @@ body {
   position: relative;
 }
 
-#grid li.active.extra {
+#grid li.active {
   cursor: pointer;
 }
 
-#grid li.active.extra .highlight {
+#grid li.active .square .meta {
   background: #ec2;
   width: 60%;
   height: 60%;
-  position: absolute;
-  top: -7px;
-  right: -7px;
+  margin:5%;
+  position: relative;
+  bottom: 7px;
+  right: 7px;
   -webkit-transition:all linear 0ms;
   -moz-transition:all linear 0ms;
   transition:all linear 0ms;
@@ -217,16 +219,16 @@ body {
   z-index: 10;
 }
 
-#grid li.red div {
+#grid li.red .square {
   background:rgba(203,0,0,1);
 }
 
-#grid li.blue div {
+#grid li.blue .square {
   background:rgba(6,146,192,1);
 }
 
-#grid li.green div {
-  background:rgba(0,45,0,.75);
+#grid li.green .square {
+  background:rgba(0,45,0,1);
 }
 
 #milestone {
