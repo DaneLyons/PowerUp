@@ -7,7 +7,13 @@ var powerUpSchema = new Schema({
   position: Number,
   color: String,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' },
-  user: { type: Schema.ObjectId, ref: 'User' }
+  user: { type: Schema.ObjectId, ref: 'User' },
+  metadata: [
+    {
+      mimetype: { type: String, default: "text/plain" },
+      content: String
+    }
+  ]
 }, {
   safe: true
 });
