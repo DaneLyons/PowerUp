@@ -1,5 +1,3 @@
-if (!PowerUp) { var PowerUp = {}; }
-
 $(function () {
   PowerUp.GridMaster = {
     initializeGrid: function (opts) {
@@ -41,9 +39,6 @@ $(function () {
       for(var i=0;i<legend_buttons.length;i++){
         $('#content .legend button:eq('+i+')').css({width:legend_width});
       }
-      
-      legend_buttons.click(function(){
-      });
     }, 
     gridMilestone: function gridMilestone(){
       var grid = $('#grid');
@@ -153,12 +148,4 @@ $(function () {
     }
   });
   
-  $("#content .controls button").click(function(ev){
-    $("#content .controls button").removeClass('active');
-    $(this).addClass('active');
-    
-    var section = $(this).data('show');
-    $(".sections .section").hide();
-    $(".sections ."+section).show();
-  });
 });
