@@ -6,38 +6,12 @@ $(function () {
           PowerUp[prop] = opts[prop];
         }
       }
-      
-      var window_height = $(window).height();
-      var window_width = $(window).width();
-      $('#page').css({height:window_height});
-
-      var grid_size = window_height-155;
-      if((grid_size+40)>(window_width/2)){
-        grid_size = (window_width/2)-40;
-      }
-
-      var content_width = window_width-grid_size-60;
-      var content_height = window_height-155;
-      var content = $('#content');
-      content.css({width:content_width,height:content_height});
-      
-      var collab_height = content_height-300;
-      $('#content .collaborators').css({height:collab_height});
-      
-      var collab_height = content_height-300;
-      $('#content .sections .about').css({height:collab_height});
 
       var grid = $('#grid');
       var grid_progress = $('#content .progress span');
-      grid.css({ width: grid_size, height: grid_size}); 
+      
       for(var i=0;i<400;i++){
         grid.append($('<li class="inactive" data-idx="'+i+'"><div></div></li>'));
-      }
-      
-      var legend_buttons = $('#content .legend button');
-      var legend_width = content_width/legend_buttons.length;
-      for(var i=0;i<legend_buttons.length;i++){
-        $('#content .legend button:eq('+i+')').css({width:legend_width});
       }
     }, 
     gridMilestone: function gridMilestone(){

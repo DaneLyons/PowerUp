@@ -173,7 +173,7 @@
       GridContentView = PowerUp.Views.GridContentView;
     
     var grid = new Grid(JSON.parse('<%- JSON.stringify(grid) %>'));
-    new GridView({
+    grid.view = new GridView({
       el: $("#grid"),
       model: grid
     });
@@ -182,6 +182,7 @@
       el: $("#content"),
       model: grid
     });
+    
     PowerUp.GridMaster.initializeGrid(params);
     PowerUp.GridMaster.populateGrid(JSON.parse('<%- JSON.stringify(grid) %>'));
   });
