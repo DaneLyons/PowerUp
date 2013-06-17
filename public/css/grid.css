@@ -493,3 +493,9 @@ body {
   background: #cb0000;
   color:#fff;
 }
+
+#content .metadata.section label[for="metadata"] {
+  display: block;
+  clear: both;
+  font-size: 20px;
+}

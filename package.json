@@ -35,6 +35,7 @@
     "q": "0.9.x",
     "i": "latest",
     "stripe": "latest",
-    "nodetime": "latest"
+    "nodetime": "latest",
+    "markdown": "latest"
   }
 }

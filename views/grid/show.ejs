@@ -121,6 +121,14 @@
   	    </form>
       <% } %>
 		</div>
+		<div class="metadata section" style="display:none;">
+		  <form action="" method="post">
+		    <label for="metadata">Add context (markdown is allowed!)</label>
+		    <div class="input">
+		      <textarea name="metadata" class="metadata"></textarea>
+		    </div>
+		    <button type="submit" class="submit button">Add context</button>
+		</div>
 	</div>
 	
 	<% if(!grid.isPrivate){ %>
