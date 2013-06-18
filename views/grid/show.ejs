@@ -1,6 +1,12 @@
 <% include ../partials/head.ejs %>
 
-<ul id="grid" class="large" data-grid-id="<%- grid._id %>"></ul>
+<ul id="grid" class="large" data-grid-id="<%- grid._id %>">
+  <% for (var i = 0; i < 400; i++) { %>
+    <li class="inactive">
+      <div class="square"></div>
+    </li>
+  <% } %>
+</ul>
 
 <div id="content">
 	<div class="heading">
@@ -31,7 +37,7 @@
 	<div class="legend">
 	  <% var colors = ['black', 'blue', 'red']; %>
 	  <% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-			<button class="powerup <%= colors[i] %> <%= gridClass %>" data-powerup-num="<%= grid.gridButtons[i].increment %>" data-color="<%= colors[i] %>">
+			<button class="powerup <%= colors[i] %> <%= gridClass %>" data-color="<%= colors[i] %>">
 				<% if (gridOwner || gridCollaborator) { %>
 					<span class="plus"></span>
 				<% } %>

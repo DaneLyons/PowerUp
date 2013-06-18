@@ -6,13 +6,6 @@ $(function () {
           PowerUp[prop] = opts[prop];
         }
       }
-
-      var grid = $('#grid');
-      var grid_progress = $('#content .progress span');
-      
-      for(var i=0;i<400;i++){
-        grid.append($('<li class="inactive" data-idx="'+i+'"><div></div></li>'));
-      }
     }, 
     gridMilestone: function gridMilestone(){
       var grid = $('#grid');
@@ -65,7 +58,6 @@ $(function () {
         var btn = $(this);
         
         if(!btn.hasClass('disabled')){
-          var num = btn.data('powerup-num');
           var color = btn.data('color');
           var emptySquares = $("ul#grid li.inactive");
           var emptyLen = emptySquares.length;
@@ -74,25 +66,23 @@ $(function () {
             var sockHost = window.location.protocol + "//" + window.location.host;
             var socket = io.connect(sockHost);
             var gridId = $("#grid").data("grid-id");
-            for (var i = 0; i < num; i++) {
-              var idx = emptySquares.eq(0).data('idx');
-              socket.emit('Grid.PowerUp', {
-                PowerUp: {
-                  grid: gridId,
-                  position: idx,
-                  color:color,
-                  user: PowerUp.user
-                }
-              });
-          
-              var newSquare = $("ul#grid li:eq("+idx+")");
-              newSquare.removeClass('inactive');
-              newSquare.addClass('active');
-              newSquare.addClass(color);      
-
-              if(emptyLen != 400 && emptyLen % 40 == 0){
-                gridMilestone();
+            var idx = emptySquares.eq(0).data('idx');
+            socket.emit('Grid.PowerUp', {
+              PowerUp: {
+                grid: gridId,
+                position: idx,
+                color:color,
+                user: PowerUp.user
               }
+            });
+        
+            var newSquare = $("ul#grid li:eq("+idx+")");
+            newSquare.removeClass('inactive');
+            newSquare.addClass('active');
+            newSquare.addClass(color);      
+
+            if(emptyLen != 400 && emptyLen % 40 == 0){
+              gridMilestone();
             }
           }
         } 

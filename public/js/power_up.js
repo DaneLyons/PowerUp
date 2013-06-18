@@ -7,7 +7,10 @@ var PowerUp = {
 (function () {
   PowerUp.Models.User = Backbone.Model.extend({});
   
-  PowerUp.Models.PowerUp = Backbone.Model.extend({});
+  PowerUp.Models.PowerUp = Backbone.Model.extend({
+    idx: null 
+  });
+  
   PowerUp.Collections.PowerUps = Backbone.Collection.extend({
     model: PowerUp.Models.PowerUp
   });
@@ -15,6 +18,11 @@ var PowerUp = {
   PowerUp.Models.Grid = Backbone.Model.extend({
     initialize: function () {
       this.powerUps = new Backbone.Collection(this.powerUps);
+      for (var i = 0; i < 400; i++) {
+        console.log(i);
+        var powerUp = new PowerUp.Models.PowerUp({ idx: i });
+        powerUp.view = new PowerUp.Views.PowerUpView({ model: powerUp });
+      }
       return this;
     }
   });
@@ -56,10 +64,12 @@ var PowerUp = {
         this.$('.legend button:eq(' + i + ')').css({ width: legend_width });
       }
     },
+  
     events: {
       "click .controls button": "showSection",
       "click .collaborate .expand.button": "expandCollaborators"
     },
+  
     showSection: function showSection(ev) {
       var target = $(ev.currentTarget);
       this.$(".controls button").removeClass('active');
@@ -69,6 +79,7 @@ var PowerUp = {
       $(".sections .section").hide();
       $(".sections ."+section).show();
     },
+  
     expandCollaborators: function expandCollaborators(ev) {
       ev.preventDefault();
       if (isExpanded) {
