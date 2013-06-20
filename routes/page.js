@@ -110,6 +110,14 @@ exports.bandNames = function (req, res) {
   });
 }
 
+exports.fiften = function (req, res) {
+  res.render("page/fiften.ejs", {
+    "title":"FIFTEN - Game to improve your mental fortitude.",
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
+  });
+}
+
 exports.start = function (req, res) {
   var userParams = req.body.user,
     gridParams = req.body.grid,
