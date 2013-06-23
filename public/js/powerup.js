@@ -23,6 +23,7 @@ var PowerUp = {
           el: $("#grid li:eq(" + i + ")"),
           model: powerUp
         });
+        powerUp.view.setPowerUp(i);
       }
       return this;
     }
@@ -169,18 +170,16 @@ var PowerUp = {
     initialize: function () {
       this.el = "ul#grid li:eq(" + this.model.idx + ")";
       this.listenTo(this.model, 'change', this.render);
-      this.setPowerUp();
     },
     render: function () {
       this.$el.html(this.template(this.model.attributes));
     },
-    setPowerUp: function () {
+    setPowerUp: function (i) {
       var view = this;
-      var idx = this.model.idx;
       var grid_progress = $('#grid #content .progress');
       
       setTimeout(function () {
-        var percent = Math.floor((idx / grid.size) * 100);
+        var percent = Math.floor((i / grid.size) * 100);
         grid_progress.text(percent + '%');
         
         view.$el.removeClass('inactive');
@@ -189,7 +188,7 @@ var PowerUp = {
         if (view.model.attributes.color) {
           view.$el.addClass(view.model.attributes.color);
         }
-      }, (idx + 1) * 25)
+      }, (i + 1) * 25)
     }
   });
 })();
