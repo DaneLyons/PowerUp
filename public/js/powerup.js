@@ -5,11 +5,9 @@ var PowerUp = {
 };
 
 (function () {
-  PowerUp.Models.User = Backbone.Model.extend({});
+  PowerUp.Models.User = Backbone.Model.extend({ });
   
-  PowerUp.Models.PowerUp = Backbone.Model.extend({
-    idx: null 
-  });
+  PowerUp.Models.PowerUp = Backbone.Model.extend({ });
   
   PowerUp.Collections.PowerUps = Backbone.Collection.extend({
     model: PowerUp.Models.PowerUp
@@ -17,12 +15,13 @@ var PowerUp = {
   
   PowerUp.Models.Grid = Backbone.Model.extend({
     initialize: function () {
-      this.powerUps = new Backbone.Collection(this.powerUps);
-      for (var i = 0; i < 400; i++) {
+      console.log(this.attributes);
+      for (var i = 0; i < this.attributes.powerUps.length; i++) {
         console.log(i);
-        var powerUp = new PowerUp.Models.PowerUp({ idx: i });
+        var powerUp = new PowerUp.Models.PowerUp(this.attributes.powerUps[i]);
         powerUp.view = new PowerUp.Views.PowerUpView({
-          el: $("#grid li:eq(" + i + ")")
+          el: $("#grid li:eq(" + i + ")"),
+          model: powerUp
         });
       }
       return this;
@@ -138,6 +137,33 @@ var PowerUp = {
   });
   
   PowerUp.Views.PowerUpView = Backbone.View.extend({
-    
+    template: _.template('<li class="inactive">\
+      <div class="square"></div>\
+    </li>'),
+    initialize: function () {
+      this.el = "ul#grid li:eq(" + this.model.idx + ")";
+      this.listenTo(this.model, 'change', this.render);
+      this.setPowerUp();
+    },
+    render: function () {
+      this.$el.html(this.template(this.model.attributes));
+    },
+    setPowerUp: function () {
+      var view = this;
+      var idx = this.model.idx;
+      var grid_progress = $('#grid #content .progress');
+      
+      setTimeout(function () {
+        var percent = Math.floor((idx / grid.size) * 100);
+        grid_progress.text(percent + '%');
+        
+        view.$el.removeClass('inactive');
+        view.$el.addClass('active');
+        console.log(view.model);
+        if (view.model.attributes.color) {
+          view.$el.addClass(view.model.attributes.color);
+        }
+      }, (idx + 1) * 25)
+    }
   });
 })();

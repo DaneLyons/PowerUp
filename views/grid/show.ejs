@@ -167,13 +167,6 @@
 <script type="text/javascript" src="/js/powerup.js"></script>
 <script type="text/javascript">
   $(function () {
-    grid = JSON.parse('<%- JSON.stringify(grid) %>');
-    
-    var params = {};
-    <% if (currentUser) { %>
-      params.user = "<%- currentUser._id %>";
-    <% } %>
-    
     var Grid = PowerUp.Models.Grid,
       GridView = PowerUp.Views.GridView,
       GridContentView = PowerUp.Views.GridContentView;
@@ -188,8 +181,5 @@
       el: $("#content"),
       model: grid
     });
-    
-    PowerUp.GridMaster.initializeGrid(params);
-    PowerUp.GridMaster.populateGrid(JSON.parse('<%- JSON.stringify(grid) %>'));
   });
 </script>

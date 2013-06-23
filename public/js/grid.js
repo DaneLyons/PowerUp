@@ -34,36 +34,7 @@ $(function () {
             });
         }, 5000);
       });
-    },
-    populateGrid: function (grid) {
-      var powerUpCount = grid.powerUps.length;
-      var gridSize = grid.size;
-      var gridElem = $("#grid");
-      var grid_progress = $('#content .progress');
-      
-      function setPowerUp(i) {
-        pos_arr.push(grid.powerUps[i].position);
-        setTimeout(function(){
-          var percent = Math.floor((i / grid.size) * 100);
-          grid_progress.text(percent + '%');
-          var rand_square = grid.powerUps[i].position;
-          var sq = gridElem.find('li:eq('+rand_square+')');
-          sq.removeClass('inactive');
-          sq.addClass('active');
-          if(grid.powerUps[i].color){
-            sq.addClass(grid.powerUps[i].color);
-          }
-        }, (i + 1) * 25)
-      }
-      
-      var pos_arr = [];
-      for(var i = 0; i < grid.powerUps.length; i++) {
-        setPowerUp(i);
-      }
-      
-      $("#content .legend button.powerup").click(function (ev) {
-        
-      });
     }
+ 
   }
 });
