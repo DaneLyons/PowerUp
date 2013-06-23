@@ -156,7 +156,17 @@
 </div>
 
 <% if(gridOwner && grid.powerUps.length == 0 && gridCount == 1){ %>
-	
+	<div id="demo_screen"></div>
+	<ul id="demo">
+		<li>
+			<h1>GRID INTRO</h1>
+			<p>Grids are a way to track your projects. The squares on the left are called PowerUps. Every time you complete a small task click the corresponding button on the right. A PowerUp will light up in your Grid.</p>
+			<p>Use PowerUp grids whenever you start a new project. Good luck!</p>
+			<div class="center">
+				<button>Try it!</button>
+			</div>
+		</li>
+	</ul>
 <% } %>
 
 <% include ../partials/footer.ejs %>

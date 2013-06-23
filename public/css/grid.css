@@ -422,10 +422,50 @@ body {
   text-transform: uppercase;
   font-size: 18px;
   color: #fff;
-  background: rgba(111,11,11,.75);
+  background:#cb0000;
   display: block;
   padding: 11px 20px;
   text-align: center;
   float:left;
   margin:5px 0 0 0;
+}
+
+#demo_screen {
+  position:absolute;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.5);
+  z-index:9999;
+}
+
+#demo {
+  width:600px;
+  padding:20px;
+  background:#fff;
+  color:#444;
+  position:absolute;
+  position:fixed;
+  top:100px;
+  left:50%;
+  margin-left:-320px;
+  z-index:10000;
+}
+
+#demo p {
+  font-size:18px;
+  line-height:1.2;
+  padding:7px 0;
+}
+
+#demo .center {
+  padding-top:25px;
+}
+
+#demo button {
+  padding:20px 50px;
+  background: #cb0000;
+  color:#fff;
 }
