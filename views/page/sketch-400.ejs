@@ -1,10 +1,26 @@
 <% include ../partials/head.ejs %>
+<style>
+	body {
+		background-image:url('/img/bg_sketch.jpg');
+	}
+	
+	#attribution {
+		position:absolute;
+		bottom:50px;
+		right:15px;
+		color:#777;
+	}
+</style>
 
 <div id="sidebar">
 	<h1>CREATE 400 SKETCHES CHALLENGE</h1>
 	<p>PowerUp is a personal analytics tool. Join the sketches challenge and track your progress.</p>
 	
 	<% include ../partials/grid_landing_page.ejs %>
+</div>
+
+<div id="attribution">
+	Photo by <a href="http://www.flickr.com/photos/dgoomany/">Dineshraj Goomany</a>
 </div>
 
 <% include ../partials/footer.ejs %>
