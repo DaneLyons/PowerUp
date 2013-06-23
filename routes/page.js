@@ -185,7 +185,7 @@ exports.start = function (req, res) {
   }
 
   if (userParams) {
-    User.findOrCreate(userParams, function (err, user) {
+    User.findOrCreate({ email: userParams.email }, function (err, user) {
       if (err) {
         console.error("ERR " + err);
       }
