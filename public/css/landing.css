@@ -1,0 +1,41 @@
+.clear,
+.hidden {
+	display:none;
+}
+
+.field {
+  margin-bottom: 10px;
+  width: 510px;
+  height: 40px;
+  position: relative;
+}
+
+.field input {
+  float: left;
+  border: none;
+  background: #fff;
+  color:#333;
+  width: 350px;
+  height: 40px;
+  margin: 0;
+  padding: 0 10px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size: 20px;
+}
+
+.field label {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  float: left;
+  padding-right: 10px;
+  width: 126px;
+  height: 40px;
+  background:rgba(255,255,255,.9);
+  background: url('/img/bg_2.png');
+  color:#333;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+#sidebar form label {
+  padding-top:0;
+}

@@ -1,0 +1,47 @@
+<form action="/start" method="post" id="new_grid">
+	
+	<div class="hidden">
+		<h2>What do you want to accomplish?</h2>
+	  <div class="field">
+			<div class="actions">
+				<button class="random" type="button"><img src="/img/icons/random.png" /></button>
+			</div>
+		
+			<label>GOAL</label>
+	    <input type="text" name="grid[name]" class="goal required" value="Lose Weight" />
+	  </div>
+
+		<div class="field textarea">
+			<label>ABOUT</label>
+			<textarea class="about" name="grid[about]"></textarea>
+			<div class="clear"></div>
+		</div>
+  
+	  <div class="field">
+			<label>WORK UNITS</label>
+	    <input type="text" name="workUnit[]" value="10 Push-Ups" class="small work_unit required" />
+			<input type="text" name="workUnit[]" class="small work_unit" value="20 Sit-Ups" />
+			<input type="text" name="workUnit[]" class="small last work_unit" value="Run 10 Minutes" />
+	  </div>
+  </div>
+
+  <% if (typeof currentUser === 'undefined') { %>
+    <div class="field">
+			<label>EMAIL</label>
+      <input type="text" name="user[email]" class="required" />
+    </div>
+
+    <div class="field">
+			<label>PASSWORD</label>
+      <input type="password" name="user[password]" class="required" />
+    </div>
+  <% } %>
+  
+	<div class="center">
+		<button type="submit" class="submit">
+			<img src="/img/icon_white.png" width="30" height="26" />
+			GET STARTED
+		</button>
+	</div>
+	<button class="clear">Clear</button>
+</form>

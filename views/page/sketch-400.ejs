@@ -1,0 +1,18 @@
+<% include ../partials/head.ejs %>
+
+<div id="sidebar">
+	<h1>CREATE 400 SKETCHES CHALLENGE</h1>
+	<p>PowerUp is a personal analytics tool. Join the sketches challenge and track your progress.</p>
+	
+	<% include ../partials/grid_landing_page.ejs %>
+</div>
+
+<% include ../partials/footer.ejs %>
+
+<script>
+  $('input.goal').val('Create 400 Sketches');
+	$('textarea.about').val('Colors are used to represent how many sketches you&#39;ve created in a given day. For the first 3 sketches, click the black button. For sketches 4-10 choose the blue button. The red button is for sketches 11+.');
+  $('input.work_unit:eq(0)').val('Create 1 Sketch');
+  $('input.work_unit:eq(1)').val('Create 1 Sketch');
+  $('input.work_unit:eq(2)').val('Create 1 Sketch');
+</script>

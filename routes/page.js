@@ -126,6 +126,22 @@ exports.fiftenTrack = function (req, res) {
   });
 }
 
+exports.run400 = function (req, res) {
+  res.render("page/run-400.ejs", {
+    "title":"Run 400 Miles Using PowerUp",
+    "stylesheets":["home","landing"],
+    "javascripts":["home"]
+  });
+}
+
+exports.sketch400 = function (req, res) {
+  res.render("page/sketch-400.ejs", {
+    "title":"Create 400 Sketches Using PowerUp",
+    "stylesheets": ["home","landing"],
+    "javascripts": ["home"]
+  });
+}
+
 exports.start = function (req, res) {
   var userParams = req.body.user,
     gridParams = req.body.grid,
