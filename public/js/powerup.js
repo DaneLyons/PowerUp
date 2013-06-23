@@ -20,7 +20,7 @@ var PowerUp = {
         console.log(i);
         var powerUp = new PowerUp.Models.PowerUp(this.attributes.powerUps[i]);
         powerUp.view = new PowerUp.Views.PowerUpView({
-          el: $("#grid li:eq(" + i + ")"),
+          el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
           model: powerUp
         });
         powerUp.view.setPowerUp(i);
