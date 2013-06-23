@@ -41,9 +41,6 @@ var PowerUp = {
         this.size = (window_width / 2) - 40;
       }
       this.$el.css({ width: this.size, height: this.size}); 
-    },
-    getNextSquare: function () {
-      
     }
   });
   
@@ -103,6 +100,7 @@ var PowerUp = {
     addPowerUp: function (ev) {
       ev.preventDefault();
       var btn = $(ev.currentTarget);
+      var gridContentView = this;
       
       if (!btn.hasClass('disabled')) {
         var color = btn.data('color');
@@ -128,11 +126,39 @@ var PowerUp = {
           newSquare.addClass('active');
           newSquare.addClass(color);      
 
-          if(emptyLen != 400 && emptyLen % 40 == 0){
-            gridMilestone();
+          if (emptyLen != 400 && emptyLen % 40 == 0){
+            gridContentView.gridMilestone();
           }
         }
       }
+    },
+    gridMilestone: function () {
+      var grid = $('#grid');
+      var grid_pos = grid.offset();
+      var grid_width = grid.width();
+      var grid_height = grid.height();
+      var percent_complete = $('.progress').text();
+      var milestone = $('<div id="milestone">\
+        <h1>'+percent_complete+' complete!</h1>\
+        <h2><img src="/img/icon_white.png" /></h2>\
+      </div>');
+      $('body').append(milestone);
+      
+      milestone.css({
+        left: grid_pos.left,
+        width: grid_width,
+        height: (grid_height / 4)
+      });
+      milestone.animate({ 
+        top: (grid_pos.top+(grid_height/3)) 
+      }, 1000, "easeOutBounce",
+        function () {
+          setTimeout(function(){
+            milestone.animate({opacity:0},1000,function(){
+              milestone.remove();
+            });
+        }, 5000);
+      });
     }
   });
   
