@@ -30,7 +30,7 @@ $(function () {
       $('#content .sections .about').css({height:collab_height});
 
       var grid = $('#grid');
-      var grid_progress = $('#content .progress span');
+      var grid_progress = $('#content .progress');
       grid.css({ width: grid_size, height: grid_size}); 
       for(var i=0;i<400;i++){
         grid.append($('<li class="inactive" data-idx="'+i+'"><div></div></li>'));
@@ -70,6 +70,7 @@ $(function () {
       var gridSize = grid.size;
       var gridElem = $("#grid");
       var grid_progress = $('#content .progress');
+      grid_progress.text('0%');
       
       function setPowerUp(i) {
         pos_arr.push(grid.powerUps[i].position);
@@ -119,7 +120,11 @@ $(function () {
               var newSquare = $("ul#grid li:eq("+idx+")");
               newSquare.removeClass('inactive');
               newSquare.addClass('active');
-              newSquare.addClass(color);      
+              newSquare.addClass(color);
+              
+              var grid_progress = $('#content .progress');
+              var percent = Math.floor(((grid.size - emptyLen) / grid.size) * 100);
+              grid_progress.text(percent + '%');
 
               if(emptyLen != 400 && emptyLen % 40 == 0){
                 gridMilestone();
