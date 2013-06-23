@@ -18,13 +18,21 @@ $(function () {
         <h2><img src="/img/icon_white.png" /></h2>\
       </div>');
       $('body').append(milestone);
-      milestone.css({left:grid_pos.left,width:grid_width,height:(grid_height/4)});
-      milestone.animate({top:(grid_pos.top+(grid_height/3))},1000,"easeOutBounce",function(){
-        setTimeout(function(){
-          milestone.animate({opacity:0},1000,function(){
-            milestone.remove();
-          });
-        },5000)
+      
+      milestone.css({
+        left: grid_pos.left,
+        width: grid_width,
+        height: (grid_height / 4)
+      });
+      milestone.animate({ 
+        top: (grid_pos.top+(grid_height/3)) 
+      }, 1000, "easeOutBounce",
+        function () {
+          setTimeout(function(){
+            milestone.animate({opacity:0},1000,function(){
+              milestone.remove();
+            });
+        }, 5000);
       });
     },
     populateGrid: function (grid) {
@@ -54,38 +62,7 @@ $(function () {
       }
       
       $("#content .legend button.powerup").click(function (ev) {
-        ev.preventDefault();
-        var btn = $(this);
         
-        if(!btn.hasClass('disabled')){
-          var color = btn.data('color');
-          var emptySquares = $("ul#grid li.inactive");
-          var emptyLen = emptySquares.length;
-          
-          if (emptyLen > 0) {
-            var sockHost = window.location.protocol + "//" + window.location.host;
-            var socket = io.connect(sockHost);
-            var gridId = $("#grid").data("grid-id");
-            var idx = emptySquares.eq(0).data('idx');
-            socket.emit('Grid.PowerUp', {
-              PowerUp: {
-                grid: gridId,
-                position: idx,
-                color:color,
-                user: PowerUp.user
-              }
-            });
-        
-            var newSquare = $("ul#grid li:eq("+idx+")");
-            newSquare.removeClass('inactive');
-            newSquare.addClass('active');
-            newSquare.addClass(color);      
-
-            if(emptyLen != 400 && emptyLen % 40 == 0){
-              gridMilestone();
-            }
-          }
-        } 
       });
     }
   }

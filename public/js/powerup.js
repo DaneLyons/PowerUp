@@ -21,7 +21,9 @@ var PowerUp = {
       for (var i = 0; i < 400; i++) {
         console.log(i);
         var powerUp = new PowerUp.Models.PowerUp({ idx: i });
-        powerUp.view = new PowerUp.Views.PowerUpView({ model: powerUp });
+        powerUp.view = new PowerUp.Views.PowerUpView({
+          el: $("#grid li:eq(" + i + ")")
+        });
       }
       return this;
     }
@@ -40,6 +42,9 @@ var PowerUp = {
         this.size = (window_width / 2) - 40;
       }
       this.$el.css({ width: this.size, height: this.size}); 
+    },
+    getNextSquare: function () {
+      
     }
   });
   
@@ -67,7 +72,8 @@ var PowerUp = {
   
     events: {
       "click .controls button": "showSection",
-      "click .collaborate .expand.button": "expandCollaborators"
+      "click .collaborate .expand.button": "expandCollaborators",
+      "click .legend button.powerup": "addPowerUp"
     },
   
     showSection: function showSection(ev) {
@@ -94,6 +100,44 @@ var PowerUp = {
 
         this.isExpanded = true;
       }
+    },
+    addPowerUp: function (ev) {
+      ev.preventDefault();
+      var btn = $(ev.currentTarget);
+      
+      if (!btn.hasClass('disabled')) {
+        var color = btn.data('color');
+        var emptySquares = $("ul#grid li.inactive");
+        var emptyLen = emptySquares.length;
+        
+        if (emptyLen > 0) {
+          var sockHost = window.location.protocol + "//" + window.location.host;
+          var socket = io.connect(sockHost);
+          var gridId = $("#grid").data("grid-id");
+          var idx = emptySquares.eq(0).data('idx');
+          socket.emit('Grid.PowerUp', {
+            PowerUp: {
+              grid: gridId,
+              position: idx,
+              color:color,
+              user: PowerUp.user
+            }
+          });
+      
+          var newSquare = $("ul#grid li:eq("+idx+")");
+          newSquare.removeClass('inactive');
+          newSquare.addClass('active');
+          newSquare.addClass(color);      
+
+          if(emptyLen != 400 && emptyLen % 40 == 0){
+            gridMilestone();
+          }
+        }
+      }
     }
+  });
+  
+  PowerUp.Views.PowerUpView = Backbone.View.extend({
+    
   });
 })();
