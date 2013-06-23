@@ -116,6 +116,7 @@ exports.gridShow = function (req, res) {
                     collaborators: collaborators,
                     names: names,
                     invites: invites,
+                    gridCount: user.grids.length,
                     "stylesheets":["grid"]
                   });
                 }
