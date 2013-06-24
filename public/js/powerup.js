@@ -113,16 +113,16 @@ var PowerUp = {
           var sockHost = window.location.protocol + "//" + window.location.host;
           var socket = io.connect(sockHost);
           var gridId = $("#grid").data("grid-id");
-          var idx = emptySquares.eq(0).data('idx');
+          var idx = emptySquares.eq(0).index();
           socket.emit('Grid.PowerUp', {
             PowerUp: {
               grid: gridId,
               position: idx,
-              color:color,
+              color: color,
               user: PowerUp.user
             }
           });
-      
+          console.log(idx);
           var newSquare = $("ul#grid li:eq("+idx+")");
           newSquare.removeClass('inactive');
           newSquare.addClass('active');
@@ -169,7 +169,6 @@ var PowerUp = {
       <div class="square"></div>\
     </li>'),
     initialize: function () {
-      console.log(this);
       this.el = "ul#grid li:eq(" + this.options.model.attributes.position + ")";
       this.listenTo(this.model, 'change', this.render);
     },
@@ -178,15 +177,14 @@ var PowerUp = {
     },
     setPowerUp: function (i) {
       var view = this;
-      var grid_progress = $('#grid #content .progress');
-      
+      var grid_progress = $('#content .progress');
+
       setTimeout(function () {
-        var percent = Math.floor((i / this.grid.attributes.size) * 100);
+        var percent = Math.floor((i / view.model.attributes.grid.attributes.size) * 100);
         grid_progress.text(percent + '%');
         
         view.$el.removeClass('inactive');
         view.$el.addClass('active');
-        console.log(view.model);
         if (view.model.attributes.color) {
           view.$el.addClass(view.model.attributes.color);
         }
