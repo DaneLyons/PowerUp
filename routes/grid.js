@@ -8,6 +8,7 @@ var Grid = require('../models/grid'),
   async = require('async'),
   _ = require('underscore'),
   util = require('util'),
+  markdown = require( "markdown" ).markdown,
   inflect = require('i')();
 
 exports.gridIndex = function (req, res) {
@@ -117,6 +118,7 @@ exports.gridShow = function (req, res) {
                     names: names,
                     invites: invites,
                     gridCount: user.grids.length,
+                    aboutHTML: markdown.toHTML( grid.about ),
                     "stylesheets":["grid"]
                   });
                 }

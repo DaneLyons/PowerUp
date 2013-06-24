@@ -51,7 +51,7 @@
 		<% if(grid.about){ %>
 			<div class="section about" style="display:none;">
 				<h3>ABOUT THIS GRID</h3>
-				<%= grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") %>
+				<%- aboutHTML %>
 			</div>
 		<% } %>
 		<div class="section collaborators" style="display:none;">
