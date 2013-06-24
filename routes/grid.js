@@ -112,13 +112,18 @@ exports.gridShow = function (req, res) {
                     }
                     collaborators[email].total = total;
                   }
+                  
+                  var about = "";
+                  if(grid.about){
+                    about = grid.about;
+                  }
                   res.render('grid/show', {
                     grid: grid,
                     collaborators: collaborators,
                     names: names,
                     invites: invites,
                     gridCount: user.grids.length,
-                    aboutHTML: markdown.toHTML( grid.about ),
+                    aboutHTML: markdown.toHTML( about ),
                     "stylesheets":["grid"]
                   });
                 }
