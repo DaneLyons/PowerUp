@@ -15,12 +15,12 @@ var PowerUp = {
   
   PowerUp.Models.Grid = Backbone.Model.extend({
     initialize: function () {
-      console.log(this.attributes);
+      var grid = this;
       for (var i = 0; i < this.attributes.powerUps.length; i++) {
-        console.log(i);
         var powerUp = new PowerUp.Models.PowerUp(this.attributes.powerUps[i]);
         powerUp.view = new PowerUp.Views.PowerUpView({
           el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
+          grid: grid,
           model: powerUp
         });
         powerUp.view.setPowerUp(i);
@@ -41,7 +41,7 @@ var PowerUp = {
       if ((this.size + 40) > (window_width / 2)) {
         this.size = (window_width / 2) - 40;
       }
-      this.$el.css({ width: this.size, height: this.size}); 
+      this.$el.css({ width: this.size, height: this.size }); 
     }
   });
   
@@ -98,6 +98,7 @@ var PowerUp = {
         this.isExpanded = true;
       }
     },
+    
     addPowerUp: function (ev) {
       ev.preventDefault();
       var btn = $(ev.currentTarget);
@@ -168,7 +169,8 @@ var PowerUp = {
       <div class="square"></div>\
     </li>'),
     initialize: function () {
-      this.el = "ul#grid li:eq(" + this.model.idx + ")";
+      console.log(this);
+      this.el = "ul#grid li:eq(" + this.options.model.attributes.position + ")";
       this.listenTo(this.model, 'change', this.render);
     },
     render: function () {
@@ -179,7 +181,7 @@ var PowerUp = {
       var grid_progress = $('#grid #content .progress');
       
       setTimeout(function () {
-        var percent = Math.floor((i / grid.size) * 100);
+        var percent = Math.floor((i / this.grid.attributes.size) * 100);
         grid_progress.text(percent + '%');
         
         view.$el.removeClass('inactive');
