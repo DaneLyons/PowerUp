@@ -17,7 +17,9 @@ var PowerUp = {
     initialize: function () {
       var grid = this;
       for (var i = 0; i < this.attributes.powerUps.length; i++) {
-        var powerUp = new PowerUp.Models.PowerUp(this.attributes.powerUps[i]);
+        var powerUpAttr = this.attributes.powerUps[i];
+        powerUpAttr.grid = grid;
+        var powerUp = new PowerUp.Models.PowerUp(powerUpAttr);
         powerUp.view = new PowerUp.Views.PowerUpView({
           el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
           grid: grid,
@@ -178,9 +180,11 @@ var PowerUp = {
     setPowerUp: function (i) {
       var view = this;
       var grid_progress = $('#content .progress');
-
+      var grid = view.model.attributes.grid;
+      console.log(grid);
+      
       setTimeout(function () {
-        var percent = Math.floor((i / view.model.attributes.grid.attributes.size) * 100);
+        var percent = Math.floor((i / grid.attributes.size) * 100);
         grid_progress.text(percent + '%');
         
         view.$el.removeClass('inactive');
