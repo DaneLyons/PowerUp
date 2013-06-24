@@ -193,6 +193,24 @@ var PowerUp = {
           view.$el.addClass(view.model.attributes.color);
         }
       }, (i + 1) * 25)
+    },
+    
+    events: {
+      "click": "showMetadata"
+    },
+    
+    showMetadata: function showMetadata(ev) {
+      ev.preventDefault();
+      var powerUpView = this;
+      
+      metadataView = new PowerUp.Views.MetadataView({ model: powerUpView.model });
+      console.log(metadataView);
+      $("#content .section").hide();
+      metadataView.$el.show();
     }
+  });
+  
+  PowerUp.Views.MetadataView = Backbone.View.extend({
+    el: "#content .section.metadata"
   });
 })();

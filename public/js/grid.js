@@ -7,11 +7,4 @@ $(function () {
       $(this).remove();
     });
   });
-  
-  function eventShowMetadata(ev) {
-    ev.preventDefault();
-    console.log("active click");
-    $("#content .section").hide();
-    $("#content .section.metadata").show();
-  };
 });
