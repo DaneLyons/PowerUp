@@ -30,10 +30,8 @@ gridSchema.plugin(timestamps);
 gridSchema.pre('save', function (next) {  
   if (!this.slug) {
     var slug = encodeURIComponent(this.name).replace(/%20/g, "-");
-    console.log("GRID SLUG: "+slug);
     var grid = this;
     Grid.count({ name:this.name }, function (err, count) {
-      console.log("GRID COUNT: "+count);
       if (count == 0) {
         grid.slug = slug;
       } else {
