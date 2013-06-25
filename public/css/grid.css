@@ -494,8 +494,23 @@ body {
   color:#fff;
 }
 
-#content .metadata.section label[for="metadata"] {
-  display: block;
-  clear: both;
-  font-size: 20px;
+#content .metadata.section {
+  padding: 12px;
+}
+
+#content .metadata.section h2 {
+  margin-top: 56px;
+  margin-bottom: 12px;
+}
+
+#content .metadata.section .nav .icon {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#content .metadata.section .nav {
+  width: 30px;
+  height: 90px;
+  padding-right: 6px;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
