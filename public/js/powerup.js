@@ -130,6 +130,12 @@ var PowerUp = {
           newSquare.addClass('active');
           newSquare.addClass(color);      
 
+          var filledLen = $("#grid li.active").length;
+          var grid = gridContentView.model;
+          var grid_progress = $("#content .progress");
+          var percent = Math.floor((filledLen / grid.attributes.size) * 100);
+          grid_progress.text(percent + '%');
+
           if (emptyLen != 400 && emptyLen % 40 == 0){
             gridContentView.gridMilestone();
           }
@@ -184,7 +190,8 @@ var PowerUp = {
       console.log(grid);
       
       setTimeout(function () {
-        var percent = Math.floor((i / grid.attributes.size) * 100);
+        var filledLen = $("#grid li.active").length;
+        var percent = Math.floor((filledLen / grid.attributes.size) * 100);
         grid_progress.text(percent + '%');
         
         view.$el.removeClass('inactive');
