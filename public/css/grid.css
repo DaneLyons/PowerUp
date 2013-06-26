@@ -496,6 +496,7 @@ body {
 
 #content .metadata.section {
   padding: 12px;
+  height: 400px;
 }
 
 #content .metadata.section h2 {
@@ -504,13 +505,34 @@ body {
 }
 
 #content .metadata.section .nav .icon {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   cursor: pointer;
 }
 
 #content .metadata.section .nav {
   width: 30px;
-  height: 90px;
-  padding-right: 6px;
+  height: auto;
+  padding: 6px;
+  margin: 8px 12px;
+  float: left;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.metadata.section form.metadata, .metadata.section form.metadata .input {
+  float: left;
+  margin-top: 4px;
+}
+
+.metadata.section form.metadata input[type="text"] {
+  width: 300px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.metadata.section form.metadata textarea.metadata {
+  font-size: 12px;
+}
+
+.metadata.section form.metadata .submit {
+  margin-top: 8px;
 }

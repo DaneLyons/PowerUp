@@ -203,14 +203,41 @@ var PowerUp = {
       ev.preventDefault();
       var powerUpView = this;
       
-      metadataView = new PowerUp.Views.MetadataView({ model: powerUpView.model });
+      metadataView = new PowerUp.Views.MetadataView({
+        model: powerUpView.model
+      });
+      metadataView.render();
       console.log(metadataView);
-      $("#content .section").hide();
-      metadataView.$el.show();
     }
   });
   
   PowerUp.Views.MetadataView = Backbone.View.extend({
-    el: "#content .section.metadata"
+    render: function () {
+      var powerUpId = this.model.attributes._id;
+      var url = "/powerups/" + powerUpId + "/metadata";
+      $(".metadata.section form.metadata").attr("action", url);
+      $("#content .section").hide();
+      this.$el.show();
+    },
+    
+    el: "#content .metadata.section",
+    
+    events: {
+      "click .nav .icon": "clickIcon" 
+    }, 
+    
+    clickIcon: function clickIcon(ev) {
+      var view = this;
+      ev.preventDefault();
+      var icon = $(ev.currentTarget);
+      var option = icon.data('option');
+      var inputSelector = "form.metadata .input." + option;
+      $(".metadata.section form.metadata .input").hide();
+      $(inputSelector).show();
+    }
   });
 })();
+
+$(function () {
+  
+})

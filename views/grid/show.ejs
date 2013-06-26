@@ -123,17 +123,33 @@
 		</div>
 		<div class="metadata section" style="display:none;">
       <h2>ADD CONTEXT</h2>
-      <ul class="nav">
-        <li class="text icon">
-          <img src="/img/glyphicons/png/glyphicons_030_pencil.png" />
-        </li>
-        <li class="image icon">
-          <img src="/img/glyphicons/png/glyphicons_011_camera.png" />
-        </li>
-	    <div class="input">
-		      <textarea name="metadata" class="metadata"></textarea>
-		    </div>
-		    <button type="submit" class="submit button">Add context</button>
+      <div class="input-list">
+        <ul class="nav">
+          <li class="option icon" data-option="text">
+            <img src="/img/glyphicons/png/glyphicons_030_pencil.png" />
+          </li>
+          <li class="option icon" data-option="image">
+            <img src="/img/glyphicons/png/glyphicons_011_camera.png" />
+          </li>
+        </ul>
+      
+        <form action="" data-method="put" class="metadata">
+  	      <div class="text input">
+    	      <textarea name="metadata" class="metadata" rows="6" cols="50" 
+    	        placeholder="Write about it."></textarea>
+    	    </div>
+  	    
+    	    <div class="image input" style="display:none;">
+    	      <input type="text" class="image metadata input" name="metadata"
+    	        placeholder="Image URL" />
+    	    </div>
+  	    
+  	      <div class="clear"></div>
+  	      <div class="submit">
+  		      <button type="submit" class="submit button">Add context</button>
+  		    </div>
+  	    </form>
+		  </div>
 		</div>
 	</div>
 	
