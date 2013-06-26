@@ -135,13 +135,15 @@
       
         <form action="" data-method="put" class="metadata">
   	      <div class="text input">
-    	      <textarea name="metadata" class="metadata" rows="6" cols="50" 
-    	        placeholder="Write about it."></textarea>
+    	      <textarea name="metadata[content]" class="metadata" rows="6" 
+    	        cols="50" placeholder="Write about it."></textarea>
     	    </div>
   	    
     	    <div class="image input" style="display:none;">
-    	      <input type="text" class="image metadata input" name="metadata"
-    	        placeholder="Image URL" />
+    	      <input type="text" class="image metadata input" 
+    	        name="metadata[content]" placeholder="Image URL" />
+    	      <input type="hidden" name="metadata[mimeType]" value="image/url" 
+    	        />
     	    </div>
   	    
   	      <div class="clear"></div>
