@@ -485,11 +485,18 @@ body {
   color:#fff;
 }
 
+.collaborators.section td.user {
+  position: relative;
+}
+
 .collaborators.section td.user .green-dot {
   width: 10px;
   height: 10px;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  background: green;
+  background: #68dcaa;
+  position: absolute;
+  left: -8px;
+  bottom: 12px;
 }

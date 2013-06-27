@@ -90,7 +90,7 @@ exports.gridShow = function (req, res) {
               users.push(user);
               for (var i = 0; i < users.length; i++) {
                 user = users[i];
-                collaborators[user.email] = { id: user._id };
+                collaborators[user.email] = { };
                 names[user.email] = user.name;
               }
 
@@ -109,7 +109,9 @@ exports.gridShow = function (req, res) {
                   for (email in collaborators) {
                     var total = 0;
                     for (color in collaborators[email]) {
-                      total += collaborators[email][color];
+                      if (color !== '_id') { 
+                        total += collaborators[email][color];
+                      }
                     }
                     collaborators[email].total = total;
                   }

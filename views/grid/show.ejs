@@ -65,6 +65,7 @@
 				</tr>
 				
 				<% var user = collaborators[grid.user.email]; %>
+				<% delete user._id; %>
 				<tr>
 			  	<td class="user" data-user-id="<%- grid.user._id %>">
 			  	  <% if (grid.user.name) { %>
