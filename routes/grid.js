@@ -80,7 +80,7 @@ exports.gridShow = function (req, res) {
           if (err) { console.log(err); }
           
           var collaborators = {};
-          var names = {};
+          var collabInfo = {};
 
           User.findById(grid.user, function (err, user) {
             if (err) { console.log(err); }
@@ -91,7 +91,7 @@ exports.gridShow = function (req, res) {
               for (var i = 0; i < users.length; i++) {
                 user = users[i];
                 collaborators[user.email] = { };
-                names[user.email] = user.name;
+                collabInfo[user.email] = { name: user.name, id: user._id };
               }
 
               PowerUp.find({ grid: grid._id })
@@ -109,9 +109,7 @@ exports.gridShow = function (req, res) {
                   for (email in collaborators) {
                     var total = 0;
                     for (color in collaborators[email]) {
-                      if (color !== '_id') { 
-                        total += collaborators[email][color];
-                      }
+                      total += collaborators[email][color];
                     }
                     collaborators[email].total = total;
                   }
@@ -123,7 +121,7 @@ exports.gridShow = function (req, res) {
                   res.render('grid/show', {
                     grid: grid,
                     collaborators: collaborators,
-                    names: names,
+                    collabInfo: collabInfo,
                     invites: invites,
                     gridCount: user.grids.length,
                     aboutHTML: markdown.toHTML( about ),

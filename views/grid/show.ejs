@@ -69,7 +69,7 @@
 				<tr>
 			  	<td class="user" data-user-id="<%- grid.user._id %>">
 			  	  <% if (grid.user.name) { %>
-			  	    <%- grid.user.name %></td>
+			  	    <%- grid.user.name %>
 					  <% } else { %>
 						  Grid Master
 					  <% } %>
@@ -84,14 +84,12 @@
 				<% delete collaborators[grid.user.email]; %>
 				
 				<% for (email in collaborators) { %>
-				  <% var userId = collaborators[email].id; %>
-				  <% delete collaborators[email].id %>
 				  <% powerUps = collaborators[email] %>
 				  				  
 			  	<tr>
-  					<td class="user" data-user-id="<%- userId %>">
-  					  <% if (names[email]) { %>
-  					    <%- names[email] %>
+  					<td class="user" data-user-id="<%- collabInfo[email].id %>">
+  					  <% if (collabInfo[email] && collabInfo[email].name) { %>
+  					    <%- collabInfo[email].name %>
   					  <% } else { %>
   					    <%- gridOwner ? email : "Player " + (i + 2) %>
   					  <% } %>
