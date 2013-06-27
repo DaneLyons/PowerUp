@@ -27,6 +27,32 @@ var PowerUp = {
         });
         powerUp.view.setPowerUp(i);
       }
+      
+      if (PowerUp.currentUser) {
+        var uri = window.location.protocol + "//" + window.location.host;
+    		var socket = io.connect(uri);
+    		socket.on('connect', function () {
+    		  var socketData = {
+    		    gridId: grid.attributes._id,
+    		    userId: PowerUp.currentUser.attributes._id
+    		  };
+    		  console.log(socketData);
+    		  socket.emit("Grid.Join", socketData);
+
+      		socket.on('Grid.Joined', function (data) {
+      		  var userId = data.userId;
+      		  
+      		  tdSelector = ".collaborators.section td.user[data-user-id='" +
+      		    userId + "']";
+      		  var userTd = $(tdSelector);
+      		  console.log(userTd);
+      		  userTd.prepend('<div class="green-dot"></div>');
+      		  console.log(userId);
+      		  console.log("JOINED!!!");
+      		});
+    		});
+      }
+      
       return this;
     }
   });
@@ -124,7 +150,6 @@ var PowerUp = {
               user: PowerUp.user
             }
           });
-          console.log(idx);
           var newSquare = $("ul#grid li:eq("+idx+")");
           newSquare.removeClass('inactive');
           newSquare.addClass('active');
@@ -187,7 +212,6 @@ var PowerUp = {
       var view = this;
       var grid_progress = $('#content .progress');
       var grid = view.model.attributes.grid;
-      console.log(grid);
       
       setTimeout(function () {
         var filledLen = $("#grid li.active").length;

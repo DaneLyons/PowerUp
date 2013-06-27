@@ -90,7 +90,7 @@ exports.gridShow = function (req, res) {
               users.push(user);
               for (var i = 0; i < users.length; i++) {
                 user = users[i];
-                collaborators[user.email] = {};
+                collaborators[user.email] = { id: user._id };
                 names[user.email] = user.name;
               }
 
@@ -99,6 +99,7 @@ exports.gridShow = function (req, res) {
                 .exec(function (err, powerUps) {
                   for (var i = 0; i < powerUps.length; i++) {
                     var powerUp = powerUps[i];
+                    
                     if (!collaborators[powerUp.user.email][powerUp.color]) {
                       collaborators[powerUp.user.email][powerUp.color] = 0;
                     }

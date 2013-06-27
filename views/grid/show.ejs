@@ -66,11 +66,13 @@
 				
 				<% var user = collaborators[grid.user.email]; %>
 				<tr>
-					<% if (grid.user.name) { %>
-			  		<td><%= grid.user.name %></td>
-					<% }else{ %>
-						<td>Grid Master</td>
-					<% } %>
+			  	<td class="user" data-user-id="<%- grid.user._id %>">
+			  	  <% if (grid.user.name) { %>
+			  	    <%- grid.user.name %></td>
+					  <% } else { %>
+						  Grid Master
+					  <% } %>
+					</td>
 					
 					<% var colors = ['black', 'blue', 'red']; %>
 					<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
@@ -81,9 +83,12 @@
 				<% delete collaborators[grid.user.email]; %>
 				
 				<% for (email in collaborators) { %>
+				  <% var userId = collaborators[email].id; %>
+				  <% delete collaborators[email].id %>
 				  <% powerUps = collaborators[email] %>
+				  				  
 			  	<tr>
-  					<td>
+  					<td class="user" data-user-id="<%- userId %>">
   					  <% if (names[email]) { %>
   					    <%- names[email] %>
   					  <% } else { %>

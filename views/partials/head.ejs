@@ -22,6 +22,16 @@
 	<script type="text/javascript" src="/js/backbone-min.js"></script>
 	<script type="text/javascript" src="/js/jquery.easing.js"></script>
 	<script type="text/javascript" src="/js/actions.js"></script>
+	<script type="text/javascript" src="/js/powerup.js"></script>
+  <% if (typeof currentUser !== 'undefined') { %>
+    <script type="text/javascript">
+      $(function () {
+        var currentUser = JSON.parse('<%- JSON.stringify(currentUser) %>');
+        PowerUp.currentUser = new PowerUp.Models.User(currentUser);
+      });
+  	</script>
+  <% } %>
+	
 	
 	<% if(typeof(javascripts) !== 'undefined'){ %>
 		<% for(javascript in javascripts){ %>
