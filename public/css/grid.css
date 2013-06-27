@@ -28,6 +28,13 @@ body {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   color:#fff;
   text-shadow:-1px -1px 0 rgba(0,0,0,.7);
+  position: relative;
+}
+
+#content .heading .online {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #content .progress {
