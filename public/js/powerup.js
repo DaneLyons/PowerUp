@@ -27,6 +27,28 @@ var PowerUp = {
         });
         powerUp.view.setPowerUp(i);
       }
+
+      if (PowerUp.currentUser) {
+        var uri = window.location.protocol + "//" + window.location.host;
+    		var socket = io.connect(uri);
+    		socket.on('connect', function () {
+    		  var socketData = {
+    		    gridId: grid.attributes._id,
+    		    userId: PowerUp.currentUser.attributes._id
+    		  };
+    		  socket.emit("Grid.Join", socketData);
+
+      		socket.on('Grid.Joined', function (data) {
+      		  var userId = data.userId;
+      		  
+      		  tdSelector = ".collaborators.section td.user[data-user-id='" +
+      		    userId + "']";
+      		  var userTd = $(tdSelector);
+      		  userTd.prepend('<div class="green-dot"></div>');
+      		});
+    		});
+      }
+      
       return this;
     }
   });
