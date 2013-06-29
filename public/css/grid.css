@@ -535,3 +535,31 @@ body {
 .metadata.section form.metadata .submit {
   margin-top: 8px;
 }
+
+#popup {
+  position:absolute;
+  z-index:3000;
+  background:#fff;
+  width:300px;
+  padding:20px;
+  -webkit-box-shadow:0 0 20px rgba(0,0,0,.7);
+  color:#444;
+}
+
+#popup h1 {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-decoration:uppercase;
+  font-size: 25px;
+}
+
+#popup .arrow {
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#fff;
+  top:30px;
+  left:-10px;
+  -webkit-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
