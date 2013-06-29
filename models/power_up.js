@@ -8,8 +8,13 @@ var powerUpSchema = new Schema({
   color: String,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' },
   user: { type: Schema.ObjectId, ref: 'User' },
-  notes: "String",
-  tags: [
+  dataTypes: [
+    {
+      mimetype: String, 
+      name: String 
+    }
+  ],
+  data: [
     {
       name: String,
       value: Schema.Types.Mixed

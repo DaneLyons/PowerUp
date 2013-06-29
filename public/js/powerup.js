@@ -222,44 +222,64 @@ var PowerUp = {
     },
     
     showMetadata: function showMetadata(ev) {
-      ev.preventDefault();
       var powerUpView = this;
+      var elem = powerUpView.$el;
       
-      metadataView = new PowerUp.Views.MetadataView({
-        model: powerUpView.model
-      });
-      metadataView.render();
-      console.log(metadataView);
+      if (elem.hasClass('active')) {
+        var popupView = new PowerUp.Views.PopupView({
+          model: powerUpView.model
+        });
+        popupView.render();
+      }
     }
   });
   
-  PowerUp.Views.MetadataView = Backbone.View.extend({
+  PowerUp.Views.PopupView = Backbone.View.extend({
+    template: _.template('<div id="popup">\
+        <div class="arrow"></div>\
+        <h1>POWERUP</h1>\
+        <button class="close"></button>\
+        <div class="time"><%- this.createdAt %></div>\
+        <% _.each(this.data, function (dataObj) { %>\
+          <div class="data">\
+            <label><%- dataObj.name %></label>\
+            <input type="text" name="data[<%- dataObj.name %>][value]" \
+              value="<%- dataObj.value %>" /> \
+          </div>\
+        <% }); %>\
+        <div class="data"><label>Current weight</label><input></div>\
+        <div class="data"><label>Mood</label><input></div>\
+        <div class="delete">\
+          <a href="#">Delete PowerUp</a>\
+        </div>\
+      </div>'),
+    
     render: function () {
-      var powerUpId = this.model.attributes._id;
-      var url = "/powerups/" + powerUpId + "/metadata";
-      $(".metadata.section form.metadata").attr("action", url);
-      $("#content .section").hide();
-      this.$el.show();
+      $("#popup").remove();
+      this.$el.html(this.template(this.model.attributes));
+      
+      var popup = this.$("#popup");
+      var elem = this.model.view.$el;
+      var offset = elem.offset();
+      
+      popup.css({
+        left: (offset.left + elem.width() + 24),
+        top: (offset.top- 26),
+        opacity: 0
+      });
+      $("body").append(this.el);
+      popup.animate({ left: '-=10', opacity: 1 }, 400);
     },
     
-    el: "#content .metadata.section",
-    
     events: {
-      "click .nav .icon": "clickIcon" 
-    }, 
+      "click .close": "closePopup"
+    },
     
-    clickIcon: function clickIcon(ev) {
-      var view = this;
+    closePopup: function closePopup(ev) {
       ev.preventDefault();
-      var icon = $(ev.currentTarget);
-      var option = icon.data('option');
-      var inputSelector = "form.metadata .input." + option;
-      $(".metadata.section form.metadata .input").hide();
-      $(inputSelector).show();
+      this.$el.remove();
     }
+    
   });
-})();
-
-$(function () {
   
-})
+})();
