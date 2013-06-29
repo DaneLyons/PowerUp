@@ -12,14 +12,15 @@ $(function () {
     var elem = $(this);
     if(elem.hasClass('active')){
       $('#popup').remove();
-      var popup = $('<div id="popup"><div class="arrow"></div><h1>PowerUp</h1></div>');
+      var popup = $('<div id="popup"><div class="arrow"></div><button class="close"></button><h1>WORK BLOCK</h1></div>');
       //add content to popup
       var content = $('<p>Sample content</p><p>Sample content</p>');
       popup.append(content);
       
       var offset = elem.offset();
-      popup.css({ left:(offset.left+elem.width()+14), top:(offset.top-26) });
+      popup.css({ left:(offset.left+elem.width()+24), top:(offset.top-26), opacity:0 });
       $('body').append(popup);
+      popup.animate({ left:'-=10',opacity:1 },400);
     }
   });
 });

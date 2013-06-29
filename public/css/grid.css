@@ -4,6 +4,7 @@ body {
   background:url('/img/bg_3.jpg') no-repeat center top;
   background:url('/img/country-road.jpg') no-repeat center top;
   background:url('/img/bg_2.png');
+  background: rgb(60, 61, 63);
   background-size:auto;
 }
 
@@ -99,23 +100,29 @@ body {
 
 #content .legend .black {
   background:rgba(57,57,57,1);
+  background: #68dcaa;
 }
 #content .legend .black:hover {
   background:rgba(50,50,50,1);
+  background:#60ca9d;
 }
 
 #content .legend .red {
   background:rgba(203,0,0,.85);
+  background:#f85b54;
 }
 #content .legend .red:hover {
   background:rgba(203,0,0,1);
+  background:#e8554e;
 }
 
 #content .legend .blue {
   background:rgba(6,146,192,.85);
+  background:#36779c;
 }
 #content .legend .blue:hover {
   background:rgba(6,146,192,1);
+  background:#306a8c;
 }
 
 #content .legend .green {
@@ -190,8 +197,9 @@ body {
   transform: rotateY(360deg);
 }
 
-#grid li.active .square {
+#grid li.active div {
   background:rgba(57,57,57,1);
+  background: #68dcaa;
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
@@ -221,10 +229,12 @@ body {
 
 #grid li.red .square {
   background:rgba(203,0,0,1);
+  background: #f85b54;
 }
 
 #grid li.blue .square {
   background:rgba(6,146,192,1);
+  background: #36779c;
 }
 
 #grid li.green .square {
@@ -542,7 +552,7 @@ body {
   background:#fff;
   width:300px;
   padding:20px;
-  -webkit-box-shadow:0 0 20px rgba(0,0,0,.7);
+  -webkit-box-shadow:0 0 20px rgba(0,0,0,.85);
   color:#444;
 }
 
