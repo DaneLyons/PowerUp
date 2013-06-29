@@ -12,9 +12,17 @@ $(function () {
     var elem = $(this);
     if(elem.hasClass('active')){
       $('#popup').remove();
-      var popup = $('<div id="popup"><div class="arrow"></div><button class="close"></button><h1>WORK BLOCK</h1></div>');
+      var popup = $('<div id="popup"><div class="arrow"></div><h1>POWERUP</h1></div>');
+      var close = $('<button class="close"></button>');
+      popup.append(close);
+      close.on('click',function(){
+        $('#popup').remove();
+      });
       //add content to popup
-      var content = $('<p>Sample content</p><p>Sample content</p>');
+      var content = $('<div class="time">July 1st, 7:39am</div>\
+      <div class="data"><label>Current weight</label><input></div>\
+      <div class="data"><label>Mood</label><input></div>\
+      <div class="delete"><a href="#">Delete PowerUp</a>');
       popup.append(content);
       
       var offset = elem.offset();
