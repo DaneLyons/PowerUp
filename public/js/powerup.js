@@ -240,15 +240,22 @@ var PowerUp = {
         <h1>POWERUP</h1>\
         <button class="close"></button>\
         <div class="time"><%- this.createdAt %></div>\
-        <% _.each(this.data, function (dataObj) { %>\
-          <div class="data">\
-            <label><%- dataObj.name %></label>\
-            <input type="text" name="data[<%- dataObj.name %>][value]" \
-              value="<%- dataObj.value %>" /> \
-          </div>\
-        <% }); %>\
-        <div class="data"><label>Current weight</label><input></div>\
-        <div class="data"><label>Mood</label><input></div>\
+        \
+        <% if (!this.data || this.data.length === 0) { %>\
+          <p>You don\'t have any data points yet.</p>\
+          <a href="<%- window.location + "/edit" %>" class="button">\
+            ADD DATA\
+          </a>\
+        <% } else { %>\
+          <% _.each(this.data, function (dataObj) { %>\
+            <div class="data">\
+              <label><%- dataObj.name %></label>\
+              <input type="text" name="data[<%- dataObj.name %>][value]" \
+                value="<%- dataObj.value %>" /> \
+            </div>\
+          <% }); %>\
+        <% } %>\
+        \
         <div class="delete">\
           <a href="#">Delete PowerUp</a>\
         </div>\
@@ -256,7 +263,9 @@ var PowerUp = {
     
     render: function () {
       $("#popup").remove();
-      this.$el.html(this.template(this.model.attributes));
+      var attr = this.model.attributes;
+      attr.grid = this.model.view.grid;
+      this.$el.html(this.template(attr));
       
       var popup = this.$("#popup");
       var elem = this.model.view.$el;

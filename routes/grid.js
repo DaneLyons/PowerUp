@@ -111,6 +111,7 @@ exports.gridShow = function (req, res) {
                     }
                     collaborators[email].total = total;
                   }
+                  
                   res.render('grid/show', {
                     grid: grid,
                     collaborators: collaborators,
