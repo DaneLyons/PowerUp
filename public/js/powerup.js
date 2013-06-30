@@ -281,12 +281,29 @@ var PowerUp = {
     },
     
     events: {
-      "click .close": "closePopup"
+      "click .close": "closePopup",
+      "click .delete": "deletePowerUp"
     },
     
     closePopup: function closePopup(ev) {
       ev.preventDefault();
       this.$el.remove();
+    },
+    
+    deletePowerUp: function deletePowerUp(ev) {
+      ev.preventDefault();
+      var popupView = this;
+      var powerUp = popupView.model;
+      
+      $.ajax({
+        url: "/powerups/" + powerUp.attributes._id,
+        type: "DELETE",
+        success: function (res) {
+          var sel = "#grid li:eq(" + powerUp.attributes.position + ")";
+          console.log(sel);
+          $(sel).remove();
+        }
+      });
     }
     
   });
