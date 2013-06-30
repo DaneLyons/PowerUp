@@ -251,8 +251,8 @@ var PowerUp = {
           <% _.each(this.data, function (dataObj) { %>\
             <div class="data">\
               <label><%- dataObj.name %></label>\
-              <input type="text" name="data[<%- dataObj.name %>][value]" \
-                value="<%- dataObj.value %>" /> \
+              <input type="text" name="<%- dataObj.name %>" class="data"\
+                value="<%- dataObj.value %>" />\
             </div>\
           <% }); %>\
         <% } %>\
@@ -283,7 +283,8 @@ var PowerUp = {
     
     events: {
       "click .close": "closePopup",
-      "click .delete": "deletePowerUp"
+      "click .delete": "deletePowerUp",
+      "change input.data": "updateData"
     },
     
     closePopup: function closePopup(ev) {
@@ -305,6 +306,32 @@ var PowerUp = {
           $(sel).remove();
         }
       });
+    },
+    
+    updateData: function updateData(ev) {
+      var popupView = this;
+      var powerUp = popupView.model;
+      var dataElem = $(ev.currentTarget);
+      
+      var dataAttr = {};
+      var dataInputs = popupView.$("input.data");
+      for (var i = 0; i < dataInputs.length; i++) {
+        dataAttr[dataInputs.attr('name')] = dataInputs.attr('value');
+      }
+            
+      var powerUpUrl = "/powerups/" + powerUp.attributes._id;
+      $.ajax({
+        type: "PUT",
+        data: {
+          data: dataAttr
+        },
+        url: powerUpUrl,
+        success: function (res) {
+          if (res.data) {
+            res.success = true;
+          }
+        }
+      })
     }
     
   });
