@@ -30,4 +30,19 @@ $(function () {
       parent.remove();
     });
   });
+  
+  $('#data_fields').on('keydown', "input", function(){
+    if($("#data_fields input").last().val() != ""){
+      var count = $("#data_fields input").length;
+      var new_field = $('<div class="field">\
+  			<label>DATA '+(count+1)+'</label>\
+  			<input type="text" value="" class="med" />\
+  			<select class="small">\
+  				<option>Number</option>\
+  				<option>Text</option>\
+  			</select>\
+  	  </div>');
+  	  $("#data_fields").append(new_field);
+    }
+  });
 });
