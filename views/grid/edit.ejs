@@ -31,7 +31,7 @@
   </div>
   
   <div class="field">
-		<label>WORK UNITS</label>
+		<label>TASKS</label>
 		
 		<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
 		  <% var btn = grid.gridButtons[i]; %>
@@ -42,6 +42,16 @@
     <% for (var i = (3 - grid.gridButtons.length); i > 0; i--) { %>
       <input type="text" name="workUnits[]" value="" class="small work_unit required <% if (i === 1) { %> last <% } %>" />
 		<% } %>
+  </div>
+
+	<div class="field">
+		<label>DATA</label>
+		
+		<input type="text" value="" class="med" />
+		<select class="small">
+			<option>Number</option>
+			<option>Text</option>
+		</select>
   </div>
 
 	<div class="field">

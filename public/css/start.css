@@ -113,9 +113,19 @@ button.random {
   border-radius:0;
 }
 
+#new_grid .field select.small {
+  width:195px;
+  background:#fff url('/img/icons/down.png') 168px 10px no-repeat;
+}
+
 #new_grid .field input.prompt {
   border-right:10px solid #cb0000;
   padding-right:0;
+}
+
+#new_grid .field input.med {
+  width:383px;
+  margin-right:10px;
 }
 
 #new_grid .field input.small {
