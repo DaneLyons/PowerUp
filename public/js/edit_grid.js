@@ -45,4 +45,20 @@ $(function () {
   	  $("#data_fields").append(new_field);
     }
   });
+  
+  $('label').on('mouseover',function(){
+    $('#info').remove();
+    
+    var elem = $(this);
+    var text = elem.data('info');
+    var info = $("<div id='info'>"+text+"</div>");
+    var pos = elem.offset();
+    info.css({ top:pos.top, left:(pos.left-230)});
+    
+    $('body').append(info);
+  });
+  
+  $('label').on('mouseout',function(){
+    $('#info').remove();
+  });
 });

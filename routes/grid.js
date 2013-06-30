@@ -148,7 +148,7 @@ exports.gridEdit = function (req, res) {
         res.render('grid/edit', {
           grid: grid,
           invites: invites,
-          "stylesheets":["page","settings","auth","start"]
+          "stylesheets":["page","settings","auth","start","grid_edit"]
         });
       });
     }
