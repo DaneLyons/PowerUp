@@ -27,16 +27,94 @@ body {
 }
 
 #content .progress {
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
-  text-align:center;
-  font-size:200px;
   color:#fff;
   text-shadow:-1px -1px 0 rgba(0,0,0,.7);
   width:100%;
+  position:relative;
+  margin-top:0;
+  top:60px;
+}
+
+#content .progress .percent {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-align:center;
+  font-size:200px;
   position:absolute;
-  left:0;
+  width:100%;
+  text-align:center;
   top:50%;
-  margin-top:-50px;
+  line-height:0;
+}
+
+#content .progress #progress_section {
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+}
+
+#content .progress #progress_section .nav {
+  position:absolute;
+  top:10px;
+  left:10px;
+}
+
+#content .progress #progress_section .nav button {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing:1px;
+  color: #fff;
+  background: rgba(0,0,0,.1);
+  display: block;
+  padding: 8px 12px 7px 12px;
+  text-align: center;
+  float: left;
+  margin-right: 10px;
+}
+
+#content .progress #progress_section button:hover {
+  background: rgba(0,0,0,.50);
+}
+
+#content .progress #progress_section .s1,
+#content .progress #progress_section .s2,
+#content .progress #progress_section .s3,
+#content .progress #progress_section .s4,
+#content .progress #progress_section .s5,
+#content .progress #progress_section .s6,
+#content .progress #progress_section .s7,
+#content .progress #progress_section .s8,
+#content .progress #progress_section .s9,
+#content .progress #progress_section .s10 {
+  display:none;
+}
+
+#content .progress #progress_section.s1 div.s1,
+#content .progress #progress_section.s2 div.s2,
+#content .progress #progress_section.s3 div.s3,
+#content .progress #progress_section.s4 div.s4,
+#content .progress #progress_section.s5 div.s5,
+#content .progress #progress_section.s6 div.s6,
+#content .progress #progress_section.s7 div.s7,
+#content .progress #progress_section.s8 div.s8,
+#content .progress #progress_section.s9 div.s9,
+#content .progress #progress_section.s10 div.s10 {
+  display:block;
+}
+
+#content .progress #progress_section.s1 button.s1,
+#content .progress #progress_section.s2 button.s2,
+#content .progress #progress_section.s3 button.s3,
+#content .progress #progress_section.s4 button.s4,
+#content .progress #progress_section.s5 button.s5,
+#content .progress #progress_section.s6 button.s6,
+#content .progress #progress_section.s7 button.s7,
+#content .progress #progress_section.s8 button.s8,
+#content .progress #progress_section.s9 button.s9,
+#content .progress #progress_section.s10 button.s10 {
+  background: rgba(0,0,0,1);
 }
 
 #content .heading h1 {
@@ -326,7 +404,7 @@ body {
   text-transform: uppercase;
   font-size: 18px;
   color: #fff;
-  background: rgba(0,0,0,.25);
+  background: rgba(0,0,0,.1);
   display: block;
   padding: 10px 15px;
   text-align: center;
@@ -340,7 +418,7 @@ body {
 
 #content .controls button.active:hover,
 #content .controls button.active {
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.85);
 }
 
 #content .controls button .icon {

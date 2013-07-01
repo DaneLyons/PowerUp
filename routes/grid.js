@@ -118,7 +118,8 @@ exports.gridShow = function (req, res) {
                     names: names,
                     invites: invites,
                     gridCount: user.grids.length,
-                    "stylesheets":["grid"]
+                    "stylesheets":["grid"],
+                    "javascripts":["d3.v3.min"]
                   });
                 }
               );

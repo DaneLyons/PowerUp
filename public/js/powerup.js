@@ -83,6 +83,7 @@ var PowerUp = {
       var section_height = content_height-300;
       this.$('.collaborators').css({ height: section_height });
       this.$('.sections .about').css({ height: section_height });
+      this.$('.sections .progress').css({ height: (section_height+60) });
       
       var legend_buttons = this.$('.legend button');
       var legend_width = content_width / legend_buttons.length;
@@ -163,7 +164,7 @@ var PowerUp = {
       var grid_pos = grid.offset();
       var grid_width = grid.width();
       var grid_height = grid.height();
-      var percent_complete = $('.progress').text();
+      var percent_complete = $('.progress .percent').text();
       var milestone = $('<div id="milestone">\
         <h1>'+percent_complete+' complete!</h1>\
         <h2><img src="/img/icon_white.png" /></h2>\
@@ -201,7 +202,7 @@ var PowerUp = {
     },
     setPowerUp: function (i) {
       var view = this;
-      var grid_progress = $('#content .progress');
+      var grid_progress = $('#content .progress .percent');
       var grid = view.model.attributes.grid;
       console.log(grid);
       
