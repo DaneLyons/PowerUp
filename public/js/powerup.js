@@ -226,6 +226,8 @@ var PowerUp = {
       var elem = powerUpView.$el;
       
       if (elem.hasClass('active')) {
+        $('li.current').removeClass('current');
+        elem.addClass('current');
         var popupView = new PowerUp.Views.PopupView({
           model: powerUpView.model
         });
@@ -271,12 +273,12 @@ var PowerUp = {
       var offset = elem.offset();
       
       popup.css({
-        left: (offset.left + elem.width() + 24),
+        left: (offset.left + elem.width() + 14),
         top: (offset.top- 26),
-        opacity: 0
+        opacity: 1
       });
       $("body").append(this.el);
-      popup.animate({ left: '-=10', opacity: 1 }, 400);
+      //popup.animate({ left: '-=10', opacity: 1 }, 300);
     },
     
     events: {
