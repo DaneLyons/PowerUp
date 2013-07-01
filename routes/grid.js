@@ -156,6 +156,7 @@ exports.gridEdit = function (req, res) {
 };
 
 exports.gridCreate = function (req, res) {
+  console.log(req.body.grid);
   console.error(req.user);
   if (!req.user) {
     res.redirect('/');
@@ -182,9 +183,12 @@ exports.gridCreate = function (req, res) {
 };
 
 exports.gridUpdate = function (req, res) {
+  console.log(req.body.grid);
+  
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
     grid.name = req.body.grid.name;
     grid.isPrivate = req.body.grid.isPrivate;
+    grid.dataTypes = req.body.grid.dataTypes;
     grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ").replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '').replace(/\"/g, "&#34;").replace(/\'/g, "&#39;");
     var newButtons = req.body.gridButtons;
     if (typeof newButtons !== 'undefined') {

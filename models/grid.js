@@ -11,8 +11,14 @@ var gridSchema = new Schema({
   stats: {
     powerUps: Number
   },
+  dataTypes: [
+    {
+      dataType: { type: String },
+      name: { type: String }
+    }
+  ],
   powerUps: [ { type: Schema.ObjectId, ref: 'PowerUp' } ],
-  gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' }],
+  gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' } ],
   user: { type: Schema.ObjectId, ref: 'User' },
   isPrivate: { type: Boolean, default: false },
   collaborators: [ { type: Schema.ObjectId, ref: 'User' } ],

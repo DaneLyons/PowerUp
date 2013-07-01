@@ -36,10 +36,12 @@ $(function () {
       var count = $("#data_fields input").length;
       var new_field = $('<div class="field">\
   			<label>DATA '+(count+1)+'</label>\
-  			<input type="text" value="" placeholder="optional" class="med" />\
-  			<select class="small">\
-  				<option>Number</option>\
-  				<option>Text</option>\
+  			<input type="text" name="grid[dataTypes][' + count + '][name]"\
+  			  value="" placeholder="optional" class="med" />\
+  			<select name="grid[dataTypes][' + count + '][dataType]"\
+  			  class="small">\
+  				<option value="number">Number</option>\
+  				<option value="text">Text</option>\
   			</select>\
   	  </div>');
   	  $("#data_fields").append(new_field);

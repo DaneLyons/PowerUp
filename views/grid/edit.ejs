@@ -46,23 +46,45 @@
 	  </div>
 
 		<div id="data_fields">
-			<div class="field">
-				<label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
-		
-				<input type="text" value="" placeholder="optional" class="med" />
-				<select class="small">
-					<option>Number</option>
-					<option>Text</option>
-				</select>
-		  </div>
-		</div>
+		  <% if (grid.dataTypes.length === 0) { %>
+		    <div class="field">
+  				<label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
 
-		<div class="field">
-			<% var grid_master = "YOU" %>
-			<% if(grid.user.name){ %>
-				<% grid_master = grid.user.name %>
-			<% } %>
-			<label data-info="You can't remove yourself as a collaborator.">PLAYER 1</label><input type="text" disabled value="<%= grid_master %>" />
+    			<input type="text" name="grid[dataTypes][0][name]" value=""
+    			  class="med" />
+    			<select name="grid[dataTypes][0][dataType]" class="small">
+    				<option value="number">Number</option>
+    				<option value="text">Text</option>
+    			</select>
+  		  </div>
+		  <% } else { %>
+		    <% var i; %>
+		    <% for (i = 0; i < grid.dataTypes.length; i++) { %>
+		      <div class="field">
+  		      <% var dataType = grid.dataTypes[i]; %>
+  		      <% if (i === 0) { %>
+  		        <label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
+  		      <% } else { %>
+  		        <label>DATA <%- i + 1 %></label>
+  		      <% } %>
+		      
+  		      <input type="text" name="grid[dataTypes][<%- i %>][name]"
+  		        value="<%- grid.dataTypes[i].name %>" class="med" />
+  		      
+      			<select name="grid[dataTypes][0][dataType]" class="small">
+      			  <% var types = ['number', 'text']; %>
+      			  <% for (var j = 0; j < types.length; j++) { %>
+      			    <option value="<%- types[j] %>"
+      			      <% if (types[j] === dataType.dataType) { %>
+      			        selected="selected"
+      			      <% } %> >
+      			      <%- types[j].charAt(0).toUpperCase() + types[j].slice(1) %>
+      			    </option>
+      			  <% } %>
+      			</select>
+      		</div>
+  		  <% } %>
+		  <% } %>
 		</div>
 	
 		<% for (var i = 0; i < grid.collaborators.length; i++) { %>
@@ -89,4 +111,5 @@
 </div>
 
 <script type="text/javascript" src="/js/edit_grid.js"></script>
+
 <% include ../partials/footer.ejs %>
