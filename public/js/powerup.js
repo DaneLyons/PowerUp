@@ -150,7 +150,7 @@ var PowerUp = {
           var newSquare = $("ul#grid li:eq("+idx+")");
           newSquare.removeClass('inactive');
           newSquare.addClass('active');
-          newSquare.addClass(color);      
+          newSquare.addClass(color);
 
           if (emptyLen != 400 && emptyLen % 40 == 0){
             gridContentView.gridMilestone();
@@ -242,7 +242,6 @@ var PowerUp = {
         <div class="time"><%- this.createdAt %></div>\
         \
         <% if (!this.data || this.data.length === 0) { %>\
-          <p>You don\'t have any data points yet.</p>\
           <a href="<%- window.location + "/edit" %>" class="button">\
             ADD DATA\
           </a>\
