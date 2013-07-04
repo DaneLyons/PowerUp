@@ -78,8 +78,6 @@ userSchema.statics.findOrCreate = function(userParams, done) {
         return done(null, user);
       }
     });
-    
-    return;
   }
   
   User.findOne({ email: userParams.email }, function(err, user) {
@@ -97,6 +95,8 @@ userSchema.statics.findOrCreate = function(userParams, done) {
         });
       } else {
         User.bcryptPassword(userParams, function (err, params) {
+          if (err) { return done(err); }
+          
           user = new User(params);
           user.save(function (err, user) {
             if (err) {
@@ -145,6 +145,8 @@ userSchema.pre('save', function (next) {
     if (count < 500) {
       user.promo.zed = true;
       next();
+    } else {
+      next();
     }
   });
 });
@@ -159,29 +161,31 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.post('save', function (user) {
-  var actionParams = {
-    user: user._id,
-    actionType: 'Models.User.Create',
-    actionObjectId: user._id,
-    actionObjectType: 'User'
-  };
-  
-  Action.findOne(actionParams, function (err, action) {
-    if (!action) {
-      action = new Action(actionParams);
-      action.save(function (err) {
-        var io = EventShroom.io;
-        console.log(io);
+  if (user.promo.zed) {
+    var actionParams = {
+      user: user._id,
+      actionType: 'Models.User.Create',
+      actionObjectId: user._id,
+      actionObjectType: 'User'
+    };
 
-        io.sockets.emit('promo.zed', function () {
-          console.log("EMISSIONS");
-          user.save(function (err, user) {
-            if (err) { console.log("ERR: " + err) }
+    Action.findOne(actionParams, function (err, action) {
+      if (!action) {
+        action = new Action(actionParams);
+        action.save(function (err) {
+          var io = EventShroom.io;
+          console.log(io);
+
+          io.sockets.emit('promo.zed', function () {
+            console.log("EMISSIONS");
+            user.save(function (err, user) {
+              if (err) { console.log("ERR: " + err) }
+            });
           });
         });
-      });
-    }
-  });
+      }
+    });
+  }
 });
 
 userSchema.post('save', function (user) {

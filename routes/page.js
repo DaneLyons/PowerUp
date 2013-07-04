@@ -3,6 +3,7 @@ var Grid = require('../models/grid'),
   User = require('../models/user'),
   HelpShroom = require('../lib/help_shroom'),
   inflect = require('i')(),
+  async = require('async'),
   util = require('util');
 
 exports.home = function (req, res) {
@@ -168,55 +169,60 @@ exports.start = function (req, res) {
   
   
   var grid = new Grid(gridParams);
-  console.log("GRID ID: "+grid._id);
-  for(var i=0;i<workUnit.length;i++){
+  async.map(workUnit, function (unit, done) {
     var btn = new GridButton({
       grid: grid._id,
-      workUnit: workUnit[i],
+      workUnit: unit,
       increment: 1
     });
   
     btn.save(function (err, button) {
+      if (err) { return done(err); }
       grid.gridButtons.push(button._id);
       grid.save(function (err) {
-        if (err) { console.log("ERR: " + err);}
+        if (err) { console.log("ERR: " + err); return done(err); }
+        return done(null, button);
       });
     });
-  }
+  }, function (err, gridButtons) {
+    if (err) { console.log(err); }
 
-  if (userParams) {
-    User.findOrCreate({ email: userParams.email }, function (err, user) {
-      if (err) {
-        console.error("ERR " + err);
-      }
-      User.findById(user._id, function (err, user) {
+    if (userParams) {
+      User.findOrCreate(userParams, function (err, user) {
+        if (err) {
+          console.error("ERR " + err);
+        }
+
+        User.findById(user._id, function (err, user) {
+          grid.user = user._id;
+          grid.save(function (err, grid) {
+            if (err) { console.log(err); }
+            user.grids.push(grid._id);
+            user.save(function (err) {
+              if (err) { console.log("ERR: " + err); }
+              req.login(user, function (err) {
+                if (err) {
+                  console.error("ERR " + err);
+                }
+                res.redirect("/grids/" + grid.slug);
+                return;
+              });
+            });
+          });
+        });
+      });
+    } else {
+      User.findById(req.user._id, function (err, user) {
         grid.user = user._id;
         grid.save(function (err, grid) {
           user.grids.push(grid._id);
           user.save(function (err) {
             if (err) { console.log("ERR: " + err); }
-            req.login(user, function (err) {
-              if (err) {
-                console.error("ERR " + err);
-              }
-              res.redirect("/grids/" + grid.slug);
-              return;
-            });
+            res.redirect("/grids/" + grid.slug);
+            return;
           });
         });
       });
-    });
-  } else {
-    User.findById(req.user._id, function (err, user) {
-      grid.user = user._id;
-      grid.save(function (err, grid) {
-        user.grids.push(grid._id);
-        user.save(function (err) {
-          if (err) { console.log("ERR: " + err); }
-          res.redirect("/grids/" + grid.slug);
-          return;
-        });
-      });
-    });
-  }
+    }
+  });
 };
