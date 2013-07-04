@@ -119,7 +119,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
       } else {
         user.validPassword(userParams.password, function (err, valid) {
           if (!valid) {
-            return done(null, false, { message: 'Incorrect password.' });
+            return done(new Error("Invalid email or password."));
           }
           return done(null, user);
         });

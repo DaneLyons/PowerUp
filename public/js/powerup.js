@@ -244,16 +244,20 @@ var PowerUp = {
         <button class="close"></button>\
         <div class="time"><%- this.createdAt %></div>\
         \
-        <% if (!this.data || this.data.length === 0) { %>\
+        <% if (!grid.attributes.dataTypes || grid.attributes.dataTypes.length === 0) { %>\
           <a href="<%- window.location + "/edit" %>" class="button">\
             ADD DATA\
           </a>\
         <% } else { %>\
-          <% _.each(this.data, function (dataObj) { %>\
+          <% _.each(grid.attributes.dataTypes, function (dataType) { %>\
+            <% if (!dataType) { return; } %>\
             <div class="data">\
-              <label><%- dataObj.name %></label>\
-              <input type="text" name="<%- dataObj.name %>" class="data"\
-                value="<%- dataObj.value %>" />\
+              <label><%- dataType.name %></label>\
+              <input type="text" name="<%- dataType.name %>" class="data"\
+                <% if (this.data && this.data[dataType.name]) { %> \
+                  value="<%- this.data[dataType.name].value %>" \
+                <% } %> \
+              />\
             </div>\
           <% }); %>\
         <% } %>\
@@ -265,9 +269,8 @@ var PowerUp = {
     
     render: function () {
       $("#popup").remove();
-      var attr = this.model.attributes;
-      attr.grid = this.model.view.grid;
-      this.$el.html(this.template(attr));
+      PowerUp.fuck = this.model.attributes;
+      this.$el.html(this.template(this.model.attributes));
       
       var popup = this.$("#popup");
       var elem = this.model.view.$el;

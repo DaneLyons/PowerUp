@@ -14,7 +14,7 @@ var gridSchema = new Schema({
   dataTypes: [
     {
       dataType: { type: String },
-      name: { type: String }
+      name: { type: String, required: true }
     }
   ],
   powerUps: [ { type: Schema.ObjectId, ref: 'PowerUp' } ],

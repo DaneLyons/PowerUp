@@ -185,10 +185,13 @@ exports.start = function (req, res) {
   }
 
   if (userParams) {
-    User.findOrCreate({ email: userParams.email }, function (err, user) {
+    User.findOrCreate(userParams, function (err, user) {
       if (err) {
         console.error("ERR " + err);
+        req.flash("error", "Invalid email or password.");
+        return res.redirect('back');
       }
+      
       User.findById(user._id, function (err, user) {
         grid.user = user._id;
         grid.save(function (err, grid) {
