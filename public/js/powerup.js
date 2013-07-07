@@ -242,7 +242,10 @@ var PowerUp = {
         <div class="arrow"></div>\
         <h1>POWERUP</h1>\
         <button class="close"></button>\
-        <div class="time"><%- this.createdAt %></div>\
+        <div class="time">\
+          <% createdAt = new Date(createdAt); %>\
+          <%- createdAt.getMonth() + 1 + "/" + createdAt.getDate() + "/" + createdAt.getFullYear() + ", " + createdAt.getHours() + ":" + createdAt.getMinutes() + ":" + createdAt.getSeconds() %>\
+        </div>\
         \
         <% if (!grid.attributes.dataTypes || grid.attributes.dataTypes.length === 0) { %>\
           <a href="<%- window.location + "/edit" %>" class="button">\
@@ -254,10 +257,9 @@ var PowerUp = {
             <div class="data">\
               <label><%- dataType.name %></label>\
               <input type="text" name="<%- dataType.name %>" class="data"\
-              <% console.log(metadata); %>\
-                <% if (metadata && metadata[dataType.name]) { %> \
-                  value="<%- metadata[dataType.name] %>" \
-                <% } %> \
+              <% if (typeof metadata !== "undefined" && metadata[dataType.name]) { %> \
+                value="<%- metadata[dataType.name] %>" \
+              <% } %> \
               />\
             </div>\
           <% }); %>\

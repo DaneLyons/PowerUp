@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
   Grid = require('./grid'),
   Schema = mongoose.Schema;
   
@@ -8,12 +7,11 @@ var powerUpSchema = new Schema({
   color: String,
   grid: { type: Schema.ObjectId, ref: 'PowerUp' },
   user: { type: Schema.ObjectId, ref: 'User' },
-  metadata: Schema.Types.Mixed
+  metadata: Schema.Types.Mixed,
+  createdAt: { type: Date, default: function () { return new Date(); } }
 }, {
   safe: true
 });
-
-powerUpSchema.plugin(timestamps);
 
 powerUpSchema.pre('save', function (next) {
   var powerUp = this;
