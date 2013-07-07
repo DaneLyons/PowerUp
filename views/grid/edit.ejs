@@ -86,15 +86,17 @@
       		</div>
   		  <% } %>
   		  
+  		  <% i -= 1; %>
   		  <div class="field">
-  		    <label>DATA <%- i %></label>
-  				<input type="text" name="grid[dataTypes][<%- i %>][name]" value=""
-    			  class="med" />
+  		    <label>DATA <%- i + 1 %></label>
+  				<input type="text" name="grid[dataTypes][<%- i %>][name]"
+  				  class="med" />
     			<select name="grid[dataTypes][<%- i %>][dataType]" class="small">
     				<option value="number">Number</option>
     				<option value="text">Text</option>
     			</select>
   		  </div>
+  		  <% delete i; %>
 		  <% } %>
 		</div>
 	
