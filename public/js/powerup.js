@@ -340,7 +340,8 @@ var PowerUp = {
         var dataElem = $(dataInputs[i]);
         dataAttr[dataElem.attr('name')] = dataElem.val();
       }
-            
+      
+      if (!powerUp.attributes.metadata) { powerUp.attributes.metadata = {}; }
       for (prop in dataAttr) {
         powerUp.attributes.metadata[prop] = dataAttr[prop];
       }
