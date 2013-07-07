@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
   inflect = require('i')(),
   util = require('util'),
   Schema = mongoose.Schema;
@@ -31,7 +30,17 @@ var gridSchema = new Schema({
   safe: true
 });
 
-gridSchema.plugin(timestamps);
+gridSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
 
 gridSchema.pre('save', function (next) {  
   if (!this.slug) {

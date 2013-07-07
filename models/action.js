@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
   Schema = mongoose.Schema;
   
 var actionSchema = new Schema({
@@ -15,7 +14,17 @@ var actionSchema = new Schema({
   safe: true
 });
 
-actionSchema.plugin(timestamps);
+actionSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
 
 var Action = mongoose.model('Action', actionSchema);
 module.exports = Action;

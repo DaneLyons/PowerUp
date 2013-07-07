@@ -243,15 +243,10 @@ var PowerUp = {
         <h1>POWERUP</h1>\
         <button class="close"></button>\
         <div class="time">\
-          <% createdAt = new Date(createdAt); %>\
-          <%- createdAt.getMonth() + 1 + "/" + createdAt.getDate() + "/" + createdAt.getFullYear() + ", " + createdAt.getHours() + ":" + createdAt.getMinutes() + ":" + createdAt.getSeconds() %>\
+          <%- createdAt %>\
         </div>\
         \
-        <% if (!grid.attributes.dataTypes || grid.attributes.dataTypes.length === 0) { %>\
-          <a href="<%- window.location + "/edit" %>" class="button">\
-            ADD DATA\
-          </a>\
-        <% } else { %>\
+        <% if (grid.attributes.dataTypes && grid.attributes.dataTypes.length) { %>\
           <% _.each(grid.attributes.dataTypes, function (dataType) { %>\
             <% if (!dataType) { return; } %>\
             <div class="data">\
@@ -265,6 +260,10 @@ var PowerUp = {
           <% }); %>\
         <% } %>\
         \
+        <a href="<%- window.location + "/edit" %>" class="button">\
+          ADD DATA\
+        </a>\
+        \
         <div class="delete">\
           <a href="#">Delete PowerUp</a>\
         </div>\
@@ -273,6 +272,19 @@ var PowerUp = {
     render: function () {
       $("#popup").remove();
       PowerUp.fuck = this.model.attributes;
+      
+      var createdAt = new Date(this.model.attributes.createdAt);
+      if (createdAt) {
+        var createdStr = createdAt.getMonth() + 1 + "/" + 
+          createdAt.getDate() + "/" + createdAt.getFullYear() + ", " +
+          createdAt.getHours() + ":" + createdAt.getMinutes();
+          
+        var sec = createdAt.getSeconds();
+        if (sec < 9) { sec = "0" + sec }
+        createdStr = createdStr + ":" + sec;
+        this.model.attributes.createdAt = createdStr;
+      }
+
       this.$el.html(this.template(this.model.attributes));
       
       var popup = this.$("#popup");

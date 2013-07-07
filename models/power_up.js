@@ -8,9 +8,21 @@ var powerUpSchema = new Schema({
   grid: { type: Schema.ObjectId, ref: 'PowerUp' },
   user: { type: Schema.ObjectId, ref: 'User' },
   metadata: Schema.Types.Mixed,
-  createdAt: { type: Date, default: function () { return new Date(); } }
+  createdAt: Date
 }, {
   safe: true
+});
+
+powerUpSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
 });
 
 powerUpSchema.pre('save', function (next) {
