@@ -344,8 +344,7 @@ var PowerUp = {
     
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
       $.post(powerUpUrl, dataAttr, function (data, status) {
-        console.log(data);
-        if (status === "200") {
+        if (status === "success") {
           var successMsg = popupView.$(".success");
           successMsg.css("opacity", 1);
           setTimeout(function () {
