@@ -343,15 +343,17 @@ var PowerUp = {
       }
     
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
-      $.post(powerUpUrl, dataAttr, function (data) {
+      $.post(powerUpUrl, dataAttr, function (data, status) {
         console.log(data);
-        var successMsg = popupView.$(".success");
-        successMsg.css("opacity", 1);
-        setTimeout(function () {
-          successMsg.animate({
-            opacity: 0
-          }, 500);
-        }, 1000);
+        if (status === "200") {
+          var successMsg = popupView.$(".success");
+          successMsg.css("opacity", 1);
+          setTimeout(function () {
+            successMsg.animate({
+              opacity: 0
+            }, 500);
+          }, 1000);
+        }
       });
     }
     
