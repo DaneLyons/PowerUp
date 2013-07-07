@@ -254,8 +254,9 @@ var PowerUp = {
             <div class="data">\
               <label><%- dataType.name %></label>\
               <input type="text" name="<%- dataType.name %>" class="data"\
-                <% if (this.data && this.data[dataType.name]) { %> \
-                  value="<%- this.data[dataType.name].value %>" \
+              <% console.log(metadata); %>\
+                <% if (metadata && metadata[dataType.name]) { %> \
+                  value="<%- metadata[dataType.name] %>" \
                 <% } %> \
               />\
             </div>\
@@ -318,24 +319,17 @@ var PowerUp = {
       var dataElem = $(ev.currentTarget);
       
       var dataAttr = {};
-      var dataInputs = popupView.$("input.data");
+      var dataInputs = $("#popup input.data");
       for (var i = 0; i < dataInputs.length; i++) {
-        dataAttr[dataInputs.attr('name')] = dataInputs.attr('value');
+        var dataElem = $(dataInputs[i]);
+        dataAttr[dataElem.attr('name')] = dataElem.val();
       }
-            
-      var powerUpUrl = "/powerups/" + powerUp.attributes._id;
-      $.ajax({
-        type: "PUT",
-        data: {
-          data: dataAttr
-        },
-        url: powerUpUrl,
-        success: function (res) {
-          if (res.data) {
-            res.success = true;
-          }
-        }
-      })
+      console.log(dataAttr);
+          
+      var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
+      $.post(powerUpUrl, dataAttr, function (data) {
+        console.log(data);
+      });
     }
     
   });
