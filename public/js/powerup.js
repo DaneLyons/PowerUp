@@ -288,7 +288,7 @@ var PowerUp = {
     
     events: {
       "click .close": "closePopup",
-      "click .delete": "deletePowerUp",
+      "click .delete a": "deletePowerUp",
       "change input.data": "updateData"
     },
     
