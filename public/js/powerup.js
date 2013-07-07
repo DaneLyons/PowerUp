@@ -300,9 +300,9 @@ var PowerUp = {
     },
     
     events: {
+      "change input.data": "updateData",
       "click .close": "closePopup",
-      "click .delete a": "deletePowerUp",
-      "change input.data": "updateData"
+      "click .delete a": "deletePowerUp"
     },
     
     closePopup: function closePopup(ev) {
@@ -336,7 +336,11 @@ var PowerUp = {
         var dataElem = $(dataInputs[i]);
         dataAttr[dataElem.attr('name')] = dataElem.val();
       }
-          
+            
+      for (prop in dataAttr) {
+        powerUp.attributes.metadata[prop] = dataAttr[prop];
+      }
+    
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
       $.post(powerUpUrl, dataAttr, function (data) {
         console.log(data);
