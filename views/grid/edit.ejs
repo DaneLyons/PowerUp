@@ -60,8 +60,9 @@
 		  <% } else { %>
 		    <% var i; %>
 		    <% for (i = 0; i < grid.dataTypes.length; i++) { %>
+		      <% var dataType = grid.dataTypes[i]; %>
+		      <% if (!dataType) { continue; } %>
 		      <div class="field">
-  		      <% var dataType = grid.dataTypes[i]; %>
   		      <% if (i === 0) { %>
   		        <label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
   		      <% } else { %>
@@ -69,7 +70,7 @@
   		      <% } %>
 		      
   		      <input type="text" name="grid[dataTypes][<%- i %>][name]"
-  		        value="<%- grid.dataTypes[i].name %>" class="med" />
+  		        value="<%- dataType.name %>" class="med" />
   		      
       			<select name="grid[dataTypes][0][dataType]" class="small">
       			  <% var types = ['number', 'text']; %>
@@ -84,6 +85,16 @@
       			</select>
       		</div>
   		  <% } %>
+  		  
+  		  <div class="field">
+  		    <label>DATA <%- i %></label>
+  				<input type="text" name="grid[dataTypes][<%- i %>][name]" value=""
+    			  class="med" />
+    			<select name="grid[dataTypes][<%- i %>][dataType]" class="small">
+    				<option value="number">Number</option>
+    				<option value="text">Text</option>
+    			</select>
+  		  </div>
 		  <% } %>
 		</div>
 	

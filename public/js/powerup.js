@@ -252,7 +252,7 @@ var PowerUp = {
             <% if (!dataType) { return; } %>\
             <div class="data">\
               <label><%- dataType.name %></label>\
-              <input type="text" name="<%- dataType.name %>" class="data"\
+              <input type="<%- dataType.dataType %>" name="<%- dataType.name %>" class="data"\
               <% if (typeof metadata !== "undefined" && metadata[dataType.name]) { %> \
                 value="<%- metadata[dataType.name] %>" \
               <% } %> \
