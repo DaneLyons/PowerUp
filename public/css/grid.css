@@ -704,3 +704,10 @@ body {
 #popup .close:hover {
   opacity:.3;
 }
+
+#popup .add {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 14px;
+}

@@ -260,10 +260,9 @@ var PowerUp = {
           <% }); %>\
         <% } %>\
         \
-        <a href="<%- window.location + "/edit" %>" class="button">\
-          ADD DATA\
-        </a>\
-        \
+        <div class="add">\
+          <a href="<%- window.location + "/edit" %>">Add Data</a>\
+        </div>\
         <div class="delete">\
           <a href="#">Delete PowerUp</a>\
         </div>\
@@ -321,7 +320,6 @@ var PowerUp = {
         type: "DELETE",
         success: function (res) {
           var sel = "#grid li:eq(" + powerUp.attributes.position + ")";
-          console.log(sel);
           $(sel).remove();
         }
       });
@@ -338,7 +336,6 @@ var PowerUp = {
         var dataElem = $(dataInputs[i]);
         dataAttr[dataElem.attr('name')] = dataElem.val();
       }
-      console.log(dataAttr);
           
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
       $.post(powerUpUrl, dataAttr, function (data) {
