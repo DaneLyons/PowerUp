@@ -191,16 +191,27 @@ exports.gridUpdate = function (req, res) {
     grid.name = req.body.grid.name;
     grid.isPrivate = req.body.grid.isPrivate;
     
-    console.log(util.inspect(req.body.grid, false, null));
-    
     var dataTypes = req.body.grid.dataTypes || [];
     for (var i = 0; i < dataTypes.length; i++) {
-      var field = dataTypes[i];
-      if (!field.name || field.name.length === 0) {
-        delete dataTypes[i];
+      var typ = dataTypes[i];
+      if (typ === null || typeof typ === 'undefined') {
+        if (typeof typ.name === null || typeof typ.name === 'undefined' || typ.name.length === 0) {
+          delete dataTypes[i];
+        }
       }
     }
-    grid.dataTypes = dataTypes;
+    
+    for (i = 0; i < dataTypes.length; i++) {
+      var field = dataTypes[i];
+      var exists = false;
+      for (var j = 0; j < grid.dataTypes.length; j++) {
+        if (!grid.dataTypes[j]) { continue; }
+        if (grid.dataTypes[j].name === field.name) {
+          exists = true;
+        }
+      }
+      if (!exists && field.name.length > 0) { grid.dataTypes.push(field); }
+    }
     
     grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ")
       .replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '')
