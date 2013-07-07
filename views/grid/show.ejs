@@ -223,6 +223,7 @@ body {
 <script type="text/javascript">
   $(function () {
     var Grid = PowerUp.Models.Grid,
+      User = PowerUp.Models.User,
       GridView = PowerUp.Views.GridView,
       GridContentView = PowerUp.Views.GridContentView;
     
@@ -236,8 +237,13 @@ body {
       el: $("#content"),
       model: grid
     });
+    
+    <% if (typeof currentUser !== 'undefined') { %>
+       PowerUp.currentUser = new User(
+         JSON.parse('<%- JSON.stringify(currentUser) %>'));
+    <% } %>
   });
-
+  
 	var margin = {top: 60, right: 20, bottom: 30, left: 50},
 	    width = 700 - margin.left - margin.right,
 	    height = 300 - margin.top - margin.bottom;

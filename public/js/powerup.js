@@ -256,6 +256,9 @@ var PowerUp = {
               <% if (typeof metadata !== "undefined" && metadata[dataType.name]) { %> \
                 value="<%- metadata[dataType.name] %>" \
               <% } %> \
+              <% if (!PowerUp.currentUser || PowerUp.currentUser.id !== user.id) { %>\
+                readonly\
+              <% } %>\
               />\
             </div>\
           <% }); %>\
@@ -343,15 +346,20 @@ var PowerUp = {
       }
     
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
-      $.post(powerUpUrl, dataAttr, function (data, status) {
-        if (status === "success") {
-          var successMsg = popupView.$(".success");
-          successMsg.css("opacity", 1);
-          setTimeout(function () {
-            successMsg.animate({
-              opacity: 0
-            }, 500);
-          }, 1000);
+      $.ajax({
+        type: "POST",
+        url: powerUpUrl,
+        data: dataAttr,
+        statusCode: {
+          200: function (data) {
+            var successMsg = popupView.$(".success");
+            successMsg.css("opacity", 1);
+            setTimeout(function () {
+              successMsg.animate({
+                opacity: 0
+              }, 500);
+            }, 1000);
+          }
         }
       });
     }
