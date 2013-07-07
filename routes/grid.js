@@ -196,7 +196,7 @@ exports.gridUpdate = function (req, res) {
     var dataTypes = req.body.grid.dataTypes || [];
     for (var i = 0; i < dataTypes.length; i++) {
       var field = dataTypes[i];
-      if (!field.name) {
+      if (!field.name || field.name.length === 0) {
         delete dataTypes[i];
       }
     }

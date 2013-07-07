@@ -53,6 +53,7 @@ $(function () {
     
     var elem = $(this);
     var text = elem.data('info');
+    if (!text) { return; }
     var info = $("<div id='info'>"+text+"</div>");
     var pos = elem.offset();
     info.css({ top:pos.top, left:(pos.left-230)});
