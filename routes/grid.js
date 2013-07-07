@@ -185,24 +185,30 @@ exports.gridCreate = function (req, res) {
 
 exports.gridUpdate = function (req, res) {  
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
+    if (req.body.grid.name) {
+      
+    }
     grid.name = req.body.grid.name;
     grid.isPrivate = req.body.grid.isPrivate;
     
-    for (field in req.body.grid.dataTypes) {
-      if (!field.hasOwnProperty('name')) {
-        delete req.body.grid.dataTypes[field];
+    console.log(util.inspect(req.body.grid, false, null));
+    
+    var dataTypes = req.body.grid.dataTypes || [];
+    for (var i = 0; i < dataTypes.length; i++) {
+      var field = dataTypes[i];
+      if (!field.name) {
+        delete dataTypes[i];
       }
     }
-    grid.dataTypes = req.body.grid.dataTypes;
+    grid.dataTypes = dataTypes;
     
     grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ")
       .replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '')
       .replace(/\"/g, "&#34;")
       .replace(/\'/g, "&#39;");
     var newButtons = req.body.gridButtons;
-    
+
     if (typeof newButtons !== 'undefined') {
-      console.log(util.inspect(newButtons, false, null));
       GridButton.find({
         _id: { $in: Object.keys(newButtons) }
       }, function (err, gridButtons) {
@@ -250,6 +256,7 @@ exports.gridUpdate = function (req, res) {
       });
     } else {
       grid.save(function (err, grid) {
+        if (err) { console.log(err); }
         res.redirect('/grids/' + grid.slug);
       });
     }

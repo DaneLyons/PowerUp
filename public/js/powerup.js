@@ -147,7 +147,7 @@ var PowerUp = {
               user: PowerUp.user
             }
           });
-          console.log(idx);
+
           var newSquare = $("ul#grid li:eq("+idx+")");
           newSquare.removeClass('inactive');
           newSquare.addClass('active');
