@@ -244,6 +244,7 @@ var PowerUp = {
         <button class="close"></button>\
         <div class="time">\
           <%- createdAt %>\
+          <span class="success">Data saved!</span>\
         </div>\
         \
         <% if (grid.attributes.dataTypes && grid.attributes.dataTypes.length) { %>\
@@ -344,6 +345,13 @@ var PowerUp = {
       var powerUpUrl = "/powerups/" + powerUp.attributes._id + "/data";
       $.post(powerUpUrl, dataAttr, function (data) {
         console.log(data);
+        var successMsg = popupView.$(".success");
+        successMsg.css("opacity", 1);
+        setTimeout(function () {
+          successMsg.animate({
+            opacity: 0
+          }, 500);
+        }, 1000);
       });
     }
     

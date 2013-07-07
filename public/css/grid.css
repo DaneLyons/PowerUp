@@ -711,3 +711,9 @@ body {
   left: 16px;
   font-size: 14px;
 }
+
+#popup .success {
+  opacity: 0;
+  position: relative;
+  left: 22px;
+}
