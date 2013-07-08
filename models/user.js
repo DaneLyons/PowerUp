@@ -26,7 +26,7 @@ var userSchema = new Schema({
   safe: true
 });
 
-gridSchema.pre('save', function (next) {
+userSchema.pre('save', function (next) {
   if (this.isNew) {
     this.createdAt = new Date();
   }
