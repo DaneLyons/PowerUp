@@ -38,12 +38,15 @@ body {
 }
 
 #content .progress {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   color:#fff;
   text-shadow:-1px -1px 0 rgba(0,0,0,.7);
   width:100%;
   position:relative;
   margin-top:0;
   top:60px;
+  text-align:center;
+  font-size:200px;
 }
 
 #content .progress .percent {
