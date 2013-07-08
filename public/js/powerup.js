@@ -283,8 +283,9 @@ var PowerUp = {
       $("#popup").remove();
       PowerUp.fuck = this.model.attributes;
       
-      var createdAt = new Date(this.model.attributes.createdAt);
+      var createdAt = this.model.attributes.createdAt;
       if (createdAt) {
+        createdAt = new Date(createdAt);
         var createdStr = createdAt.getMonth() + 1 + "/" + 
           createdAt.getDate() + "/" + createdAt.getFullYear() + ", " +
           createdAt.getHours() + ":" + createdAt.getMinutes();
