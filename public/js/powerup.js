@@ -294,6 +294,8 @@ var PowerUp = {
         if (sec < 9) { sec = "0" + sec }
         createdStr = createdStr + ":" + sec;
         this.model.attributes.createdAt = createdStr;
+      } else {
+        this.model.attributes.createdAt = "";
       }
 
       this.$el.html(this.template(this.model.attributes));
