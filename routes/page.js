@@ -228,3 +228,7 @@ exports.start = function (req, res) {
     }
   });
 };
+
+exports.zeldaEgg = function (req, res) {
+  res.redirect("http://youtu.be/b3KUyPKbR7Q");
+};
