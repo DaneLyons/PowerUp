@@ -192,20 +192,22 @@ exports.gridUpdate = function (req, res) {
     grid.isPrivate = req.body.grid.isPrivate;
     
     var dataTypes = req.body.grid.dataTypes || [];
-    for (var i = 0; i < dataTypes.length; i++) {
-      var typ = dataTypes[i];
-      if (typ === null || typeof typ === 'undefined') {
-        if (typeof typ.name === null || typeof typ.name === 'undefined' || typ.name.length === 0) {
-          delete dataTypes[i];
-        }
-      }
-    }
-    
     for (i = 0; i < dataTypes.length; i++) {
       var field = dataTypes[i];
+      if (field === null || typeof field === 'undefined') {
+        delete dataTypes[i];
+        continue;
+      } else {
+        if (typeof field.name === null || typeof field.name === 'undefined' || field.name.length === 0) {
+          delete dataTypes[i];
+          continue;
+        }
+      }
+      
       var exists = false;
       for (var j = 0; j < grid.dataTypes.length; j++) {
         if (!grid.dataTypes[j]) { continue; }
+        if (!grid.dataTypes[j].name) { delete grid.dataTypes[j]; continue; }
         if (grid.dataTypes[j].name === field.name) {
           exists = true;
         }
