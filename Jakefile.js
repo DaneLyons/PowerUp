@@ -142,17 +142,17 @@ task('default', ["load-props", "create-versioned-dir", "move-files", "symlink-li
 			spawn = require('child_process').spawn,
 			upstart;
 	
-	console.log(("    Executing command:\n    $ monit stop " + properties.siteName + "-" + properties.state).grey);
+	console.log(("    Executing command:\n    $ sudo monit stop " + properties.siteName + "-" + properties.state).grey);
 	// Stop the old version of the app and start the new version with monit
-	exec("monit stop " + properties.siteName + "-" + properties.state, function (error, stdout, stderr) {
+	exec("sudo monit stop " + properties.siteName + "-" + properties.state, function (error, stdout, stderr) {
 
 		if (error) {
 			throw error;
 		} else {
-			console.log(("\n    Executing command:\n    $ monit start " +
+			console.log(("\n    Executing command:\n    $ sudo monit start " +
 												properties.siteName + "-" + properties.state).grey);
 
-			exec("monit start " + properties.siteName + "-" + properties.state, function (error, stdout, stderr) {
+			exec("sudo monit start " + properties.siteName + "-" + properties.state, function (error, stdout, stderr) {
 
 				console.log("\n + Old instance killed successfully\n".green);
 				if (error) {
