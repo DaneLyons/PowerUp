@@ -14,12 +14,8 @@ var powerUpSchema = new Schema({
 });
 
 powerUpSchema.pre('save', function (next) {
-  if (!this.createdAt) {
-    if (this.updatedAt) {
-      this.createdAt = this.updatedAt;
-    } else {
-      this.createdAt = new Date();
-    }
+  if (this.isNew) {
+    this.createdAt = new Date();
   }
   
   next();

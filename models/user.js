@@ -26,13 +26,9 @@ var userSchema = new Schema({
   safe: true
 });
 
-userSchema.pre('save', function (next) {
-  if (!this.createdAt) {
-    if (this.updatedAt) {
-      this.createdAt = this.updatedAt;
-    } else {
-      this.createdAt = new Date();
-    }
+gridSchema.pre('save', function (next) {
+  if (this.isNew) {
+    this.createdAt = new Date();
   }
   
   next();
