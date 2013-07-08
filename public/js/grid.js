@@ -7,4 +7,21 @@ $(function () {
       $(this).remove();
     });
   });
+  
+  $('#progress_section .nav button').on('click',function(){
+    $('#progress_section').attr('class',$(this).attr('class'));
+  });
+  
+  $(document).keydown(function(ev){   
+    if($('#grid li.current').length > 0){
+      if(ev.which == 37){
+        //prev
+        $('#grid li.current').prev('.active').trigger('click');
+      }
+      if(ev.which == 39){
+        //next
+        $('#grid li.current').next('.active').trigger('click');
+      }
+    }
+  });
 });

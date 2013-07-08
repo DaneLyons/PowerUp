@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
   uuid = require('node-uuid'),
   Schema = mongoose.Schema,
   Grid = require('./grid'),
@@ -27,7 +26,17 @@ var userSchema = new Schema({
   safe: true
 });
 
-userSchema.plugin(timestamps);
+userSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
 
 userSchema.statics.bcryptPassword = function (userParams, done) {
   bcrypt.genSalt(10, function (err, salt) {
@@ -119,7 +128,7 @@ userSchema.statics.findOrCreate = function(userParams, done) {
       } else {
         user.validPassword(userParams.password, function (err, valid) {
           if (!valid) {
-            return done(null, false, { message: 'Incorrect password.' });
+            return done(new Error("Invalid email or password."));
           }
           return done(null, user);
         });

@@ -1,78 +1,127 @@
 <% include ../partials/head.ejs %>
 
-<h1>EDIT GRID</h1>
-<form action="/grids/<%= grid.slug %>" method="post" id="new_grid">
-  <div class="field">
-		<label>GOAL</label>
-    <input type="text" name="grid[name]" class="goal required" value="<%= grid.name %>" />
-  </div>
+<div id="grid_form">
+	<h1>EDIT GRID</h1>
+	<form action="/grids/<%= grid.slug %>" method="post" id="new_grid">
+	  <div class="field">
+			<label data-info="Try keeping things simple and clear. It's generally a good idea to exclude numbers and specifics. i.e. 'Lose Weight' instead of 'Lose 50 lbs'.">GOAL</label>
+	    <input type="text" name="grid[name]" class="goal required" value="<%= grid.name %>" />
+	  </div>
 
-	<div class="field textarea">
-		<label>ABOUT</label>
-		<% var about_text = "" %>
-		<% if(grid.about){ %>
-			<% about_text = grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") %>
-		<% } %>
-		<textarea name="grid[about]"><%= about_text %></textarea>
-		<div class="clear"></div>
-	</div>
-
-	<div class="field">
-		<label>ACCESS</label>
-		<select name="grid[isPrivate]">
-			<% if(!grid.isPrivate){ %>
-				<option value="0" selected>Public</option>
-				<option value="1">Private</option>
-			<% }else{ %>
-				<option value="0">Public</option>
-				<option value="1" selected>Private</option>
+		<div class="field textarea">
+			<label data-info="Talk about what you'd like to accomplish and why. Use markdown for formatting.">ABOUT</label>
+			<% var about_text = "" %>
+			<% if(grid.about){ %>
+				<% about_text = grid.about.replace(/&#34;/g,'"').replace(/&#39;/g, "'") %>
 			<% } %>
-		</select>
-  </div>
-  
-  <div class="field">
-		<label>WORK UNITS</label>
-		
-		<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
-		  <% var btn = grid.gridButtons[i]; %>
-    	<input type="text" name="gridButtons[<%- btn._id %>]"
-    	  value="<%= btn.workUnit %>" class="small work_unit required<% if (i === 2) { %> last <% } %>" />
-    <% } %>
-    
-    <% for (var i = (3 - grid.gridButtons.length); i > 0; i--) { %>
-      <input type="text" name="workUnits[]" value="" class="small work_unit required <% if (i === 1) { %> last <% } %>" />
-		<% } %>
-  </div>
+			<textarea name="grid[about]"><%= about_text %></textarea>
+			<div class="clear"></div>
+		</div>
 
-	<div class="field">
-		<% var grid_master = "YOU" %>
-		<% if(grid.user.name){ %>
-			<% grid_master = grid.user.name %>
-		<% } %>
-		<label>PLAYER 1</label><input type="text" disabled value="<%= grid_master %>" />
-	</div>
+		<div class="field">
+			<label data-info="If you set your grid to private only you and invited collaborators will have access.">ACCESS</label>
+			<select name="grid[isPrivate]">
+				<% if(!grid.isPrivate){ %>
+					<option value="0" selected>Public</option>
+					<option value="1">Private</option>
+				<% }else{ %>
+					<option value="0">Public</option>
+					<option value="1" selected>Private</option>
+				<% } %>
+			</select>
+	  </div>
+  
+	  <div class="field">
+			<label data-info="Break down your goal into 1-3 small, repeatable tasks. i.e. 'Workout for 10 mins', 'Study for 10 mins' or 'Send an email'.">TASKS</label>
+		
+			<% for (var i = 0; i < grid.gridButtons.length; i++) { %>
+			  <% var btn = grid.gridButtons[i]; %>
+	    	<input type="text" name="gridButtons[<%- btn._id %>]"
+	    	  value="<%= btn.workUnit %>" class="small work_unit required<% if (i === 2) { %> last <% } %>" />
+	    <% } %>
+    
+	    <% for (var i = (3 - grid.gridButtons.length); i > 0; i--) { %>
+	      <input type="text" name="workUnits[]" value="" class="small work_unit required <% if (i === 1) { %> last <% } %>" />
+			<% } %>
+	  </div>
+
+		<div id="data_fields">
+		  <% if (grid.dataTypes.length === 0) { %>
+		    <div class="field">
+  				<label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
+
+    			<input type="text" name="grid[dataTypes][0][name]" value=""
+    			  class="med" />
+    			<select name="grid[dataTypes][0][dataType]" class="small">
+    				<option value="number">Number</option>
+    				<option value="text">Text</option>
+    			</select>
+  		  </div>
+		  <% } else { %>
+		    <% var i; %>
+		    <% for (i = 0; i < grid.dataTypes.length; i++) { %>
+		      <% var dataType = grid.dataTypes[i]; %>
+		      <% if (!dataType) { continue; } %>
+		      <div class="field">
+  		      <% if (i === 0) { %>
+  		        <label data-info="Great for adding context to your tasks. Try adding notes, weight, time, scores, mood or whatever you want to quantify/reference later.">DATA</label>
+  		      <% } else { %>
+  		        <label>DATA <%- i + 1 %></label>
+  		      <% } %>
+		      
+  		      <input type="text" name="grid[dataTypes][<%- i %>][name]"
+  		        value="<%- dataType.name %>" class="med" />
+  		      
+      			<select name="grid[dataTypes][<%- i %>][dataType]" class="small">
+      			  <% var types = ['number', 'text']; %>
+      			  <% for (var j = 0; j < types.length; j++) { %>
+      			    <option value="<%- types[j] %>"
+      			      <% if (types[j] === dataType.dataType) { %>
+      			        selected="selected"
+      			      <% } %> >
+      			      <%- types[j].charAt(0).toUpperCase() + types[j].slice(1) %>
+      			    </option>
+      			  <% } %>
+      			</select>
+      		</div>
+  		  <% } %>
+  		  
+  		  <div class="field">
+  		    <label>DATA <%- i + 1 %></label>
+  				<input type="text" name="grid[dataTypes][<%- i %>][name]"
+  				  class="med" />
+    			<select name="grid[dataTypes][<%- i %>][dataType]" class="small">
+    				<option value="number">Number</option>
+    				<option value="text">Text</option>
+    			</select>
+  		  </div>
+  		  <% delete i; %>
+		  <% } %>
+		</div>
 	
-	<% for (var i = 0; i < grid.collaborators.length; i++) { %>
-	  <% var user = grid.collaborators[i]; %>
-  	<div class="field">
-  		<a href="#" class="delete user" data-user="<%- user._id %>" data-grid-slug="<%- grid.slug %>">DELETE</a>
-  		<label>PLAYER <%- i + 2 %></label>
-  		<input type="text" disabled value="<%- user.name || user.email %>" />
-  	</div>
-  <% } %>
+		<% for (var i = 0; i < grid.collaborators.length; i++) { %>
+		  <% var user = grid.collaborators[i]; %>
+	  	<div class="field">
+	  		<a href="#" class="delete user" data-user="<%- user._id %>" data-grid-slug="<%- grid.slug %>">DELETE</a>
+	  		<label data-info="This is someone you've invited to join. If they abuse their collaboration privileges, delete them and their PowerUps will be removed.">PLAYER <%- i + 2 %></label>
+	  		<input type="text" disabled value="<%- user.name || user.email %>" />
+	  	</div>
+	  <% } %>
   
-  <% for (var i = 0; i < invites.length; i++) { %>
-	  <% var invite = invites[i]; %>
-  	<div class="field">
-  		<a href="#" class="delete invite" data-invite="<%- invite._id %>">
-  		  DELETE</a>
-  		<label>PLAYER <%- i + 2 + grid.collaborators.length %></label>
-  		<input type="text" disabled value="<%- invite.toParams.email %> (invite sent)" />
-  	</div>
-  <% } %>
+	  <% for (var i = 0; i < invites.length; i++) { %>
+		  <% var invite = invites[i]; %>
+	  	<div class="field">
+	  		<a href="#" class="delete invite" data-invite="<%- invite._id %>">
+	  		  DELETE</a>
+	  		<label data-info="This is someone who hasn't yet accepted your invite.">PLAYER <%- i + 2 + grid.collaborators.length %></label>
+	  		<input type="text" disabled value="<%- invite.toParams.email %> (invite sent)" />
+	  	</div>
+	  <% } %>
   
-	<button type="submit" class="submit">Save</button>
-</form>
+		<button type="submit" class="submit">Save</button>
+	</form>
+</div>
 
 <script type="text/javascript" src="/js/edit_grid.js"></script>
+
 <% include ../partials/footer.ejs %>

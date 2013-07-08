@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-  timestamps = require('mongoose-timestamp'),
   inflect = require('i')(),
   util = require('util'),
   Schema = mongoose.Schema;
@@ -11,8 +10,14 @@ var gridSchema = new Schema({
   stats: {
     powerUps: Number
   },
+  dataTypes: [
+    {
+      dataType: { type: String },
+      name: { type: String, required: true }
+    }
+  ],
   powerUps: [ { type: Schema.ObjectId, ref: 'PowerUp' } ],
-  gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' }],
+  gridButtons: [ { type: Schema.ObjectId, ref: 'GridButton' } ],
   user: { type: Schema.ObjectId, ref: 'User' },
   isPrivate: { type: Boolean, default: false },
   collaborators: [ { type: Schema.ObjectId, ref: 'User' } ],
@@ -25,7 +30,17 @@ var gridSchema = new Schema({
   safe: true
 });
 
-gridSchema.plugin(timestamps);
+gridSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
 
 gridSchema.pre('save', function (next) {  
   if (!this.slug) {

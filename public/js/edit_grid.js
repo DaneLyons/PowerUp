@@ -30,4 +30,38 @@ $(function () {
       parent.remove();
     });
   });
+  
+  $('#data_fields').on('keydown', "input", function(){
+    if($("#data_fields input").last().val() != ""){
+      var count = $("#data_fields input").length;
+      var new_field = $('<div class="field">\
+  			<label>DATA '+(count+1)+'</label>\
+  			<input type="text" name="grid[dataTypes][' + count + '][name]"\
+  			  value="" placeholder="optional" class="med" />\
+  			<select name="grid[dataTypes][' + count + '][dataType]"\
+  			  class="small">\
+  				<option value="number">Number</option>\
+  				<option value="text">Text</option>\
+  			</select>\
+  	  </div>');
+  	  $("#data_fields").append(new_field);
+    }
+  });
+  
+  $('label').on('mouseover',function(){
+    $('#info').remove();
+    
+    var elem = $(this);
+    var text = elem.data('info');
+    if (!text) { return; }
+    var info = $("<div id='info'>"+text+"</div>");
+    var pos = elem.offset();
+    info.css({ top:pos.top, left:(pos.left-230)});
+    
+    $('body').append(info);
+  });
+  
+  $('label').on('mouseout',function(){
+    $('#info').remove();
+  });
 });

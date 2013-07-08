@@ -2,7 +2,6 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   uuid = require('node-uuid'),
   util = require('util'),
-  timestamps = require('mongoose-timestamp'),
   User = require('./user'),
   Grid = require('./grid'),
   Mailer = require('../lib/mailer');
@@ -22,7 +21,17 @@ var inviteSchema = new Schema({
   safe: true
 });
 
-inviteSchema.plugin(timestamps);
+inviteSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
 
 inviteSchema.post('save', function (invite) {
   if (!invite.isSent) {

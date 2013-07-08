@@ -118,6 +118,7 @@ exports.gridShow = function (req, res) {
                   if(grid.about){
                     about = grid.about;
                   }
+
                   res.render('grid/show', {
                     grid: grid,
                     collaborators: collaborators,
@@ -125,7 +126,8 @@ exports.gridShow = function (req, res) {
                     invites: invites,
                     gridCount: user.grids.length,
                     aboutHTML: markdown.toHTML( about ),
-                    "stylesheets":["grid"]
+                    "stylesheets":["grid"],
+                    "javascripts":["d3.v3.min"]
                   });
                 }
               );
@@ -155,7 +157,7 @@ exports.gridEdit = function (req, res) {
         res.render('grid/edit', {
           grid: grid,
           invites: invites,
-          "stylesheets":["page","settings","auth","start"]
+          "stylesheets":["page","settings","auth","start","grid_edit"]
         });
       });
     }
@@ -163,6 +165,7 @@ exports.gridEdit = function (req, res) {
 };
 
 exports.gridCreate = function (req, res) {
+  console.log(req.body.grid);
   console.error(req.user);
   if (!req.user) {
     res.redirect('/');
@@ -188,14 +191,45 @@ exports.gridCreate = function (req, res) {
   });
 };
 
-exports.gridUpdate = function (req, res) {
+exports.gridUpdate = function (req, res) {  
   Grid.findOne({ slug: req.params.slug }, function (err, grid) {
+    if (req.body.grid.name) {
+      
+    }
     grid.name = req.body.grid.name;
     grid.isPrivate = req.body.grid.isPrivate;
-    grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ").replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '').replace(/\"/g, "&#34;").replace(/\'/g, "&#39;");
+    
+    var dataTypes = req.body.grid.dataTypes || [];
+    for (i = 0; i < dataTypes.length; i++) {
+      var field = dataTypes[i];
+      if (field === null || typeof field === 'undefined') {
+        delete dataTypes[i];
+        continue;
+      } else {
+        if (typeof field.name === null || typeof field.name === 'undefined' || field.name.length === 0) {
+          delete dataTypes[i];
+          continue;
+        }
+      }
+      
+      var exists = false;
+      for (var j = 0; j < grid.dataTypes.length; j++) {
+        if (!grid.dataTypes[j]) { continue; }
+        if (!grid.dataTypes[j].name) { delete grid.dataTypes[j]; continue; }
+        if (grid.dataTypes[j].name === field.name) {
+          exists = true;
+        }
+      }
+      if (!exists && field.name.length > 0) { grid.dataTypes.push(field); }
+    }
+    
+    grid.about = req.body.grid.about.replace(/(\r\n|\n|\r)/gm," ")
+      .replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '')
+      .replace(/\"/g, "&#34;")
+      .replace(/\'/g, "&#39;");
     var newButtons = req.body.gridButtons;
+
     if (typeof newButtons !== 'undefined') {
-      console.log(util.inspect(newButtons, false, null));
       GridButton.find({
         _id: { $in: Object.keys(newButtons) }
       }, function (err, gridButtons) {
@@ -243,6 +277,7 @@ exports.gridUpdate = function (req, res) {
       });
     } else {
       grid.save(function (err, grid) {
+        if (err) { console.log(err); }
         res.redirect('/grids/' + grid.slug);
       });
     }

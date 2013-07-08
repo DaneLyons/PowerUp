@@ -9,6 +9,18 @@ var gridButtonSchema = new Schema({
   safe: true
 });
 
+gridButtonSchema.pre('save', function (next) {
+  if (!this.createdAt) {
+    if (this.updatedAt) {
+      this.createdAt = this.updatedAt;
+    } else {
+      this.createdAt = new Date();
+    }
+  }
+  
+  next();
+});
+
 gridButtonSchema.statics.findOrCreate = function (opts, done) {
   GridButton.findOne(opts, function (err, btn) {
     if (!btn) {

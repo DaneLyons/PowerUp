@@ -4,7 +4,7 @@ body {
   background:url('/img/bg_3.jpg') no-repeat center top;
   background:url('/img/country-road.jpg') no-repeat center top;
   background:url('/img/bg_2.png');
-  background:rgb(60, 61, 63);
+  background: rgb(60, 61, 63);
   background-size:auto;
 }
 
@@ -38,16 +38,94 @@ body {
 }
 
 #content .progress {
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
-  text-align:center;
-  font-size:200px;
   color:#fff;
   text-shadow:-1px -1px 0 rgba(0,0,0,.7);
   width:100%;
+  position:relative;
+  margin-top:0;
+  top:60px;
+}
+
+#content .progress .percent {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-align:center;
+  font-size:200px;
   position:absolute;
-  left:0;
+  width:100%;
+  text-align:center;
   top:50%;
-  margin-top:-50px;
+  line-height:0;
+}
+
+#content .progress #progress_section {
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+}
+
+#content .progress #progress_section .nav {
+  position:absolute;
+  top:10px;
+  left:10px;
+}
+
+#content .progress #progress_section .nav button {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing:1px;
+  color: #fff;
+  background: rgba(0,0,0,.1);
+  display: block;
+  padding: 8px 12px 7px 12px;
+  text-align: center;
+  float: left;
+  margin-right: 10px;
+}
+
+#content .progress #progress_section button:hover {
+  background: rgba(0,0,0,.50);
+}
+
+#content .progress #progress_section .s1,
+#content .progress #progress_section .s2,
+#content .progress #progress_section .s3,
+#content .progress #progress_section .s4,
+#content .progress #progress_section .s5,
+#content .progress #progress_section .s6,
+#content .progress #progress_section .s7,
+#content .progress #progress_section .s8,
+#content .progress #progress_section .s9,
+#content .progress #progress_section .s10 {
+  display:none;
+}
+
+#content .progress #progress_section.s1 div.s1,
+#content .progress #progress_section.s2 div.s2,
+#content .progress #progress_section.s3 div.s3,
+#content .progress #progress_section.s4 div.s4,
+#content .progress #progress_section.s5 div.s5,
+#content .progress #progress_section.s6 div.s6,
+#content .progress #progress_section.s7 div.s7,
+#content .progress #progress_section.s8 div.s8,
+#content .progress #progress_section.s9 div.s9,
+#content .progress #progress_section.s10 div.s10 {
+  display:block;
+}
+
+#content .progress #progress_section.s1 button.s1,
+#content .progress #progress_section.s2 button.s2,
+#content .progress #progress_section.s3 button.s3,
+#content .progress #progress_section.s4 button.s4,
+#content .progress #progress_section.s5 button.s5,
+#content .progress #progress_section.s6 button.s6,
+#content .progress #progress_section.s7 button.s7,
+#content .progress #progress_section.s8 button.s8,
+#content .progress #progress_section.s9 button.s9,
+#content .progress #progress_section.s10 button.s10 {
+  background: rgba(0,0,0,1);
 }
 
 #content .heading h1 {
@@ -112,7 +190,7 @@ body {
 
 #content .legend .black {
   background:rgba(57,57,57,1);
-  background:#68dcaa;
+  background: #68dcaa;
 }
 #content .legend .black:hover {
   background:rgba(50,50,50,1);
@@ -173,6 +251,7 @@ body {
 
 #grid li {
   position:relative;
+  overflow: hidden;
   z-index:2;
 }
 
@@ -194,10 +273,11 @@ body {
   float:left;
 }
 
-#grid li div {
+#grid li .square {
   width:90%;
   height:90%;
   margin:5%;
+  overflow: hidden;
   background:rgba(0,0,0,.15);
   -webkit-transition:all linear 400ms;
   -webkit-transform: rotateY(360deg);
@@ -209,24 +289,46 @@ body {
 
 #grid li.active div {
   background:rgba(57,57,57,1);
-  background:#68dcaa;
+  background: #68dcaa;
   -webkit-transform: rotateY(180deg);
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  position: relative;
 }
 
-#grid li.red div {
+#grid li.active {
+  cursor: pointer;
+}
+
+#grid li.active .square .meta {
+  background: #ec2;
+  width: 60%;
+  height: 60%;
+  margin:5%;
+  position: relative;
+  bottom: 7px;
+  right: 7px;
+  -webkit-transition:all linear 0ms;
+  -moz-transition:all linear 0ms;
+  transition:all linear 0ms;
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+  z-index: 10;
+}
+
+#grid li.red .square {
   background:rgba(203,0,0,1);
-  background:#f85b54;
+  background: #f85b54;
 }
 
-#grid li.blue div {
+#grid li.blue .square {
   background:rgba(6,146,192,1);
-  background:#36779c;
+  background: #36779c;
 }
 
-#grid li.green div {
-  background:rgba(0,45,0,.75);
+#grid li.green .square {
+  background:rgba(0,45,0,1);
 }
 
 #milestone {
@@ -314,7 +416,7 @@ body {
   text-transform: uppercase;
   font-size: 18px;
   color: #fff;
-  background: rgba(0,0,0,.25);
+  background: rgba(0,0,0,.1);
   display: block;
   padding: 10px 15px;
   text-align: center;
@@ -328,7 +430,7 @@ body {
 
 #content .controls button.active:hover,
 #content .controls button.active {
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.85);
 }
 
 #content .controls button .icon {
@@ -506,4 +608,140 @@ body {
   position: absolute;
   left: -8px;
   bottom: 12px;
+}
+
+#content .metadata.section {
+  padding: 12px;
+  height: 400px;
+}
+
+#content .metadata.section h2 {
+  margin-top: 56px;
+  margin-bottom: 12px;
+}
+
+#content .metadata.section .nav .icon {
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+#content .metadata.section .nav {
+  height: auto;
+  padding: 6px;
+  margin: 8px 12px;
+  float: left;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.metadata.section form.metadata, .metadata.section form.metadata .input {
+  float: left;
+  margin-top: 4px;
+}
+
+.metadata.section form.metadata input[type="text"] {
+  width: 300px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.metadata.section form.metadata textarea.metadata {
+  font-size: 12px;
+}
+
+.metadata.section form.metadata .submit {
+  margin-top: 8px;
+}
+
+#popup {
+  position:absolute;
+  z-index:3000;
+  background:#fff url('/img/icons/popup_arrows.png') no-repeat bottom right;
+  width:300px;
+  padding:15px;
+  -webkit-box-shadow:0 0 20px rgba(0,0,0,.85);
+  color:#444;
+}
+
+#popup h1 {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-decoration:uppercase;
+  font-size: 20px;
+  margin-bottom:2px;
+}
+
+#popup .time {
+  font-size:14px;
+  color:#777;
+  padding-bottom:15px;
+}
+
+#popup .data {
+  clear:left;
+}
+
+#popup .data label {
+  width:120px;
+  padding-right:10px;
+  text-align:right;
+  font-size:14px;
+  color:#777;
+  display:block;
+  padding-top:7px;
+  float:left;
+}
+
+#popup .data input {
+  width:155px;
+  padding:5px;
+  border:1px solid #ddd;
+}
+
+#popup .arrow {
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#fff;
+  top:30px;
+  left:-10px;
+  -webkit-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+#popup .close {
+  position:absolute;
+  top:15px;
+  right:15px;
+  background:transparent url('/img/glyphicons_207_remove_2.png') no-repeat;
+  width:18px;
+  height:18px;
+  padding:0;
+  opacity:.2;
+}
+
+#popup .delete {
+  padding-top:10px;
+  text-align:center;
+}
+
+#popup .delete a {
+  font-size:13px;
+  color:#aaa;
+}
+
+#popup .close:hover {
+  opacity:.3;
+}
+
+#popup .add {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 14px;
+}
+
+#popup .success {
+  opacity: 0;
+  position: relative;
+  left: 22px;
 }
