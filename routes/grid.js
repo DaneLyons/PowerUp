@@ -127,7 +127,7 @@ exports.gridShow = function (req, res) {
                     gridCount: user.grids.length,
                     aboutHTML: markdown.toHTML( about ),
                     "stylesheets":["grid"],
-                    "javascripts":["d3.v3.min"]
+                    "javascripts":[]
                   });
                 }
               );

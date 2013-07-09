@@ -156,7 +156,7 @@ var PowerUp = {
 
           var filledLen = $("#grid li.active").length;
           var grid = gridContentView.model;
-          var grid_progress = $("#content .progress");
+          var grid_progress = $("#content .progress .percent");
           var percent = Math.floor((filledLen / grid.attributes.size) * 100);
           grid_progress.text(percent + '%');
 
