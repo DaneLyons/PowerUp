@@ -271,7 +271,7 @@ var PowerUp = {
           <% }); %>\
         <% } %>\
         \
-        <div class="add" style="display:none">\
+        <div class="add">\
           <a href="<%- window.location + "/edit" %>">Edit</a>\
         </div>\
         <div class="delete">\
