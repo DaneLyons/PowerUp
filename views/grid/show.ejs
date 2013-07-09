@@ -199,9 +199,11 @@
 <script type="text/javascript" src="/js/grid.js"></script>
 <script type="text/javascript" src="/js/powerup.js"></script>
 <script type="text/javascript">
+	var powerups;
   $(function () {
     var Grid = PowerUp.Models.Grid,
       User = PowerUp.Models.User,
+			Powerups = PowerUp.Collections.PowerUps,
       GridView = PowerUp.Views.GridView,
       GridContentView = PowerUp.Views.GridContentView;
     
@@ -210,6 +212,15 @@
       el: $("#grid"),
       model: grid
     });
+
+		powerups = new Powerups(grid.attributes.powerUps);
+		for(var i=0;i<powerups.models.length;i++){
+			powerups.models[i].view = new PowerUp.Views.PowerUpView({
+        el: $("#grid li:eq(" + powerups.models[i].attributes.position + ")"),
+        grid: grid,
+        model: powerups.models[i]
+      });
+		}
     
     new GridContentView({
       el: $("#content"),
