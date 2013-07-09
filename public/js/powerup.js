@@ -250,7 +250,7 @@ var PowerUp = {
         <h1>POWERUP</h1>\
         <button class="close"></button>\
         <div class="time">\
-          <%- createdAt %>\
+          <%- new Date(createdAt).format("mmm dS yyyy, h:MM TT") %>\
           <span class="success">Data saved!</span>\
         </div>\
         \
@@ -271,8 +271,8 @@ var PowerUp = {
           <% }); %>\
         <% } %>\
         \
-        <div class="add">\
-          <a href="<%- window.location + "/edit" %>">Add Data</a>\
+        <div class="add" style="display:none">\
+          <a href="<%- window.location + "/edit" %>">Edit</a>\
         </div>\
         <div class="delete">\
           <a href="#">Delete PowerUp</a>\
