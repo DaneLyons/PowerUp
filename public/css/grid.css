@@ -675,7 +675,7 @@ body {
 #popup .time {
   font-size:14px;
   color:#777;
-  padding-bottom:15px;
+  padding-bottom:35px;
 }
 
 #popup .data {
@@ -723,7 +723,7 @@ body {
 }
 
 #popup .delete {
-  padding-top:10px;
+  padding-top:35px;
   text-align:center;
 }
 

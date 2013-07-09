@@ -303,6 +303,7 @@ var PowerUp = {
       var popup = this.$("#popup");
       var elem = this.model.view.$el;
       var offset = elem.offset();
+      var windowHeight = $(window).height();
       
       popup.css({
         left: (offset.left + elem.width() + 14),
@@ -310,6 +311,21 @@ var PowerUp = {
         opacity: 1
       });
       $("body").append(this.el);
+      
+      var windowHeight = $(window).height();
+      var popupHeight = popup.outerHeight();
+      
+      if((popupHeight+(offset.top- 26)) > windowHeight){
+        var diff = (popupHeight+(offset.top- 26)) - windowHeight;
+        popup.css({
+          top:'-='+(diff+10)
+        });
+        $("#popup .arrow").css({
+          top:'+='+(diff+10)
+        });
+      }
+      
+      
       //popup.animate({ left: '-=10', opacity: 1 }, 300);
     },
     
