@@ -16,6 +16,7 @@ exports.home = function (req, res) {
     }else if(freebies.length<3){
       freebies = "0"+freebies;
     }
+    
     res.render("page/home.ejs", {
       "freebies":freebies,
       "stylesheets":["home"],

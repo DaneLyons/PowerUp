@@ -4,11 +4,13 @@
 	<h1>TRACK YOUR PROGRESS</h1>
 	<p>PowerUp is a personal analytics tool that helps you turn your projects and goals into stories.</p>
 	
-	<p class="freebies">The next
-	<% for(var i=0;i<freebies.length;i++){ %>
-		<strong><%= freebies[i] %></strong>
+	<% if (freebies !== "000") { %>
+  	<p class="freebies">The next
+  	<% for(var i=0;i<freebies.length;i++){ %>
+  		<strong><%= freebies[i] %></strong>
+  	<% } %>
+  	 lucky users get free premium accounts for life!</p>
 	<% } %>
-	 lucky users get free premium accounts for life!</p>
 	
 	<a href="/getting-started" class="button">
 		<img src="/img/icon_white.png" width="30" height="26" />
