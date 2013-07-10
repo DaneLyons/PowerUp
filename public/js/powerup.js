@@ -312,6 +312,7 @@ var PowerUp = {
         opacity: 1
       });
       $("body").append(this.el);
+      popup.find('input').first().focus();
       
       var windowHeight = $(window).height();
       var popupHeight = popup.outerHeight();
