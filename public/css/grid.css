@@ -70,8 +70,8 @@ body {
 
 #content .progress #progress_section .nav {
   position:absolute;
-  top:10px;
-  left:10px;
+  top:15px;
+  left:15px;
 }
 
 #content .progress #progress_section .nav button {
@@ -747,4 +747,74 @@ body {
   opacity: 0;
   position: relative;
   left: 22px;
+}
+
+#filter {
+  background:#fff;
+  color:#000;
+  text-shadow:none !important;
+  margin:55px 20px 0 20px;
+  padding:15px;
+  text-align:left;
+  font-size:15px;
+}
+
+#filter h2 {
+  padding-bottom:15px;
+}
+
+#filter select,
+#filter .text {
+  float: left;
+  border: none;
+  background: #eee;
+  color: #000;
+  width: 180px;
+  height: 40px;
+  margin: 5px 0 0 5px;
+  padding: 0 10px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size: 20px;
+}
+
+#filter label {
+  float:left;
+  margin-right:10px;
+  font-size:20px;
+  line-height:40px;
+  padding-top:5px;
+}
+
+#filter select {
+  background:#eee url('/img/icons/down.png') 145px 10px no-repeat;
+  width:170px;
+  -webkit-border-radius:0;
+  -moz-border-radius:0;
+  border-radius:0;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}
+
+#filter #filter_button:hover,
+#filter #filter_button {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  text-transform: uppercase;
+  font-size: 18px;
+  color: #fff;
+  background: #cb0000;
+  display: block;
+  padding: 11px 20px;
+  text-align: center;
+  float: left;
+  margin: 5px 0 0 0;
+}
+
+#filter_opp option {
+  display:none;
+}
+
+#filter_opp.number option.number
+#filter_opp.text option.text {
+  display:none;
 }

@@ -85,6 +85,7 @@ var PowerUp = {
       this.$('.collaborators').css({ height: section_height });
       this.$('.sections .about').css({ height: section_height });
       this.$('.sections .progress').css({ height: (section_height+60) });
+      this.$('.sections #filter').css({ height: (section_height-30) });
       
       var legend_buttons = this.$('.legend button');
       var legend_width = content_width / legend_buttons.length;
@@ -222,7 +223,7 @@ var PowerUp = {
         if (view.model.attributes.color) {
           view.$el.addClass(view.model.attributes.color);
         }
-      }, (i + 1) * 25)
+      }, (i + 1) * 10)
     },
     
     events: {

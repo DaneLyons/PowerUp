@@ -49,17 +49,38 @@
 	<div class="sections">
 		<div class="section progress">
 			<div id="progress_section" class="s1">
-				<div class="nav" style="display:none;">
-					<button class="s1">OVERALL</button>
-					<button class="s2">MOOD</button>
-					<button class="s3">WEIGHT</button>
+				<div class="nav">
+					<% if(grid.dataTypes.length){ %>
+						<button class="s1">OVERALL</button>
+						<button class="s2">FILTER</button>
+					<% } %>
 				</div>
 				<div class="s1">
 					<div class="percent"></div>
 				</div>
 				<div class="s2">
-				</div>
-				<div class="s3">
+					<div id="filter">
+						<h2>Show PowerUps</h2>
+						<label>WHERE</label>
+						<select id="filter_attr">
+						<% for(var i=0;i<grid.dataTypes.length;i++){ %>
+							<option data-type="<%= grid.dataTypes[i].dataType %>"><%= grid.dataTypes[i].name %></option>
+						<% } %>
+						</select>
+						<select id="filter_opp">
+							<% if(grid.dataTypes.length > 0 && grid.dataTypes[0].dataType == 'text'){ %>
+								<option class="text number" value="less" disabled>is less than</option>
+								<option class="text default" value="equal" selected>equals</option>
+								<option class="text number" value="more" disabled>is greater than</option>
+							<% }else{ %>
+								<option class="text number" value="less">is less than</option>
+								<option class="text default" value="equal" selected>equals</option>
+								<option class="text number" value="more">is greater than</option>
+							<% } %>
+						</select>
+						<input id="filter_val" class="text" />
+						<button id="filter_button">Filter</button>
+					</div>
 				</div>
 			</div>
 		</div>
