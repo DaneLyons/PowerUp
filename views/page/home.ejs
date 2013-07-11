@@ -1,56 +1,40 @@
 <% include ../partials/head.ejs %>
+<style>
+	body {
+		/* background-image:url('/img/bg_sketch.jpg'); */
+	}
+	
+	#attribution {
+		position:absolute;
+		bottom:50px;
+		right:15px;
+		color:#777;
+	}
+</style>
 
 <div id="sidebar">
 	<h1>TRACK YOUR PROGRESS</h1>
 	<p>PowerUp is a personal analytics tool that helps you turn your projects and goals into stories.</p>
 	
-	<% if (freebies !== "000") { %>
-  	<p class="freebies">The next
-  	<% for(var i=0;i<freebies.length;i++){ %>
-  		<strong><%= freebies[i] %></strong>
-  	<% } %>
-  	 lucky users get free premium accounts for life!</p>
-	<% } %>
-	
-	<a href="/getting-started" class="button">
-		<img src="/img/icon_white.png" width="30" height="26" />
-		GET STARTED
-	</a>
+	<form action="/sign_up" method="post">
+    <div class="field">
+			<label>EMAIL</label>
+      <input type="email" class="email" name="user[email]" />
+    </div>
+    
+    <div class="field">
+			<label>PASSWORD</label>
+      <input type="password" class="password" name="user[password]" />
+    </div>
+		
+		<div class="center">
+			<button type="submit" class="submit">
+				<img src="/img/icon_white.png" width="30" height="26" />
+				GET STARTED
+			</button>
+		</div>
+  </form>
+
 </div>
 
 <% include ../partials/footer.ejs %>
-
-<script>
-	var freebies = "<%= freebies %>";
-	function freebieCounter(){
-	  console.log("FREEBIE!");
-		freebies -= 1;
-		freebies += ""; //makes freebies a string
-    if(freebies.length<2){
-      freebies = "00"+freebies;
-    }else if(freebies.length<3){
-      freebies = "0"+freebies;
-    }
-		for(var i=0;i<freebies.length;i++){
-			var elem = $('.freebies strong:eq('+i+')');
-			var currentNum = elem.text();
-			var newNum = freebies[i];
-			if(currentNum != newNum){
-				elem.toggleClass('flip');
-				(function(elem,i){
-					setTimeout(function(){
-						elem.text(freebies[i]);
-					},200);
-				})(elem,i);
-			}
-		}
-	}
-	
-	$(function(){
-	  var uri = window.location.protocol + "//" + window.location.host;
-		var socket = io.connect(uri);
-    socket.on('promo.zed', function (data) {
-		  freebieCounter();
-	  });
-	});
-</script>

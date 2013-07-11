@@ -7,22 +7,26 @@ var Grid = require('../models/grid'),
   util = require('util');
 
 exports.home = function (req, res) {
-  User.count({},function(err,count){
-    var freebies = 500-count;
-    if(freebies<0){ freebies=0 }
-    freebies += ""; //makes freebies a string
-    if(freebies.length<2){
-      freebies = "00"+freebies;
-    }else if(freebies.length<3){
-      freebies = "0"+freebies;
-    }
-    
+  if (req.user) {
+    User.findById(req.user._id, function (err, user) {
+      Grid.find({ _id: { $in: user.grids } })
+        .populate('user')
+        .populate('powerUps')
+        .exec(function (err, grids) {
+          if(grids.length > 0){
+            res.redirect("/grids");
+          }else{
+            res.redirect("/getting-started");
+          }
+        }
+      );
+    });
+  } else {
     res.render("page/home.ejs", {
-      "freebies":freebies,
-      "stylesheets":["home"],
+      "stylesheets":["home","landing"],
       "javascripts":["home"]
     });
-  });
+  }
 };
 
 exports.tos = function (req, res) {
