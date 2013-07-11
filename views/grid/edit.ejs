@@ -123,9 +123,9 @@
 	
 	<% if (typeof currentUser !== 'undefined') { %>
 	  <% if (String(currentUser._id) === String(grid.user._id)) { %>
-	    <div class="delete">
+	    <div class="delete links">
 	      <form action="/grids/<%- grid.slug %>/delete" method="post" class="delete">
-	        <a class="delete" href="#">DELETE GRID</a>
+	        <a class="delete" href="#">Delete Grid</a>
 	      </form>
 	    </div>
 	  <% } %>
