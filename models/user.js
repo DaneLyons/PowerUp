@@ -13,6 +13,7 @@ var userSchema = new Schema({
   email: String,
   passwordHash: String,
   passwordSalt: String,
+  secret: String,
   isConfirmed: { type: Boolean, default: true },
   grids: [ { type: Schema.ObjectId, ref: 'Grid' } ],
   promo: {
@@ -32,6 +33,12 @@ userSchema.pre('save', function (next) {
   }
   
   next();
+});
+
+userSchema.pre('save', function (next) {
+  if (!this.secret) {
+    this.secret = uuid.v4();
+  }
 });
 
 userSchema.statics.bcryptPassword = function (userParams, done) {
