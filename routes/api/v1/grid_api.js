@@ -1,7 +1,7 @@
 var Grid = require('../../../models/grid'),
   User = require('../../../models/user');
   
-exports.gridIndex = function (req, res) {
+exports.listGrids = function (req, res) {
   if (req.user) {
     Grid.find({ user: req.user._id }).populate('user')
       .populate('collaborators')
@@ -26,7 +26,11 @@ exports.gridIndex = function (req, res) {
   }
 };
 
-exports.gridShow = function (req, res) {
+exports.createGrid = function (req, res) {
+  
+};
+
+exports.showGrid = function (req, res) {
   Grid.findById(req.params.id).populate('user')
     .populate('collaborators')
     .populate('powerUps')
@@ -39,3 +43,11 @@ exports.gridShow = function (req, res) {
     }
   );
 }
+
+exports.updateGrid = function (req, res) {
+  
+};
+
+exports.deleteGrid = function (req, res) {
+  
+};

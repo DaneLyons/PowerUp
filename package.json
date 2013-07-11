@@ -36,6 +36,7 @@
     "i": "latest",
     "stripe": "latest",
     "nodetime": "latest",
-    "markdown": "latest"
+    "markdown": "latest",
+    "express-namespace": "latest"
   }
 }
