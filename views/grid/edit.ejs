@@ -120,6 +120,16 @@
   
 		<button type="submit" class="submit">Save</button>
 	</form>
+	
+	<% if (typeof currentUser !== 'undefined') { %>
+	  <% if (String(currentUser._id) === String(grid.user._id)) { %>
+	    <div class="delete">
+	      <form action="/grids/<%- grid.slug %>/delete" method="post" class="delete">
+	        <a class="delete" href="#">DELETE GRID</a>
+	      </form>
+	    </div>
+	  <% } %>
+	<% } %>
 </div>
 
 <script type="text/javascript" src="/js/edit_grid.js"></script>

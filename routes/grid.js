@@ -335,8 +335,29 @@ exports.deleteCollaborator = function (req, res) {
   });
 };
 
-exports.gridDestroy = function (req, res) {
-  
+exports.gridDelete = function (req, res) {
+  Grid.findOne({ slug: req.params.slug }, function (err, grid) {
+    User.findById(req.user._id, function (err, user) {
+      if (String(grid.user) !== String(user._id)) {
+        req.flash("You don't have permission to delete this grid.");
+        return res.redirect('back');
+      }
+      
+      PowerUp.remove({ grid: grid._id }, function (err) {
+        GridButton.remove({ grid: grid._id }, function (err) {
+          Invite.remove({ grid: grid._id }, function (err) {
+            user.grids.pull(grid._id);
+            user.save(function (err, user) {
+              Grid.remove({ _id: grid._id }, function (err) {
+                req.flash("Grid deleted.");
+                return res.redirect('/grids');
+              });
+            });
+          });
+        });
+      });
+    });
+  });
 };
 
 exports.powerUp = function (req, res) {

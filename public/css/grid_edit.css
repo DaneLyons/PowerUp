@@ -5,6 +5,7 @@
 #grid_form {
   width:748px;
   float:right;
+  position: relative;
 }
 
 #info {
@@ -16,4 +17,10 @@
   font-size:14px;
   padding:10px;
   text-align:left;
+}
+
+#grid_form div.delete {
+  position: absolute;
+  bottom: 78px;
+  right: 0px;
 }

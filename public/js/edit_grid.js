@@ -64,4 +64,13 @@ $(function () {
   $('label').on('mouseout',function(){
     $('#info').remove();
   });
+  
+  $(".delete a.delete").on('click', function (ev) {
+    ev.preventDefault();
+    var sure = confirm("Are you sure? All of this grid's data will be gone forever!");
+    
+    if (!sure) { return; }
+    
+    $(ev.currentTarget).parents("form.delete").submit();    
+  });
 });
