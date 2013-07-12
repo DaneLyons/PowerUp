@@ -47,7 +47,7 @@ exports.postSignUp = function (req, res) {
       if (req.session) {
         locals.flash = req.session.flash;
       }
-      res.render('auth/sign_in', locals);
+      res.redirect('/sign_in');
       return;
     }
     
