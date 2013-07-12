@@ -79,6 +79,13 @@ exports.contact = function (req, res) {
   });
 };
 
+exports.pricing = function (req, res) {
+  res.render("page/pricing.ejs", {
+    "title":"PowerUp Pricing",
+    "stylesheets":["page","content"]
+  });
+};
+
 exports.faq = function (req, res) {
   res.render("page/faq.ejs", {
     "title":"PowerUp Frequently Asked Questions",
