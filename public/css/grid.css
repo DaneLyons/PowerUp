@@ -689,14 +689,22 @@ body {
   font-size:14px;
   color:#777;
   display:block;
-  padding-top:7px;
+  padding-top:12px;
   float:left;
 }
 
 #popup .data input {
   width:155px;
   padding:5px;
-  border:1px solid #ddd;
+  border:none;
+  background:#f5f5f5;
+  font-size:18px;
+}
+
+#popup input::-webkit-outer-spin-button,
+#popup input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #popup .arrow {
