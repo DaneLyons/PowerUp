@@ -54,4 +54,22 @@ a.new_grid {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   font-size: 20px;
   text-transform: uppercase;
+  position:relative;
+  top:-18px;
+}
+
+h2.completed {
+  padding-top:40px;
+}
+
+.totals {
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+  font-size: 40px;
+  padding:0 0 50px 0;
+  line-height:1;
+  text-align:center;
+}
+
+.totals li {
+  clear:both;
 }

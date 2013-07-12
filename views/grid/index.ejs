@@ -2,23 +2,55 @@
 
 <div class="grids">
 
+	<% var powerUpCount = 0 %>
+	<% for (var i = grids.length-1; i > -1; i--) { %>
+		<% powerUpCount += grids[i].powerUps.length %>
+	<% } %>
+	<ul class="totals">
+		<li>PowerUps: <%= powerUpCount %></li>
+	</ul>
+
+
 	<a href="/grids/new" class="new_grid">New Grid</a>
-  <h1>Grids</h1>
+  <h2>Grids</h2>
   
+	<% var completed = [] %>
   <% for (var i = grids.length-1; i > -1; i--) { %>
     <% var grid = grids[i]; %>
 		<% var percent = (grid.powerUps.length/grid.size)*100; %>
 
     <ul class="grid_list">
+			<% if(grid.powerUps.length < 400){ %>
+      	<li>
+	        <% if (String(currentUser._id) === String(grid.user._id)) { %>
+					  <a class="edit" href="/grids/<%- grid.slug %>/edit">EDIT</a>
+					<% } %>
+					<div class="fill" style="width:<%= percent %>%;"></div>
+	        <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
+	      </li>
+			<% }else{ %>
+				<% completed.push(grid) %>
+			<% } %>
+    </ul>
+  <% } %>
+
+	<% if(completed.length > 0){ %>
+		<h2 class="completed">Completed Grids</h2>
+		<% for (var i = completed.length-1; i > -1; i--) { %>
+			<% var grid = completed[i]; %>
+			<% var percent = (grid.powerUps.length/grid.size)*100; %>
+		<% } %>
+		
+		<ul class="grid_list">
       <li>
         <% if (String(currentUser._id) === String(grid.user._id)) { %>
 				  <a class="edit" href="/grids/<%- grid.slug %>/edit">EDIT</a>
 				<% } %>
 				<div class="fill" style="width:<%= percent %>%;"></div>
-        <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
+        <a href="/grids/<%- grid.slug %>"><%= grid.name %> <%= grid.powerUps.length %></a>
       </li>
     </ul>
-  <% } %>
+	<% } %>
 </div>
 
 <% include ../partials/footer.ejs %>
