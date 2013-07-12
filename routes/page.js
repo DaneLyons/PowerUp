@@ -201,32 +201,47 @@ exports.start = function (req, res) {
         }
 
         User.findById(user._id, function (err, user) {
-          grid.user = user._id;
-          grid.save(function (err, grid) {
-            if (err) { console.log(err); }
-            user.grids.push(grid._id);
-            user.save(function (err) {
-              if (err) { console.log("ERR: " + err); }
-              req.login(user, function (err) {
-                if (err) {
-                  console.error("ERR " + err);
-                }
-                res.redirect("/grids/" + grid.slug);
-                return;
+          HelpShroom.canCreateGrid(user._id, function (err, allowed) {
+            if (!allowed) {
+              res.redirect('/join');
+              return;
+            }
+            
+            grid.user = user._id;
+            grid.save(function (err, grid) {
+              if (err) { console.log(err); }
+              user.grids.push(grid._id);
+              user.save(function (err) {
+                if (err) { console.log("ERR: " + err); }
+                req.login(user, function (err) {
+                  if (err) {
+                    console.error("ERR " + err);
+                  }
+                  res.redirect("/grids/" + grid.slug);
+                  return;
+                });
               });
             });
           });
         });
       });
     } else {
-      User.findById(req.user._id, function (err, user) {
-        grid.user = user._id;
-        grid.save(function (err, grid) {
-          user.grids.push(grid._id);
-          user.save(function (err) {
-            if (err) { console.log("ERR: " + err); }
-            res.redirect("/grids/" + grid.slug);
-            return;
+      HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
+        if (!allowed) {
+          res.redirect('/join');
+          return;
+        }
+        
+        User.findById(req.user._id, function (err, user) {
+          grid.user = user._id;
+          if (HelpShroom)
+          grid.save(function (err, grid) {
+            user.grids.push(grid._id);
+            user.save(function (err) {
+              if (err) { console.log("ERR: " + err); }
+              res.redirect("/grids/" + grid.slug);
+              return;
+            });
           });
         });
       });
