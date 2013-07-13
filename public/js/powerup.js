@@ -47,6 +47,19 @@ var PowerUp = {
       		  var userTd = $(tdSelector);
       		  userTd.prepend('<div class="green-dot"></div>');
       		});
+      		
+      		socket.on('Grid.PowerUp.Created', function (data) {
+      		  var powerUpAttr = data.power_up;
+      		  powerUpAttr.grid = grid;
+            var powerUp = new PowerUp.Models.PowerUp(powerUpAttr);
+            powerUp.view = new PowerUp.Views.PowerUpView({
+              el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
+              grid: grid,
+              model: powerUp
+            });
+            var idx = $("ul#grid li.inactive").eq(0);
+            powerUp.view.setPowerUp(idx);
+      		});
     		});
       }
       
@@ -149,16 +162,7 @@ var PowerUp = {
           };
           socket.emit('Grid.PowerUp', {
             PowerUp: powerUpAttr
-          });
-
-          powerUpAttr.grid = gridContentView.model;
-          var powerUp = new PowerUp.Models.PowerUp(powerUpAttr);
-          powerUp.view = new PowerUp.Views.PowerUpView({
-            el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
-            grid: grid,
-            model: powerUp
-          });
-          powerUp.view.setPowerUp(idx);          
+          });                   
         }
       }
     },

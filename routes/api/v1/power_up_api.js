@@ -10,7 +10,7 @@ exports.createPowerUp = function (req, res) {
 };
 
 exports.showPowerUp = function (req, res) {
-  PowerUp.findById(req.params.id)
+  PowerUp.findOne({ _id: req.params.id, user: req.user._id })
     .populate('user')
     .exec(function (err, powerUp) {
       if (err) { return res.send(400, err); }
