@@ -3,36 +3,32 @@ var Grid = require('../../../models/grid'),
   async = require('async');
   
 exports.listGrids = function (req, res) {
-  if (req.user) {
-    Grid.find({ user: req.user._id }).populate('user')
-      .populate('collaborators')
-      .populate('powerUps')
-      .populate('gridButtons')
-      .exec(function (err, grids) {
-        if (err) {
-          return res.send(400, { error_message: err });
-        }
-        
-        async.map(grids, function filterParams(grid, done) {
-          for (prop in grid) {
-            if (Grid.attrReadable.indexOf(prop) === -1) {
+  Grid.find({ user: req.user._id }).populate('user')
+    .populate('collaborators')
+    .populate('powerUps')
+    .populate('gridButtons')
+    .exec(function (err, grids) {
+      if (err) {
+        return res.send(400, { error_message: err });
+      }
+      
+      async.map(grids, function filterParams(grid, done) {
+        grid = grid.toJSON();
+        for (prop in grid) {
+          if (Grid.attrReadable.indexOf(String(prop)) === -1) {
+            if (grid.hasOwnProperty(prop)) {
+              console.log(prop);
               delete grid[prop];
+              console.log(grid);
             }
           }
-        }, function (err, grids) {
-          res.send({ grids: grids });
-        });
-      }
-    );
-  } else {
-    Grid.find({ isPrivate: false }, function (err, grids) {
-      if (err) {
-        res.send(400, { error_message: err });
-        return;
-      }
-      res.send({ grids: grids });
-    });
-  }
+        }
+        return done(null, grid);
+      }, function (err, grids) {
+        res.send({ grids: grids });
+      });
+    }
+  );
 };
 
 exports.createGrid = function (req, res) {

@@ -39,6 +39,7 @@ userSchema.pre('save', function (next) {
   if (!this.secret) {
     this.secret = uuid.v4();
   }
+  next();
 });
 
 userSchema.statics.bcryptPassword = function (userParams, done) {

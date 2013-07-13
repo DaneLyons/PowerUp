@@ -1,6 +1,14 @@
 var PowerUp = require('../../../models/power_up'),
   User = require('../../../models/user');
+
+exports.listPowerUps = function (req, res) {
   
+};
+
+exports.createPowerUp = function (req, res) {
+  
+};
+
 exports.showPowerUp = function (req, res) {
   PowerUp.findById(req.params.id)
     .populate('user')
@@ -10,4 +18,12 @@ exports.showPowerUp = function (req, res) {
       res.send(powerUp);
     }
   );
+};
+
+exports.updatePowerUp = function (req, res) {
+  
+};
+
+exports.deletePowerUp = function (req, res) {
+  
 };
