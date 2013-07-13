@@ -38,6 +38,8 @@
     "stripe": "latest",
     "nodetime": "latest",
     "markdown": "latest",
-    "express-namespace": "latest"
+    "express-namespace": "latest",
+    "mocha": "latest",
+    "should": "latest"
   }
 }

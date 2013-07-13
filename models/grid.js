@@ -30,6 +30,15 @@ var gridSchema = new Schema({
   safe: true
 });
 
+gridSchema.statics.attrWriteable = [
+  'name', 'about', 'dataTypes', 'gridButtons', 'isPrivate', 'collaborators'
+];
+
+gridSchema.statics.attrReadable = [
+  '_id', 'name', 'about', 'stats', 'dataTypes', 'gridButtons', 'user',
+  'isPrivate', 'collaborators', 'slug', 'size'
+];
+
 gridSchema.pre('save', function (next) {
   if (this.isNew) {
     this.createdAt = new Date();
