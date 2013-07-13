@@ -34,11 +34,7 @@ exports.listGrids = function (req, res) {
 exports.createGrid = function (req, res) {
   var gridParams = req.body.grid;
   if (!gridParams) { return res.send(400, "'grid' parameter is missing."); }
-  for (prop in gridParams) {
-    if (Grid.attrWritable.indexOf(prop) === -1) {
-      delete gridParams[prop];
-    }
-  }
+  gridParams = Grid.filterAttr(gridParams, 'writeable');
   
   var grid = new Grid(gridParams);
   grid.save(function (err, grid) {

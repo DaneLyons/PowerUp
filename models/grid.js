@@ -39,6 +39,29 @@ gridSchema.statics.attrReadable = [
   'isPrivate', 'collaborators', 'slug', 'size'
 ];
 
+gridSchema.methods.filterAttr = function filterAttr(filterType) {
+  var grid = this;
+  var filterMap = {
+    "readable": "attrReadable",
+    "writeable": "attrWriteable"
+  };
+  
+  var filterSet = Grid[filterMap[filterType]];
+  if (typeof filterSet === 'undefined') { return null; }
+  
+  var props = grid.toJSON();
+  for (prop in props) {
+    if (filterSet.indexOf(prop) === -1) {
+      delete props[prop];
+    }
+  }
+  return props;
+};
+
+gridSchema.statics.filterAttr = function (attr, filterType) {
+  filterAttr.bind(attr, filterType);
+};
+
 gridSchema.pre('save', function (next) {
   if (this.isNew) {
     this.createdAt = new Date();
