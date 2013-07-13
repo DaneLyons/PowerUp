@@ -47,6 +47,19 @@ var PowerUp = {
       		  var userTd = $(tdSelector);
       		  userTd.prepend('<div class="green-dot"></div>');
       		});
+      		
+      		socket.on('Grid.PowerUp.Created', function (data) {
+      		  var powerUpAttr = data.power_up;
+      		  powerUpAttr.grid = grid;
+            var powerUp = new PowerUp.Models.PowerUp(powerUpAttr);
+            powerUp.view = new PowerUp.Views.PowerUpView({
+              el: $("#grid li:eq(" + powerUp.attributes.position + ")"),
+              grid: grid,
+              model: powerUp
+            });
+            var idx = $("ul#grid li.inactive").eq(0);
+            powerUp.view.setPowerUp(idx);
+      		});
     		});
       }
       
@@ -141,29 +154,15 @@ var PowerUp = {
           var socket = io.connect(sockHost);
           var gridId = $("#grid").data("grid-id");
           var idx = emptySquares.eq(0).index();
+          var powerUpAttr = {
+            grid: gridId,
+            position: idx,
+            color: color,
+            user: PowerUp.user
+          };
           socket.emit('Grid.PowerUp', {
-            PowerUp: {
-              grid: gridId,
-              position: idx,
-              color: color,
-              user: PowerUp.user
-            }
-          });
-
-          var newSquare = $("ul#grid li:eq("+idx+")");
-          newSquare.removeClass('inactive');
-          newSquare.addClass('active');
-          newSquare.addClass(color);
-
-          var filledLen = $("#grid li.active").length;
-          var grid = gridContentView.model;
-          var grid_progress = $("#content .progress .percent");
-          var percent = Math.floor((filledLen / grid.attributes.size) * 100);
-          grid_progress.text(percent + '%');
-
-          if (emptyLen != 400 && emptyLen % 40 == 0){
-            gridContentView.gridMilestone();
-          }
+            PowerUp: powerUpAttr
+          });                   
         }
       }
     },

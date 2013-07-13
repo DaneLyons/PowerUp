@@ -30,6 +30,38 @@ var gridSchema = new Schema({
   safe: true
 });
 
+gridSchema.statics.attrWriteable = [
+  'name', 'about', 'dataTypes', 'gridButtons', 'isPrivate', 'collaborators'
+];
+
+gridSchema.statics.attrReadable = [
+  '_id', 'name', 'about', 'stats', 'dataTypes', 'gridButtons', 'user',
+  'isPrivate', 'collaborators', 'slug', 'size'
+];
+
+gridSchema.methods.filterAttr = function filterAttr(filterType) {
+  var grid = this;
+  var filterMap = {
+    "readable": "attrReadable",
+    "writeable": "attrWriteable"
+  };
+  
+  var filterSet = Grid[filterMap[filterType]];
+  if (typeof filterSet === 'undefined') { return null; }
+  
+  var props = grid.toJSON();
+  for (prop in props) {
+    if (filterSet.indexOf(prop) === -1) {
+      delete props[prop];
+    }
+  }
+  return props;
+};
+
+gridSchema.statics.filterAttr = function (attr, filterType) {
+  filterAttr.bind(attr, filterType);
+};
+
 gridSchema.pre('save', function (next) {
   if (this.isNew) {
     this.createdAt = new Date();

@@ -20,6 +20,7 @@
     "passport-local": "latest",
     "passport-facebook": "latest",
     "passport-twitter": "latest",
+    "passport-http": "latest",
     "bcrypt": "latest",
     "socket.io": "0.9.x",
     "express-partials": "latest",
@@ -36,6 +37,9 @@
     "i": "latest",
     "stripe": "latest",
     "nodetime": "latest",
-    "markdown": "latest"
+    "markdown": "latest",
+    "express-namespace": "latest",
+    "mocha": "latest",
+    "should": "latest"
   }
 }

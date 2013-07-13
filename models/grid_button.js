@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var gridButtonSchema = new Schema({
   grid: { type: Schema.ObjectId, ref: 'Grid' },
   workUnit: String,
-  increment: Number
+  increment: { type: Number, default: 1 }
 }, {
   safe: true
 });
