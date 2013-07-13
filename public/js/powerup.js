@@ -216,7 +216,6 @@ var PowerUp = {
       setTimeout(function () {
         var filledLen = $("#grid li.active").length;
         var percent = Math.floor((filledLen / grid.attributes.size) * 100);
-        console.log(filledLen);
         if(filledLen>398){ 
           percent=100;
         }

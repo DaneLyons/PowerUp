@@ -1,5 +1,7 @@
 <% include ../partials/head.ejs %>
 
+<%= currentUser.isPremium || (currentUser.promo && currentUser.promo.zed) %>
+
 <div class="grids">
 
 	<% var powerUpCount = 0 %>
@@ -47,7 +49,7 @@
 				  <a class="edit" href="/grids/<%- grid.slug %>/edit">EDIT</a>
 				<% } %>
 				<div class="fill" style="width:<%= percent %>%;"></div>
-        <a href="/grids/<%- grid.slug %>"><%= grid.name %> <%= grid.powerUps.length %></a>
+        <a href="/grids/<%- grid.slug %>"><%= grid.name %></a>
       </li>
     </ul>
 	<% } %>
