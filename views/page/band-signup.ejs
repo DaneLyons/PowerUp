@@ -1,0 +1,23 @@
+<% include ../partials/head.ejs %>
+<style>
+	body {
+		background-image:url('/img/photos/band.jpg');
+	}
+</style>
+
+<div id="sidebar">
+	<h1>PRACTICE MAKES LEGENDS</h1>
+	<p>PowerUp can help you stay on track while you focus on doing what you do best. Rocking out.</p>
+	
+	<% include ../partials/grid_landing_page.ejs %>
+</div>
+
+<% include ../partials/footer.ejs %>
+
+<script>
+  $('input.goal').val('Start a Band');
+	$('textarea.about').val('Colors are used to represent how far you&#39;ve gone in a given day. For the first 3 miles, click the black button. For miles 4-10 choose the blue button. The red button is for miles 11+.');
+  $('input.work_unit:eq(0)').val('Practice 10 Mins');
+  $('input.work_unit:eq(1)').val('Write Lyrics 10 Mins');
+  $('input.work_unit:eq(2)').val('Promote 10 Mins');
+</script>
