@@ -29,7 +29,7 @@ exports.createGrid = function (req, res) {
   grid.save(function (err, grid) {
     if (err) { return res.send(400, err); }
     
-    res.send({ grid: grid);
+    res.send({ grid: grid });
   });
 };
 
