@@ -1,0 +1,22 @@
+<% include ../partials/head.ejs %>
+<style>
+	body {
+		background-image:url('/img/photos/band.jpg');
+	}
+</style>
+
+<div id="sidebar">
+	<h1>PRACTICE MAKES LEGENDS</h1>
+	<p>PowerUp can help you stay on track while you focus on doing what you do best. Rocking out.</p>
+	
+	<% include ../partials/grid_landing_page.ejs %>
+</div>
+
+<% include ../partials/footer.ejs %>
+
+<script>
+  $('input.goal').val('Become Famous');
+  $('input.work_unit:eq(0)').val('Practice 10 Mins');
+  $('input.work_unit:eq(1)').val('Write Lyrics 10 Mins');
+  $('input.work_unit:eq(2)').val('Promote 10 Mins');
+</script>

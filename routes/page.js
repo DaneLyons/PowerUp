@@ -171,6 +171,14 @@ exports.sketch400 = function (req, res) {
   });
 }
 
+exports.bandSignup = function (req, res) {
+  res.render("page/band-signup.ejs", {
+    "title":"Band Signup",
+    "stylesheets": ["home","landing"],
+    "javascripts": ["home"]
+  });
+}
+
 exports.start = function (req, res) {
   var userParams = req.body.user,
     gridParams = req.body.grid,
