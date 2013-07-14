@@ -1,0 +1,299 @@
+<% include ../partials/head.ejs %>
+
+<link rel="stylesheet" href="/css/jquery-ui.css" />
+<style>
+	h1.heading {
+		padding-bottom:5px;
+	}
+
+	div.gap {
+		height:20px;
+	}
+	
+	p.note {
+		padding-bottom:5px;
+	}
+	
+	p.note span {
+		font-weight:bold;
+	}
+	
+	button {
+		background:#888;
+	}
+
+	button.active {
+		background:#cb0000;
+		color:#fff;
+	}
+	
+	button.random {
+		background: rgba(255,255,255,.5);
+		color:#444;
+		padding: 10px;
+		position: relative;
+		top: -2px;
+		border: 5px solid rgba(0,0,0,.15);
+		-webkit-border-radius: 100px;
+		-moz-border-radius: 100px;
+		border-radius: 100px;
+	}
+	
+	button.random:hover {
+		background: rgba(255,255,255,1);
+	}
+	
+	input[type="range"]{
+	  background:#bbb;
+	  width: 410px;
+	  height: 6px;
+	  -webkit-appearance: none;
+		float:left;
+		position:relative;
+		top:3px;
+	}
+
+	input[type="range"]::-webkit-slider-thumb{
+	   -webkit-appearance:none !important;  
+	   width:25px;
+	   height:16px;
+	   -webkit-appearance: none;
+	    background: #555;
+	 }
+	
+	input[type="range"]::-webkit-slider-thumb:hover{
+	}
+	
+	input[type="number"]{
+		-webkit-appearance: none;
+		border: none;
+		background: rgba(0,0,0,.07);
+		font-weight: bold;
+		font-size: 18px;
+		padding: 3px;
+	}
+	
+	#band_frame {
+		padding-top:40px;
+		padding-bottom:125px;
+		text-align:center;
+		background:rgba(0,0,0,.1);
+		position:relative;
+	}
+	
+	#band_frame h1 {
+		font-size:50px;
+	}
+	
+	#day_buttons {
+		padding-top:5px;
+	}
+	
+	.get_started {
+		position:absolute;
+		bottom:0;
+		height:90px;
+		text-align:center;
+		width:100%;
+		padding-top:15px;
+		border-top:1px dashed #888;
+	}
+	
+	.get_started p {
+		padding-bottom:20px;
+	}
+	
+	.get_started a{
+		background: #cb0000;
+		color: #fff;
+		padding: 10px 30px;
+		font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
+		font-size: 20px;
+		text-transform: uppercase;
+	}
+	
+	div.content {
+		clear:both;
+		padding-top:50px;
+		font-size:17px;
+		padding-bottom:50px;
+	}
+	
+	div.content p {
+		padding-bottom:15px;
+	}
+	
+	div.content a.right {
+		margin-left:15px;
+	}
+	
+	.sharing {
+		float:right;
+		padding-top:10px;
+	}
+	
+	.twitter-share-button {
+		background:transparent;
+	}
+	
+	#sortable .ui-icon {
+		float:left;
+		position:relative;
+		top:0;
+	}
+	
+	#sortable li {
+		height:30px;
+		margin-bottom:5px;
+		padding-top:14px;
+	}
+	
+	#sortable li label.left {
+		width:100px;
+		text-align:right;
+		margin-right:10px;
+	}
+	
+	#sortable li label.right {
+		margin-left:10px;
+		float:left;
+	}
+	
+	.gap {
+		border-top:1px dashed #888;
+		margin:30px 0;
+	}
+	
+	.tips {
+		padding:20px 0 75px 20px;
+		list-style:square;
+		font-size:16px;
+	}
+	
+	.tips li {
+		padding-bottom:10px;
+	}
+</style>
+
+
+<div class="sharing">
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="duilen">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>
+<h1 class="heading">
+	Company Name Generator
+	<button class="company button random" type="button">NEXT <img src="/img/icons/random.png" /></button>
+</h1>
+
+<div id="band_frame">
+	<h2>RANDOM COMPANY NAME:</h2>
+	<h1 id="band_name"></h1>
+	
+	<div class="get_started">
+		<p>Be Legendary</p>
+		<a href="/getting-started/6">START BUILDING</a>
+	</div>
+</div>
+
+
+<div class="content">
+	<h2>CALL DIBS ON YOUR COMPANY NAME</h2>
+	<div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'powerupio'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  
+	<div class="gap"></div>
+
+	<h2>Bonus tips for choosing the perfect company name</h2>
+	<ol class="tips">
+		<li><strong>Choose a name that’s easily remembered.</strong> You should be able to explain in a couple of seconds how to spell your company name. A name that’s phonetic (spelled like it’s pronounced) is preferable.</li>
+
+    <li><strong>Names that sound like familiar words are best.</strong> If you can associate your company’s name with a familiar word, then your abstract name becomes much easier to recall.</li>
+
+    <li><strong>Look for names with an available domain.</strong> It’s commonly said but worth reiterating. If you have the .com, it lends a lot of credibility to your company. It’s not a deal-breaker, but it’s a bonus if you have your-name.com (or whatever your favorite TLD is).</li>
+
+    <li><strong>Fit the tone of your company.</strong> Your name says a lot about you. Pick a name that’s generally aligned with your company’s target market, and doesn’t sound too playful, or foreboding, depending on who you are.</li>
+    
+		<li><strong>Have fun with it.</strong> When you take things too seriously it's hard to be open to so many great possibilities.</li>
+		
+		<p>If this company name randomizer was helpful at all in your naming process please send us an email. We'd love to hear your story! <a href="mailto:tips@powerup.io">tips@powerup.io</a></p>
+	</ol>
+</div>
+
+<% include ../partials/footer.ejs %>
+
+<script src="/js/jquery-ui.js"></script>
+<script>
+	$(function(){
+		$("button.random").click(random_name)
+	
+		$( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+		$( "#sortable" ).on("sortupdate",generate_name);
+		
+		if(!Modernizr.inputtypes.range){
+
+		}
+		
+		if (Modernizr.draganddrop) {
+		  // Browser supports HTML5 DnD.
+		}
+
+    $('.heading button.random.company').click(function(){
+			generate_name();
+    });
+
+		random_name();
+	});
+	
+	function generate_name(){
+		var name = "",
+		  minLen = 2,
+		  maxLen = 5;
+		  
+		// get random int within range. code taken from MDN example
+		var len = Math.floor(Math.random() * (maxLen - minLen + 1)) + minLen;
+		
+		for (var i = 0; i < len; i++) {
+		  // start w/ consonant pair, and insert vowels for every other pair
+		  var getVowel = (i % 2 !== 0);
+		  var pair = "";
+		  if (getVowel) {
+		    pair = vowelPairs[Math.floor(Math.random() * vowelPairs.length)];
+		  } else {
+		    pair = consPairs[Math.floor(Math.random() * consPairs.length)];
+		  }
+		  name += pair;
+		}
+		name = name.toUpperCase();
+		$('#band_name').text(name);
+	}
+	
+	function random_name(){
+		$('#sortable input').each(function(){
+			var elem = $(this);
+			var slider = sliders[elem.data('slider')];
+			var rand = Math.floor(Math.random() * slider.length);
+			elem.val(rand);
+		});
+		generate_name();
+	}
+	
+	var consPairs = ["bl", "br", "ch", "cl", "cr", "dr", "fl", "fr", "gl", "gr",
+		"pl", "pr", "sc", "sh", "sk", "sl", "sm", "sn", "sp", "st", "sw", "th",
+		"tr", "tw", "wh", "wr", "sch", "scr", "shr", "sph", "spl", "spr", "squ",
+		"str", "thr", "nth"];
+	var vowelPairs = ["ai", "au", "aw", "ay", "ea", "ee", "ei", "eu", "ew",
+	  "ey", "ie", "oi", "oo", "ou", "ow", "oy"];
+</script>

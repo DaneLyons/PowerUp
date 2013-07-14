@@ -121,7 +121,15 @@ exports.bandNames = function (req, res) {
     "stylesheets":["page","content"],
     "javascripts":["modernizr"]
   });
-}
+};
+
+exports.companyNames = function (req, res) {
+  res.render("page/company-names.ejs", {
+    "title":"Random Company Name Generator",
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
+  });
+};
 
 exports.rockBandNames = function (req, res) {
   res.render("page/rock-band-names.ejs", {
