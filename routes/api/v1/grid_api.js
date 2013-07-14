@@ -29,7 +29,7 @@ exports.createGrid = function (req, res) {
   grid.save(function (err, grid) {
     if (err) { return res.send(400, err); }
     
-    res.send(grid);
+    res.send({ grid: grid);
   });
 };
 
@@ -61,7 +61,7 @@ exports.updateGrid = function (req, res) {
       
       grid.save(function (err, grid) {
         if (err) { return res.send(400, err); }
-        res.send(grid);
+        res.send({ grid: grid });
       });
     }
   );
@@ -72,6 +72,6 @@ exports.deleteGrid = function (req, res) {
     _id: req.params.id, user: req.params.user
   }, function (err, grid) {
     if (err) { return res.send(400, err); }
-    res.send(grid);
+    res.send({ grid: grid });
   });
 };

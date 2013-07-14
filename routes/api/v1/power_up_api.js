@@ -11,7 +11,7 @@ exports.listPowerUps = function (req, res) {
     .populate('grid')
     .exec(function (err, powerUps) {
       if (err) { return res.send(400, err); }
-      res.send(powerUps);
+      res.send({ powerUps: powerUps });
     }
   );
 };
@@ -25,7 +25,7 @@ exports.createPowerUp = function (req, res) {
   var powerUp = new PowerUp(params);
   powerUp.save(function (err, powerUp) {
     if (err) { return res.send(400, err); }
-    res.send(powerUp);
+    res.send({ powerUp: powerUp });
   });
 };
 
@@ -36,7 +36,7 @@ exports.showPowerUp = function (req, res) {
     .exec(function (err, powerUp) {
       if (err) { return res.send(400, err); }
       
-      res.send(powerUp);
+      res.send({ powerUp: powerUp });
     }
   );
 };
@@ -53,7 +53,7 @@ exports.updatePowerUp = function (req, res) {
       }
       powerUp.save(function (err, powerUp) {
         if (err) { return res.send(400, err); }
-        res.send(powerUp);
+        res.send({ powerUp: powerUp });
       });
     }
   );
@@ -64,6 +64,6 @@ exports.deletePowerUp = function (req, res) {
     _id: req.params.id, user: req.params.user
   }, function (err, powerUp) {
     if (err) { return res.send(400, err); }
-    res.send(powerUp);
+    res.send({ powerUp: powerUp });
   });
 };

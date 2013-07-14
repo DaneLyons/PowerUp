@@ -12,9 +12,9 @@ describe('GET /grids', function () {
           pass: "4ad210fe-e74c-494d-8773-329fa634308b"
         }
       }, function (err, res, body) {
-        console.log(err);
-        console.log(res);
         if (err) { throw err; }
+        err.should.not.exist;
+        res.status.should.equal(200);
         body.should.equal([]);
         body.length.should.equal(0);
       });
