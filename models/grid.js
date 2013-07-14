@@ -40,16 +40,16 @@ gridSchema.statics.attrReadable = [
 ];
 
 gridSchema.methods.filterAttr = function filterAttr(filterType) {
-  var grid = this;
+  var model = this;
   var filterMap = {
     "readable": "attrReadable",
     "writeable": "attrWriteable"
   };
   
   var filterSet = Grid[filterMap[filterType]];
-  if (typeof filterSet === 'undefined') { return null; }
+  if (typeof filterSet === 'undefined') { return model; }
   
-  var props = grid.toJSON();
+  var props = model.toJSON();
   for (prop in props) {
     if (filterSet.indexOf(prop) === -1) {
       delete props[prop];

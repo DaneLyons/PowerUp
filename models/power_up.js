@@ -13,6 +13,38 @@ var powerUpSchema = new Schema({
   safe: true
 });
 
+powerUpSchema.statics.attrReadable = [
+  "id", "position", "color", "grid", "user", "metadata", "createdAt"
+];
+
+powerUpSchema.statics.attrWriteable = [
+  "position", "color", "grid", "metadata", "createdAt"
+];
+
+powerUpSchema.methods.filterAttr = function filterAttr(filterType) {
+  var model = this;
+  var filterMap = {
+    "readable": "attrReadable",
+    "writeable": "attrWriteable"
+  };
+  
+  var filterSet = PowerUp[filterMap[filterType]];
+  if (typeof filterSet === 'undefined') { return model; }
+  
+  var props = model.toJSON();
+  for (prop in props) {
+    if (filterSet.indexOf(prop) === -1) {
+      delete props[prop];
+    }
+  }
+  return props;
+};
+
+powerUpSchema.statics.filterAttr = function (attr, filterType) {
+  filterAttr.bind(attr, filterType);
+};
+
+
 powerUpSchema.pre('save', function (next) {
   if (this.isNew) {
     this.createdAt = new Date();
