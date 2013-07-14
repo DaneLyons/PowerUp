@@ -123,6 +123,14 @@ exports.bandNames = function (req, res) {
   });
 }
 
+exports.rockBandNames = function (req, res) {
+  res.render("page/rock-band-names.ejs", {
+    "title":"Rock Band Name Generator",
+    "stylesheets":["page","content"],
+    "javascripts":["modernizr"]
+  });
+}
+
 exports.fiften = function (req, res) {
   res.render("page/fiften.ejs", {
     "title":"FIFTEN - Game to improve your mental fortitude.",

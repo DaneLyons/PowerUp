@@ -172,6 +172,12 @@
 	.tips li {
 		padding-bottom:10px;
 	}
+	
+	a.sub {
+		font-weight:bold;
+		position:relative;
+		top:-15px;
+	}
 </style>
 
 
@@ -180,12 +186,12 @@
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
 <h1 class="heading">
-	Band Name Generator
+	Rock Band Name Generator
 	<button class="random" type="button"><img src="/img/icons/random.png"></button>
 </h1>
+<a class="sub" href="/generator/band_names">Original Band Name Generator</a>
 
-
-<ul id="sortable">
+<ul id="sortable" style="display:none">
 	<li class="ui-state-default">
 		<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 		<label class="left">WEAK</label>
@@ -207,7 +213,7 @@
 </ul>
 
 <div id="band_frame">
-	<h2>RANDOM BAND NAME:</h2>
+	<h2>Random Rock Band Name:</h2>
 	<h1 id="band_name"></h1>
 	
 	<div class="get_started">
@@ -307,8 +313,8 @@
 	}
 	
 	var sliders = [
-		["FEEBLE","PUNY","ANT","FAIRY","TINY","OLD","LOST","GLASS","SLOPPY","UGLY","FAT","BUBBLE","BANANA","SOLAR","NOODLE","TACO","DOMESTIC","BABY","SOFT","GRASS","URBAN","BUTTON","WHISKEY","SAUCE","FANCY","MONEY","HAPPY","LUCKY","DONUT","NEON","TOAST","SCRAPPY","ASS","NUDE","ORGAN","RETRO","FRISBEE","PLAID","DENIM","FUZZY","JELLY","FISH","EGG","BOX","DITCH","RAD","MEAT","SHOE","WOOD","HORN","ROAD","SILICON","STONE","STORM","HAMMER","LAMA","PONY","GADGET","COW","BULL","BUFFALO","WILD","IRON","AXE","BEARD","SWORD","BANK","PUZZLE","OGRE","DRAGON","TANK","WAR","SUPER","HARDCORE","MAGIC","POWER","GRID","NUKE","SAUCER","SPACE","STAR"],
-		["LIGHT","LASER","COMET","FLASH","ZIP","BIRD","RABBIT","BURST","WEASEL","JET","RACING","CODE","SPUN","FED","STYLE","ROCKET","SHIP","BUZZING","LAUNCHING","JUGGLING","ASSISTING","FIRE","GIGGLING","SHOP","WAVING","RIDING","WAXING","FRIENDLY","SPANKING","KICKING","TRIMMING","TESTING","BELL","SHUFFLING","BUCKET","FIXING","CAR","TRUCK","WIND","INVENTING","JUDGING","WIELDING","BOAT","CARGO","CLOCK","SLIDE","WAGON","ROOSTER","FARM","BUCKET","DOLL","MOOSE","TEMPLE","LOVING","BELLY","SLUG","BLIMP","WATCHING","SITTING","WAX","TAR","TIME"],
-		["DROIDS","CLONES","ROBOTS","DEVICE","IMPLANTS","BLASTERS","ASTRONAUT","EXPERIMENT","THEORY","TECHNOLOGY","PROTOTYPE","TROOPERS","ROVERS","ARTISTS","DRONES","HOAX","HACKERS","NERDS","PILOTS","FLYERS","SPEEDSTERS","EXHIBIT","RACERS","WRITERS","MAKERS","INTERNS","SPIES","NURSES","HEROES","EXTREMISTS","HARVEST","BUTLERS","RANGERS","MONKS","BAKERS","GOALIES","CLEANERS","DEPUTIES","TRADERS","MARINES","LUMBERJACKS","FANS","WANNABES","HATERS","INMATES","TRAVELERS","PREACHERS","WORKERS","SERVANTS","CLOWNS","HELPERS","SIDESHOW","OBJECT","ENEMIES","GOBLINS","WAGER","STOMPERS","HOOLIGANS","PIRATES","COLONY","REMOVERS","PUPPETS","POTION","TONIC","CIRCUS","COWBOYS","MASTERS","VIKINGS","KINGS","QUEENS","BANDITS","ARMY","GANG","MONKEYS","DUMMIES","JUNKIES","WARRIORS","WITCHES","PEONS","TROLLS","SLAVES","HIVE","DINOSAURS","SAVAGES","ZOMBIES"]
+		["ASS",""],
+		["HAPPY",""],
+		["NEWS","SPAM"]
 	]
 </script>
