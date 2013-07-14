@@ -28,15 +28,19 @@
 	}
 	
 	button.random {
-		background:transparent;
-		padding:0;
-		position:relative;
-		top:-2px;
-		opacity:.4;
+		background: rgba(255,255,255,.5);
+		color:#444;
+		padding: 10px;
+		position: relative;
+		top: -2px;
+		border: 5px solid rgba(0,0,0,.15);
+		-webkit-border-radius: 100px;
+		-moz-border-radius: 100px;
+		border-radius: 100px;
 	}
 	
 	button.random:hover {
-		opacity:1;
+		background: rgba(255,255,255,1);
 	}
 	
 	input[type="range"]{
@@ -178,7 +182,7 @@
 </div>
 <h1 class="heading">
 	Company Name Generator
-	<button class="random company" type="button">NEW NAME</button>
+	<button class="company button random" type="button">NEXT <img src="/img/icons/random.png" /></button>
 </h1>
 
 <div id="band_frame">
