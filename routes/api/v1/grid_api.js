@@ -12,21 +12,10 @@ exports.listGrids = function (req, res) {
         return res.send(400, { error_message: err });
       }
       
-      async.map(grids, function filterParams(grid, done) {
-        grid = grid.toJSON();
-        for (prop in grid) {
-          if (Grid.attrReadable.indexOf(String(prop)) === -1) {
-            if (grid.hasOwnProperty(prop)) {
-              console.log(prop);
-              delete grid[prop];
-              console.log(grid);
-            }
-          }
-        }
-        return done(null, grid);
-      }, function (err, grids) {
-        res.send({ grids: grids });
-      });
+      for (var i = 0; i < grids.length; i++) {
+        grids[i] = grids[i].filterAttr('readable');
+      }
+      res.send({ grids: grids });
     }
   );
 };
@@ -54,12 +43,7 @@ exports.showGrid = function (req, res) {
         return;
       }
       
-      for (prop in grid) {
-        if (Grid.attrReadable.indexOf(prop) === -1) {
-          delete grid[prop];
-        }
-      }
-      
+      grid = grid.filterAttr('readable');
       res.send({ grid: grid });
     }
   );
@@ -70,17 +54,13 @@ exports.updateGrid = function (req, res) {
     .populate('collaborators')
     .populate('powerUps')
     .populate('gridButtons').exec(function (err, grid) {
-      var gridParams = req.body.grid;
-      
+      var gridParams = Grid.filterParams(req.body.grid, 'writeable');
       for (prop in gridParams) {
-        if (Grid.attrWritable.indexOf(prop) !== -1) {
-          grid[prop] = gridParams[prop];
-        }
+        grid[prop] = gridParams[prop];
       }
       
       grid.save(function (err, grid) {
         if (err) { return res.send(400, err); }
-        
         res.send(grid);
       });
     }
