@@ -2,7 +2,7 @@ var PowerUp = require('../../../models/power_up'),
   User = require('../../../models/user');
 
 exports.listPowerUps = function (req, res) {
-  var params = req.params.powerUp;
+  var params = req.body.powerUps;
   if (!params) { params = {}; }
   params.user = req.user._id;
   PowerUp.filterAttr(params, 'readable');

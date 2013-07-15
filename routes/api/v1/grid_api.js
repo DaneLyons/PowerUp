@@ -3,13 +3,20 @@ var Grid = require('../../../models/grid'),
   async = require('async');
   
 exports.listGrids = function (req, res) {
-  Grid.find({ user: req.user._id }).populate('user')
+  var params = req.body.grids;
+  console.log(params);
+  if (typeof params === 'undefined') { params = {}; }
+  params.user = String(req.user._id);
+  params = Grid.filterAttr(params, 'readable');
+  console.log(params);
+  Grid.find(params).populate('user')
     .populate('collaborators')
     .populate('powerUps')
     .populate('gridButtons')
     .exec(function (err, grids) {
+      console.log(err);
       if (err) {
-        return res.send(400, { error_message: err });
+        return res.send(400, err);
       }
       
       for (var i = 0; i < grids.length; i++) {

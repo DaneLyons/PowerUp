@@ -31,10 +31,10 @@ powerUpSchema.methods.filterAttr = function filterAttr(filterType) {
   var filterSet = PowerUp[filterMap[filterType]];
   if (typeof filterSet === 'undefined') { return model; }
   
-  var props = model.toJSON();
-  for (prop in props) {
-    if (filterSet.indexOf(prop) === -1) {
-      delete props[prop];
+  var props = {}
+  for (prop in filterSet) {
+    if (filterSet.hasOwnProperty(prop)) {
+      props[prop] = model[prop];
     }
   }
   return props;
