@@ -4,11 +4,10 @@ var Grid = require('../../../models/grid'),
   
 exports.listGrids = function (req, res) {
   var params = req.body.grids;
-  console.log(params);
   if (typeof params === 'undefined') { params = {}; }
   params.user = String(req.user._id);
   params = Grid.filterAttr(params, 'readable');
-  console.log(params);
+
   Grid.find(params).populate('user')
     .populate('collaborators')
     .populate('powerUps')

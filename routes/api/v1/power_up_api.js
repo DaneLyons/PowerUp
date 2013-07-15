@@ -6,10 +6,15 @@ exports.listPowerUps = function (req, res) {
   if (!params) { params = {}; }
   params.user = req.user._id;
   PowerUp.filterAttr(params, 'readable');
+  
   PowerUp.find(params)
     .populate('user')
     .populate('grid')
     .exec(function (err, powerUps) {
+      for (var i = 0; i < powerUps.length; i++) {
+        powerUps[i] = powerUps[i].filterAttr('readable');
+      }
+      
       if (err) { return res.send(400, err); }
       res.send({ powerUps: powerUps });
     }

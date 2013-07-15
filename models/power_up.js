@@ -1,7 +1,17 @@
 var mongoose = require('mongoose'),
   Grid = require('./grid'),
+  _ = require('underscore'),
   Schema = mongoose.Schema;
   
+// Import Underscore.string to separate object, because there are conflict functions (include, reverse, contains)
+_.str = require('underscore.string');
+
+// Mix in non-conflict functions to Underscore namespace if you want
+_.mixin(_.str.exports());
+
+// All functions, include conflict, will be available through _.str object
+_.str.include('Underscore.string', 'string'); // => true  
+
 var powerUpSchema = new Schema({
   position: Number,
   color: String,
@@ -21,29 +31,31 @@ powerUpSchema.statics.attrWriteable = [
   "position", "color", "grid", "metadata", "createdAt"
 ];
 
-powerUpSchema.methods.filterAttr = function filterAttr(filterType) {
-  var model = this;
+function filterAttr(attr, filterType) {
   var filterMap = {
     "readable": "attrReadable",
     "writeable": "attrWriteable"
   };
   
   var filterSet = PowerUp[filterMap[filterType]];
-  if (typeof filterSet === 'undefined') { return model; }
+  if (typeof filterSet === 'undefined') { return attr; }
   
-  var props = {}
-  for (prop in filterSet) {
-    if (filterSet.hasOwnProperty(prop)) {
-      props[prop] = model[prop];
+  var props = {};
+  for (prop in attr) {
+    if (filterSet.indexOf(prop) !== -1) {
+      props[_.underscored(prop)] = attr[prop];
     }
   }
   return props;
 };
 
-powerUpSchema.statics.filterAttr = function (attr, filterType) {
-  filterAttr.bind(attr, filterType);
-};
+powerUpSchema.static('filterAttr', function (attr, filterType) {
+  return filterAttr(attr, filterType);
+});
 
+powerUpSchema.method('filterAttr', function (filterType) {
+  return filterAttr(this, filterType);
+});
 
 powerUpSchema.pre('save', function (next) {
   if (this.isNew) {

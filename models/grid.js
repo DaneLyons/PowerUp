@@ -1,7 +1,17 @@
 var mongoose = require('mongoose'),
   inflect = require('i')(),
   util = require('util'),
+  _  = require('underscore'),
   Schema = mongoose.Schema;
+
+// Import Underscore.string to separate object, because there are conflict functions (include, reverse, contains)
+_.str = require('underscore.string');
+
+// Mix in non-conflict functions to Underscore namespace if you want
+_.mixin(_.str.exports());
+
+// All functions, include conflict, will be available through _.str object
+_.str.include('Underscore.string', 'string'); // => true
   
 var gridSchema = new Schema({
   name: String,
@@ -52,7 +62,7 @@ function filterAttr(attr, filterType) {
   var props = {};
   for (prop in attr) {
     if (filterSet.indexOf(prop) !== -1) {
-      props[prop] = attr[prop];
+      props[_.underscored(prop)] = attr[prop];
     }
   }
   return props;
