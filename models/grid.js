@@ -31,12 +31,13 @@ var gridSchema = new Schema({
 });
 
 gridSchema.statics.attrWriteable = [
-  'name', 'about', 'dataTypes', 'gridButtons', 'isPrivate', 'collaborators'
+  'name', 'about', 'dataTypes', 'gridButtons', 'isPrivate', 'collaborators',
+  'powerUps'
 ];
 
 gridSchema.statics.attrReadable = [
-  '_id', 'name', 'about', 'stats', 'dataTypes', 'gridButtons', 'user',
-  'isPrivate', 'collaborators', 'slug', 'size'
+  'id', 'name', 'about', 'dataTypes', 'gridButtons', 'user',
+  'isPrivate', 'collaborators', 'slug', 'size', 'powerUps'
 ];
 
 gridSchema.methods.filterAttr = function filterAttr(filterType) {
