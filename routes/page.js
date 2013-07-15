@@ -117,7 +117,7 @@ exports.calcBook = function (req, res) {
 
 exports.bandNames = function (req, res) {
   res.render("page/band-names.ejs", {
-    "title":"Random Band Name Generator",
+    "title":"Random Band Name Generator \m/",
     "stylesheets":["page","content"],
     "javascripts":["modernizr"]
   });
@@ -133,7 +133,7 @@ exports.companyNames = function (req, res) {
 
 exports.rockBandNames = function (req, res) {
   res.render("page/rock-band-names.ejs", {
-    "title":"Rock Band Name Generator",
+    "title":"Rock Band Name Generator \m/",
     "stylesheets":["page","content"],
     "javascripts":["modernizr"]
   });
