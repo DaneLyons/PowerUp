@@ -773,17 +773,9 @@ body {
   clear:both;
 }
 
-#filter .and {
-  line-height:0;
-  padding: 12px 10px;
-  margin:9px 0 0 10px;
-  font-size: 17px;
-  color: #444;
-  background:rgba(0,0,0,.05);
-  border:3px solid rgba(0,0,0,.15);
-  -webkit-border-radius:100px;
-  -moz-border-radius:100px;
-  border-radius:100px;
+#filter .filter,
+#filter .sub_filter {
+  clear:both;
 }
 
 #filter .center {
@@ -794,12 +786,24 @@ body {
   border-top:1px dashed #ddd;
 }
 
-#page #filter button.and:hover {
-  background:rgba(0,0,0,.1);
+#filter .remove,
+#filter .and {
+  line-height:26px;
+  padding:0 0 3px 0;
+  width:50px;
+  margin:7px 0 0 15px;
+  font-size:26px;
+  color: #444;
+  background:rgba(0,0,0,.05);
+  border:3px solid rgba(0,0,0,.15);
+  -webkit-border-radius:100px;
+  -moz-border-radius:100px;
+  border-radius:100px;
 }
 
-#filter .and span {
-  font-size:26px;
+#page #filter button.remove:hover,
+#page #filter button.and:hover {
+  background:rgba(0,0,0,.1);
 }
 
 #filter h2 {
@@ -826,6 +830,8 @@ body {
   font-size:20px;
   line-height:40px;
   padding-top:5px;
+  width:60px;
+  text-align:right;
 }
 
 #filter select {
@@ -852,11 +858,11 @@ body {
   margin: 0 auto;
 }
 
-#filter_opp option {
+.filter_opp option {
   display:none;
 }
 
-#filter_opp.number option.number
-#filter_opp.text option.text {
+.filter_opp.number option.number
+.filter_opp.text option.text {
   display:none;
 }

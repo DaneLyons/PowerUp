@@ -29,15 +29,15 @@ $(function () {
     submitFilter();
   });
   
-  $('#filter_attr').on('change',function(){
+  $('#filter').on('change','.filter_attr',function(){
     var val = $(this).find(":selected").data('type');
     if(val=='text'){
-      $('#filter_opp option.number').attr("disabled","disabled");
+      $(this).next('.filter_opp').find('option.number').attr("disabled","disabled");
     }
     if(val=='number'){
-      $('#filter_opp option.number').removeAttr("disabled");
+      $(this).next('.filter_opp').find('option.number').removeAttr("disabled");
     }
-    $('#filter_opp').val('equal');
+    $(this).next('.filter_opp').val('equal');
   });
   
   $('#filter').keypress(function(e) {
@@ -48,39 +48,52 @@ $(function () {
   
   $('button.s1').on('click',resetPowerUps);
   
+  $('#filter button.and').on('click',function(){
+    var filterHtml = $('#filter .filter').html();
+    var filter = $('<div class="sub_filter group">'+filterHtml+'</button></div>');
+    filter.find('label').text('AND');
+    filter.find('button.and').removeClass('and').addClass('remove').text('-');
+    
+    $('#filter .group').last().after(filter);
+  });
+  
+  $('#filter').on('click','button.remove',function(){
+    $(this).parent('.group').remove();
+  });
+  
   function submitFilter(){
-    var attr = $('#filter_attr').val();
-    var val = $('#filter_val').val();
-    var opp = $('#filter_opp').val();
-    filterPowerUps(attr,val,opp);
+    var filters = []
+    $('#filter .group').each(function(){
+      var elem = $(this);
+      var opt = {
+        attr:elem.find('.filter_attr').val(),
+        val:elem.find('.filter_val').val(),
+        opp:elem.find('.filter_opp').val()
+      };
+      filters.push(opt);
+    });
+    filterPowerUps(filters);
   }
   
-  function filterPowerUps(attr,val,opp){
+  function filterPowerUps(filters){
 		for(var i=0;i<powerups.models.length;i++){
 			var metadata = powerups.models[i].get("metadata");
-			if(opp == 'less'){
-			  if(metadata && parseInt(metadata[attr]) < parseInt(val)){
-  				powerups.models[i].view.$el.css({ opacity:1 });
-  			}else{
-  				powerups.models[i].view.$el.css({ opacity:.15 });
-  			}
+			var opacity=1;
+			for(var ii=0;ii<filters.length;ii++){
+			  if(!metadata){
+			    opacity=.15;
+			  }
+			  if(filters[ii].opp == 'less' && (metadata && parseInt(metadata[filters[ii].attr]) >= parseInt(filters[ii].val))){
+			    opacity=.15;
+			  }
+			  if(filters[ii].opp == 'equal' && (metadata && metadata[filters[ii].attr] != filters[ii].val)){
+			    opacity=.15;
+			  }
+			  if(filters[ii].opp == 'more' && (metadata && parseInt(metadata[filters[ii].attr]) <= parseInt(filters[ii].val))){
+			    opacity=.15;
+			  }
 			}
-			
-			if(opp == 'equal'){
-			  if(metadata && metadata[attr] == val){
-  				powerups.models[i].view.$el.css({ opacity:1 });
-  			}else{
-  				powerups.models[i].view.$el.css({ opacity:.15 });
-  			}
-			}
-			
-			if(opp == 'more'){
-			  if(metadata && parseInt(metadata[attr]) > parseInt(val)){
-  				powerups.models[i].view.$el.css({ opacity:1 });
-  			}else{
-  				powerups.models[i].view.$el.css({ opacity:.15 });
-  			}
-			}
+			powerups.models[i].view.$el.css({ opacity:opacity });
 		}
 	}
 	

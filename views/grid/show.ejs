@@ -61,31 +61,32 @@
 				<div class="s2">
 					<div id="filter">
 						<h2>Show PowerUps</h2>
-						<div class="filter">
-						<label>WHERE</label>
-						<select id="filter_attr">
-						<% for(var i=0;i<grid.dataTypes.length;i++){ %>
-							<option data-type="<%= grid.dataTypes[i].dataType %>"><%= grid.dataTypes[i].name %></option>
-						<% } %>
-						</select>
-						<select id="filter_opp">
-							<% if(grid.dataTypes.length > 0 && grid.dataTypes[0].dataType == 'text'){ %>
-								<option class="text number" value="less" disabled>is less than</option>
-								<option class="text default" value="equal" selected>equals</option>
-								<option class="text number" value="more" disabled>is greater than</option>
-							<% }else{ %>
-								<option class="text number" value="less">is less than</option>
-								<option class="text default" value="equal" selected>equals</option>
-								<option class="text number" value="more">is greater than</option>
+						<div class="filter group">
+							<label>WHERE</label>
+							<select class="filter_attr">
+							<% for(var i=0;i<grid.dataTypes.length;i++){ %>
+								<option data-type="<%= grid.dataTypes[i].dataType %>"><%= grid.dataTypes[i].name %></option>
 							<% } %>
-						</select>
-						<input id="filter_val" class="text" />
-					</div>
-					<button class="and" style="display:none"><span>+</span></button>
-						
-					<div class="clear"></div>
-					<div class="center">
-						<button id="filter_button">Filter Grid</button>
+							</select>
+							<select class="filter_opp">
+								<% if(grid.dataTypes.length > 0 && grid.dataTypes[0].dataType == 'text'){ %>
+									<option class="text number" value="less" disabled>is less than</option>
+									<option class="text default" value="equal" selected>equals</option>
+									<option class="text number" value="more" disabled>is greater than</option>
+								<% }else{ %>
+									<option class="text number" value="less">is less than</option>
+									<option class="text default" value="equal" selected>equals</option>
+									<option class="text number" value="more">is greater than</option>
+								<% } %>
+							</select>
+							<input class="filter_val text" />
+							<button class="and">+</button>
+						</div>
+
+						<div class="clear"></div>
+						<div class="center">
+							<button id="filter_button">Filter Grid</button>
+						</div>
 					</div>
 				</div>
 			</div>
