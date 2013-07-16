@@ -31,7 +31,6 @@ $(function () {
   
   $('#filter_attr').on('change',function(){
     var val = $(this).find(":selected").data('type');
-    console.log(val);
     if(val=='text'){
       $('#filter_opp option.number').attr("disabled","disabled");
     }

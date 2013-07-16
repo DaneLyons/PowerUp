@@ -61,6 +61,7 @@
 				<div class="s2">
 					<div id="filter">
 						<h2>Show PowerUps</h2>
+						<div class="filter">
 						<label>WHERE</label>
 						<select id="filter_attr">
 						<% for(var i=0;i<grid.dataTypes.length;i++){ %>
@@ -79,7 +80,12 @@
 							<% } %>
 						</select>
 						<input id="filter_val" class="text" />
-						<button id="filter_button">Filter</button>
+					</div>
+					<button class="and" style="display:none"><span>+</span></button>
+						
+					<div class="clear"></div>
+					<div class="center">
+						<button id="filter_button">Filter Grid</button>
 					</div>
 				</div>
 			</div>

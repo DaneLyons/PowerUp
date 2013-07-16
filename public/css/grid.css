@@ -765,6 +765,41 @@ body {
   padding:15px;
   text-align:left;
   font-size:15px;
+  overflow:auto;
+}
+
+#filter .addons {
+  padding-top:5px;
+  clear:both;
+}
+
+#filter .and {
+  line-height:0;
+  padding: 12px 10px;
+  margin:9px 0 0 10px;
+  font-size: 17px;
+  color: #444;
+  background:rgba(0,0,0,.05);
+  border:3px solid rgba(0,0,0,.15);
+  -webkit-border-radius:100px;
+  -moz-border-radius:100px;
+  border-radius:100px;
+}
+
+#filter .center {
+  clear:both;
+  text-align:center;
+  padding-top:20px;
+  margin-top:20px;
+  border-top:1px dashed #ddd;
+}
+
+#page #filter button.and:hover {
+  background:rgba(0,0,0,.1);
+}
+
+#filter .and span {
+  font-size:26px;
 }
 
 #filter h2 {
@@ -812,10 +847,9 @@ body {
   color: #fff;
   background: #cb0000;
   display: block;
-  padding: 11px 20px;
+  padding: 20px 40px;
   text-align: center;
-  float: left;
-  margin: 5px 0 0 0;
+  margin: 0 auto;
 }
 
 #filter_opp option {
