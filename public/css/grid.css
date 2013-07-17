@@ -757,6 +757,7 @@ body {
   left: 22px;
 }
 
+#heatmap,
 #filter {
   background:#fff;
   color:#000;
@@ -765,6 +766,66 @@ body {
   padding:15px;
   text-align:left;
   font-size:15px;
+  overflow:auto;
+}
+
+#filter .addons {
+  padding-top:5px;
+  clear:both;
+}
+
+#filter .filter,
+#filter .sub_filter {
+  clear:both;
+}
+
+#filter .center {
+  clear:both;
+  text-align:center;
+  padding-top:20px;
+  margin-top:20px;
+  border-top:1px dashed #ddd;
+}
+
+#heatmap button,
+#filter .remove,
+#filter .and {
+  line-height:26px;
+  padding:0 0 3px 0;
+  width:50px;
+  margin:7px 0 0 15px;
+  font-size:26px;
+  color: #444;
+  background:rgba(0,0,0,.05);
+  border:3px solid rgba(0,0,0,.15);
+  -webkit-border-radius:100px;
+  -moz-border-radius:100px;
+  border-radius:100px;
+}
+
+#page #heatmap button:hover,
+#page #filter button.remove:hover,
+#page #filter button.and:hover {
+  background:rgba(0,0,0,.1) !important;
+}
+
+#heatmap p {
+  padding-top:10px;
+  font-size:14px;
+}
+
+#heatmap button {
+  width:auto;
+  font-size:20px;
+  padding:5px 10px;
+  margin:10px 15px 0 0;
+}
+
+#page #heatmap button.active:hover,
+#heatmap button.active {
+  background:#cb0000 !important;
+  border-color:rgba(0,0,0,.4);
+  color:#fff;
 }
 
 #filter h2 {
@@ -791,6 +852,8 @@ body {
   font-size:20px;
   line-height:40px;
   padding-top:5px;
+  width:60px;
+  text-align:right;
 }
 
 #filter select {
@@ -812,17 +875,16 @@ body {
   color: #fff;
   background: #cb0000;
   display: block;
-  padding: 11px 20px;
+  padding: 20px 40px;
   text-align: center;
-  float: left;
-  margin: 5px 0 0 0;
+  margin: 0 auto;
 }
 
-#filter_opp option {
+.filter_opp option {
   display:none;
 }
 
-#filter_opp.number option.number
-#filter_opp.text option.text {
+.filter_opp.number option.number
+.filter_opp.text option.text {
   display:none;
 }

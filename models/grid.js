@@ -73,7 +73,9 @@ gridSchema.pre('save', function (next) {
 
 gridSchema.pre('save', function (next) {  
   if (!this.slug) {
-    var slug = encodeURIComponent(this.name).replace(/%20/g, "-");
+    var name = this.name.replace(/[^a-zA-Z\d\s]/g,"");
+    name = name.replace(/\s{2,}/g, ' ');
+    var slug = encodeURIComponent(name).replace(/%20/g, "-");
     var grid = this;
     Grid.count({ name:this.name }, function (err, count) {
       if (count == 0) {

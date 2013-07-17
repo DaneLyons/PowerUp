@@ -206,7 +206,7 @@ exports.gridUpdate = function (req, res) {
         delete dataTypes[i];
         continue;
       } else {
-        if (typeof field.name === null || typeof field.name === 'undefined' || field.name.length === 0) {
+        if (typeof field.name === null || typeof field.name === 'undefined' || field.name.length === 0 && !field.original_value) {
           delete dataTypes[i];
           continue;
         }
@@ -214,6 +214,27 @@ exports.gridUpdate = function (req, res) {
       
       var exists = false;
       for (var j = 0; j < grid.dataTypes.length; j++) {
+        if(field.original_value && grid.dataTypes[j].name === field.original_value){
+          if(field.name.length > 0){
+            grid.dataTypes[j].name = field.name;
+            grid.dataTypes[j].dataType = field.dataType;
+            exists = true;
+            
+            /* NOT WORKING
+            PowerUp.find({grid: grid._id}, function (err, powerUps) {
+              for(var k = 0; k < powerUps.length;k++){
+                var powerUp = powerUps[k];
+                if(powerUp.metadata && powerUp.metadata[field.original_value]){
+                  console.log('UPDATING POWERUP');
+                  powerUp.metadata[field.name] = powerUp.metadata[field.original_value];
+                  delete powerUp.metadata[field.original_value];
+                  powerUp.save();
+                }
+              }
+            });
+            */
+          }
+        }
         if (!grid.dataTypes[j]) { continue; }
         if (!grid.dataTypes[j].name) { delete grid.dataTypes[j]; continue; }
         if (grid.dataTypes[j].name === field.name) {
