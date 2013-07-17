@@ -127,3 +127,15 @@
   -moz-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
+
+#tasks_tracked {
+  width:100%;
+  position:absolute;
+  bottom:7px;
+  left:0;
+  text-align:center;
+  font-size:19px;
+  font-weight:100;
+  letter-spacing:1px;
+  text-shadow:1px 1px 0 rgba(0,0,0,.7);
+}

@@ -1,8 +1,8 @@
 <% include ../partials/head.ejs %>
 <style>
 	#sidebar {
-		height: 320px;
-		margin-top:-185px;
+		height: 340px;
+		margin-top:-195px;
 	}
 	h2 {
 		padding-bottom:10px;
@@ -59,7 +59,9 @@
 			</button>
 		</div>
   </form>
-
+	
+	<% power_ups = power_ups.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); %>
+	<div id="tasks_tracked"><%= power_ups %> tasks tracked on PowerUp</div>
 </div>
 
 <% include ../partials/footer.ejs %>

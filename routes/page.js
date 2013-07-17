@@ -1,5 +1,6 @@
 var Grid = require('../models/grid'),
   GridButton = require('../models/grid_button'),
+  PowerUp = require('../models/power_up'),
   User = require('../models/user'),
   HelpShroom = require('../lib/help_shroom'),
   inflect = require('i')(),
@@ -22,9 +23,12 @@ exports.home = function (req, res) {
       );
     });
   } else {
-    res.render("page/home.ejs", {
-      "stylesheets":["home","landing"],
-      "javascripts":["home"]
+    PowerUp.count({}, function (err, count) {
+      res.render("page/home.ejs", {
+        "power_ups":count,
+        "stylesheets":["home","landing"],
+        "javascripts":["home"]
+      });
     });
   }
 };
