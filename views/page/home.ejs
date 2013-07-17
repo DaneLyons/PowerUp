@@ -1,20 +1,45 @@
 <% include ../partials/head.ejs %>
 <style>
-	body {
-		/* background-image:url('/img/bg_sketch.jpg'); */
+	#sidebar {
+		height: 320px;
+		margin-top:-185px;
 	}
-	
-	#attribution {
-		position:absolute;
-		bottom:50px;
-		right:15px;
-		color:#777;
+	h2 {
+		padding-bottom:10px;
 	}
 </style>
 
 <div id="sidebar">
-	<h1>TRACK YOUR PROGRESS</h1>
-	<p>PowerUp is a personal analytics tool that helps you turn your projects and goals into stories.</p>
+	<ul class="slideshow">
+		<li class="active">
+			<h1>TRACK YOUR PROGRESS</h1>
+			<p>PowerUp is a personal analytics tool that helps you turn your projects and goals into stories.</p>
+		</li>
+		<li>
+			<h2>BUILD GOOD HABITS</h2>
+			<p>We help you break your goals down and focus on the most important tasks.</p>
+		</li>
+		<li>
+			<h2>REWARDS</h2>
+			<p>Visually tracking goals and milestones keeps you motivated to get more done.</p>
+		</li>
+		<li>
+			<h2>LEARN MORE</h2>
+			<p>Our visualizations are designed to help you explore your data to help you improve.</p>
+		</li>
+		<li>
+			<h2>COLLABORATE</h2>
+			<p>Get your friends involved to keep things fun, challenging and competitive.</p>
+		</li>
+	</ul>
+	<div class="slide_nav">
+		<button class="active" data-slide="0"></button>
+		<button data-slide="1"></button>
+		<button data-slide="2"></button>
+		<button data-slide="3"></button>
+		<button data-slide="4"></button>
+	</div>
+		
 	
 	<form id="sign_up_form" action="/sign_up" method="post">
     <div class="field">
@@ -30,7 +55,7 @@
 		<div class="center">
 			<button type="submit" class="submit">
 				<img src="/img/icon_white.png" width="30" height="26" />
-				GET STARTED
+				SIGN UP
 			</button>
 		</div>
   </form>
