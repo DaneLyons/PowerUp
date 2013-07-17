@@ -220,19 +220,18 @@ exports.gridUpdate = function (req, res) {
             grid.dataTypes[j].dataType = field.dataType;
             exists = true;
             
-            /* NOT WORKING
             PowerUp.find({grid: grid._id}, function (err, powerUps) {
-              for(var k = 0; k < powerUps.length;k++){
-                var powerUp = powerUps[k];
-                if(powerUp.metadata && powerUp.metadata[field.original_value]){
+              async.each(powerUps, function (powerUp) {
+                if (powerUp.metadata && powerUp.metadata[field.original_value]){
                   console.log('UPDATING POWERUP');
                   powerUp.metadata[field.name] = powerUp.metadata[field.original_value];
                   delete powerUp.metadata[field.original_value];
-                  powerUp.save();
+                  powerUp.save(function (err, powerUp) {
+                    if (err) { console.log(err); }
+                  });
                 }
-              }
+              });
             });
-            */
           }
         }
         if (!grid.dataTypes[j]) { continue; }
