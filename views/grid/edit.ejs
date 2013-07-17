@@ -68,7 +68,7 @@
   		      <% } else { %>
   		        <label>DATA <%- i + 1 %></label>
   		      <% } %>
-		      
+		      	<input type="hidden" name="grid[dataTypes][<%- i %>][original_value]" value="<%- dataType.name %>" />
   		      <input type="text" name="grid[dataTypes][<%- i %>][name]"
   		        value="<%- dataType.name %>" class="med" />
   		      
