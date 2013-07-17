@@ -46,7 +46,10 @@ $(function () {
     }
   });
   
-  $('button.s1').on('click',resetPowerUps);
+  $('button.s1,button.s2,button.s3').on('click',function(){
+    resetPowerUps();
+    $('#heatmap button').removeClass('active');
+  });
   
   $('#filter button.and').on('click',function(){
     var filterHtml = $('#filter .filter').html();
@@ -59,6 +62,12 @@ $(function () {
   
   $('#filter').on('click','button.remove',function(){
     $(this).parent('.group').remove();
+  });
+  
+  $('#heatmap button').on('click',function(){
+    $('#heatmap button').removeClass('active');
+    $(this).addClass('active');
+    heatmapPowerUps($(this).text());
   });
   
   function submitFilter(){
@@ -95,6 +104,27 @@ $(function () {
 			}
 			powerups.models[i].view.$el.css({ opacity:opacity });
 		}
+	}
+	
+	function heatmapPowerUps(data){
+	  var high = 0;
+	  for(var i=0;i<powerups.models.length;i++){
+	    var metadata = powerups.models[i].get("metadata");
+	    if(metadata && parseInt(metadata[data]) > high){
+	      high = parseInt(metadata[data]);
+	    }
+	  }
+	  for(var i=0;i<powerups.models.length;i++){
+	    var metadata = powerups.models[i].get("metadata");
+	    var opacity = .15;
+	    if(metadata && metadata[data]){
+	      opacity = parseInt(metadata[data])/high;
+	      if(opacity < .15){
+	        opacity=.15;
+	      }
+	    }
+	    powerups.models[i].view.$el.css({ opacity:opacity });
+	  }
 	}
 	
 	function resetPowerUps(){

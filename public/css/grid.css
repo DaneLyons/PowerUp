@@ -757,6 +757,7 @@ body {
   left: 22px;
 }
 
+#heatmap,
 #filter {
   background:#fff;
   color:#000;
@@ -786,6 +787,7 @@ body {
   border-top:1px dashed #ddd;
 }
 
+#heatmap button,
 #filter .remove,
 #filter .and {
   line-height:26px;
@@ -801,9 +803,29 @@ body {
   border-radius:100px;
 }
 
+#page #heatmap button:hover,
 #page #filter button.remove:hover,
 #page #filter button.and:hover {
-  background:rgba(0,0,0,.1);
+  background:rgba(0,0,0,.1) !important;
+}
+
+#heatmap p {
+  padding-top:10px;
+  font-size:14px;
+}
+
+#heatmap button {
+  width:auto;
+  font-size:20px;
+  padding:5px 10px;
+  margin:10px 15px 0 0;
+}
+
+#page #heatmap button.active:hover,
+#heatmap button.active {
+  background:#cb0000 !important;
+  border-color:rgba(0,0,0,.4);
+  color:#fff;
 }
 
 #filter h2 {

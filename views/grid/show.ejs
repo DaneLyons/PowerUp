@@ -53,6 +53,7 @@
 					<% if(grid.dataTypes.length){ %>
 						<button class="s1">OVERALL</button>
 						<button class="s2">FILTER</button>
+						<button class="s3">HEATMAP</button>
 					<% } %>
 				</div>
 				<div class="s1">
@@ -87,6 +88,23 @@
 						<div class="center">
 							<button id="filter_button">Filter Grid</button>
 						</div>
+					</div>
+				</div>
+				<div class="s3">
+					<div id="heatmap">
+						<h2>Heatmap</h2>
+						<% var shown = false; %>
+						<% for(var i=0;i<grid.dataTypes.length;i++){ %>
+							<% if(grid.dataTypes[i].dataType == 'number'){ %>
+								<% shown = true; %>
+								<button data-type="<%= grid.dataTypes[i].dataType %>"><%= grid.dataTypes[i].name %></button>
+							<% } %>
+						<% } %>
+						<% if(shown){ %>
+							<p>Highest numbers are most visible.</p>
+						<% }else{ %>
+							<p>You must have a numeric data point to use heatmaps.</p>
+						<% } %>
 					</div>
 				</div>
 			</div>
