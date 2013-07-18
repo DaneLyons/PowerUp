@@ -72,19 +72,29 @@ gridSchema.pre('save', function (next) {
 });
 
 gridSchema.pre('save', function (next) {  
-  if (!this.slug) {
-    var name = this.name.replace(/[^a-zA-Z\d\s]/g,"");
-    name = name.replace(/\s{2,}/g, ' ');
-    var slug = encodeURIComponent(name).replace(/%20/g, "-");
-    var grid = this;
-    Grid.count({ name:this.name }, function (err, count) {
-      if (count == 0) {
+  var grid = this;
+  if (!grid.slug) {
+    var name = grid.name.replace(/\s{2,}/g, ' ');
+    name = name.replace(' ', '-');
+    var slug = encodeURIComponent(name);
+    
+    Grid.find({ slug: { $regex: slug } }, function (err, existingGrids) {
+      if (err) { return next(err); }
+      
+      if (existingGrids.length === 0) {
         grid.slug = slug;
+      } else if (existingGrids.length === 1) {
+        grid.slug = slug + '-2';
       } else {
-        grid.slug = slug + "-" + count;
+        var lastSlug = existingGrids[existingGrids.length - 1].slug;
+        var parts = lastSlug.split('-');
+        var lastNum = parseInt(parts[parts.length - 1], 10);
+        grid.slug = slug + '-' + (lastNum + 1);
       }
+      
       next();
     });
+  
   } else {
     next();
   }
