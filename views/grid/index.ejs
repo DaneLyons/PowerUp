@@ -45,7 +45,7 @@
 			<% var percent = (grid.powerUps.length/grid.size)*100; %>
 		<% } %>
 		
-		<ul class="grid_list">
+		<ul class="grid_list completed_list">
       <li>
         <% if (String(currentUser._id) === String(grid.user._id)) { %>
 				  <a class="edit" href="/grids/<%- grid.slug %>/edit">EDIT</a>

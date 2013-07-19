@@ -6,7 +6,7 @@ div.grids {
 .grid_list li {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   height:40px;
-  background:rgba(0,0,0,.05);
+  background:#68dcaa;
   font-size:20px;
   line-height:40px;
   margin-bottom:5px;
@@ -22,6 +22,8 @@ div.grids {
   top:0;
   left:0;
   z-index:100;
+  color:#fff;
+  text-shadow:none;
 }
 
 .grid_list li .fill {
@@ -32,7 +34,11 @@ div.grids {
   z-index:99;
   height:100%;
   width:45%;
-  background:rgba(0,0,0,.10);
+  background:#4bc090;
+}
+
+.completed_list li .fill {
+  background:#444;
 }
 
 .grid_list .edit {
