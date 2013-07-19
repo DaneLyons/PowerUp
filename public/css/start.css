@@ -7,6 +7,10 @@
   margin-left:5px;
 }
 
+.content {
+  width:750px;
+}
+
 .next {
   background:#cb0000;
   color:#fff;
@@ -85,6 +89,7 @@ button.random {
   float:left;
   border:none;
   background:#fff;
+  background: rgba(0,0,0,.02);
   width:564px;
   height:40px;
   margin:0;
@@ -103,7 +108,7 @@ button.random {
 }
 
 #new_grid .field select {
-  background:#fff url('/img/icons/down.png') 556px 10px no-repeat;
+  background:rgba(0,0,0,.02) url('/img/icons/down.png') 556px 10px no-repeat;
   width:584px;
   -webkit-appearance:none;
   -moz-appearance:none;
@@ -115,7 +120,7 @@ button.random {
 
 #new_grid .field select.small {
   width:187px;
-  background:#fff url('/img/icons/down.png') 158px 10px no-repeat;
+  background:rgba(0,0,0,.02) url('/img/icons/down.png') 158px 10px no-repeat;
 }
 
 #new_grid .field input.prompt {

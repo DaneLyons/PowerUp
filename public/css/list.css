@@ -1,3 +1,8 @@
+div.grids {
+  padding:24px 20px 20px 20px;
+  width:610px;
+}
+
 .grid_list li {
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
   height:40px;
@@ -63,13 +68,21 @@ h2.completed {
 }
 
 .totals {
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue",arial;
-  font-size: 40px;
+  font-size: 20px;
   padding:0 0 50px 0;
-  line-height:1;
-  text-align:center;
+  line-height:1.2;
 }
 
 .totals li {
   clear:both;
+  border-top:1px solid rgba(0,0,0,.03);
+  padding:2px 0;
+}
+
+.totals li label {
+  display:block;
+  float:left;
+  text-align:right;
+  padding-right:5px;
+  width:125px;
 }

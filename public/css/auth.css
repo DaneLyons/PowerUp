@@ -3,16 +3,17 @@ h1 {
 }
 
 #page {
-  width:550px;
+  /* width:550px; */
 }
 
 .field input {
-  width:388px;
+  width:460px;
 }
 
 .links {
   text-align:right;
   line-height:1.4;
+  padding-right:30px;
 }
 
 .links a {

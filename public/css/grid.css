@@ -8,10 +8,6 @@ body {
   background-size:auto;
 }
 
-#logo {
-  opacity:.8;
-}
-
 #content {
   position:absolute;
   top:95px;

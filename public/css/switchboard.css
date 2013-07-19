@@ -12,7 +12,7 @@ ul.thirds {
 }
 
 #page ul.thirds li {
-  width:300px;
+  width:325px;
   padding-right:15px;
   font-size:16px;
   line-height:1.2;
@@ -22,12 +22,12 @@ ul.thirds {
 
 #page ul.thirds li div {
   float:left;
-  width:235px;
+  width:250px;
 }
 
 #page ul.thirds img {
   width:50px;
   float:left;
   margin-right:15px;
-  opacity:.1;
+  opacity:.25;
 }

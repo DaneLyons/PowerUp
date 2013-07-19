@@ -135,7 +135,7 @@ exports.badgeTimeline = function (req, res) {
 exports.calcBook = function (req, res) {
   res.render("page/calc-book.ejs", {
     "title":"How long does it take to write a book?",
-    "stylesheets":["page","content"],
+    "stylesheets":["page","content","tools"],
     "javascripts":["modernizr"]
   });
 };
@@ -143,7 +143,7 @@ exports.calcBook = function (req, res) {
 exports.bandNames = function (req, res) {
   res.render("page/band-names.ejs", {
     "title":"Random Band Name Generator",
-    "stylesheets":["page","content"],
+    "stylesheets":["page","content","tools"],
     "javascripts":["modernizr"]
   });
 };
@@ -151,7 +151,7 @@ exports.bandNames = function (req, res) {
 exports.companyNames = function (req, res) {
   res.render("page/company-names.ejs", {
     "title":"Random Company Name Generator",
-    "stylesheets":["page","content"],
+    "stylesheets":["page","content","tools"],
     "javascripts":["modernizr"]
   });
 };
@@ -159,7 +159,7 @@ exports.companyNames = function (req, res) {
 exports.rockBandNames = function (req, res) {
   res.render("page/rock-band-names.ejs", {
     "title":"Rock Band Name Generator",
-    "stylesheets":["page","content"],
+    "stylesheets":["page","content","tools"],
     "javascripts":["modernizr"]
   });
 }

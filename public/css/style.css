@@ -118,8 +118,9 @@ strong {
 #header {
   width:100%;
   height:75px;
-  background:rgba(0,0,0,.5);
+  background:rgba(0,0,0,.7);
   position:absolute;
+  position:fixed;
   top:0;
   z-index: 10;
 }
@@ -132,7 +133,6 @@ strong {
   position:absolute;
   top:5px;
   left:10px;
-  opacity:.6;
 }
 
 #page {
@@ -227,7 +227,7 @@ form label {
   bottom:0;
   left:0;
   height:40px;
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.7);
   z-index:2000;
 }
 

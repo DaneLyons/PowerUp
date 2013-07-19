@@ -14,6 +14,36 @@ body {
   text-align:left;
   color:#333;
   text-shadow:1px 1px 0 rgba(255,255,255,.5);
+  background:#fff;
+  padding:40px;
+  -webkit-box-shadow:0 0 20px rgba(0,0,0,.15);
+  -moz-box-shadow:0 0 20px rgba(0,0,0,.15);
+  box-shadow:0 0 20px rgba(0,0,0,.15);
+}
+
+#page:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+#page .side {
+  position:absolute;
+  font-size:18px;
+  line-height:1.2;
+  right:0;
+  top:0;
+  height:100%;
+  width:350px;
+  background:rgba(0,0,0,.02);
+  border-left:1px dashed rgba(0,0,0,.1);
+}
+
+#page .side div {
+  padding:20px;
 }
 
 #content h1 {
@@ -83,7 +113,7 @@ h2 {
 
 .content {
   float:left;
-  width:750px;
+  width:650px;
   margin-left:20px;
   font-size:20px;
   line-height:1.2;

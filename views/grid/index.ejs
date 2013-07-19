@@ -1,16 +1,20 @@
 <% include ../partials/head.ejs %>
 
-<div class="grids">
-
+<div class="side">
 	<% var powerUpCount = 0 %>
 	<% for (var i = grids.length-1; i > -1; i--) { %>
 		<% powerUpCount += grids[i].powerUps.length %>
 	<% } %>
-	<ul class="totals">
-		<li>PowerUps: <%= powerUpCount %></li>
-	</ul>
+	<div>
+		<h2>YOUR STATS</h2>
+		<ul class="totals">
+			<li><label>Grids:</label><%= grids.length %></li>
+			<li><label>Tasks:</label><%= powerUpCount %></li>
+		</ul>
+	</div>
+</div>
 
-
+<div class="grids content">
 	<a href="/grids/new" class="new_grid">New Grid</a>
   <h2>Grids</h2>
   
