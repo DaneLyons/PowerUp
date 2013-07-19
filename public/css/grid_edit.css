@@ -3,9 +3,8 @@
 }
 
 #grid_form {
-  width:748px;
   float:right;
-  position: relative;
+  padding-left: 95px;
 }
 
 #info {
