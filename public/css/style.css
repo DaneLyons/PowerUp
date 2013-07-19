@@ -241,6 +241,7 @@ form label {
   letter-spacing:1px;
   float:left;
   padding:0 10px;
+  text-shadow: none;
 }
 
 #nav a:hover {

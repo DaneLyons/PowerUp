@@ -76,6 +76,27 @@ exports.gettingStarted = function (req, res) {
   }
 };
 
+exports.newGrid = function (req, res) {
+  var renderParams = {
+    "title": "New Grid",
+    "stylesheets": ["page","start"],
+    "javascripts": ["slides"]
+  };
+  
+  if (req.user) {
+    HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
+      if (!allowed) {
+        res.redirect('/join');
+        return;
+      }
+  
+      res.render("page/new.ejs", renderParams);
+    });
+  } else {
+    res.render("page/new.ejs", renderParams);
+  }
+}
+
 exports.contact = function (req, res) {
   res.render("page/contact.ejs", {
     "title":"PowerUp Contact Page",

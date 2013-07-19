@@ -110,7 +110,7 @@
   height:15px;
   float:left;
   margin-right:5px;
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.2);
   -webkit-transition:all linear 400ms;
   -webkit-transform: rotateY(360deg);
   -moz-transition:all linear 400ms;
