@@ -75,7 +75,7 @@ gridSchema.pre('save', function (next) {
   var grid = this;
   if (!grid.slug) {
     var name = grid.name.replace(/\s{2,}/g, ' ');
-    name = name.replace(' ', '-');
+    name = name.replace(/\s/g, '-');
     var slug = encodeURIComponent(name);
     
     Grid.find({ slug: { $regex: slug } }, function (err, existingGrids) {
