@@ -13,8 +13,35 @@
 </style>
 
 <div id="sidebar">
-	<h1>LOSE WEIGHT WITH BABY STEPS</h1>
-	<p>PowerUp is a tool for tracking progress in small steps, and finding patterns to help you make smart, healthy choices. <a href="/getting-started">Find out more.</a></p>
+	<ul class="slideshow">
+		<li class="active">
+			<h1>LOSE WEIGHT WITH BABY STEPS</h1>
+			<p>PowerUp is a tool for tracking progress in small steps, and seeing your progress faster.</p>
+		</li>
+		<li>
+			<h2>TRACK WHAT MATTERS</h2>
+			<p>We help you break your goals down, and focus on what matters to you.</p>
+		</li>
+		<li>
+			<h2>FEEL THE PROGRESS</h2>
+			<p>By tracking each little step, you'll see your accomplishments and get more done.</p>
+		</li>
+		<li>
+			<h2>MAKE SMART CHOICES</h2>
+			<p>Whatever you want to count or track, we'll show you how your choices affect your progress.</p>
+		</li>
+		<li>
+			<h2>GET ENCOURAGEMENT</h2>
+			<p>Get support from your friends, and invite them to work towards the same goal.</p>
+		</li>
+	</ul>
+	<div class="slide_nav">
+		<button class="active" data-slide="0"></button>
+		<button data-slide="1"></button>
+		<button data-slide="2"></button>
+		<button data-slide="3"></button>
+		<button data-slide="4"></button>
+	</div>
 	
 	<form id="sign_up_form" action="/start" method="post">		
 		<% include ../partials/grid_landing_page.ejs %>

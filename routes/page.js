@@ -170,7 +170,7 @@ exports.fiften = function (req, res) {
     "stylesheets":["page","content"],
     "javascripts":["modernizr"]
   });
-}
+};
 
 exports.fiftenTrack = function (req, res) {
   res.render("page/fiften_track.ejs", {
@@ -202,7 +202,7 @@ exports.bandSignup = function (req, res) {
     "stylesheets": ["home","landing"],
     "javascripts": ["home"]
   });
-}
+};
 
 exports.start = function (req, res) {
   var userParams = req.body.user,
