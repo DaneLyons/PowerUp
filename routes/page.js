@@ -228,10 +228,8 @@ exports.start = function (req, res) {
   }
   gridParams.workUnit = workUnit;
   
-  var grid = new Grid(gridParams);
-  console.log(req.body);
-  grid.dataTypes = req.body.dataTypes;
   
+  var grid = new Grid(gridParams);
   async.map(workUnit, function (unit, done) {
     var btn = new GridButton({
       grid: grid._id,
@@ -320,13 +318,3 @@ exports.weightLoss = function (req, res) {
     });
   });
 };
-
-exports.becomeAWriter = function (req, res) {
-  PowerUp.count({}, function (err, count) {
-    res.render("page/become-a-writer.ejs", {
-      "power_ups":count,
-      "stylesheets":["home","landing"],
-      "javascripts":["home"]
-    });
-  });
-}
