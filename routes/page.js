@@ -308,3 +308,13 @@ exports.start = function (req, res) {
 exports.zeldaEgg = function (req, res) {
   res.redirect("http://youtu.be/b3KUyPKbR7Q");
 };
+
+exports.weightLoss = function (req, res) {
+  PowerUp.count({}, function (err, count) {
+    res.render("page/weight-loss.ejs", {
+      "power_ups":count,
+      "stylesheets":["home","landing"],
+      "javascripts":["home"]
+    });
+  });
+};
