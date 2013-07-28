@@ -55,7 +55,7 @@
   $(function () {
     $("#new_grid input[name='grid[name]']").attr('value', 'Become a Writer');
     var units = ['Write', 'Edit', 'Publish'];
-    $("#new_grid input[name='workUnit[]']").each(function (el, i) {
+    _.each($("#new_grid input[name='workUnit[]']"), function (el, i) {
       $(el).val(units[i]);
     });
     
