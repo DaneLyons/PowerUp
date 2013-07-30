@@ -14,6 +14,7 @@ var userSchema = new Schema({
   passwordHash: String,
   passwordSalt: String,
   secret: String,
+  resetToken: String,
   isConfirmed: { type: Boolean, default: true },
   grids: [ { type: Schema.ObjectId, ref: 'Grid' } ],
   promo: {
@@ -38,6 +39,13 @@ userSchema.pre('save', function (next) {
 userSchema.pre('save', function (next) {
   if (!this.secret) {
     this.secret = uuid.v4();
+  }
+  next();
+});
+
+userSchema.pre('save', function (next) {
+  if (!this.resetToken) {
+    this.resetToken = uuid.v4();
   }
   next();
 });

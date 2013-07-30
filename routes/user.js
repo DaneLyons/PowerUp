@@ -2,7 +2,9 @@ var Grid = require('../models/grid'),
   GridButton = require('../models/grid_button'),
   User = require('../models/user'),
   Preference = require('../models/preference'),
+  Mailer = require('../lib/mailer'),
   inflect = require('i')(),
+  uuid = require('node-uuid'),
   stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
   
 exports.settings = function (req, res) {
@@ -199,5 +201,68 @@ exports.upgrade = function (req, res) {
         });
       }
     );
+  });
+};
+
+exports.forgotPassword = function (req, res) {
+  res.render('user/forgot_password', {
+    "stylesheets":["page","settings","auth"]
+  });
+};
+
+exports.postForgotPassword = function (req, res) {
+  var email = req.body.email;
+  if (!email) {
+    req.flash("info", "Please enter your email.");
+    return res.redirect('back');
+  }
+  
+  User.findOne({ email: email }, function (err, user) {
+    if (err || !user) {
+      req.flash("error", "Sorry, but we couldn't find anyone with that email.");
+      return res.redirect('back');
+    }
+    
+    if (!user.resetToken) {
+      user.resetToken = uuid.v4();
+      user.save(function (err) {
+        if (err) { console.log(err); }
+      });
+    }
+    
+    var link = "https://powerup.io/reset_password?u=" + user._id + "&t=" + user.resetToken;
+    var msg = "<p>Hi there,</p><p>We received a request to reset your PowerUp password. If you didn't request this, you can safely ignore this. You can <a href='" + link + "'>sign in and reset your password here.</a></p><p>PowerOn!</p><p>Dane and Austin</p><br /><p>Co-Founders of PowerUp</p>";
+    
+    Mailer.send({
+      to: email,
+      subject: "Reset your PowerUp password.",
+      text: msg,
+      html: msg,
+    }, function (err, response) {
+      req.flash("info", "Thanks! You should receive a reset email shortly.");
+      res.redirect('back');
+    });
+  });
+};
+
+exports.resetPassword = function (req, res) {
+  var userId = req.query.u,
+    resetToken = req.query.t;
+    
+  if (!userId || !resetToken) {
+    return res.redirect('/');
+  }
+  
+  User.findById(userId, function (err, user) {
+    if (err || !user) { return res.redirect('/'); }
+    
+    if (user.resetToken !== resetToken) {
+      return res.redirect('/');
+    }
+    
+    req.login(user, function (err) {
+      if (err) { console.log(err); return res.redirect('/'); }
+      res.redirect('/change_password');
+    });
   });
 };
