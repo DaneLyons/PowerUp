@@ -48,7 +48,6 @@ inviteSchema.post('save', function (invite) {
           } else {
             subject = "You've been invited to collaborate.";
           }
-          
           var mailerParams = {
             to: user.email,
             subject: subject,
