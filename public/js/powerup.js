@@ -29,8 +29,13 @@ var PowerUp = {
       }
 
       if (PowerUp.currentUser) {
-        var uri = location.origin.replace(/^http/, 'ws');
-    		var socket = io.connect(uri);
+        var sockHost = location.origin.replace(/^http/, 'ws');
+        var opts = {};
+        if (window.location.protocol === "https") {
+          opts.secure = true;
+        }
+        
+        var socket = io.connect(sockHost, opts);
     		socket.on('connect', function () {
     		  var socketData = {
     		    gridId: grid.attributes._id,
@@ -152,7 +157,12 @@ var PowerUp = {
         
         if (emptyLen > 0) {
           var sockHost = location.origin.replace(/^http/, 'ws');
-          var socket = io.connect(sockHost);
+          var opts = {};
+          if (window.location.protocol === "https") {
+            opts.secure = true;
+          }
+          
+          var socket = io.connect(sockHost, opts);
           var gridId = $("#grid").data("grid-id");
           var idx = emptySquares.eq(0).index();
           var powerUpAttr = {
