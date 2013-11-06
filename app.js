@@ -47,7 +47,8 @@ app.configure(function(){
       secret: process.env.CLIENT_SECRET || "it's a secret to everybody...",
       cookie: { maxAge: 999999999, httpOnly: false },
       store: new MongoStore({
-        url: process.env.MONGO_SESSION_URL
+        url: process.env.MONGO_SESSION_URL,
+        auto_reconnect: true
       })
     }));
   } else {
