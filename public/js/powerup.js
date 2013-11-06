@@ -202,7 +202,7 @@ var PowerUp = {
       <div class="square"></div>\
     </li>'),
     initialize: function () {
-      this.el = "ul#grid li:eq(" + this.options.model.attributes.position + ")";
+      this.el = "ul#grid li:eq(" + this.model.attributes.position + ")";
       this.listenTo(this.model, 'change', this.render);
     },
     render: function () {
