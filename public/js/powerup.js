@@ -151,8 +151,8 @@ var PowerUp = {
         var emptyLen = emptySquares.length;
         
         if (emptyLen > 0) {
-          var sockHost = window.location.protocol + "//" + window.location.host;
-          var socket = io.connect(sockHost);
+          var sockHost = "wss://" + window.location.host;
+          var socket = io.connect(sockHost, { secure: true });
           var gridId = $("#grid").data("grid-id");
           var idx = emptySquares.eq(0).index();
           var powerUpAttr = {
