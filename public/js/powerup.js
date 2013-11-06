@@ -29,7 +29,7 @@ var PowerUp = {
       }
 
       if (PowerUp.currentUser) {
-        var uri = "wss://" + window.location.host;
+        var uri = location.origin.replace(/^http/, 'ws');
     		var socket = io.connect(uri);
     		socket.on('connect', function () {
     		  var socketData = {
@@ -151,7 +151,7 @@ var PowerUp = {
         var emptyLen = emptySquares.length;
         
         if (emptyLen > 0) {
-          var sockHost = "wss://" + window.location.host;
+          var sockHost = location.origin.replace(/^http/, 'ws');
           var socket = io.connect(sockHost);
           var gridId = $("#grid").data("grid-id");
           var idx = emptySquares.eq(0).index();
