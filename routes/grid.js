@@ -37,7 +37,7 @@ exports.gridNew = function (req, res) {
   
   HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
     if (!allowed) {
-      res.redirect('/join');
+      res.redirect('https://powerupio.herokuapp.com/join');
       return;
     }
     
@@ -173,7 +173,7 @@ exports.gridCreate = function (req, res) {
   
   HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
     if (!allowed) {
-      res.redirect('/join');
+      res.redirect('https://powerupio.herokuapp.com/join');
       return;
     }
 

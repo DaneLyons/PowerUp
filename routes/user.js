@@ -187,7 +187,7 @@ exports.upgrade = function (req, res) {
   
   User.findById(req.user._id, function (err, user) {
     if (!user.stripeId) {
-      res.redirect('/join');
+      res.redirect('https://powerupio.herokuapp.com/join');
       return;
     }
     

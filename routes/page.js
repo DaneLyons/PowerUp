@@ -65,7 +65,7 @@ exports.gettingStarted = function (req, res) {
   if (req.user) {
     HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
       if (!allowed) {
-        res.redirect('/join');
+        res.redirect('https://powerupio.herokuapp.com/join');
         return;
       }
   
@@ -86,7 +86,7 @@ exports.newGrid = function (req, res) {
   if (req.user) {
     HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
       if (!allowed) {
-        res.redirect('/join');
+        res.redirect('https://powerupio.herokuapp.com/join');
         return;
       }
   
@@ -261,7 +261,7 @@ exports.start = function (req, res) {
         User.findById(user._id, function (err, user) {
           HelpShroom.canCreateGrid(user._id, function (err, allowed) {
             if (!allowed) {
-              res.redirect('/join');
+              res.redirect('https://powerupio.herokuapp.com/join');
               return;
             }
             
@@ -286,7 +286,7 @@ exports.start = function (req, res) {
     } else {
       HelpShroom.canCreateGrid(req.user._id, function (err, allowed) {
         if (!allowed) {
-          res.redirect('/join');
+          res.redirect('https://powerupio.herokuapp.com/join');
           return;
         }
         
