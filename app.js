@@ -15,7 +15,7 @@ var express = require('express'),
   passport = require('passport'),
   flash = require('connect-flash'),
   redis = require('redis'),
-  RedisStore = require('connect-redis')(express),
+  MongoStore = require('connect-mongo')(express),
   page = require('./routes/page'),
   RouteShroom = require('./lib/route_shroom'),  // Routes
   path = require('path'),
@@ -43,21 +43,11 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   
   if (process.env.NODE_ENV === 'production') {
-    var redisUrl = url.parse(process.env.REDISTOGO_URL),
-      redisAuth = redisUrl.auth.split(':'),
-      redisHost = redisUrl.hostname,
-      redisPort = redisUrl.port,
-      redisDb = redisAuth[0],
-      redisPass = redisAuth[1];
-    
     app.use(express.session({
       secret: process.env.CLIENT_SECRET || "it's a secret to everybody...",
       cookie: { maxAge: 999999999, httpOnly: false },
-      store: new RedisStore({
-        host: redisHost,
-        port: redisPort,
-        db: redisDb,
-        pass: redisPass
+      store: new MongoStore({
+        url: process.env.MONGO_SESSION_URL
       })
     }));
   } else {
