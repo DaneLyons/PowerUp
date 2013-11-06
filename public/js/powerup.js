@@ -30,7 +30,7 @@ var PowerUp = {
 
       if (PowerUp.currentUser) {
         var uri = "wss://" + window.location.host;
-    		var socket = io.connect(uri, { secure: true });
+    		var socket = io.connect(uri);
     		socket.on('connect', function () {
     		  var socketData = {
     		    gridId: grid.attributes._id,
@@ -152,7 +152,7 @@ var PowerUp = {
         
         if (emptyLen > 0) {
           var sockHost = "wss://" + window.location.host;
-          var socket = io.connect(sockHost, { secure: true });
+          var socket = io.connect(sockHost);
           var gridId = $("#grid").data("grid-id");
           var idx = emptySquares.eq(0).index();
           var powerUpAttr = {
