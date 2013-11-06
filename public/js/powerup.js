@@ -30,7 +30,7 @@ var PowerUp = {
 
       if (PowerUp.currentUser) {
         var uri = window.location.protocol + "//" + window.location.host;
-    		var socket = io.connect(uri);
+    		var socket = io.connect(uri, { secure: true });
     		socket.on('connect', function () {
     		  var socketData = {
     		    gridId: grid.attributes._id,
