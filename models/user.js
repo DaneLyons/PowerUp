@@ -4,7 +4,6 @@ var mongoose = require('mongoose'),
   Grid = require('./grid'),
   Action = require('./action'),
   SignUp = require('./sign_up'),
-  Mailer = require('../lib/mailer')
   bcrypt = require('bcrypt'),
   EventShroom = require('../lib/event_shroom');
   
